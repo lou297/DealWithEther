@@ -117,6 +117,20 @@ export default {
        * TODO: PJTⅡ 과제1 Req.1-2 [지갑 조회]
        * 사용자 지갑을 조회하여 잔액을 화면에 보여준다.
        */
+      walletService.findByUserId(this.userId,
+        (response)=> {
+          this.wallet.id = response.data.id;
+          this.wallet.ownerId = response.data.ownerId;
+          this.wallet.address = response.data.address;
+          this.wallet.balance = response.data.balance;
+          this.wallet.cash    = response.data.cash;
+          this.wallet.receivingCount = response.data.receivingCount;
+        },
+        (error)=> {
+          alert("지갑 조회 중 에러 발생");
+          console.dir(error);
+        }
+      )
 
       /**
        * TODO: PJTⅡ 과제3 Req.1-3 [지갑 조회 확장]
@@ -129,7 +143,16 @@ export default {
      * 이더 충전을 요청
      */
     chargeETH() {
-  
+      walletService.chargeEther(this.walletAddress,
+        (response)=> {
+          console.dir(response);
+          alert("충전 되었습니다.");
+        },
+        (error)=> {
+          console.dir(error);
+          alert("충전에 실패하였습니다.");
+        }
+      )
     },
     chargeCash() {
       const vm = this;

@@ -10,8 +10,17 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
+import org.web3j.protocol.Web3j;
+import org.web3j.protocol.core.DefaultBlockParameterName;
+import org.web3j.protocol.core.methods.response.EthGetBalance;
+import org.web3j.protocol.http.HttpService;
+import org.web3j.utils.Convert;
+import org.web3j.utils.Convert.Unit;
 
 import javax.validation.Valid;
+
+import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.List;
 
 @CrossOrigin(origins = "*")
@@ -29,19 +38,20 @@ public class WalletController {
 	}
 
 	/**
-	 * TODO Sub PJT Ⅱ 과제 1
-	 * 지갑 등록
+	 * TODO Sub PJT Ⅱ 과제 1 지갑 등록
+	 * 
 	 * @param wallet
 	 */
 	@ApiOperation(value = "Register wallet of user")
 	@RequestMapping(value = "/wallets", method = RequestMethod.POST)
 	public Wallet register(@Valid @RequestBody Wallet wallet) {
+		walletService.register(wallet);
 		return null;
 	}
 
 	/**
-	 * TODO Sub PJT Ⅱ 과제 1
-	 * 지갑 조회 by address
+	 * TODO Sub PJT Ⅱ 과제 1 지갑 조회 by address
+	 * 
 	 * @param address 지갑 주소
 	 */
 	@ApiOperation(value = "Fetch wallet by address")
@@ -51,14 +61,23 @@ public class WalletController {
 	}
 
 	/**
-	 * TODO Sub PJT Ⅱ 과제 1
-	 * 지갑 조회 by user's id
+	 * TODO Sub PJT Ⅱ 과제 1 지갑 조회 by user's id
+	 * 
 	 * @param uid 사용자 id
+	 * @throws IOException
 	 */
 	@ApiOperation(value = "Fetch wallet of user")
 	@RequestMapping(value = "/wallets/of/{uid}", method = RequestMethod.GET)
-	public Wallet getByUser(@PathVariable long uid) {
-		return null;
+	public Wallet getByUser(@PathVariable long uid) throws IOException {
+		// Wallet wallet = walletService.get(uid);
+		// Web3j web3 = Web3j.build(new HttpService("http://localhost:8545/"));
+		// EthGetBalance balanceWei = web3
+		// .ethGetBalance(wallet.getAddress(), DefaultBlockParameterName.LATEST)
+		// .send();
+		// BigDecimal balanceInEther = Convert.fromWei(balanceWei.getBalance().toString(), Unit.ETHER);
+		// wallet.setBalance(balanceInEther);
+
+		return walletService.get(uid);
 	}
 
 	/**
@@ -69,6 +88,6 @@ public class WalletController {
 	@ApiOperation(value = "Request ether")
 	@RequestMapping(value ="/wallets/{address}", method = RequestMethod.PUT)
 	public Wallet requestEth(@PathVariable String address){ // 테스트 가능하도록 일정 개수의 코인을 충전해준다.
-		return null;
+		return walletService.requestEth(address);
 	}
 }

@@ -81,8 +81,12 @@ export default {
        * TODO: PJTⅡ 과제 Req.1-1 [지갑 생성]
        * web3 api를 사용하여 지갑을 생성한다.
        */
-      
+      var web3 = new Web3();
+      web3.setProvider(new Web3.providers.HttpProvider('http://localhost:8545'));
 
+      var newAccount = web3.eth.accounts.create();
+      this.privateKey = newAccount.privateKey;
+      this.walletAddress = newAccount.address;
       this.step += 1;
     },
     saveWallet: function() {
@@ -90,7 +94,17 @@ export default {
        * TODO: PJTⅡ 과제 Req.1-1 [지갑 생성]
        * 생성된 사용자의 지갑 정보를 서버에 등록한다.
        */
-     
+      registerWallet(this.userId, this.walletAddress,
+        (response)=>{
+          console.log(response);
+          alert("등록에 성공하였습니다.");
+          this.$router.push('/mypage/wallet_info');
+        },
+        (error)=> {
+          console.log(error);
+          alert("등록에 실패하였습니다.");
+        }
+      );
     }
   }
 };
