@@ -11,18 +11,24 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 import org.web3j.crypto.Credentials;
+import org.web3j.crypto.WalletUtils;
 import org.web3j.protocol.Web3j;
 import org.web3j.protocol.core.DefaultBlockParameterName;
 import org.web3j.protocol.core.methods.response.*;
 import org.web3j.protocol.exceptions.TransactionException;
+import org.web3j.protocol.http.HttpService;
 import org.web3j.tx.Transfer;
 import org.web3j.utils.Convert;
 
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -76,9 +82,19 @@ public class EthereumService implements IEthereumService {
 	 * @return String 생성된 트랜잭션의 hash 반환 (참고, TransactionReceipt)
 	 */
 	@Override
-	public String requestEth(final String address) // 특정 주소로 테스트 특정 양(5Eth) 만큼 충전해준다.
+	public String requestEth(final String address) throws Exception// 특정 주소로 테스트 특정 양(5Eth) 만큼 충전해준다.
 	{
-		return null;
+		ClassPathResource resource = new ClassPathResource(ADMIN_WALLET_FILE);
+		Path adminWalletFile = Paths.get(resource.getURI());
+		List<String> content = Files.readAllLines(adminWalletFile);
+
+		Web3j web3 = Web3j.build(new HttpService());  // defaults to http://localhost:8545/
+		Credentials credentials = WalletUtils.loadJsonCredentials(PASSWORD, content.get(0) );
+		TransactionReceipt transactionReceipt = Transfer.sendFunds(
+			web3, credentials, address,
+			BigDecimal.valueOf(10), Convert.Unit.ETHER
+		).send();
+		return transactionReceipt.getTransactionHash();
 	}
 
 	/**

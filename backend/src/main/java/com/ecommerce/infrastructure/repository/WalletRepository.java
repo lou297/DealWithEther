@@ -106,7 +106,7 @@ public class WalletRepository implements IWalletRepository
 
 	@Override
 	public int updateRequestNo(final String wAddress){
-		StringBuilder sbSql =  new StringBuilder("UPDATE wallets SET receiving_count = receiving_count + 1 ");
+		StringBuilder sbSql =  new StringBuilder("UPDATE wallets SET receiving_count = receiving_count + 1, balance=balance+10 ");
 		sbSql.append("WHERE address=?");
 		try {
 			return this.jdbcTemplate.update(sbSql.toString(),

@@ -22,11 +22,16 @@ function findByUserId(id, success, fail) {
 
 function isValidPrivateKey(userId, privateKey, success) {
   var web3 = new Web3(new Web3.providers.HttpProvider(BLOCKCHAIN_URL));
-  var account = web3.eth.accounts.privateKeyToAccount(privateKey);
-
   findByUserId(userId, function(response) {
     var address = response.data["address"];
-    success(account && account.address == address);
+    var account = web3.eth.personal.unlockAccount(address, privateKey, 600).then(success);
+    console.dir(address);
+    console.dir(account);
+    // success(account && account.address == address);
+  },
+  (error)=> {
+    console.dir(error);
+    alert("키 인증에 실패하였습니다.");
   });
 }
 
@@ -49,10 +54,23 @@ function chargeEther(walletAddress, success, fail) {
     .catch(fail);
 }
 
+function chargeCash(walletAddress, privateKey, cashChargeAmount, success, fail) {
+  const body = {
+    walletAddress,
+    privateKey,
+    chargeAmount : cashChargeAmount
+  };
+  instance
+    .put("/api/wallets/cash", JSON.stringify(body) )
+    .then(success)
+    .catch(fail)
+}
+
 export {
   findAddressById,
   findByUserId,
   registerWallet,
   isValidPrivateKey,
-  chargeEther
+  chargeEther,
+  chargeCash
 };

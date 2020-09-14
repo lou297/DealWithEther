@@ -8,25 +8,19 @@ import com.ecommerce.domain.Wallet;
 import com.ecommerce.domain.exception.ApplicationException;
 import com.ecommerce.domain.exception.NotFoundException;
 import com.ecommerce.domain.repository.IWalletRepository;
-import com.ecommerce.infrastructure.repository.WalletRepository;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.web3j.protocol.Web3j;
-import org.web3j.protocol.admin.Admin;
-import org.web3j.protocol.admin.methods.response.PersonalUnlockAccount;
-import org.web3j.protocol.core.DefaultBlockParameterName;
-import org.web3j.protocol.core.methods.request.Transaction;
-import org.web3j.protocol.core.methods.response.EthGetBalance;
-import org.web3j.protocol.http.HttpService;
-import org.web3j.utils.Convert;
-import org.web3j.utils.Convert.Unit;
 
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 /**
@@ -42,6 +36,9 @@ public class WalletService implements IWalletService {
 	private IWalletRepository walletRepository;
 	private IEthereumService ethereumService;
 	private ICashContractService cashContractService;
+
+	@Value("${eth.admin.wallet.filename}")
+	private String walletPath;
 
 	@Autowired
 	public WalletService(IWalletRepository walletRepository, IEthereumService ethereumService,
@@ -106,30 +103,21 @@ public class WalletService implements IWalletService {
 	 * @return Wallet
 	 */
 	@Override
-	public Wallet requestEth(String walletAddress) {
+	public Wallet requestEth(String walletAddress) throws Exception{
+		// if(wallet.getReceivingCount() >= 20) throw new Exception();
+		ethereumService.requestEth(walletAddress);
+		Wallet wallet = walletRepository.get(walletAddress);
 
-		Admin web3 = Admin.build(new HttpService("http://localhost:8545/"));
-		PersonalUnlockAccount personalUnlockAccount = null;
-		try {
-			personalUnlockAccount = web3.personalUnlockAccount("0xa229097aaac92c5f178d61cfa8fe5ae00f6505d1", "test0").send();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		if (personalUnlockAccount.accountUnlocked()) {
-			// send a transaction
-			BigInteger nonce = BigInteger.valueOf(100);
-			BigInteger gasprice = BigInteger.valueOf(100);
-			BigInteger gaslimit = BigInteger.valueOf(100);
+		walletRepository.updateRequestNo(walletAddress);
+		wallet.setReceivingCount(wallet.getReceivingCount()+1);
+		
+		walletRepository.updateBalance(walletAddress, wallet.getBalance().add(BigDecimal.valueOf(10)), wallet.getCash());
+		wallet.setBalance(wallet.getBalance().add(BigDecimal.valueOf(10)));
+		return wallet;
+	}
 
-			Transaction transaction = Transaction.createContractTransaction(
-				"0xa229097aaac92c5f178d61cfa8fe5ae00f6505d1",
-				nonce,
-             	gasprice,  // we use default gas limit
-              	null
-			);
-
-			
-		}
+	public Wallet buyCash(String eoa, String pk, double chargeAmount) throws Exception{
+		cashContractService.buyCash(eoa, pk, chargeAmount);
 		return null;
 	}
 }

@@ -28,5 +28,7 @@ public interface IWalletService
 	Wallet syncBalance(String walletAddress, BigDecimal balance, int cash);
 
 	@Transactional
-	Wallet requestEth(String walletAddress);
+	Wallet requestEth(String walletAddress) throws Exception;
+
+	Wallet buyCash(String eoa, String pk, double amount) throws Exception;
 }

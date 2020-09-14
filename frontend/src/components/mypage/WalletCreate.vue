@@ -85,8 +85,13 @@ export default {
       web3.setProvider(new Web3.providers.HttpProvider('http://localhost:8545'));
 
       var newAccount = web3.eth.accounts.create();
+      var account = web3.eth.personal.newAccount(newAccount.privateKey).then((response) => { 
+        this.walletAddress = response;
+        console.log(response);
+        console.log(this.walletAddress);
+      });
+      console.log(this.walletAddress);
       this.privateKey = newAccount.privateKey;
-      this.walletAddress = newAccount.address;
       this.step += 1;
     },
     saveWallet: function() {
@@ -98,6 +103,7 @@ export default {
         (response)=>{
           console.log(response);
           alert("등록에 성공하였습니다.");
+          this.$store.commit("setWalletAddress", response.data.address);
           this.$router.push('/mypage/wallet_info');
         },
         (error)=> {
