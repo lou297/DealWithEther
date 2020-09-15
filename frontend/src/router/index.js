@@ -112,6 +112,11 @@ const routes = [
         component: () => import("../components/item/ItemDetail.vue"),
       },
       {
+        name: "item.detail2",
+        path: "detail2",
+        component: () => import("../components/item/Item_Detail.vue"),
+      },
+      {
         name: "item.purchase",
         path: "purchase/:id",
         component: () => import("../components/item/ItemPurchase.vue"),
@@ -136,8 +141,8 @@ const routes = [
       {
         name: "escrow.history",
         path: "history/:id",
-        component: () => import("@/components/escrow/EscrowHistory.vue")
-      }
+        component: () => import("@/components/escrow/EscrowHistory.vue"),
+      },
     ],
   },
   {
