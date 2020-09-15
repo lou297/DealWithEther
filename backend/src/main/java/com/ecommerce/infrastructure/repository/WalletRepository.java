@@ -43,13 +43,16 @@ public class WalletRepository implements IWalletRepository
 	@Override
 	public Wallet get(final long ownerId)
 	{
+		System.out.println("아이디"+ownerId);
 		StringBuilder sbSql =  new StringBuilder("SELECT * FROM wallets WHERE owner_id=?");
 		try {
-			return this.jdbcTemplate.queryForObject(sbSql.toString(),
-								new Object[] { ownerId }, (rs, rowNum) -> WalletFactory.create(rs) );
+			return this.jdbcTemplate.queryForObject(sbSql.toString(), new Object[] { ownerId },
+			 (rs, rowNum) -> WalletFactory.create(rs) );
 		} catch (EmptyResultDataAccessException e) {
+			System.out.println(e);
 			return null;
 		} catch (Exception e) {
+			System.out.println(e);
 			throw new RepositoryException(e, e.getMessage());
 		}
 	}
@@ -84,8 +87,8 @@ public class WalletRepository implements IWalletRepository
 					.usingGeneratedKeyColumns("id");
 
 			Number newId = simpleJdbcInsert.executeAndReturnKey(paramMap);
-			return newId.longValue();
-
+			//return newId.longValue();
+			return wallet.getOwnerId();
 		}catch (Exception e) {
 			throw new RepositoryException(e, e.getMessage());
 		}

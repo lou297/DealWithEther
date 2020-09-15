@@ -3,6 +3,7 @@ package com.ecommerce.api;
 import com.ecommerce.application.IWalletService;
 import com.ecommerce.domain.Cash;
 import com.ecommerce.domain.Wallet;
+import com.ecommerce.domain.exception.ApplicationException;
 import com.ecommerce.domain.exception.EmptyListException;
 import com.ecommerce.domain.exception.NotFoundException;
 
@@ -10,6 +11,7 @@ import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContextException;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 import org.web3j.protocol.Web3j;

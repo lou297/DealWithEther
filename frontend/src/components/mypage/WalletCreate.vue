@@ -61,6 +61,8 @@
 import { registerWallet } from "@/api/wallet.js";
 import Web3 from "web3";
 import MyPageNav from "./MyPageNav.vue";
+import Axios from 'axios';
+import { BLOCKCHAIN_URL } from "../../config/index.js";
 
 export default {
   components: {
@@ -93,6 +95,7 @@ export default {
       console.log(this.walletAddress);
       this.privateKey = newAccount.privateKey;
       this.step += 1;
+      console.log('지갑 생성됨');
     },
     saveWallet: function() {
       /**
