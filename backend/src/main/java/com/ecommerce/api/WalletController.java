@@ -94,6 +94,7 @@ public class WalletController {
 	@ApiOperation(value = "Request ether")
 	@RequestMapping(value = "/wallets/{address}", method = RequestMethod.PUT)
 	public Wallet requestEth(@PathVariable String address) throws Exception { // 테스트 가능하도록 일정 개수의 코인을 충전해준다.
+		System.out.println("이더 충전 들어옴!!");
 		Wallet wallet = null;
 		try {
 			wallet = walletService.requestEth(address);
