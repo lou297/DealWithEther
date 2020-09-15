@@ -16,7 +16,7 @@ public class EthereumServiceTest
 	private IEthereumService ethereumService;
 
 	@Test
-	public void testRequestEth()
+	public void testRequestEth() throws Exception
 	{
 		String toAddress = "0x6190E280834C9a3414EC2b93B268b629206ab65C";
 		String txhash = this.ethereumService.requestEth(toAddress);

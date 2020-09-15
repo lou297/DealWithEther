@@ -24,7 +24,7 @@
                     v-on:click="chargeETH()"
                     v-bind:disabled="isCharging"
                   >
-                    {{ isCharging ? "충전중" : "ETH 충전하기" }}
+                    {{ isCharging ? "충전중" : "10ETH 충전하기" }}
                   </button>
                 </td>
               </tr>
@@ -117,6 +117,20 @@ export default {
        * TODO: PJTⅡ 과제1 Req.1-2 [지갑 조회]
        * 사용자 지갑을 조회하여 잔액을 화면에 보여준다.
        */
+      walletService.findByUserId(this.userId,
+        (response)=> {
+          this.wallet.id = response.data.id;
+          this.wallet.ownerId = response.data.ownerId;
+          this.wallet.address = response.data.address;
+          this.wallet.balance = response.data.balance;
+          this.wallet.cash    = response.data.cash;
+          this.wallet.receivingCount = response.data.receivingCount;
+        },
+        (error)=> {
+          alert("지갑 조회 중 에러 발생");
+          console.dir(error);
+        }
+      )
 
       /**
        * TODO: PJTⅡ 과제3 Req.1-3 [지갑 조회 확장]
@@ -129,19 +143,48 @@ export default {
      * 이더 충전을 요청
      */
     chargeETH() {
-  
+      this.isCharging = true;
+      walletService.chargeEther(this.walletAddress,
+        (response)=> {
+          console.dir(response);
+          this.wallet.balance = response.data.balance;
+          this.wallet.receivingCount = response.data.receivingCount;
+          this.isCharging = false;
+          alert("충전 되었습니다.");
+        },
+        (error)=> {
+          console.dir(error);
+          alert("충전에 실패하였습니다.");
+        }
+      )
     },
     chargeCash() {
       const vm = this;
       this.isCashCharging = true;
       const privateKey = prompt("캐시를 충전하시려면 개인키를 입력하세요.");
-      if (privateKey) {
-        /**
-         * TODO: PJTⅡ 과제3 Req.1-1 [토큰 구매]
-         * 이더를 지불하고 캐시를 충전
-         */
-        
-      }
+      let check = false;
+      walletService.isValidPrivateKey(this.userId, privateKey, 
+        (res) => {
+          if (res) {
+            /**
+             * TODO: PJTⅡ 과제3 Req.1-1 [토큰 구매]
+             * 이더를 지불하고 캐시를 충전
+             */
+            walletService.chargeCash(this.wallet.address, privateKey, this.cashChargeAmount,
+              (response)=> {
+                console.dir(response);
+              },
+              (error)=>{
+                console.dir(error);
+                alert("캐쉬 충전에 실패하였습니다.");
+              }
+            )
+    
+          }else {
+            alert("개인키 인증에 실패하였습니다.")
+          }
+        }
+      )
     },
     /**
      * TODO: PJTⅡ 과제3 Req.1-2 [토큰 잔액 조회]

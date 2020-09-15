@@ -83,13 +83,17 @@ export default {
        * TODO: PJTⅡ 과제 Req.1-1 [지갑 생성]
        * web3 api를 사용하여 지갑을 생성한다.
        */
-      
-      var web3 = new Web3(BLOCKCHAIN_URL); // your geth
-      var account = web3.eth.accounts.create();
-      console.log(account);
+      var web3 = new Web3();
+      web3.setProvider(new Web3.providers.HttpProvider('http://localhost:8545'));
 
-      this.walletAddress = account.address;
-      this.privateKey = account.privateKey;
+      var newAccount = web3.eth.accounts.create();
+      var account = web3.eth.personal.newAccount(newAccount.privateKey).then((response) => { 
+        this.walletAddress = response;
+        console.log(response);
+        console.log(this.walletAddress);
+      });
+      console.log(this.walletAddress);
+      this.privateKey = newAccount.privateKey;
       this.step += 1;
       console.log('지갑 생성됨');
     },
@@ -98,18 +102,18 @@ export default {
        * TODO: PJTⅡ 과제 Req.1-1 [지갑 생성]
        * 생성된 사용자의 지갑 정보를 서버에 등록한다.
        */
-
-      registerWallet(
-        this.userId,
-        this.walletAddress,
-        function(success) {
-          alert('지갑 등록 성공!');
+      registerWallet(this.userId, this.walletAddress,
+        (response)=>{
+          console.log(response);
+          alert("등록에 성공하였습니다.");
+          this.$store.commit("setWalletAddress", response.data.address);
+          this.$router.push('/mypage/wallet_info');
         },
-        function(fail){
-          alert('지갑 등록 실패!');
+        (error)=> {
+          console.log(error);
+          alert("등록에 실패하였습니다.");
         }
       );
-     
     }
   }
 };

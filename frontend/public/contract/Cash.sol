@@ -25,23 +25,61 @@ contract Cash is IERC20{
     
     using SafeMath for uint256;
     
-    string public constant name = "Cash";		
-    string public constant symbol = "C";			
-    uint8 public constant decimals = 0;	
+    string public constant _name = "Cash";		
+    string public constant _symbol = "C";			
+    uint8 public constant _decimals = 0;	
     
     address payable public minter;
     mapping (address => uint256) private balances;
     mapping (address => mapping(address => uint256)) private allowed;  
-    uint256 public totalSupply;
+    uint256 public _totalSupply;
 
     /**
      * @notice constructor
      * totalSupply(inital supply), minter(owner)
      */
     constructor() public {
-        totalSupply = 10 ** 7; // initial supply
+        _totalSupply = 10 ** 7; // initial supply
         minter = msg.sender;
-        balances[minter] = totalSupply;
+        balances[minter] = _totalSupply;
+    }
+    
+    /**
+     * @dev Returns the name of the token.
+     */
+    function name() public view returns (string memory) {
+        return _name;
+    }
+
+    /**
+     * @dev Returns the symbol of the token, usually a shorter version of the
+     * name.
+     */
+    function symbol() public view returns (string memory) {
+        return _symbol;
+    }
+    /**
+     * @dev Returns the number of decimals used to get its user representation.
+     * For example, if `decimals` equals `2`, a balance of `505` tokens should
+     * be displayed to a user as `5,05` (`505 / 10 ** 2`).
+     *
+     * Tokens usually opt for a value of 18, imitating the relationship between
+     * Ether and Wei. This is the value {ERC20} uses, unless {_setupDecimals} is
+     * called.
+     *
+     * NOTE: This information is only used for _display_ purposes: it in
+     * no way affects any of the arithmetic of the contract, including
+     * {IERC20-balanceOf} and {IERC20-transfer}.
+     */
+    function decimals() public view returns (uint8) {
+        return _decimals;
+    }
+
+    /**
+    * @dev Total number of tokens in existence
+    */
+    function totalSupply() public view returns (uint256) {
+        return _totalSupply;
     }
     
     /**
@@ -53,7 +91,7 @@ contract Cash is IERC20{
         require(msg.sender == minter);
         require(_amount < 1e60);
         balances[_receiver] = balances[_receiver].add(_amount);
-        totalSupply = totalSupply.add(_amount);
+        _totalSupply = _totalSupply.add(_amount);
     }
     
     /**
