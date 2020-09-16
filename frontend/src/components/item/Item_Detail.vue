@@ -5,7 +5,7 @@
       <v-row justify="space-around" style="margin-top:50px">
         <v-col cols="5" style="margin-right:30px">
           <v-img
-            src="https://picsum.photos/510/300?random"
+            :src="item.image"
             aspect-ratio="1"
             max-width="386"
             max-height="386"
@@ -13,11 +13,11 @@
         </v-col>
         <v-col cols="6">
           <v-row>
-            <h2 style="float:left">아미 후드티 새상품 XL</h2>
+            <h2 style="float:left">{{item.name}}</h2>
           </v-row>
           <v-row>
             <v-col cols="9">
-              <h1 style="float:left">210,000 원</h1>
+              <h1 style="float:left">{{item.price}}원</h1>
             </v-col>
             <v-col cols="3">
               <v-btn style="width:100%">네고요청</v-btn>
@@ -26,7 +26,7 @@
           <v-divider />
           <v-row>
             <v-col cols="3" style="text-align:left">· 판매자</v-col>
-            <v-col cols="8" style="text-align:left">판매자</v-col>
+            <v-col cols="8" style="text-align:left">{{item.seller}}</v-col>
 
             <v-col cols="3" style="text-align:left">· 신용등급</v-col>
             <v-col cols="8" style="text-align:left">3.7</v-col>
@@ -35,7 +35,7 @@
             <v-col cols="8" style="text-align:left">직거래</v-col>
 
             <v-col cols="3" style="text-align:left">· 거래지역</v-col>
-            <v-col cols="8" style="text-align:left">천안시 동남구 봉명동</v-col>
+            <v-col cols="8" style="text-align:left">{{item.dealRegion}}</v-col>
 
             <v-row>
               <v-col cols="3">
@@ -56,15 +56,14 @@
       <h2 align="left">상품정보</h2>
       <v-divider />
       <p align="left">
-        아미 후드티 새상품 XL입니다
-        <br />택도 안뜯었습니다 !!! 완전 새상품
+        {{item.explanation}}
       </p>
     </v-container>
   </div>
 </template>
 
 <script>
-// import * as itemService from "../../api/item.js";
+import * as itemService from "../../api/item.js";
 // import * as auctionService from "../../api/auction.js";
 // import * as userService from "../../api/user.js";
 import { findById as findUserById } from "@/api/user.js";
@@ -85,15 +84,15 @@ export default {
         category: null,
         explanation: "",
         available: null,
-        state: "",
-        seller: {
-          id: null,
-          name: "",
-          email: "",
-        },
+        seller: {},
         image: null,
+        idDirect: {},
+        dealRegion: {},
         price: null,
         registeredAt: null,
+      },
+      user : {
+
       },
       userId: this.$store.state.user.id,
     };
@@ -124,6 +123,29 @@ export default {
   },
   created() {
     this.item.id = this.$route.params.id;
+
+    itemService.findById(this.item.id,
+      res => {
+        console.dir(res)
+        this.item = res.data
+
+        findById(this.item.seller, 
+        res => {
+            alert(res.data)
+            const data = res.data;
+            this.user.name = data["name"];
+            this.user.email = data["email"];
+            this.item.seller = this.user.email
+        },
+        err => {
+          alert(err)
+        }
+        );
+      },
+      err => {
+        alert(err)
+      }
+    )
   },
   // 일단 주석처리
   //   mounted: function() {
