@@ -187,7 +187,6 @@
         </v-container>
     </div>
 </template>
-
 <script>
 import {create as createItem} from "@/api/item.js";
 import {registerItem} from "@/utils/itemInventory.js";
