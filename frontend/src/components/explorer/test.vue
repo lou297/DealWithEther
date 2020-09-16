@@ -21,7 +21,7 @@
                         <div class="form-group">
                             <label id="image-upload">이미지 첨부</label>
                             <!-- Upload image input-->
-                            <input id="upload" type="file" class="form-control" style="height: auto;" @change="onFileChange" />
+                            <input id="upload" type="file" class="form-control" style="height: auto;" @change="onFileChange"/>
                         </div>
                     </v-flex>
                     <v-flex xl6 lg6 md12 sm12 xs12>
@@ -32,7 +32,7 @@
                                         <div class="card-body">
                                             <div class="form-group">
                                                 <label id="name">상품 이름</label>
-                                                <input type="text" class="form-control" id="name" v-model="item.name" />
+                                                <input type="text" class="form-control" id="name" v-model="item.name"/>
                                             </div>
                                             <div class="form-group">
                                                 <label id="name">카테고리</label>
@@ -44,11 +44,11 @@
                                             </div>
                                             <div class="form-group">
                                                 <label id="name">직거래 여부</label>
-                                                <input type="checkbox" class="form-control" id="check" />
+                                                <input type="checkbox" class="form-control" id="check"/>
                                             </div>
                                             <div class="form-group">
                                                 <label id="price">가격 <b>(CASH)</b></label>
-                                                <input type="number" class="form-control" id="price" v-model="item.price" />
+                                                <input type="number" class="form-control" id="price" v-model="item.price"/>
                                             </div>
                                             <div class="form-group">
                                                 <label id="description">상품 설명</label>
@@ -56,7 +56,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label id="privateKey">지갑 개인키</label>
-                                                <input id="privateKey" v-model="privateKey" type="text" class="form-control" placeholder="지갑 개인키를 입력해주세요." />
+                                                <input id="privateKey" v-model="privateKey" type="text" class="form-control" placeholder="지갑 개인키를 입력해주세요."/>
                                             </div>
                                         </div>
                                     </div>
@@ -88,8 +88,8 @@
 </template>
 
 <script>
-import { create as createItem } from "@/api/item.js";
-import { registerItem } from "@/utils/itemInventory.js";
+import {create as createItem} from "@/api/item.js";
+import {registerItem} from "@/utils/itemInventory.js";
 
 export default {
     name: "ItemCreate",
@@ -118,7 +118,7 @@ export default {
             if (this.item.imgName) {
                 return process.env.BASE_URL + "images/" + this.item.imgName;
             }
-
+            
             return null;
         },
     },
@@ -132,7 +132,7 @@ export default {
                 this.isCreating = false;
                 return;
             }
-
+            
             const item = {
                 name: this.item.name,
                 category: this.item.category,
@@ -140,7 +140,7 @@ export default {
                 seller: this.userId,
                 image: this.item.imgName,
             };
-
+            
             /**
              * TODO: PJTⅢ 과제3 Req.1-1 [상품 등록]
              * DB에 상품 등록 후 반환 받은 id를 이용해서 이더리움에 상품을 등록
@@ -151,7 +151,7 @@ export default {
             if (!files.length) {
                 return;
             }
-
+            
             this.item.imgName = files[0].name;
         },
     },
