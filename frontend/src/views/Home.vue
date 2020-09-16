@@ -1,20 +1,51 @@
 <template>
-    <div>
-        <h-nav></h-nav>
-        <div id="main-overview" class="container" style="margin-top: 52px;">
-            <v-row>
-                <v-col>
-                    <div>
-                        <div class="box">
-                            <input type="text" placeholder="상품명, 지역명 등을 검색해보세요!">
-                            <button>검색</button>
-                        </div>
-                        <div style="float:left; padding:8px 0 0 15px;">
-                            판매하기 | 내상점 | 문의톡
-                        </div>
-                        <div style="clear:both;"></div>
-                    </div>
-                    <br>
+  <div>
+    <h-nav></h-nav>
+    <div id="main-overview" class="container" style="margin-top: 52px;">
+      <v-row>
+        <v-col>
+        <div>
+          <div class="box">
+            <input type="text" placeholder="상품명, 지역명 등을 검색해보세요!">
+            <button>검색</button>
+          </div>
+          <div style="float:left; padding:0 0 0 15px;">
+            <router-link class="nav-link" to="/sell">판매하기</router-link>
+            <!-- <a href='../components/explorer/test.vue'>판매하기</a> -->
+          </div>
+          <div style="float:left; padding:8px 0 0 15px;">
+            내상점 
+          </div>
+          <div style="float:left; padding:8px 0 0 15px;">
+            문의톡 
+          </div>
+           <div style="clear:both;"></div>
+        </div><br>
+       
+          <v-footer padless>
+            <v-row justify="center" no-gutters>
+                  <v-btn
+                    v-for="link in links"
+                    :key="link"
+                    color="black"
+                    text
+                    rounded
+                    class="my-2"
+                    style="margin-left: 30px;"
+                  >
+                    {{ link }}
+                  </v-btn>
+            </v-row>
+          </v-footer>
+
+          <v-carousel hide-delimiters style="margin-top: 10px; height: 300px; padding:15px 15px 0 15px;">
+            <v-carousel-item
+              v-for="(item,i) in items"
+              :key="i"
+            >
+            <img :src="item.src" style="height:57%; width:100%">
+            </v-carousel-item>
+          </v-carousel><br>
 
                     <v-footer padless>
                         <v-row justify="center" no-gutters>
