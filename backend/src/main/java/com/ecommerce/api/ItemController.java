@@ -108,7 +108,8 @@ public class ItemController
 	}
 
 	/**
-	 * TODO Sub PJT Ⅲ 과제 3 상품 판매 취소
+	 * TODO Sub PJT Ⅲ 과제 3
+	 * 상품 판매 취소
 	 * 
 	 * @param id 아이템 id
 	 * @return Item
