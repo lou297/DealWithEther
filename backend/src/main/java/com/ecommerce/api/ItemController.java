@@ -78,7 +78,7 @@ public class ItemController
 	@RequestMapping(value = "/items/name/{name}", method = RequestMethod.GET)
 	public List<Item> getByUser(@PathVariable String name) {
 		List<Item> items = itemService.getByName(name);
-		if (items == null || items.size() == 0) {
+		if (items == null || items.size() == 0 ) {
 			logger.error("NOT FOUND LIST OF NAME: ", name);
 			return null;
 		}
