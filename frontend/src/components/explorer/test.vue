@@ -209,7 +209,7 @@ export default {
             privateKey: "",
             userId: this.$store.state.user.id,
             isCreating: false,
-            imgSrc: `${require("C:\\Users\\multicampus\\Downloads\\_.png")}`,
+            // imgSrc: `${require("C:\\Users\\multicampus\\Downloads\\_.png")}`,
         };
     },
     computed: {
