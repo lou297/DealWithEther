@@ -13,8 +13,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
-public class ItemService implements IItemService
-{
+public class ItemService implements IItemService {
 	public static final Logger logger = LoggerFactory.getLogger(ItemService.class);
 
 	private IItemRepository itemRepository;
@@ -25,14 +24,12 @@ public class ItemService implements IItemService
 	}
 
 	@Override
-	public List<Item> list()
-	{
+	public List<Item> list() {
 		return this.itemRepository.list();
 	}
 
 	@Override
-	public Item get(final long id)
-	{
+	public Item get(final long id) {
 		return this.itemRepository.get(id);
 	}
 
@@ -41,31 +38,42 @@ public class ItemService implements IItemService
 		return this.itemRepository.getByUser(uid);
 	}
 
+	@Override
+	public List<Item> getByName(String title) {
+		return this.itemRepository.getByName(title);
+	}
+
+	@Override
+	public List<Item> getByCategory(String category) {
+		return this.itemRepository.getByCategory(category);
+	}
+
 	/**
-	 * TODO Sub PJT Ⅲ 과제 3
-	 * 상품 등록 시 상품 정보를 저장한다.
+	 * TODO Sub PJT Ⅲ 과제 3 상품 등록 시 상품 정보를 저장한다.
+	 * 
 	 * @param item
 	 * @return Item
 	 */
 	@Override
 	public Item register(final Item item) {
-		return null;
+		long id = this.itemRepository.create(item);
+		return this.itemRepository.get(id);
 	}
 
 	/**
-	 * TODO Sub PJT Ⅲ 과제 3
-	 * 상품 판매 취소
+	 * TODO Sub PJT Ⅲ 과제 3 상품 판매 취소
+	 * 
 	 * @param id 상품 id
 	 * @return Item
 	 */
 	@Override
-	public Item delete(final long id)
-	{
-		return null;
+	public int delete(final long id) {
+		return this.itemRepository.delete(id);
 	}
 
 	/**
 	 * 상품 정보 업데이트
+	 * 
 	 * @param item
 	 * @return
 	 */
@@ -77,15 +85,19 @@ public class ItemService implements IItemService
 		if (item.getSeller() == 0 || item.getSeller() != itemStored.getSeller())
 			throw new ApplicationException("잘못된 접근입니다.");
 
-		if(item.getName() == null || "".equals(item.getName()))
+		if (item.getName() == null || "".equals(item.getName()))
 			item.setName(itemStored.getName());
-		if(item.getExplanation() == null || "".equals(item.getExplanation()))
+		if (item.getExplanation() == null || "".equals(item.getExplanation()))
 			item.setExplanation(itemStored.getExplanation());
-		if(item.getAvailable() == null || "".equals(item.getAvailable()))
+		if (item.getAvailable() == null || "".equals(item.getAvailable()))
 			item.setAvailable(itemStored.getAvailable());
+		if (item.getImage() == null || "".equals(item.getImage()))
+			item.setImage(itemStored.getImage());
+		if (item.getPrice() == 0)
+			item.setPrice(itemStored.getPrice());
 
 		int affected = this.itemRepository.update(item);
-		if(affected == 0)
+		if (affected == 0)
 			throw new ApplicationException("상품정보수정 처리가 반영되지 않았습니다.");
 
 		return this.itemRepository.get(item.getId());

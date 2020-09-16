@@ -7,7 +7,13 @@ import java.util.List;
 
 public interface IItemService {
 	List<Item> list();
+
 	List<Item> getByUser(int uid);
+
+	List<Item> getByName(String title);
+
+	List<Item> getByCategory(String Category);
+
 	Item get(long id);
 
 	@Transactional
@@ -17,5 +23,5 @@ public interface IItemService {
 	Item update(Item item);
 
 	@Transactional
-	Item delete(long id);
+	int delete(long id);
 }

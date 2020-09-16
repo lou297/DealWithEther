@@ -28,3 +28,7 @@ HELP.md
 
 ### VS Code ###
 .vscode/
+
+### application settings ###
+/src/main/resources/application.properties
+### /src/main/resources/admin.wallet
