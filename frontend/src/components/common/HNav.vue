@@ -17,6 +17,7 @@
           <li class="nav-item">
             <router-link class="nav-link" to="/shop">Shop</router-link>
           </li>
+          <!-- 테스트용 -->
           <li class="nav-item">
             <router-link class="nav-link" to="/item/detail2">item</router-link>
           </li>
