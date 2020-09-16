@@ -9,6 +9,7 @@ import MyPage from "@/views/MyPage.vue";
 import Item from "@/views/Item.vue";
 import Explorer from "@/views/Explorer.vue";
 import Escrow from "@/views/Escrow.vue";
+import Sell from "@/views/Sell.vue";
 
 Vue.use(VueRouter);
 
@@ -30,6 +31,11 @@ const routes = [
         path: "/register",
         name: "signup",
         component: Signup,
+    },
+    {
+        path: "/sell",
+        name: "sell",
+        component: Sell,
     },
     {
         path: "/logout",
@@ -184,7 +190,6 @@ const routes = [
             },
         ],
     },
-  },
   {
     name: "item",
     path: "/item",

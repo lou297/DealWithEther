@@ -9,8 +9,15 @@
             <input type="text" placeholder="상품명, 지역명 등을 검색해보세요!">
             <button>검색</button>
           </div>
+          <div style="float:left; padding:0 0 0 15px;">
+            <router-link class="nav-link" to="/sell">판매하기</router-link>
+            <!-- <a href='../components/explorer/test.vue'>판매하기</a> -->
+          </div>
           <div style="float:left; padding:8px 0 0 15px;">
-            판매하기 | 내상점 | 문의톡
+            내상점 
+          </div>
+          <div style="float:left; padding:8px 0 0 15px;">
+            문의톡 
           </div>
            <div style="clear:both;"></div>
         </div><br>
@@ -140,7 +147,7 @@ export default {
   components: {
     HNav,
     StepFlow
-  }
+  },
 };
 </script>
 
