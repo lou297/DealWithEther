@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary" style="height: 50px;">
     <div class="container">
-      <img id="nav-icon" src="../../../public/images/rocket.svg">
+      <img id="nav-icon" src="../../../public/images/rocket.svg" />
       <!-- <div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div> -->
       <router-link class="navbar-brand" to="/">중고마켓</router-link>
       <div
@@ -16,6 +16,10 @@
           </li>
           <li class="nav-item">
             <router-link class="nav-link" to="/shop">Shop</router-link>
+          </li>
+          <!-- 테스트용 -->
+          <li class="nav-item">
+            <router-link class="nav-link" to="/item/detail2">item</router-link>
           </li>
           <li class="nav-item" v-if="$store.state.isSigned">
             <router-link
