@@ -21,7 +21,7 @@
                         <div class="form-group">
                             <label id="image-upload">이미지 첨부</label>
                             <!-- Upload image input-->
-                            <input id="upload" type="file" class="form-control" style="height: auto;" @change="onFileChange" />
+                            <input id="upload" type="file" class="form-control" style="height: auto;" @change="onFileChange"/>
                         </div>
                     </v-flex>
                     <v-flex xl6 lg6 md12 sm12 xs12>
@@ -32,7 +32,7 @@
                                         <div class="card-body">
                                             <div class="form-group">
                                                 <label id="name">상품 이름</label>
-                                                <input type="text" class="form-control" id="name" v-model="item.name" />
+                                                <input type="text" class="form-control" id="name" v-model="item.name"/>
                                             </div>
                                             <div class="form-group">
                                                 <label id="name">카테고리</label>
@@ -44,11 +44,11 @@
                                             </div>
                                             <div class="form-group">
                                                 <label id="name">직거래 여부</label>
-                                                <input type="checkbox" class="form-control" id="check" />
+                                                <input type="checkbox" class="form-control" id="check"/>
                                             </div>
                                             <div class="form-group">
                                                 <label id="price">가격 <b>(CASH)</b></label>
-                                                <input type="number" class="form-control" id="price" v-model="item.price" />
+                                                <input type="number" class="form-control" id="price" v-model="item.price"/>
                                             </div>
                                             <div class="form-group">
                                                 <label id="description">상품 설명</label>
@@ -56,7 +56,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label id="privateKey">지갑 개인키</label>
-                                                <input id="privateKey" v-model="privateKey" type="text" class="form-control" placeholder="지갑 개인키를 입력해주세요." />
+                                                <input id="privateKey" v-model="privateKey" type="text" class="form-control" placeholder="지갑 개인키를 입력해주세요."/>
                                             </div>
                                         </div>
                                     </div>
@@ -83,13 +83,113 @@
                     </v-flex>
                 </v-layout>
             </div>
-        </v-container>
-    </div>
+          <v-flex xl6 lg6 md12 sm12 xs12>
+            <div class="container">
+              <div class="row">
+                <div class="col-md-12 mx-auto">
+                  <div class="card">
+                    <div class="card-body">
+                      <div class="form-group">
+                        <label id="name">상품 이름</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="name"
+                          v-model="item.name"
+                        />
+                      </div>
+                      <div class="form-group">
+                        <label id="name">카테고리</label>
+                        <select
+                          class="form-control"
+                          id="category"
+                          v-model="item.category"
+                        >
+                          <option value="D">디지털/가전</option>
+                          <option value="C">유아물품</option>
+                          <option value="H">게임/취미</option>
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <label id="name">직거래 여부</label>
+                        <input
+                          type="checkbox"
+                          class="form-control"
+                          id="check"
+                        />
+                      </div>
+                      <div class="form-group">
+                        <label id="price">가격 <b>(CASH)</b></label>
+                        <input
+                          type="number"
+                          class="form-control"
+                          id="price"
+                          v-model="item.price"
+                        />
+                      </div>
+                      <div class="form-group">
+                        <label id="description">상품 설명</label>
+                        <textarea
+                          class="form-control"
+                          id="description"
+                          v-model="item.description"
+                          placeholder=""
+                        ></textarea>
+                      </div>
+                      <div class="form-group">
+                        <label id="privateKey">지갑 개인키</label>
+                        <input
+                          id="privateKey"
+                          v-model="privateKey"
+                          type="text"
+                          class="form-control"
+                          placeholder="지갑 개인키를 입력해주세요."
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </v-flex>
+        <v-layout row wrap>
+          <v-flex>
+            <button
+              type="button"
+              class="btn btn-primary"
+              v-on:click="save"
+              v-bind:disabled="isCreating"
+            >
+              채팅
+            </button>
+          </v-flex>
+          <v-flex>
+            <button
+              type="button"
+              class="btn btn-primary"
+              v-on:click="save"
+              v-bind:disabled="isCreating"
+            >
+              상품 등록
+            </button>
+          </v-flex>
+          <v-flex>
+            <button
+              type="button"
+              class="btn btn-primary"
+              v-on:click="save"
+              v-bind:disabled="isCreating"
+            >
+              등록 취소
+            </button>
+          </v-flex>
+        </v-layout>
+      </div>
 </template>
 
 <script>
-import { create as createItem } from "@/api/item.js";
-import { registerItem } from "@/utils/itemInventory.js";
+import {create as createItem} from "@/api/item.js";
+import {registerItem} from "@/utils/itemInventory.js";
 
 export default {
     name: "ItemCreate",
@@ -117,7 +217,7 @@ export default {
             if (this.item.imgName) {
                 return process.env.BASE_URL + "images/" + this.item.imgName;
             }
-
+            
             return null;
         },
     },
@@ -131,7 +231,7 @@ export default {
                 this.isCreating = false;
                 return;
             }
-
+            
             const item = {
                 name: this.item.name,
                 category: this.item.category,
@@ -139,7 +239,7 @@ export default {
                 seller: this.userId,
                 image: this.item.imgName,
             };
-
+            
             /**
              * TODO: PJTⅢ 과제3 Req.1-1 [상품 등록]
              * DB에 상품 등록 후 반환 받은 id를 이용해서 이더리움에 상품을 등록
@@ -150,7 +250,7 @@ export default {
             if (!files.length) {
                 return;
             }
-
+            
             this.item.imgName = files[0].name;
         },
     },
@@ -159,41 +259,41 @@ export default {
 
 <style>
 .image-area {
-    border: 2px dashed #ced4da;
-    padding: 1rem;
-    position: relative;
+  border: 2px dashed #ced4da;
+  padding: 1rem;
+  position: relative;
 }
 
 .image-area::before {
-    content: "업로드 된 이미지";
-    font-weight: bold;
-    text-transform: uppercase;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 0.8rem;
-    z-index: 1;
+  content: "업로드 된 이미지";
+  font-weight: bold;
+  text-transform: uppercase;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.8rem;
+  z-index: 1;
 }
 
 .image-area img {
-    z-index: 2;
-    position: relative;
+  z-index: 2;
+  position: relative;
 }
 
 .profile {
-    display: flex;
-    justify-content: center;
-    /* min-width: 100px; */
-    size: 200px;
+  display: flex;
+  justify-content: center;
+  /* min-width: 100px; */
+  size: 200px;
 }
 
 .backImg {
-    width: 80%;
-    margin: auto;
-    border-radius: 2rem;
-    background-size: 152vh;
-    padding: 20px;
-    box-shadow: 3px 3px 5px 1px #595959;
+  width: 80%;
+  margin: auto;
+  border-radius: 2rem;
+  background-size: 152vh;
+  padding: 20px;
+  box-shadow: 3px 3px 5px 1px #595959;
 }
 </style>

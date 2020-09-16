@@ -5,10 +5,15 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-public interface IItemRepository
-{
+public interface IItemRepository {
 	List<Item> list();
+
 	List<Item> getByUser(final long userId);
+
+	List<Item> getByName(final String name);
+
+	List<Item> getByCategory(final String category);
+
 	Item get(long id);
 
 	@Transactional
