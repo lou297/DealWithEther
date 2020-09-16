@@ -18,6 +18,12 @@
         >
         <router-link
           class="nav-item nav-link"
+          v-bind:class="{ active: viewName == 'mypage.profile' }"
+          :to="{ name: 'mypage.profile' }"
+          >프로필</router-link
+        >
+        <router-link
+          class="nav-item nav-link"
           v-bind:class="{ active: viewName == 'mypage.items' }"
           :to="{ name: 'mypage.items' }"
           >상품 관리</router-link
