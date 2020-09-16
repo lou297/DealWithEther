@@ -9,6 +9,7 @@ import MyPage from "@/views/MyPage.vue";
 import Item from "@/views/Item.vue";
 import Explorer from "@/views/Explorer.vue";
 import Escrow from "@/views/Escrow.vue";
+import Sell from "@/views/Sell.vue";
 
 Vue.use(VueRouter);
 
@@ -16,30 +17,120 @@ Vue.use(VueRouter);
  * 아래의 router를 변경하여 구현할 수 있습니다.
  */
 const routes = [
-  {
-    path: "/",
-    name: "home",
-    component: Home,
-  },
-  {
-    name: "login",
-    path: "/login",
-    component: Login,
-  },
-  {
-    path: "/register",
-    name: "signup",
-    component: Signup,
-  },
-  {
-    path: "/logout",
-    name: "logout",
-    beforeEnter(to, from, next) {
-      store.commit("logout");
-      alert("로그아웃 되었습니다.");
-      next("/");
+    {
+        path: "/",
+        name: "home",
+        component: Home,
     },
-  },
+    {
+        name: "login",
+        path: "/login",
+        component: Login,
+    },
+    {
+        path: "/register",
+        name: "signup",
+        component: Signup,
+    },
+    {
+        path: "/sell",
+        name: "sell",
+        component: Sell,
+    },
+    {
+        path: "/logout",
+        name: "logout",
+        beforeEnter(to, from, next) {
+            store.commit("logout");
+            alert("로그아웃 되었습니다.");
+            next("/");
+        },
+    },
+    {
+        name: "shop",
+        path: "/shop",
+        component: Shop,
+        children: [
+            {
+                path: "",
+                component: () => import("@/components/shop/All.vue"),
+            },
+            {
+                path: "digital",
+                component: () => import("@/components/shop/Digital.vue"),
+            },
+            {
+                path: "child",
+                component: () => import("@/components/shop/Child.vue"),
+            },
+            {
+                path: "hobby",
+                component: () => import("@/components/shop/Hobby.vue"),
+            },
+        ],
+        redirect: () => {
+            return "/shop";
+        },
+    },
+    {
+        name: "mypage",
+        path: "/mypage",
+        component: MyPage,
+        children: [
+            {
+                name: "mypage.wallet.create",
+                path: "wallet_create",
+                component: () => import("../components/mypage/WalletCreate.vue"),
+            },
+            {
+                name: "mypage.wallet.info",
+                path: "wallet_info",
+                component: () => import("../components/mypage/WalletInfo.vue"),
+            },
+            {
+                name: "mypage.items",
+                path: "/mypage/items",
+                component: () => import("../components/mypage/MyItems.vue"),
+            },
+            {
+                name: "mypage.password",
+                path: "/mypage/password",
+                component: () =>
+                    import ("../components/mypage/Password.vue"),
+            },
+            {
+                name: "mypage.profile",
+                path: "/mypage/profile",
+                component: () =>
+                    import ("../components/mypage/MyProfile.vue"),
+            },
+        ],
+        redirect: () => {
+            return "/mypage/items";
+        },
+    },
+    {
+        name: "item",
+        path: "/item",
+        component: Item,
+        children: [
+            {
+                name: "item.create",
+                path: "create",
+                component: () => import("../components/item/ItemCreate.vue"),
+            },
+            {
+                name: "item.detail",
+                path: "detail/:id",
+                component: () => import("../components/item/ItemDetail.vue"),
+            },
+            {
+                name: "item.purchase",
+                path: "purchase/:id",
+                component: () => import("../components/item/ItemPurchase.vue"),
+            },
+        ],
+    },
   {
     name: "shop",
     path: "/shop",
@@ -100,7 +191,6 @@ const routes = [
     redirect: () => {
       return "/mypage/items";
     },
-  },
   {
     name: "item",
     path: "/item",

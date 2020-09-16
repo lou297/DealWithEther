@@ -83,7 +83,6 @@
                     </v-flex>
                 </v-layout>
             </div>
-          </v-flex>
           <v-flex xl6 lg6 md12 sm12 xs12>
             <div class="container">
               <div class="row">
@@ -153,7 +152,6 @@
               </div>
             </div>
           </v-flex>
-        </v-layout>
         <v-layout row wrap>
           <v-flex>
             <button
@@ -187,8 +185,6 @@
           </v-flex>
         </v-layout>
       </div>
-    </v-container>
-  </div>
 </template>
 
 <script>
@@ -209,7 +205,6 @@ export default {
             privateKey: "",
             userId: this.$store.state.user.id,
             isCreating: false,
-            // imgSrc: `${require("C:\\Users\\multicampus\\Downloads\\_.png")}`,
         };
     },
     computed: {
@@ -259,7 +254,6 @@ export default {
             this.item.imgName = files[0].name;
         },
     },
-  },
 };
 </script>
 
