@@ -24,14 +24,12 @@
             </v-layout>
         </v-container>
         <div class="row">
-
             <v-flex xs12 sm12 md6 lg4 xl3
                     class="col-md-3 artwork"
                     v-for="item in items"
                     v-bind:key="item.id">
                 <item-card :item="item" @clicked="onClickItem(item.id)"></item-card>
             </v-flex>
-
         </div>
         <div class="text-center">
             <v-pagination
@@ -67,9 +65,7 @@ export default {
             disabled: false,
             length: 30,
             nextIcon: 'navigate_next',
-            nextIcons: ['mdi-chevron-right', 'mdi-arrow-right', 'mdi-menu-right'],
             prevIcon: 'navigate_before',
-            prevIcons: ['mdi-chevron-left', 'mdi-arrow-left', 'mdi-menu-left'],
             page: 1,
             totalVisible: 10,
         };
@@ -81,7 +77,6 @@ export default {
     },
     mounted: function () {
         const vm = this;
-
         findAll(function (response) {
             if (response.data.length > 0) {
                 vm.items = response.data;

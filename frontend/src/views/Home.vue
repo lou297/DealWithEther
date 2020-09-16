@@ -34,7 +34,7 @@
 
                     <v-carousel hide-delimiters style="margin-top: 10px; height: 300px; padding:15px 15px 0 15px;">
                         <v-carousel-item
-                            v-for="(item,i) in items"
+                            v-for="(item,i) in items2"
                             :key="i"
                         >
                             <img :src="item.src" style="height:57%; width:100%">
@@ -42,58 +42,26 @@
                     </v-carousel>
                     <br>
 
-                    <v-row>
-                        <v-col cols="3">
-                            <v-card class="mx-auto" max-width="230">
-                                <img
-                                    class="white--text align-end"
-                                    height="200px"
-                                    width="230"
-                                    src="../../public/images/glass.jpg"
-                                >
-                                <v-card-actions style="padding-left:15px;">블루라이트 차단안경</v-card-actions>
-                                <v-card-actions style="padding-left:15px;">13,000원</v-card-actions>
-                            </v-card>
-                        </v-col>
-                        <v-col cols="3">
-                            <v-card class="mx-auto" max-width="230">
-                                <img
-                                    class="white--text align-end"
-                                    height="200px"
-                                    width="230"
-                                    src="../../public/images/image1.jpg"
-                                >
-
-                                <v-card-actions style="padding-left:15px;">입생로랑 정품 가방</v-card-actions>
-                                <v-card-actions style="padding-left:15px;">380,000원</v-card-actions>
-                            </v-card>
-                        </v-col>
-                        <v-col cols="3">
-                            <v-card class="mx-auto" max-width="230">
-                                <img
-                                    class="white--text align-end"
-                                    height="200px"
-                                    width="230"
-                                    src="../../public/images/image2.jpg"
-                                >
-
-                                <v-card-actions style="padding-left:15px;">뉴발란스 327 그레이</v-card-actions>
-                                <v-card-actions style="padding-left:15px;">160,000원</v-card-actions>
-                            </v-card>
-                        </v-col>
-                        <v-col cols="3">
-                            <v-card class="mx-auto" max-width="230">
-                                <img
-                                    class="white--text align-end"
-                                    height="200px"
-                                    width="230"
-                                    src="../../public/images/image3.jpg"
-                                >
-                                <v-card-actions style="padding-left:15px;">애플워치3 gps 스그</v-card-actions>
-                                <v-card-actions style="padding-left:15px;">210,000원</v-card-actions>
-                            </v-card>
-                        </v-col>
-                    </v-row>
+                    <div class="row">
+                        <v-flex xs12 sm12 md6 lg4 xl3
+                                class="col-md-3 artwork"
+                                v-for="item in items"
+                                v-bind:key="item.id">
+                            <item-card :item="item" @clicked="onClickItem(item.id)"></item-card>
+                        </v-flex>
+                    </div>
+                    <div class="text-center">
+                        <v-pagination
+                            v-model="page"
+                            :circle="circle"
+                            :disabled="disabled"
+                            :length="length"
+                            :next-icon="nextIcon"
+                            :prev-icon="prevIcon"
+                            :page="page"
+                            :total-visible="totalVisible"
+                        ></v-pagination>
+                    </div>
 
                 </v-col>
             </v-row>
@@ -108,11 +76,14 @@ import Vue from 'vue';
 import Vuetify from 'vuetify/lib';
 import 'material-design-icons-iconfont/dist/material-design-icons.css';
 import {mdiAccount} from '@mdi/js';
+import {findAll} from "@/api/item";
+import {getPrice} from "@/utils/itemInventory";
+import ItemCard from "@/components/shop/ItemCard";
 
 export default {
     data() {
         return {
-            items: [
+            items2: [
                 {
                     src: require('../../public/images/test.jpg')
                 },
@@ -126,6 +97,14 @@ export default {
                     src: 'https://cdn.vuetifyjs.com/images/carousel/planet.jpg'
                 }
             ],
+            items: [],
+            circle: false,
+            disabled: false,
+            length: 30,
+            nextIcon: 'navigate_next',
+            prevIcon: 'navigate_before',
+            page: 1,
+            totalVisible: 10,
             links: [
                 '여성의류',
                 '남성의류',
@@ -140,8 +119,36 @@ export default {
     },
     components: {
         HNav,
-        StepFlow
-    }
+        StepFlow,
+        ItemCard
+    },
+    mounted: function () {
+        const vm = this;
+
+        findAll(function (response) {
+            if (response.data.length > 0) {
+                vm.items = response.data;
+                vm.items.forEach(i => {
+                    // [스마트 컨트랙트] 가격 조회
+                    getPrice(
+                        i.id,
+                        function (price) {
+                            vm.$set(i, "price", price);
+                        },
+                        function (err) {
+                            console.error('가격 조회 실패:', err);
+                            // alert("상품 가격 조회를 실패했습니다.");
+                        }
+                    )
+                })
+            }
+        });
+    },
+    methods: {
+        onClickItem(itemId) {
+            this.$router.push("item/detail/" + itemId);
+        }
+    },
 };
 </script>
 
