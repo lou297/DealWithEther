@@ -108,28 +108,6 @@ const routes = [
     },
   },
   {
-    name: "item",
-    path: "/item",
-    component: Item,
-    children: [
-      {
-        name: "item.create",
-        path: "create",
-        component: () => import("../components/item/ItemCreate.vue"),
-      },
-      {
-        name: "item.detail",
-        path: "detail/:id",
-        component: () => import("../components/item/ItemDetail.vue"),
-      },
-      {
-        name: "item.purchase",
-        path: "purchase/:id",
-        component: () => import("../components/item/ItemPurchase.vue"),
-      },
-    ],
-  },
-  {
     name: "shop",
     path: "/shop",
     component: Shop,
