@@ -89,7 +89,14 @@ const routes = [
             {
                 name: "mypage.password",
                 path: "/mypage/password",
-                component: () => import("../components/mypage/Password.vue"),
+                component: () =>
+                    import ("../components/mypage/Password.vue"),
+            },
+            {
+                name: "mypage.profile",
+                path: "/mypage/profile",
+                component: () =>
+                    import ("../components/mypage/MyProfile.vue"),
             },
         ],
         redirect: () => {
