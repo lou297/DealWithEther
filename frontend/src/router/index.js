@@ -15,8 +15,7 @@ Vue.use(VueRouter);
 /**
  * 아래의 router를 변경하여 구현할 수 있습니다.
  */
-const routes = [
-    {
+const routes = [{
         path: "/",
         name: "home",
         component: Home,
@@ -44,22 +43,25 @@ const routes = [
         name: "shop",
         path: "/shop",
         component: Shop,
-        children: [
-            {
+        children: [{
                 path: "",
-                component: () => import("@/components/shop/All.vue"),
+                component: () =>
+                    import ("@/components/shop/All.vue"),
             },
             {
                 path: "digital",
-                component: () => import("@/components/shop/Digital.vue"),
+                component: () =>
+                    import ("@/components/shop/Digital.vue"),
             },
             {
                 path: "child",
-                component: () => import("@/components/shop/Child.vue"),
+                component: () =>
+                    import ("@/components/shop/Child.vue"),
             },
             {
                 path: "hobby",
-                component: () => import("@/components/shop/Hobby.vue"),
+                component: () =>
+                    import ("@/components/shop/Hobby.vue"),
             },
         ],
         redirect: () => {
@@ -70,21 +72,23 @@ const routes = [
         name: "mypage",
         path: "/mypage",
         component: MyPage,
-        children: [
-            {
+        children: [{
                 name: "mypage.wallet.create",
                 path: "wallet_create",
-                component: () => import("../components/mypage/WalletCreate.vue"),
+                component: () =>
+                    import ("../components/mypage/WalletCreate.vue"),
             },
             {
                 name: "mypage.wallet.info",
                 path: "wallet_info",
-                component: () => import("../components/mypage/WalletInfo.vue"),
+                component: () =>
+                    import ("../components/mypage/WalletInfo.vue"),
             },
             {
                 name: "mypage.items",
                 path: "/mypage/items",
-                component: () => import("../components/mypage/MyItems.vue"),
+                component: () =>
+                    import ("../components/mypage/MyItems.vue"),
             },
             {
                 name: "mypage.password",
@@ -107,21 +111,23 @@ const routes = [
         name: "item",
         path: "/item",
         component: Item,
-        children: [
-            {
+        children: [{
                 name: "item.create",
                 path: "create",
-                component: () => import("../components/item/ItemCreate.vue"),
+                component: () =>
+                    import ("../components/item/ItemCreate.vue"),
             },
             {
                 name: "item.detail",
                 path: "detail/:id",
-                component: () => import("../components/item/ItemDetail.vue"),
+                component: () =>
+                    import ("../components/item/ItemDetail.vue"),
             },
             {
                 name: "item.purchase",
                 path: "purchase/:id",
-                component: () => import("../components/item/ItemPurchase.vue"),
+                component: () =>
+                    import ("../components/item/ItemPurchase.vue"),
             },
         ],
     },
@@ -129,21 +135,23 @@ const routes = [
         name: "escrow",
         path: "/escrow",
         component: Escrow,
-        children: [
-            {
+        children: [{
                 name: "escrow.purchase.detail",
                 path: "purchase/detail",
-                component: () => import("@/components/escrow/PurchaseTxDetail.vue"),
+                component: () =>
+                    import ("@/components/escrow/PurchaseTxDetail.vue"),
             },
             {
                 name: "escrow.sale.detail",
                 path: "sale/detail",
-                component: () => import("@/components/escrow/SaleTxDetail.vue"),
+                component: () =>
+                    import ("@/components/escrow/SaleTxDetail.vue"),
             },
             {
                 name: "escrow.history",
                 path: "history/:id",
-                component: () => import("@/components/escrow/EscrowHistory.vue"),
+                component: () =>
+                    import ("@/components/escrow/EscrowHistory.vue"),
             },
         ],
     },
@@ -151,121 +159,134 @@ const routes = [
         name: "explorer",
         path: "/explorer",
         component: Explorer,
-        children: [
-            {
+        children: [{
                 name: "explorer.dashboard",
                 path: "dashboard",
-                component: () => import("../components/explorer/Dashboard.vue"),
+                component: () =>
+                    import ("../components/explorer/Dashboard.vue"),
             },
             {
                 name: "explorer.block",
                 path: "blocks",
-                component: () => import("../components/explorer/BlockListView.vue"),
+                component: () =>
+                    import ("../components/explorer/BlockListView.vue"),
             },
             {
                 name: "explorer.block.detail",
                 path: "block/:blockNumber",
-                component: () => import("../components/explorer/BlockDetail.vue"),
+                component: () =>
+                    import ("../components/explorer/BlockDetail.vue"),
             },
             {
                 name: "explorer.tx",
                 path: "txes",
-                component: () => import("../components/explorer/TxListView.vue"),
+                component: () =>
+                    import ("../components/explorer/TxListView.vue"),
             },
             {
                 name: "explorer.tx.detail",
                 path: "tx/:hash",
-                component: () => import("../components/explorer/TxDetail.vue"),
+                component: () =>
+                    import ("../components/explorer/TxDetail.vue"),
             },
             {
                 name: "explorer.test",
                 path: "test",
-                component: () => import("../components/explorer/test.vue"),
+                component: () =>
+                    import ("../components/explorer/test.vue"),
             },
         ],
     },
-  },
-  {
-    name: "item",
-    path: "/item",
-    component: Item,
-    children: [
-      {
-        name: "item.create",
-        path: "create",
-        component: () => import("../components/item/ItemCreate.vue"),
-      },
-      {
-        name: "item.detail",
-        path: "detail/:id",
-        component: () => import("../components/item/ItemDetail.vue"),
-      },
-      {
-        name: "item.detail2",
-        path: "detail2",
-        component: () => import("../components/item/Item_Detail.vue"),
-      },
-      {
-        name: "item.purchase",
-        path: "purchase/:id",
-        component: () => import("../components/item/ItemPurchase.vue"),
-      },
-    ],
-  },
-  {
-    name: "escrow",
-    path: "/escrow",
-    component: Escrow,
-    children: [
-      {
-        name: "escrow.purchase.detail",
-        path: "purchase/detail",
-        component: () => import("@/components/escrow/PurchaseTxDetail.vue"),
-      },
-      {
-        name: "escrow.sale.detail",
-        path: "sale/detail",
-        component: () => import("@/components/escrow/SaleTxDetail.vue"),
-      },
-      {
-        name: "escrow.history",
-        path: "history/:id",
-        component: () => import("@/components/escrow/EscrowHistory.vue"),
-      },
-    ],
-  },
-  {
-    name: "explorer",
-    path: "/explorer",
-    component: Explorer,
-    children: [
-      {
-        name: "explorer.dashboard",
-        path: "dashboard",
-        component: () => import("../components/explorer/Dashboard.vue"),
-      },
-      {
-        name: "explorer.block",
-        path: "blocks",
-        component: () => import("../components/explorer/BlockListView.vue"),
-      },
-      {
-        name: "explorer.block.detail",
-        path: "block/:blockNumber",
-        component: () => import("../components/explorer/BlockDetail.vue"),
-      },
-      {
-        name: "explorer.tx",
-        path: "txes",
-        component: () => import("../components/explorer/TxListView.vue"),
-      },
-      {
-        name: "explorer.tx.detail",
-        path: "tx/:hash",
-        component: () => import("../components/explorer/TxDetail.vue"),
-      },
-    ],
-  },
+    {
+        name: "item",
+        path: "/item",
+        component: Item,
+        children: [{
+                name: "item.create",
+                path: "create",
+                component: () =>
+                    import ("../components/item/ItemCreate.vue"),
+            },
+            {
+                name: "item.detail",
+                path: "detail/:id",
+                component: () =>
+                    import ("../components/item/ItemDetail.vue"),
+            },
+            {
+                name: "item.detail2",
+                path: "detail2",
+                component: () =>
+                    import ("../components/item/Item_Detail.vue"),
+            },
+            {
+                name: "item.purchase",
+                path: "purchase/:id",
+                component: () =>
+                    import ("../components/item/ItemPurchase.vue"),
+            },
+        ],
+    },
+    {
+        name: "escrow",
+        path: "/escrow",
+        component: Escrow,
+        children: [{
+                name: "escrow.purchase.detail",
+                path: "purchase/detail",
+                component: () =>
+                    import ("@/components/escrow/PurchaseTxDetail.vue"),
+            },
+            {
+                name: "escrow.sale.detail",
+                path: "sale/detail",
+                component: () =>
+                    import ("@/components/escrow/SaleTxDetail.vue"),
+            },
+            {
+                name: "escrow.history",
+                path: "history/:id",
+                component: () =>
+                    import ("@/components/escrow/EscrowHistory.vue"),
+            },
+        ],
+    },
+    {
+        name: "explorer",
+        path: "/explorer",
+        component: Explorer,
+        children: [{
+                name: "explorer.dashboard",
+                path: "dashboard",
+                component: () =>
+                    import ("../components/explorer/Dashboard.vue"),
+            },
+            {
+                name: "explorer.block",
+                path: "blocks",
+                component: () =>
+                    import ("../components/explorer/BlockListView.vue"),
+            },
+            {
+                name: "explorer.block.detail",
+                path: "block/:blockNumber",
+                component: () =>
+                    import ("../components/explorer/BlockDetail.vue"),
+            },
+            {
+                name: "explorer.tx",
+                path: "txes",
+                component: () =>
+                    import ("../components/explorer/TxListView.vue"),
+            },
+            {
+                name: "explorer.tx.detail",
+                path: "tx/:hash",
+                component: () =>
+                    import ("../components/explorer/TxDetail.vue"),
+            },
+        ],
+    },
 ];
 
 const router = new VueRouter({
