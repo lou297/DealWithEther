@@ -131,7 +131,6 @@ const routes = [
             },
         ],
     },
-  },
   {
     name: "shop",
     path: "/shop",
@@ -192,6 +191,7 @@ const routes = [
     redirect: () => {
       return "/mypage/items";
     },
+  },
   {
     name: "item",
     path: "/item",
