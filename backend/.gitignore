@@ -31,4 +31,4 @@ HELP.md
 
 ### application settings ###
 /src/main/resources/application.properties
-/src/main/resources/admin.wallet
+### /src/main/resources/admin.wallet
