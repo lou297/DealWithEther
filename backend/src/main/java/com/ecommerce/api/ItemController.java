@@ -100,7 +100,7 @@ public class ItemController
 	@RequestMapping(value = "/items/of/{uid}", method = RequestMethod.GET)
 	public List<Item> getByUser(@PathVariable int uid) {
 		List<Item> items = itemService.getByUser(uid);
-		if (items == null || items.size() == 0) {
+		if (items == null || items.size() == 0 ) {
 			logger.error("NOT FOUND LIST OF UID: ", uid);
 			return null;
 		}
