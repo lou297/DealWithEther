@@ -19,7 +19,7 @@
           </li>
           <!-- 테스트용 -->
           <li class="nav-item">
-            <router-link class="nav-link" to="/item/detail2">item</router-link>
+            <router-link class="nav-link" :to="{name: 'item.detail2', params: {id:2}}">item</router-link>
           </li>
           <li class="nav-item" v-if="$store.state.isSigned">
             <router-link

@@ -28,16 +28,20 @@
                     background-color="#82B1FF"
                     color="indigo darken-4"
                 >
-                    <v-tab>
+                    <v-tab
+                    @click="showDealHistory">
                     거래내역
                     </v-tab>
-                    <v-tab>
+                    <v-tab
+                    @click="showRecentlyViewHistory">
                     최근 본 목록
                     </v-tab>
-                    <v-tab>
+                    <v-tab
+                    @click="showBookMarkList">
                     찜한 목록
                     </v-tab>
-                    <v-tab>
+                    <v-tab
+                    @click="showRegistedItemList">
                     등록한 상품
                     </v-tab>
                 </v-tabs>
@@ -50,8 +54,8 @@
                     id="slide-group"
                 >
                     <v-slide-item
-                    v-for="n in 15"
-                    :key="n"
+                    v-for="item in items"
+                    :key="item"
                     v-slot:default="{ active, toggle }"
                     >
                     <v-card
@@ -87,6 +91,7 @@
 <script>
 import MyPageNav from "./MyPageNav.vue";
 import { findById } from "@/api/user.js";
+import * as itemService from "../../api/item.js";
 
 export default {
   components: {
@@ -95,14 +100,33 @@ export default {
   data() {
     return {
       userId: this.$store.state.user.id,
-      user : {}
+      user : {},
+      items: {}
     };
   },
   created: ()=> {
       
   },
   methods: {
-      
+      showDealHistory() {
+        //   alert("deal history")
+      },
+      showRecentlyViewHistory() {
+
+      },
+      showBookMarkList() {
+
+      },
+      showRegistedItemList() {
+          itemService.findMySaleItems(this.userId,
+            res=> {
+                this.items = res.data
+            },
+            error => {
+                alert(error)
+            }
+          )
+      }
   },
   mounted: function() {
       findById(this.userId, 
