@@ -72,8 +72,9 @@
 </template>
 
 <script>
-import {create as createItem} from "@/api/item.js";
-import {registerItem} from "@/utils/itemInventory.js";
+import { create as createItem } from "@/api/item.js";
+import { save as savaImage } from "@/api/item.js";
+import { registerItem } from "@/utils/itemInventory.js";
 
 export default {
     name: "ItemCreate",
@@ -131,6 +132,27 @@ export default {
                 return;
             }
 
+            const data = new FormData();
+            const file = this.files;
+            for (let i = 0; i < this.files.length; i++) {
+                data.append("file",this.files[i]);
+            }
+            for(var pair of data.entries()) {
+                console.log(pair[0]+","+pair[1]);
+            }
+
+            savaImage( // 사진 등록
+                data,
+                function(success) {
+                    alert("이미지 등록 성공!");
+                },
+                function(error) {
+                    console.log(error);
+                },
+                function(final){
+                    console.log('안녕');
+                }
+            );
             createItem( // 상품 등록 - 백앤드
                 this.item,
                 function (success) {
@@ -143,6 +165,7 @@ export default {
                     console.log('안녕');
                 }
             );
+
             /**
              * TODO: PJTⅢ 과제3 Req.1-1 [상품 등록]
              * DB에 상품 등록 후 반환 받은 id를 이용해서 이더리움에 상품을 등록
