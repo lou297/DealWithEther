@@ -16,7 +16,7 @@
                     </v-img>
                 </v-col>
                 <v-col cols="4" id="profile-info">
-                    <p class="font-weight-bold">{{user.name}}</p>
+                    <p class="font-weight-bold">{{userName}}</p>
                     <p>등록 건수 : <span>0</span></p>
                     <p>판매 건수 : <span>0</span></p>
                     <p>구매 건수 : <span>0</span></p>
@@ -100,22 +100,33 @@ export default {
   data() {
     return {
       userId: this.$store.state.user.id,
+      userName : {},
       user : {},
-      items: {}
+      items: []
     };
   },
-  created: ()=> {
-      
+  created() {
+      findById(this.userId, 
+        (response) => {
+            const data = response.data;
+            this.user.name = data["name"];
+            this.user.email = data["email"];
+            this.userName = data["name"];
+      });
   },
   methods: {
       showDealHistory() {
         //   alert("deal history")
       },
       showRecentlyViewHistory() {
-
+        const bookMark = JSON.parse(sessionStorage.getItem("bookmark"))
+        
+        if(bookMark != undefined)
+            this.items = bookMark
+        else
+            this.items = []
       },
       showBookMarkList() {
-
       },
       showRegistedItemList() {
           itemService.findMySaleItems(this.userId,
@@ -129,14 +140,7 @@ export default {
       }
   },
   mounted: function() {
-      findById(this.userId, 
-        (response) => {
-            const data = response.data;
-            this.user.name = data["name"];
-            this.user.email = data["email"];
-            console.dir(data)
-            console.dir(this.user.name)
-      });
+      
   }
 };
 </script>

@@ -116,6 +116,28 @@ export default {
             }
             return null;
         },
+        saveBookMark() {
+            var bookMark = JSON.parse(sessionStorage.getItem("bookmark"))
+            if(bookMark == undefined) {
+                bookMark = new Set()
+                bookMark.add(this.item)
+            } else {
+                var duplicate = false
+                for(var item of bookMark) {
+                    if(this.item.id == item.id) {
+                        duplicate = true
+                        break;
+                    }
+                }
+                if(!duplicate) {
+                    bookMark = new Set([... bookMark, this.item])
+                }
+            }
+            
+            
+            
+            sessionStorage.setItem("bookmark", JSON.stringify(bookMark))
+        }
     },
     filters: {
         symbolToFullName(symbol) {
@@ -124,6 +146,7 @@ export default {
     },
     created() {
         this.item.id = this.$route.params.id;
+
     },
     mounted: function () {
         const vm = this;
@@ -140,12 +163,13 @@ export default {
                 vm.item.seller.id = result.seller;
                 vm.item.image = result.image;
                 vm.item.registeredAt = result.registeredAt;
-
+                
                 // 판매자 정보
                 findUserById(result.seller, function (res) {
                     const result = res.data;
                     vm.item.seller.name = result.name;
                     vm.item.seller.email = result.email;
+                    vm.saveBookMark()
                 });
             },
             function (error) {
