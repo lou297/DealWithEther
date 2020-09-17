@@ -61,6 +61,14 @@ function create(body, success, fail, final) {
     .finally(final);
 }
 
+function save(files, success, fail, final) {
+  instance
+    .post("/api/items/images/" , files, {headers: { "Content-Type": "multipart/form-data"}})
+    .then(success)
+    .catch(fail)
+    .finally(final);
+}
+
 function update(body, success, fail) {
   instance
     .put("/api/items", JSON.stringify(body))
@@ -99,6 +107,7 @@ export {
   findByBuyer,
   findByBidder,
   create,
+  save,
   update,
   remove,
   confirm,
