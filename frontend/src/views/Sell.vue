@@ -31,9 +31,9 @@
                                             </div>
                                             <div class="form-group">
                                                 <label id="name">직거래 여부</label>
-                                                <input type="checkbox" class="form-control" id="check" v-model="item.isDirect"/>
+                                                <input type="checkbox" class="form-control" id="check" v-model="item.directDeal"/>
                                             </div>
-                                            <div class="form-group" v-if="item.isDirect == true">
+                                            <div class="form-group" v-if="item.directDeal == true">
                                                 <label id="name">직거래 장소</label>
                                                 <input type="text" class="form-control" id="name" v-model="item.dealRegion"/>
                                             </div>
@@ -46,10 +46,10 @@
                                                 <label id="description">상품 설명</label>
                                                 <textarea class="form-control" id="description" v-model="item.explanation" placeholder=""></textarea>
                                             </div>
-                                            <!-- <div class="form-group">
+                                            <div class="form-group">
                                                 <label id="privateKey">지갑 개인키</label>
                                                 <input id="privateKey" v-model="privateKey" type="text" class="form-control" placeholder="지갑 개인키를 입력해주세요." />
-                                            </div> -->
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -94,10 +94,11 @@ export default {
                 available: true,
                 seller: this.$store.state.user.id,
                 image: "",
-                isDirect: false,
+                directDeal: false,
                 dealRegion: "",
                 price: null,
             },
+            imageURL: "",
             privateKey: "",
             userId: this.$store.state.user.id,
             isCreating: false,
@@ -134,7 +135,10 @@ export default {
                     alert("상품 등록 성공!");
                 },
                 function(error) {
-                    console.error(error);
+                    console.log(error);
+                },
+                function(final){
+                    console.log('안녕');
                 }
             );
             /**
@@ -146,12 +150,14 @@ export default {
             var target = input.target;
             var files = input.target.files || input.dataTransfer.files;
             if (!files.length) return;
-            
+
+            const file = input.target.files[0];
+            this.item.image = URL.createObjectURL(file);
+            console.log(URL.createObjectURL(file));
             var reader = new FileReader();
             reader.onload = (e) => {
-                this.item.image = e.target.result;
+                this.imageURL = e.target.result;
             }
-            reader.readAsDataURL(target.files[0]);
         },
     },
 };
