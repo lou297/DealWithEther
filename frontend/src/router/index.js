@@ -300,7 +300,6 @@ const routes = [
             },
         ],
     },
-    },
 
   {
     name: "item",
