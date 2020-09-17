@@ -10,14 +10,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api")
-public class ItemController
-{
+public class ItemController {
 	public static final Logger logger = LoggerFactory.getLogger(ItemController.class);
 
 	private IItemService itemService;
@@ -29,8 +29,7 @@ public class ItemController
 	}
 
 	/**
-	 * TODO Sub PJT Ⅲ 과제 3
-	 * 상품 등록
+	 * TODO Sub PJT Ⅲ 과제 3 상품 등록
 	 * 
 	 * @param item
 	 * @return Item
@@ -78,7 +77,7 @@ public class ItemController
 	@RequestMapping(value = "/items/name/{name}", method = RequestMethod.GET)
 	public List<Item> getByUser(@PathVariable String name) {
 		List<Item> items = itemService.getByName(name);
-		if (items == null || items.size() == 0 ) {
+		if (items == null || items.size() == 0) {
 			logger.error("NOT FOUND LIST OF NAME: ", name);
 			return null;
 		}
@@ -100,7 +99,7 @@ public class ItemController
 	@RequestMapping(value = "/items/of/{uid}", method = RequestMethod.GET)
 	public List<Item> getByUser(@PathVariable int uid) {
 		List<Item> items = itemService.getByUser(uid);
-		if (items == null || items.size() == 0 ) {
+		if (items == null || items.size() == 0) {
 			logger.error("NOT FOUND LIST OF UID: ", uid);
 			return null;
 		}
@@ -108,8 +107,7 @@ public class ItemController
 	}
 
 	/**
-	 * TODO Sub PJT Ⅲ 과제 3
-	 * 상품 판매 취소
+	 * TODO Sub PJT Ⅲ 과제 3 상품 판매 취소
 	 * 
 	 * @param id 아이템 id
 	 * @return Item
@@ -124,5 +122,10 @@ public class ItemController
 	@RequestMapping(value = "/items", method = RequestMethod.PUT)
 	public Item update(@RequestBody Item item) {
 		return itemService.update(item);
+	}
+
+	@RequestMapping(value = "/items/images", method = RequestMethod.POST)
+	public void uploadFile(@RequestParam("file") MultipartFile[] file) {
+		logger.info(file[0].getOriginalFilename());
 	}
 }
