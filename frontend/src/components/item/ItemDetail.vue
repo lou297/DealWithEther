@@ -15,11 +15,7 @@
                                     {{ item.name }}
                                 </h3>
                             </div>
-                            <img
-                                class="center"
-                                :src="getImg(item.image)"
-                                style="max-height: 500px;"
-                            />
+                            <img class="center" :src="getImg(item.image)" style="max-height: 500px;"/>
                             <div class="form-group">
                                 <h4 class="alert alert-primary">{{ item.price }} CASH</h4>
                             </div>
@@ -44,15 +40,9 @@
                             </div>
                             <div class="row" v-if="userId !== item.seller.id">
                                 <div class="col-md-12 text-right">
-                                    <router-link
-                                        :to="{
-                      name: 'item.purchase',
-                      params: { id: item.id, seller: item.seller, image: item.image, name: item.name, price: item.price },
-                    }"
-                                        class="btn btn-lg btn-primary"
-                                    >구매하기
-                                    </router-link
-                                    >
+                                    <router-link :to="{name: 'item.purchase',params: { id: item.id, seller: item.seller, image: item.image, name: item.name, price: item.price }, }" class="btn btn-lg btn-primary">
+                                        구매하기
+                                    </router-link>
                                 </div>
                             </div>
                         </div>
@@ -158,6 +148,7 @@ export default {
             this.item.id,
             function (price) {
                 vm.item.price = price;
+                console.log(price);
             },
             function (err) {
                 alert('상품 가격 조회에 실패했습니다.');
