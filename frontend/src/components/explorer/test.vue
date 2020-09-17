@@ -151,41 +151,43 @@
                         </div>
                     </div>
                 </div>
-            </v-flex>
-            <v-layout row wrap>
-                <v-flex>
-                    <button
-                        type="button"
-                        class="btn btn-primary"
-                        v-on:click="save"
-                        v-bind:disabled="isCreating"
-                    >
-                        채팅
-                    </button>
-                </v-flex>
-                <v-flex>
-                    <button
-                        type="button"
-                        class="btn btn-primary"
-                        v-on:click="save"
-                        v-bind:disabled="isCreating"
-                    >
-                        상품 등록
-                    </button>
-                </v-flex>
-                <v-flex>
-                    <button
-                        type="button"
-                        class="btn btn-primary"
-                        v-on:click="save"
-                        v-bind:disabled="isCreating"
-                    >
-                        등록 취소
-                    </button>
-                </v-flex>
-            </v-layout>
+              </div>
+            </div>
+          </v-flex>
+        <v-layout row wrap>
+          <v-flex>
+            <button
+              type="button"
+              class="btn btn-primary"
+              v-on:click="save"
+              v-bind:disabled="isCreating"
+            >
+              채팅
+            </button>
+          </v-flex>
+          <v-flex>
+            <button
+              type="button"
+              class="btn btn-primary"
+              v-on:click="save"
+              v-bind:disabled="isCreating"
+            >
+              상품 등록
+            </button>
+          </v-flex>
+          <v-flex>
+            <button
+              type="button"
+              class="btn btn-primary"
+              v-on:click="save"
+              v-bind:disabled="isCreating"
+            >
+              등록 취소
+            </button>
+          </v-flex>
+        </v-layout>
         </v-container>
-    </div>
+      </div>
 </template>
 <script>
 import {create as createItem} from "@/api/item.js";
