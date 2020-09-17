@@ -193,7 +193,12 @@ export default {
 
             const data = new FormData();
             const file = this.files;
-            data.append("file",file);
+            for (let i = 0; i < this.files.length; i++) {
+                data.append("file",this.files[i]);
+            }
+            for(var pair of data.entries()) {
+                console.log(pair[0]+","+pair[1]);
+            }
 
             savaImage( // 사진 등록
                 data,
@@ -233,10 +238,11 @@ export default {
             }
             for (let i = 0; i < input.length; i++) {
                 const file = input.__ob__.value[i];
+                console.log(file);
                 this.item.image.push(URL.createObjectURL(file));
                 this.files.push(file);
             }
-            console.log(this.item.image)
+           //console.log(this.item.image)
 
             // var files = input.target.files || input.dataTransfer.files;
             // if (!files.length) return;
