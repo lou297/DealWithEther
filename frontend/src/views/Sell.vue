@@ -5,10 +5,34 @@
         <div id="main-overview" class="container" >
             <v-row>
                 <v-col cols="6">
-                    <img :src="defaultImage" v-if="isImageUpload == false" style="width:90%; margin-top: 15px;">
-                    <img :src="item.image" v-if="isImageUpload == true" style="height:250px; width:390px; margin-top: 15px;" ><br><br>
+<!--                    <img :src="defaultImage" v-if="isImageUpload == false" style="width:90%; margin-top: 15px;">-->
+<!--                    <img :src="item.image" v-if="isImageUpload == true" style="height:250px; width:390px; margin-top: 15px;" ><br><br>-->
+                    <v-card>
+                        <v-container fluid>
+                            <v-row>
+                                <v-col
+                                    v-for="n in 9"
+                                    :key="n"
+                                    class="d-flex child-flex"
+                                    cols="4"
+                                >
+                                    <v-card flat tile class="d-flex">
+                                        <v-img
+                                            :src="item.image[n-1]"
+                                            :lazy-src="item.image[n-1]"
+                                            aspect-ratio="1"
+                                            class="grey lighten-2"
+                                            @click="removeImage(n-1)"
+                                        >
+                                        </v-img>
+                                    </v-card>
+                                </v-col>
+                            </v-row>
+                        </v-container>
+                    </v-card>
                     <div class="form-group">
-                        <input id="upload" type="file" class="form-control" style="height: auto; margin-left:18px; width:92%;" @change="onFileChange" />
+<!--                        <input id="upload" type="file" class="form-control" style="height: auto; margin-left:18px; width:92%;" @change="onFileChange" />-->
+                        <v-file-input multiple label="File input" @change="onFileChange" ></v-file-input>
                     </div>
                 </v-col>
                 <v-col cols="6">
@@ -114,13 +138,14 @@ export default {
     name: "ItemCreate",
     data() {
         return {
+            files:[],
             item: {
                 name: "",
                 category: "",
                 explanation: "",
                 available: true,
                 seller: this.$store.state.user.id,
-                image: "",
+                image: [],
                 directDeal: false,
                 dealRegion: "",
                 price: null,
@@ -184,18 +209,35 @@ export default {
         },
 
         onFileChange(input) {
-            var files = input.target.files || input.dataTransfer.files;
-            if (!files.length) return;
-
-            this.isImageUpload = true;
-            const file = input.target.files[0];
-            this.item.image = URL.createObjectURL(file);
-            console.log(URL.createObjectURL(file));
-            var reader = new FileReader();
-            reader.onload = (e) => {
-                this.imageURL = e.target.result;
+            if(input.length === 0) {
+                console.log("00000000000")
+                return;
             }
+            for (let i = 0; i < input.length; i++) {
+                const file = input.__ob__.value[i];
+                this.item.image.push(URL.createObjectURL(file));
+                this.files.push(file);
+            }
+            console.log(this.item.image)
+
+            // var files = input.target.files || input.dataTransfer.files;
+            // if (!files.length) return;
+            //
+            // this.isImageUpload = true;
+            // const file = input.target.files[0];
+            // this.item.image = URL.createObjectURL(file);
+            // console.log(URL.createObjectURL(file));
+            // var reader = new FileReader();
+            // reader.onload = (e) => {
+            //     this.imageURL = e.target.result;
+            // }
         },
+
+        removeImage(n){
+            alert(n);
+            // this.item.image[n].removeImage();
+            this.item.image.splice(n, 1);
+        }
     },
 };
 </script>
