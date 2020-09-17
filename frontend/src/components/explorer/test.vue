@@ -184,6 +184,7 @@
             </button>
           </v-flex>
         </v-layout>
+        </v-container>
       </div>
 </template>
 
