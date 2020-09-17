@@ -37,6 +37,8 @@ public class ItemController {
 	@ApiOperation(value = "Register an item")
 	@RequestMapping(value = "/items", method = RequestMethod.POST)
 	public Item register(@RequestBody Item item) {
+		System.out.println(item.toString());
+		logger.info(item.toString());
 		return itemService.register(item);
 	}
 
@@ -125,7 +127,11 @@ public class ItemController {
 	}
 
 	@RequestMapping(value = "/items/images", method = RequestMethod.POST)
-	public void uploadFile(@RequestParam("file") MultipartFile[] file) {
+	public int uploadFile(@RequestParam("file") MultipartFile[] file) {
+		System.out.println("123");
+		for (int i = 0; i < file.length; i++)
+			System.out.println("파일이름: " + file[i].getOriginalFilename());
 		logger.info(file[0].getOriginalFilename());
+		return 1;
 	}
 }
