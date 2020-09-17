@@ -287,5 +287,8 @@
 	price: 30000
 	directDeal: true
 	dealRegion: 구로구 연동로 }
+<<<<<<< HEAD
 2020-09-17 10:46:07 [http-nio-8080-exec-5] DEBUG c.e.i.repository.ItemRepository - registered_at: 2020-09-17T10:46:07.740569900
 2020-09-17 10:46:07 [http-nio-8080-exec-5] DEBUG c.e.i.repository.ItemRepository - INSERTED: 14
+=======
+>>>>>>> 022a51e6bc549f41e3daecbe99dbff51ec488a6c
