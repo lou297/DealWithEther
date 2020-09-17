@@ -79,14 +79,14 @@
 <script>
 import BlockList from "../../components/explorer/BlockList";
 import TxList from "../../components/explorer/TxList";
-import test from "../../components/explorer/test";
+// import test from "../../components/explorer/test";
 
 export default {
     name: "Dashboard",
     components: {
         BlockList,
         TxList,
-        test,
+        // test,
     },
     data() {
         return {
