@@ -61,9 +61,9 @@ function create(body, success, fail, final) {
     .finally(final);
 }
 
-function save(files, success, fail, final) {
+function save(data, success, fail, final) {
   instance
-    .post("/api/items/images/" , files, {headers: { "Content-Type": "multipart/form-data"}})
+    .post("/api/items/images/" , data, {headers: { "Content-Type": "multipart/form-data"}})
     .then(success)
     .catch(fail)
     .finally(final);

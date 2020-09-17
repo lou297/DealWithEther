@@ -191,8 +191,12 @@ export default {
                 return;
             }
 
+            const data = new FormData();
+            const file = this.files;
+            data.append("file",file);
+
             savaImage( // 사진 등록
-                this.files,
+                data,
                 function(success) {
                     alert("이미지 등록 성공!");
                 },
