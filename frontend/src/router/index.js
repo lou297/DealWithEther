@@ -274,32 +274,113 @@ const routes = [
         ],
     },
     {
-        name: "item",
-        path: "/item",
-        component: Item,
-        children: [
-            {
-                name: "item.create",
-                path: "create",
-                component: () => import("../components/item/ItemCreate.vue"),
-            },
-            {
-                name: "item.detail",
-                path: "detail/:id",
-                component: () => import("../components/item/ItemDetail.vue"),
-            },
-            {
-                name: "item.detail2",
-                path: "detail2",
-                component: () => import("../components/item/Item_Detail.vue"),
-            },
-            {
-                name: "item.purchase",
-                path: "purchase/:id",
-                component: () => import("../components/item/ItemPurchase.vue"),
-            },
-        ],
-    },
+    name: "item",
+    path: "/item",
+    component: Item,
+    children: [
+      {
+        name: "item.create",
+        path: "create",
+        component: () => import("../components/item/ItemCreate.vue"),
+      },
+      {
+        name: "item.detail",
+        path: "detail/:id",
+        component: () => import("../components/item/ItemDetail.vue"),
+      },
+      {
+        name: "item.purchase",
+        path: "purchase/:id",
+        component: () => import("../components/item/ItemPurchase.vue"),
+      },
+    ],
+  },
+  {
+    name: "escrow",
+    path: "/escrow",
+    component: Escrow,
+    children: [
+      {
+        name: "escrow.purchase.detail",
+        path: "purchase/detail",
+        component: () => import("@/components/escrow/PurchaseTxDetail.vue"),
+      },
+      {
+        name: "escrow.sale.detail",
+        path: "sale/detail",
+        component: () => import("@/components/escrow/SaleTxDetail.vue"),
+      },
+      {
+        name: "escrow.history",
+        path: "history/:id",
+        component: () => import("@/components/escrow/EscrowHistory.vue"),
+      },
+    ],
+  },
+  {
+    name: "explorer",
+    path: "/explorer",
+    component: Explorer,
+    children: [
+      {
+        name: "explorer.dashboard",
+        path: "dashboard",
+        component: () => import("../components/explorer/Dashboard.vue"),
+      },
+      {
+        name: "explorer.block",
+        path: "blocks",
+        component: () => import("../components/explorer/BlockListView.vue"),
+      },
+      {
+        name: "explorer.block.detail",
+        path: "block/:blockNumber",
+        component: () => import("../components/explorer/BlockDetail.vue"),
+      },
+      {
+        name: "explorer.tx",
+        path: "txes",
+        component: () => import("../components/explorer/TxListView.vue"),
+      },
+      {
+        name: "explorer.tx.detail",
+        path: "tx/:hash",
+        component: () => import("../components/explorer/TxDetail.vue"),
+      },
+      {
+        name: "explorer.test",
+        path: "test",
+        component: () => import("../components/explorer/test.vue"),
+      },
+    ],
+  },
+  {
+    name: "item",
+    path: "/item",
+    component: Item,
+    children: [
+      {
+        name: "item.create",
+        path: "create",
+        component: () => import("../components/item/ItemCreate.vue"),
+      },
+      {
+        name: "item.detail",
+        path: "detail/:id",
+        component: () => import("../components/item/ItemDetail.vue"),
+      },
+      {
+        name: "item.detail2",
+        path: "detail2",
+        component: () => import("../components/item/Item_Detail.vue"),
+      },
+      {
+        name: "item.purchase",
+        path: "purchase/:id",
+        component: () => import("../components/item/ItemPurchase.vue"),
+      },
+    ],
+  },
 
     {
         name: "escrow",
