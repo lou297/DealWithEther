@@ -15,11 +15,7 @@
                                     {{ item.name }}
                                 </h3>
                             </div>
-                            <img
-                                class="center"
-                                :src="getImg(item.image)"
-                                style="max-height: 500px;"
-                            />
+                            <img class="center" :src="getImg(item.image)" style="max-height: 500px;"/>
                             <div class="form-group">
                                 <h4 class="alert alert-primary">{{ item.price }} CASH</h4>
                             </div>
@@ -44,15 +40,9 @@
                             </div>
                             <div class="row" v-if="userId !== item.seller.id">
                                 <div class="col-md-12 text-right">
-                                    <router-link
-                                        :to="{
-                      name: 'item.purchase',
-                      params: { id: item.id, seller: item.seller, image: item.image, name: item.name, price: item.price },
-                    }"
-                                        class="btn btn-lg btn-primary"
-                                    >구매하기
-                                    </router-link
-                                    >
+                                    <router-link :to="{name: 'item.purchase',params: { id: item.id, seller: item.seller, image: item.image, name: item.name, price: item.price }, }" class="btn btn-lg btn-primary">
+                                        구매하기
+                                    </router-link>
                                 </div>
                             </div>
                         </div>
@@ -116,6 +106,28 @@ export default {
             }
             return null;
         },
+        saveBookMark() {
+            var bookMark = JSON.parse(sessionStorage.getItem("bookmark"))
+            if(bookMark == undefined) {
+                bookMark = new Set()
+                bookMark.add(this.item)
+            } else {
+                var duplicate = false
+                for(var item of bookMark) {
+                    if(this.item.id == item.id) {
+                        duplicate = true
+                        break;
+                    }
+                }
+                if(!duplicate) {
+                    bookMark = new Set([... bookMark, this.item])
+                }
+            }
+            
+            
+            
+            sessionStorage.setItem("bookmark", JSON.stringify(bookMark))
+        }
     },
     filters: {
         symbolToFullName(symbol) {
@@ -124,6 +136,7 @@ export default {
     },
     created() {
         this.item.id = this.$route.params.id;
+
     },
     mounted: function () {
         const vm = this;
@@ -140,12 +153,13 @@ export default {
                 vm.item.seller.id = result.seller;
                 vm.item.image = result.image;
                 vm.item.registeredAt = result.registeredAt;
-
+                
                 // 판매자 정보
                 findUserById(result.seller, function (res) {
                     const result = res.data;
                     vm.item.seller.name = result.name;
                     vm.item.seller.email = result.email;
+                    vm.saveBookMark()
                 });
             },
             function (error) {
@@ -158,6 +172,7 @@ export default {
             this.item.id,
             function (price) {
                 vm.item.price = price;
+                console.log(price);
             },
             function (err) {
                 alert('상품 가격 조회에 실패했습니다.');

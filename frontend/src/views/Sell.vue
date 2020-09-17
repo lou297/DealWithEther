@@ -1,7 +1,34 @@
 <template>
     <div>
-        <h-breadcrumb title="상품 등록" description="새로운 상품을 등록합니다."></h-breadcrumb>
-        <v-container>
+        <h-breadcrumb title="상품 등록" style="margin:0px; padding-top:0px;"></h-breadcrumb>
+
+        <div id="main-overview" class="container" >
+            <v-row>
+                <v-col cols="6">
+                    <img :src="defaultImage" v-if="isImageUpload == false" style="width:90%; margin-top: 15px;">
+                    <img :src="item.image" v-if="isImageUpload == true" style="height:250px; width:390px; margin-top: 15px;" ><br><br>
+                    <div class="form-group">
+                        <input id="upload" type="file" class="form-control" style="height: auto; margin-left:18px; width:92%;" @change="onFileChange" />
+                    </div>
+                </v-col>
+                <v-col cols="6">
+                    <v-form ref="form" v-model="valid" lazy-validation>
+                        <v-text-field v-model="item.name" :counter="10" label="상품 이름" required></v-text-field>
+                        <v-select v-model="item.category" :items="items" :rules="[v => !!v || 'Item is required']" label="카테고리" required></v-select>
+                        <v-text-field type="number" v-model="item.price" label="가격" required></v-text-field>
+                        <v-text-field v-model="item.explanation" label="설명" required></v-text-field>
+                        <v-checkbox v-model="item.directDeal" label="직거래 여부" required></v-checkbox>
+                        <v-text-field v-if="item.directDeal == true" 
+                            v-model="item.dealRegion" label="장소" required></v-text-field>
+
+                        <v-btn color="success" class="mr-4" @click="save">취소</v-btn>
+                        <v-btn color="error" class="mr-4" @click="save">등록</v-btn>
+                    </v-form>
+                </v-col>
+            </v-row>
+        </div><br><br><br>
+
+        <!-- <v-container>
             <div row justify-space-around class="backImg">
                 <v-layout row wrap>
                     <v-flex xl6 lg6 md12 sm12 xs12>
@@ -31,9 +58,9 @@
                                             </div>
                                             <div class="form-group">
                                                 <label id="name">직거래 여부</label>
-                                                <input type="checkbox" class="form-control" id="check" v-model="item.isDirect"/>
+                                                <input type="checkbox" class="form-control" id="check" v-model="item.directDeal"/>
                                             </div>
-                                            <div class="form-group" v-if="item.isDirect == true">
+                                            <div class="form-group" v-if="item.directDeal == true">
                                                 <label id="name">직거래 장소</label>
                                                 <input type="text" class="form-control" id="name" v-model="item.dealRegion"/>
                                             </div>
@@ -46,10 +73,10 @@
                                                 <label id="description">상품 설명</label>
                                                 <textarea class="form-control" id="description" v-model="item.explanation" placeholder=""></textarea>
                                             </div>
-                                            <!-- <div class="form-group">
+                                            <div class="form-group">
                                                 <label id="privateKey">지갑 개인키</label>
                                                 <input id="privateKey" v-model="privateKey" type="text" class="form-control" placeholder="지갑 개인키를 입력해주세요." />
-                                            </div> -->
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -75,7 +102,7 @@
                     </v-flex>
                 </v-layout>
             </div>
-        </v-container>
+        </v-container> -->
     </div>
 </template>
 
@@ -94,13 +121,23 @@ export default {
                 available: true,
                 seller: this.$store.state.user.id,
                 image: "",
-                isDirect: false,
+                directDeal: false,
                 dealRegion: "",
                 price: null,
             },
+            imageURL: "",
             privateKey: "",
             userId: this.$store.state.user.id,
             isCreating: false,
+            defaultImage: require('../../public/images/no_image.png'),
+            isImageUpload: false,
+            items: [
+                '여성의류',
+                '남성의류',
+                '생활/문구',
+                '디지털/가전',
+                '패션잡화',
+            ],
         };
     },
     computed: {
@@ -134,7 +171,10 @@ export default {
                     alert("상품 등록 성공!");
                 },
                 function(error) {
-                    console.error(error);
+                    console.log(error);
+                },
+                function(final){
+                    console.log('안녕');
                 }
             );
             /**
@@ -142,16 +182,19 @@ export default {
              * DB에 상품 등록 후 반환 받은 id를 이용해서 이더리움에 상품을 등록
              */
         },
+
         onFileChange(input) {
-            var target = input.target;
             var files = input.target.files || input.dataTransfer.files;
             if (!files.length) return;
-            
+
+            this.isImageUpload = true;
+            const file = input.target.files[0];
+            this.item.image = URL.createObjectURL(file);
+            console.log(URL.createObjectURL(file));
             var reader = new FileReader();
             reader.onload = (e) => {
-                this.item.image = e.target.result;
+                this.imageURL = e.target.result;
             }
-            reader.readAsDataURL(target.files[0]);
         },
     },
 };
