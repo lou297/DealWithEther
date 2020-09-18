@@ -43,6 +43,17 @@ public class ItemRepository implements IItemRepository {
 			throw new RepositoryException(e, e.getMessage());
 		}
 	}
+	
+	@Override
+	public List<Item> pageList(final int page) {
+		StringBuilder sbSql = new StringBuilder("SELECT * FROM items WHERE available=1 limit 5 offset ?"); // where available
+		try {
+			return this.jdbcTemplate.query(sbSql.toString(), new Object[] { (page-1)*5 },
+					(rs, rowNum) -> ItemFactory.create(rs));
+		} catch (Exception e) {
+			throw new RepositoryException(e, e.getMessage());
+		}
+	}
 
 	@Override
 	public List<Item> getByUser(final long userId) {

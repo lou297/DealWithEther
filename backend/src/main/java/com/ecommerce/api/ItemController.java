@@ -179,6 +179,16 @@ public class ItemController {
 		}
 	}
 
+	@ApiOperation(value = "Select page list") // page에 대한거 db에서 쿼리로 넘기기
+	@RequestMapping(value = "/items/page/{page}", method = RequestMethod.GET)
+	public List<Item> getPage(@PathVariable int page) {
+
+		System.out.println(page);
+		List<Item> list = itemService.pageList(page);
+		for(Item temp : list) System.out.println(temp);
+		return list;
+	}
+
 	@GetMapping("/items/images/{id}")
 	public Object downloadFile(@PathVariable String id, HttpServletRequest request) throws MalformedURLException {
 		// Load file as Resource

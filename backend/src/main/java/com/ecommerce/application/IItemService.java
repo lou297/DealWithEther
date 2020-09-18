@@ -8,6 +8,8 @@ import java.util.List;
 public interface IItemService {
 	List<Item> list();
 
+	List<Item> pageList(int page);
+
 	List<Item> getByUser(int uid);
 
 	List<Item> getByName(String title);

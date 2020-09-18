@@ -8,6 +8,8 @@ import java.util.List;
 public interface IItemRepository {
 	List<Item> list();
 
+	List<Item> pageList(final int page);
+
 	List<Item> getByUser(final long userId);
 
 	List<Item> getByName(final String name);
