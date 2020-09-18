@@ -5,7 +5,7 @@
             <v-container>
                 <v-layout>
                     <v-flex xl6 lg6 md6 sm12 xs12>
-                        <v-flex xl10 lg10 md10 sm10 xs10>
+                        <v-flex xl8 lg8 md8 sm8 xs8>
                             <v-card>
                                 <v-container fluid xl10>
                                     <v-row>
@@ -26,7 +26,7 @@
                                             </v-hover>
                                         </v-col>
                                         <v-col
-                                            v-for="n in image.length"
+                                            v-for="n in item.image.length"
                                             :key="n"
                                             class="d-flex child-flex"
                                             cols="4"
@@ -34,7 +34,7 @@
                                             <v-hover v-slot:default="{ hover }">
                                                 <v-card flat tile class="d-flex" :elevation="hover ? 16 : 2">
                                                     <v-img
-                                                        :src="image[n-1]"
+                                                        :src="item.image[n-1]"
                                                         aspect-ratio="1"
                                                         class="grey lighten-2"
                                                         @click="removeImage(n-1)"
@@ -46,6 +46,7 @@
                                     </v-row>
                                 </v-container>
                             </v-card>
+
                         </v-flex>
                     </v-flex>
 
@@ -92,6 +93,7 @@ export default {
                 price: null,
             },
             image: [],
+            id: null,
             imageURL: "",
             privateKey: "",
             userId: this.$store.state.user.id,
@@ -141,10 +143,11 @@ export default {
                 console.log(pair[0]+","+pair[1]);
             }
 
-            savaImage( // 사진 등록
-                data,
+            createItem( // 상품 등록 - 백앤드
+                this.item,
                 function(success) {
-                    alert("이미지 등록 성공!");
+                    alert("상품 등록 성공!");
+                    this.id = success.id;
                 },
                 function(error) {
                     console.log(error);
@@ -153,10 +156,13 @@ export default {
                     console.log('안녕');
                 }
             );
-            createItem( // 상품 등록 - 백앤드
-                this.item,
-                function (success) {
-                    alert("상품 등록 성공!");
+
+            savaImage( // 사진 등록
+                data,
+                this.id,
+                function(success) {
+                    alert("이미지 등록 성공!");
+
                 },
                 function (error) {
                     console.log(error);
