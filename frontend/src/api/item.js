@@ -4,14 +4,14 @@ const instance = createInstance();
 
 function findAll(page, success, fail) {
     instance
-        .get("/api/items/" + page)
+        .get("/api/items/page/" + page)
         .then(success)
         .catch(fail);
 }
 
 function findByCategory(keyword, page, success, fail) {
     instance
-        .get("/api/items/category/" + keyword + "/" + page)
+        .get("/api/items/category/page/" + keyword + "/" + page)
         .then(success)
         .catch(fail);
 }
