@@ -1,20 +1,34 @@
 package com.ecommerce.api;
 
 import com.ecommerce.application.IItemService;
+import com.ecommerce.domain.BasicResponse;
 import com.ecommerce.domain.Item;
 import com.ecommerce.domain.exception.EmptyListException;
 import com.ecommerce.domain.exception.NotFoundException;
 import io.swagger.annotations.ApiOperation;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -97,7 +111,7 @@ public class ItemController {
 	public List<Item> getByCategory(@PathVariable String category) {
 		System.out.println(category);
 		List<Item> items = itemService.getByCategory(category);
-//		System.out.println(items.toString());
+		// System.out.println(items.toString());
 		if (items == null || items.size() == 0) {
 			logger.error("NOT FOUND LIST OF CATEGORY: ", category);
 			return null;
@@ -175,4 +189,42 @@ public class ItemController {
 		return list;
 	}
 
+	@GetMapping("/items/images/{id}")
+	public Object downloadFile(@PathVariable String id, HttpServletRequest request) throws MalformedURLException {
+		// Load file as Resource
+		// Resource resource = service.loadFileAsResource(fileName);
+		Resource resource;
+		String baseDir = this.getClass().getResource("/").getPath() + "static/upload/";
+		baseDir = baseDir.substring(1);
+
+		// 리눅스를 위한 세팅
+		if (baseDir.substring(0, 1).equals("C")) {
+			baseDir = "C:/Users/multicampus/images/";
+		} else {
+			baseDir = "/home/ubuntu/dist/server/image/";
+		}
+		String fileName = baseDir + id + ".jpg";
+
+		Path path = Paths.get(baseDir).toAbsolutePath().normalize();
+		Path fPath = path.resolve(fileName).normalize();
+
+		resource = new UrlResource(fPath.toUri());
+		System.out.println(fPath);
+		// Try to determine file's content type
+		String contentType = null;
+		try {
+			contentType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
+		} catch (IOException ex) {
+			logger.info("Could not determine file type.");
+		}
+		System.out.println(contentType);
+		// Fallback to the default content type if type could not be determined
+		if (contentType == null) {
+			contentType = "application/octet-stream";
+		}
+		System.out.println("여기까진오냐");
+		return ResponseEntity.ok().contentType(MediaType.parseMediaType(contentType))
+				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
+				.body(resource);
+	}
 }
