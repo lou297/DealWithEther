@@ -2,6 +2,33 @@
     <div>
         <h-shop-categories :category="'전체보기'"></h-shop-categories>
         <v-container>
+            <ul>
+                <li>
+                    <v-btn color="orange" text >
+                        전체검색
+                    </v-btn>
+                </li>
+                <li>
+                    <v-btn color="orange" text @click="getByCategory('가전')">
+                        가전
+                    </v-btn>
+                </li>
+                <li>
+                    <v-btn color="orange" text @click="getByCategory('유아')">
+                        유아
+                    </v-btn>
+                </li>
+                <li>
+                    <v-btn color="orange" text @click="getByCategory('메롱')">
+                        메롱
+                    </v-btn>
+                </li>
+            </ul>
+
+            <v-spacer></v-spacer>
+        </v-container>
+        <router-link class="nav-link" to="/item/create">상품 등록</router-link>
+        <v-container>
             <v-layout row wrap justify-center>
                 <v-flex xs3 sm3 md3 lg3 xl3>
                     <v-select :items="types" label="카테고리" solo v-model="typeBox" style="margin-left:5px"></v-select>
@@ -78,40 +105,72 @@ export default {
         searchRoute() {
             const vm = this;
             findByCategory(vm.searchKeyword,
-            res => {
-                vm.items = res.data
-            },
-            err => {
-                alert(err)
-            })
+                res => {
+                    vm.items = res.data
+                },
+                err => {
+                    alert(err)
+                })
 
+        },
+        getAllList() {
+            const vm = this;
+            findAll(function (response) {
+                    if (response.data.length > 0) {
+                        vm.items = response.data;
+                        vm.items.forEach(i => {
+                            // [스마트 컨트랙트] 가격 조회
+                            getPrice(
+                                i.id,
+                                function (price) {
+                                    vm.$set(i, "price", price);
+                                },
+                                function (err) {
+                                    console.error('가격 조회 실패:', err);
+                                    // alert("상품 가격 조회를 실패했습니다.");
+                                }
+                            )
+                        })
+                    }
+                },
+                err => {
+                    alert(err)
+                });
+        },
+        getByCategory(category) {
+            const vm = this;
+            findByCategory(category, function (response) {
+                    if (response.data.length > 0) {
+                        vm.items = response.data;
+                        vm.items.forEach(i => {
+                            // [스마트 컨트랙트] 가격 조회
+                            getPrice(
+                                i.id,
+                                function (price) {
+                                    vm.$set(i, "price", price);
+                                },
+                                function (err) {
+                                    console.error('가격 조회 실패:', err);
+                                    // alert("상품 가격 조회를 실패했습니다.");
+                                }
+                            )
+                        })
+                    }
+                },
+                err => {
+                    alert(err)
+                });
         }
     },
     mounted: function () {
-        const vm = this;
-        findAll(function (response) {
-            if (response.data.length > 0) {
-                vm.items = response.data;
-                vm.items.forEach(i => {
-                    // [스마트 컨트랙트] 가격 조회
-                    getPrice(
-                        i.id,
-                        function (price) {
-                            vm.$set(i, "price", price);
-                        },
-                        function (err) {
-                            console.error('가격 조회 실패:', err);
-                            // alert("상품 가격 조회를 실패했습니다.");
-                        }
-                    )
-                })
-            }
-        },
-        err => {
-            alert(err)
-        });
+        this.getAllList();
     }
 };
 </script>
 
-<style></style>
+<style>
+ul {
+    display: flex;
+    list-style: none;
+}
+</style>
