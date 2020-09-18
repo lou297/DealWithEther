@@ -110,7 +110,7 @@ public class ItemController {
 	@RequestMapping(value = "/items/category/page/{category}/{page}", method = RequestMethod.GET)
 	public List<Item> getByCategory(@PathVariable String category, @PathVariable int page) {
 		System.out.println(category);
-		List<Item> items = itemService.getByCategory(category);
+		List<Item> items = itemService.getByCategory(category, page);
 		// System.out.println(items.toString());
 		if (items == null || items.size() == 0) {
 			logger.error("NOT FOUND LIST OF CATEGORY: ", category);
