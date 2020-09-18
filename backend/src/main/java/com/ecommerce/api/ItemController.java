@@ -111,7 +111,7 @@ public class ItemController {
 	public List<Item> getByCategory(@PathVariable String category) {
 		System.out.println(category);
 		List<Item> items = itemService.getByCategory(category);
-//		System.out.println(items.toString());
+		// System.out.println(items.toString());
 		if (items == null || items.size() == 0) {
 			logger.error("NOT FOUND LIST OF CATEGORY: ", category);
 			return null;
@@ -180,11 +180,10 @@ public class ItemController {
 	}
 
 	@GetMapping("/items/images/{id}")
-	public Object downloadFile(@PathVariable long id, HttpServletRequest request) throws MalformedURLException {
+	public Object downloadFile(@PathVariable String id, HttpServletRequest request) throws MalformedURLException {
 		// Load file as Resource
 		// Resource resource = service.loadFileAsResource(fileName);
-		List<Resource> resources = new ArrayList<Resource>();
-		Map<String, Object> map = new HashMap<String, Object>();
+		Resource resource;
 		String baseDir = this.getClass().getResource("/").getPath() + "static/upload/";
 		baseDir = baseDir.substring(1);
 
@@ -194,26 +193,17 @@ public class ItemController {
 		} else {
 			baseDir = "/home/ubuntu/dist/server/image/";
 		}
+		String fileName = baseDir + id + ".jpg";
 
-		for (int i = 1; i < 9; i++) {
-			String fileName = baseDir + Long.toString(id) + "_" + Integer.toString(i) + ".jpg";
+		Path path = Paths.get(baseDir).toAbsolutePath().normalize();
+		Path fPath = path.resolve(fileName).normalize();
 
-			Path path = Paths.get(baseDir).toAbsolutePath().normalize();
-			Path fPath = path.resolve(fileName).normalize();
-
-			File fFile = new File(fPath.toString());
-			if (!fFile.exists())
-				continue;
-
-			resources.add(new UrlResource(fPath.toUri()));
-			System.out.println(fPath);
-		}
-		map.put("status", true);
-		map.put("data", resources);
+		resource = new UrlResource(fPath.toUri());
+		System.out.println(fPath);
 		// Try to determine file's content type
 		String contentType = null;
 		try {
-			contentType = request.getServletContext().getMimeType(resources.get(0).getFile().getAbsolutePath());
+			contentType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
 		} catch (IOException ex) {
 			logger.info("Could not determine file type.");
 		}
@@ -222,11 +212,9 @@ public class ItemController {
 		if (contentType == null) {
 			contentType = "application/octet-stream";
 		}
-		final BasicResponse response = new BasicResponse();
-		response.status = true;
-		response.data = "success";
-		response.object = resources;
 		System.out.println("여기까진오냐");
-		return new ResponseEntity<>(response, HttpStatus.OK);
+		return ResponseEntity.ok().contentType(MediaType.parseMediaType(contentType))
+				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
+				.body(resource);
 	}
 }
