@@ -109,7 +109,9 @@ public class ItemController {
 	@ApiOperation(value = "Fetch an item with category")
 	@RequestMapping(value = "/items/category/{category}", method = RequestMethod.GET)
 	public List<Item> getByCategory(@PathVariable String category) {
+		System.out.println(category);
 		List<Item> items = itemService.getByCategory(category);
+//		System.out.println(items.toString());
 		if (items == null || items.size() == 0) {
 			logger.error("NOT FOUND LIST OF CATEGORY: ", category);
 			return null;

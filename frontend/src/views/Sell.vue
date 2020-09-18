@@ -69,7 +69,6 @@
                 label="장소"
                 required
               ></v-text-field>
-
               <v-btn color="success" class="mr-4" @click="save">취소</v-btn>
               <v-btn color="error" class="mr-4" @click="save">등록</v-btn>
             </v-form>
@@ -156,28 +155,38 @@ export default {
         console.log(pair[0] + "," + pair[1]);
       }
 
-      createItem(
-        // 상품 등록 - 백앤드
-        this.item,
-        function (success) {
-          alert("상품 등록 성공!");
-          console.log(success);
-          vm.item.id = success.data.id;
-          console.log("아이디:" + success.data.id);
-          savaImage(
-            // 사진 등록
-            data,
-            vm.item.id,
-            function (success) {
-              alert("이미지 등록 성공!");
-            },
-            function (error) {
-              console.log(error);
-            },
-            function (final) {
-              console.log("안녕");
-            }
-          );
+            createItem( // 상품 등록 - 백앤드
+                this.item,
+                function(success) {
+                    alert("상품 등록 성공!");
+                    this.id = success.id;
+                },
+                function(error) {
+                    console.log(error);
+                },
+                function(final){
+                    console.log('안녕');
+                }
+            );
+
+            savaImage( // 사진 등록
+                data,
+                this.id,
+                function(success) {
+                    alert("이미지 등록 성공!");
+                },
+                function (error) {
+                    console.log(error);
+                },
+                function (final) {
+                    console.log('안녕');
+                }
+            );
+
+            /**
+             * TODO: PJTⅢ 과제3 Req.1-1 [상품 등록]
+             * DB에 상품 등록 후 반환 받은 id를 이용해서 이더리움에 상품을 등록
+             */
         },
         function (error) {
           console.log(error);

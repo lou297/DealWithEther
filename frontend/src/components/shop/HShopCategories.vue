@@ -2,22 +2,6 @@
   <div class="breadcrumb">
     <div class="container">
       <h4>Shop > {{ category }}</h4>
-      <ul>
-        <li>
-          <router-link class="nav-link" to="/shop">전체보기</router-link>
-        </li>
-        <li>
-          <router-link class="nav-link" to="/shop/digital">디지털/가전</router-link>
-        </li>
-        <li>
-          <router-link class="nav-link" to="/shop/child">유아물품</router-link>
-        </li>
-        <li>
-          <router-link class="nav-link" to="/shop/hobby">게임/취미</router-link>
-        </li>
-      </ul>
-        <v-spacer></v-spacer>
-        <router-link class="nav-link" to="/item/create">상품 등록</router-link>
     </div>
   </div>
 </template>
