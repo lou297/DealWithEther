@@ -151,6 +151,7 @@ export default {
                 dealRegion: "",
                 price: null,
             },
+            id: null,
             imageURL: "",
             privateKey: "",
             userId: this.$store.state.user.id,
@@ -200,10 +201,11 @@ export default {
                 console.log(pair[0]+","+pair[1]);
             }
 
-            savaImage( // 사진 등록
-                data,
+            createItem( // 상품 등록 - 백앤드
+                this.item,
                 function(success) {
-                    alert("이미지 등록 성공!");
+                    alert("상품 등록 성공!");
+                    this.id = success.id;
                 },
                 function(error) {
                     console.log(error);
@@ -212,10 +214,11 @@ export default {
                     console.log('안녕');
                 }
             );
-            createItem( // 상품 등록 - 백앤드
-                this.item,
+            savaImage( // 사진 등록
+                data,
+                this.id,
                 function(success) {
-                    alert("상품 등록 성공!");
+                    alert("이미지 등록 성공!");
                 },
                 function(error) {
                     console.log(error);
