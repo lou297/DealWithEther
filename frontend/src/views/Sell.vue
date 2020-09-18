@@ -26,7 +26,7 @@
                                             </v-hover>
                                         </v-col>
                                         <v-col
-                                            v-for="n in item.image.length"
+                                            v-for="n in image.length"
                                             :key="n"
                                             class="d-flex child-flex"
                                             cols="4"
@@ -34,7 +34,7 @@
                                             <v-hover v-slot:default="{ hover }">
                                                 <v-card flat tile class="d-flex" :elevation="hover ? 16 : 2">
                                                     <v-img
-                                                        :src="item.image[n-1]"
+                                                        :src="image[n-1]"
                                                         aspect-ratio="1"
                                                         class="grey lighten-2"
                                                         @click="removeImage(n-1)"
@@ -87,7 +87,6 @@ export default {
                 explanation: "",
                 available: true,
                 seller: this.$store.state.user.id,
-
                 directDeal: false,
                 dealRegion: "",
                 price: null,
@@ -128,7 +127,7 @@ export default {
         save() {
             const vm = this;
             this.isCreating = true; // 아이템 등록 중임을 화면에 표시, 등록이 끝나면 false로 변경
-            if (this.item.name.length <= 0 || this.item.category.length <= 0 || this.item.price === null || this.item.price <= 0 || this.item.image === null || this.item.image.length <= 0) {
+            if (this.item.name.length <= 0 || this.item.category.length <= 0 || this.item.price === null || this.item.price <= 0 || this.image === null || this.image.length <= 0) {
                 alert("입력폼을 모두 입력해주세요.");
                 this.isCreating = false;
                 return;
