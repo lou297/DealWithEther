@@ -87,11 +87,12 @@ export default {
                 explanation: "",
                 available: true,
                 seller: this.$store.state.user.id,
-                image: [],
+
                 directDeal: false,
                 dealRegion: "",
                 price: null,
             },
+            image: [],
             id: null,
             imageURL: "",
             privateKey: "",
@@ -189,12 +190,12 @@ export default {
 
             if (length > 9) length = 9;
             for (let i = 1; i <= length; i++) {
-                if (this.item.image.length + i >= 9) {
+                if (this.image.length + i >= 9) {
                     alert("더이상 이미지를 추가할수 없습니다")
                     break;
                 }
                 const file = input.target.files[i - 1];
-                this.item.image.push(URL.createObjectURL(file));
+                this.image.push(URL.createObjectURL(file));
                 this.files.push(file);
             }
             console.log(this.files);
@@ -204,7 +205,7 @@ export default {
         removeImage(n) {
             alert(n);
             // this.item.image[n].removeImage();
-            this.item.image.splice(n, 1);
+            this.image.splice(n, 1);
             this.files.splice(n, 1);
         }
     },
