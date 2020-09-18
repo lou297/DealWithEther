@@ -11,7 +11,7 @@ function findAll(success, fail) {
 
 function findByCategory(keyword, success, fail) {
     instance
-        .get("/api/items/name/" + keyword)
+        .get("/api/items/category/" + keyword)
         .then(success)
         .catch(fail);
 }
