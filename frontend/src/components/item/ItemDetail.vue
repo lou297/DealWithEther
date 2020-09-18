@@ -1,9 +1,61 @@
 <template>
     <div>
-        <h-breadcrumb
-            title="상품 상세 보기"
-            description="등록된 상품의 상세 내역을 볼 수 있습니다."
-        ></h-breadcrumb>
+        <h-breadcrumb title="상품 상세 보기" description="등록된 상품의 상세 내역을 볼 수 있습니다."></h-breadcrumb>
+           <v-container fluid>
+                <v-row justify="space-around" style="margin-top:50px">
+                    <v-col cols="5" style="margin-right:30px">
+                    <v-img
+                        :src="item.image"
+                        aspect-ratio="1"
+                        max-width="386"
+                        max-height="386"
+                    ></v-img>
+                    </v-col>
+                    <v-col cols="6">
+                        <v-row>
+                            <v-col cols="6" style="float:left; text-align:left"><h4>{{item.name}}</h4></v-col>
+                            <v-col cols="3" style="float:left">{{item.price}}원</v-col>
+                            <v-col cols="3" style="padding: 5px;"><v-btn style="float:left;" >네고요청</v-btn></v-col>
+                        </v-row>
+                    <v-divider style="margin-top:0px;"/>
+                    <v-row>
+                        <v-col cols="3" style="text-align:left">판매자</v-col>
+                        <v-col cols="8" style="text-align:left">{{ item.seller.name }}({{ item.seller.email }})</v-col>
+                        <v-col cols="3" style="text-align:left">매너점수</v-col>
+                        <v-col cols="8" style="text-align:left">3.7</v-col>
+                        <v-col cols="3" style="text-align:left">상품 등록일</v-col>
+                        <v-col cols="8" style="text-align:left">{{ item.registeredAt }}</v-col>
+                        <v-col cols="3" style="text-align:left">거래방법</v-col>
+
+                        <v-col v-if="item.directDeal == true" cols="8" style="text-align:left">직거래</v-col>
+                        <v-col v-if="item.directDeal == true" cols="3" style="text-align:left">직거래 장소</v-col>
+                        <v-col v-if="item.directDeal == true" cols="8" style="text-align:left">{{item.dealRegion}}</v-col>
+                        <v-col v-else cols="8" style="text-align:left">택배</v-col>
+                        <v-col cols="3" style="text-align:left">상태</v-col>
+                        <v-col cols="8" style="text-align:left">{{ item.available ? "판매중" : "판매 종료" }}</v-col>
+
+                       
+
+                        <v-row>
+                        <v-col cols="2.2"><v-btn large style="width:100%">찜</v-btn></v-col>
+                        <v-col cols="2.2"><v-btn large color="primary" style="width:100%">문의톡</v-btn></v-col>
+                        <v-col cols="2.2"><v-btn large color="error" style="width:100%">네고요청</v-btn></v-col>
+                        <v-col cols="2.2"><v-btn large color="error" style="width:100%">바로구매</v-btn></v-col>
+                        </v-row>
+                    </v-row>
+                    </v-col>
+                </v-row>
+        <v-divider />
+      <h2 align="left">상품정보</h2>
+      <v-divider />
+      <p align="left">
+        {{item.explanation}}
+      </p>
+    </v-container>
+
+
+
+
         <div class="container">
             <div class="row">
                 <div class="col-md-8 mx-auto">
@@ -81,6 +133,8 @@ export default {
                     name: '',
                     email: '',
                 },
+                directDeal: false,
+                dealRegion: "",
                 image: null,
                 price: null,
                 registeredAt: null,
@@ -102,6 +156,7 @@ export default {
         },
         getImg(name) {
             if (name) {
+                console.log(name);
                 return getLocalImg(name);
             }
             return null;
@@ -123,9 +178,6 @@ export default {
                     bookMark = new Set([... bookMark, this.item])
                 }
             }
-            
-            
-            
             sessionStorage.setItem("bookmark", JSON.stringify(bookMark))
         }
     },
@@ -136,7 +188,6 @@ export default {
     },
     created() {
         this.item.id = this.$route.params.id;
-
     },
     mounted: function () {
         const vm = this;
@@ -152,7 +203,11 @@ export default {
                 vm.item.available = result.available;
                 vm.item.seller.id = result.seller;
                 vm.item.image = result.image;
+                vm.item.price = result.price;
+                vm.item.directDeal = result.directDeal;
+                vm.item.dealRegion = result.dealRegion;
                 vm.item.registeredAt = result.registeredAt;
+                console.log(vm.item);
                 
                 // 판매자 정보
                 findUserById(result.seller, function (res) {
@@ -175,7 +230,6 @@ export default {
                 console.log(price);
             },
             function (err) {
-                alert('상품 가격 조회에 실패했습니다.');
                 console.error('가격 조회 실패:', err);
             },
         );

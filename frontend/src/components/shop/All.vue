@@ -13,7 +13,7 @@
                         type="text"
                         color="black"
                         placeholder="검색어를 입력하세요"
-                        v-model="search"
+                        v-model="searchKeyword"
                         @keyup.enter="searchRoute"
                         style="margin-left:5px"
                         solo
@@ -48,7 +48,7 @@
 </template>
 
 <script>
-import {findAll} from "@/api/item.js";
+import {findAll, findByCategory} from "@/api/item.js";
 import HShopCategories from "./HShopCategories.vue";
 import ItemCard from "./ItemCard.vue";
 import {getPrice} from '@/utils/itemInventory.js';
@@ -68,11 +68,23 @@ export default {
             prevIcon: 'navigate_before',
             page: 1,
             totalVisible: 10,
+            searchKeyword: ""
         };
     },
     methods: {
         onClickItem(itemId) {
             this.$router.push("item/detail/" + itemId);
+        },
+        searchRoute() {
+            const vm = this;
+            findByCategory(vm.searchKeyword,
+            res => {
+                vm.items = res.data
+            },
+            err => {
+                alert(err)
+            })
+
         }
     },
     mounted: function () {
@@ -94,6 +106,9 @@ export default {
                     )
                 })
             }
+        },
+        err => {
+            alert(err)
         });
     }
 };
