@@ -24,7 +24,6 @@
                     </v-btn>
                 </li>
             </ul>
-
             <v-spacer></v-spacer>
         </v-container>
         <router-link class="nav-link" to="/item/create">상품 등록</router-link>
@@ -95,7 +94,7 @@ export default {
             prevIcon: 'navigate_before',
             page: 1,
             totalVisible: 10,
-            searchKeyword: ""
+            searchKeyword: "",
         };
     },
     methods: {
@@ -115,7 +114,7 @@ export default {
         },
         getAllList() {
             const vm = this;
-            findAll(function (response) {
+            findAll(this.page,function (response) {
                     if (response.data.length > 0) {
                         vm.items = response.data;
                         vm.items.forEach(i => {
@@ -139,7 +138,7 @@ export default {
         },
         getByCategory(category) {
             const vm = this;
-            findByCategory(category, function (response) {
+            findByCategory(category, this.page, function (response) {
                     if (response.data.length > 0) {
                         vm.items = response.data;
                         vm.items.forEach(i => {
