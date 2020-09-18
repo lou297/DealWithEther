@@ -43,8 +43,8 @@ public class ItemController {
 	public Item register(@RequestBody Item item) {
 		System.out.println(item.toString());
 		logger.info(item.toString());
-		// return itemService.register(item);
-		return null;
+		return itemService.register(item);
+		// return null;
 	}
 
 	@ApiOperation(value = "Fetch all items")
