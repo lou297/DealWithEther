@@ -67,6 +67,7 @@
                 :prev-icon="prevIcon"
                 :page="page"
                 :total-visible="totalVisible"
+                @input="getAllList"
             ></v-pagination>
         </div>
     </div>
