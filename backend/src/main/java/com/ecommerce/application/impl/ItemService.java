@@ -29,6 +29,11 @@ public class ItemService implements IItemService {
 	}
 
 	@Override
+	public List<Item> pageList(int page) {
+		return this.itemRepository.pageList(page);
+	}
+
+	@Override
 	public Item get(final long id) {
 		return this.itemRepository.get(id);
 	}
