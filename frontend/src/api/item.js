@@ -68,12 +68,12 @@ function create(body, success, fail, final) {
         .finally(final);
 }
 
-function save(data, success, fail, final) {
-    instance
-        .post("/api/items/images/", data, { headers: { "Content-Type": "multipart/form-data" } })
-        .then(success)
-        .catch(fail)
-        .finally(final);
+function save(data, id, success, fail, final) {
+  instance
+    .post("/api/items/images/" + id , data, {headers: { "Content-Type": "multipart/form-data"}})
+    .then(success)
+    .catch(fail)
+    .finally(final);
 }
 
 function update(body, success, fail) {
