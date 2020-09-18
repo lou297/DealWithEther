@@ -67,11 +67,11 @@ public class ItemRepository implements IItemRepository {
 	}
 
 	@Override
-	public List<Item> getByName(final String name) {
-		StringBuilder sbSql = new StringBuilder("SELECT * FROM items WHERE name like ? ");
+	public List<Item> getByName(final String name, final int page) {
+		StringBuilder sbSql = new StringBuilder("SELECT * FROM items WHERE name like ? limit 5 offset ?");
 		String tname = "%" + name + "%";
 		try {
-			return this.jdbcTemplate.query(sbSql.toString(), new Object[] { tname },
+			return this.jdbcTemplate.query(sbSql.toString(), new Object[] { tname, (page-1)*5 },
 					(rs, rowNum) -> ItemFactory.create(rs));
 		} catch (Exception e) {
 			throw new RepositoryException(e, e.getMessage());

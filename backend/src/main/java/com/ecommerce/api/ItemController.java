@@ -96,9 +96,9 @@ public class ItemController {
 	}
 
 	@ApiOperation(value = "Fetch an item with name")
-	@RequestMapping(value = "/items/name/{name}", method = RequestMethod.GET)
-	public List<Item> getByName(@PathVariable String name) {
-		List<Item> items = itemService.getByName(name);
+	@RequestMapping(value = "/items/name/{name}/{page}", method = RequestMethod.GET)
+	public List<Item> getByName(@PathVariable String name, @PathVariable int page) {
+		List<Item> items = itemService.getByName(name, page);
 		if (items == null || items.size() == 0) {
 			logger.error("NOT FOUND LIST OF NAME: ", name);
 			return null;

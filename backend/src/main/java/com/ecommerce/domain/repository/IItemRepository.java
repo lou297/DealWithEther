@@ -12,7 +12,7 @@ public interface IItemRepository {
 
 	List<Item> getByUser(final long userId);
 
-	List<Item> getByName(final String name);
+	List<Item> getByName(final String name, final int page);
 
 	List<Item> getByCategory(final String category, final int page);
 
