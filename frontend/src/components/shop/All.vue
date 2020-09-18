@@ -4,7 +4,7 @@
         <v-container>
             <ul>
                 <li>
-                    <v-btn color="orange" text >
+                    <v-btn color="orange" text @click="getAllList">
                         전체검색
                     </v-btn>
                 </li>
