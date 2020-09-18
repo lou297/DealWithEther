@@ -2,16 +2,16 @@ import { createInstance } from "./index.js";
 
 const instance = createInstance();
 
-function findAll(success, fail) {
+function findAll(page, success, fail) {
     instance
-        .get("/api/items/")
+        .get("/api/items/" + page)
         .then(success)
         .catch(fail);
 }
 
-function findByCategory(keyword, success, fail) {
+function findByCategory(keyword, page, success, fail) {
     instance
-        .get("/api/items/category/" + keyword)
+        .get("/api/items/category/" + keyword + "/" + page)
         .then(success)
         .catch(fail);
 }
