@@ -5,7 +5,7 @@
             <v-container>
                 <v-layout>
                     <v-flex xl6 lg6 md6 sm12 xs12>
-                        <v-flex xl8 lg8 md8 sm8 xs8>
+                        <v-flex xl10 lg10 md10 sm10 xs10>
                             <v-card>
                                 <v-container fluid xl10>
                                     <v-row>
@@ -26,7 +26,7 @@
                                             </v-hover>
                                         </v-col>
                                         <v-col
-                                            v-for="n in item.image.length"
+                                            v-for="n in image.length"
                                             :key="n"
                                             class="d-flex child-flex"
                                             cols="4"
@@ -34,7 +34,7 @@
                                             <v-hover v-slot:default="{ hover }">
                                                 <v-card flat tile class="d-flex" :elevation="hover ? 16 : 2">
                                                     <v-img
-                                                        :src="item.image[n-1]"
+                                                        :src="image[n-1]"
                                                         aspect-ratio="1"
                                                         class="grey lighten-2"
                                                         @click="removeImage(n-1)"
@@ -46,7 +46,6 @@
                                     </v-row>
                                 </v-container>
                             </v-card>
-
                         </v-flex>
                     </v-flex>
 
@@ -87,11 +86,12 @@ export default {
                 explanation: "",
                 available: true,
                 seller: this.$store.state.user.id,
-                image: [],
+
                 directDeal: false,
                 dealRegion: "",
                 price: null,
             },
+            image: [],
             imageURL: "",
             privateKey: "",
             userId: this.$store.state.user.id,
@@ -184,12 +184,12 @@ export default {
 
             if (length > 9) length = 9;
             for (let i = 1; i <= length; i++) {
-                if (this.item.image.length + i >= 9) {
+                if (this.image.length + i >= 9) {
                     alert("더이상 이미지를 추가할수 없습니다")
                     break;
                 }
                 const file = input.target.files[i - 1];
-                this.item.image.push(URL.createObjectURL(file));
+                this.image.push(URL.createObjectURL(file));
                 this.files.push(file);
             }
             console.log(this.files);
@@ -199,7 +199,7 @@ export default {
         removeImage(n) {
             alert(n);
             // this.item.image[n].removeImage();
-            this.item.image.splice(n, 1);
+            this.image.splice(n, 1);
             this.files.splice(n, 1);
         }
     },
