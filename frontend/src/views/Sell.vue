@@ -1,132 +1,73 @@
 <template>
     <div>
         <h-breadcrumb title="상품 등록" style="margin:0px; padding-top:0px;"></h-breadcrumb>
-
-        <div id="main-overview" class="container" >
-            <v-row>
-                <v-col cols="6">
-<!--                    <img :src="defaultImage" v-if="isImageUpload == false" style="width:90%; margin-top: 15px;">-->
-<!--                    <img :src="item.image" v-if="isImageUpload == true" style="height:250px; width:390px; margin-top: 15px;" ><br><br>-->
-                    <v-card>
-                        <v-container fluid>
-                            <v-row>
-                                <v-col
-                                    v-for="n in 9"
-                                    :key="n"
-                                    class="d-flex child-flex"
-                                    cols="4"
-                                >
-                                    <v-card flat tile class="d-flex">
-                                        <v-img
-                                            :src="item.image[n-1]"
-                                            :lazy-src="item.image[n-1]"
-                                            aspect-ratio="1"
-                                            class="grey lighten-2"
-                                            @click="removeImage(n-1)"
+        <div id="main-overview" class="container">
+            <v-container>
+                <v-layout>
+                    <v-flex xl6 lg6 md6 sm12 xs12>
+                        <v-flex xl8 lg8 md8 sm8 xs8>
+                            <v-card>
+                                <v-container fluid xl10>
+                                    <v-row>
+                                        <v-col class="d-flex child-flex" cols="4">
+                                            <v-hover v-slot:default="{ hover }">
+                                                <div class="form-group">
+                                                    <v-card flat tile class="d-flex" :elevation="hover ? 16 : 2">
+                                                        <v-img
+                                                            src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2F20150805_174%2Feco33j_14387587048977dTo3_PNG%2F20150805_161129.png&type=sc960_832"
+                                                            aspect-ratio="1"
+                                                            class="grey lighten-2"
+                                                            @click="onImageClick"
+                                                        >
+                                                            <input ref="uploader" type="file" multiple accept="image/*" @change="onFileChange" hidden/>
+                                                        </v-img>
+                                                    </v-card>
+                                                </div>
+                                            </v-hover>
+                                        </v-col>
+                                        <v-col
+                                            v-for="n in item.image.length"
+                                            :key="n"
+                                            class="d-flex child-flex"
+                                            cols="4"
                                         >
-                                        </v-img>
-                                    </v-card>
-                                </v-col>
-                            </v-row>
-                        </v-container>
-                    </v-card>
-                    <div class="form-group">
-<!--                        <input id="upload" type="file" class="form-control" style="height: auto; margin-left:18px; width:92%;" @change="onFileChange" />-->
-                        <v-file-input multiple label="File input" @change="onFileChange" ></v-file-input>
-                    </div>
-                </v-col>
-                <v-col cols="6">
-                    <v-form ref="form" v-model="valid" lazy-validation>
-                        <v-text-field v-model="item.name" :counter="10" label="상품 이름" required></v-text-field>
-                        <v-select v-model="item.category" :items="items" :rules="[v => !!v || 'Item is required']" label="카테고리" required></v-select>
-                        <v-text-field type="number" v-model="item.price" label="가격" required></v-text-field>
-                        <v-text-field v-model="item.explanation" label="설명" required></v-text-field>
-                        <v-checkbox v-model="item.directDeal" label="직거래 여부" required></v-checkbox>
-                        <v-text-field v-if="item.directDeal == true" 
-                            v-model="item.dealRegion" label="장소" required></v-text-field>
+                                            <v-hover v-slot:default="{ hover }">
+                                                <v-card flat tile class="d-flex" :elevation="hover ? 16 : 2">
+                                                    <v-img
+                                                        :src="item.image[n-1]"
+                                                        aspect-ratio="1"
+                                                        class="grey lighten-2"
+                                                        @click="removeImage(n-1)"
+                                                    >
+                                                    </v-img>
+                                                </v-card>
+                                            </v-hover>
+                                        </v-col>
+                                    </v-row>
+                                </v-container>
+                            </v-card>
 
-                        <v-btn color="success" class="mr-4" @click="save">취소</v-btn>
-                        <v-btn color="error" class="mr-4" @click="save">등록</v-btn>
-                    </v-form>
-                </v-col>
-            </v-row>
-        </div><br><br><br>
-
-        <!-- <v-container>
-            <div row justify-space-around class="backImg">
-                <v-layout row wrap>
-                    <v-flex xl6 lg6 md12 sm12 xs12>
-                        <img :src="item.image"><br>
-                        <div class="form-group">
-                            <input id="upload" type="file" class="form-control" style="height: auto;" @change="onFileChange" />
-                        </div>
+                        </v-flex>
                     </v-flex>
-                    <v-flex xl6 lg6 md12 sm12 xs12>
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-12 mx-auto">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <div class="form-group">
-                                                <label id="name">상품 이름</label>
-                                                <input type="text" class="form-control" id="name" v-model="item.name" />
-                                            </div>
-                                            <div class="form-group">
-                                                <label id="name">카테고리</label>
-                                                <select class="form-control" id="category" v-model="item.category">
-                                                    <option value="D">디지털/가전</option>
-                                                    <option value="C">유아물품</option>
-                                                    <option value="H">게임/취미</option>
-                                                    <option value="A">의류</option>
-                                                </select>
-                                            </div>
-                                            <div class="form-group">
-                                                <label id="name">직거래 여부</label>
-                                                <input type="checkbox" class="form-control" id="check" v-model="item.directDeal"/>
-                                            </div>
-                                            <div class="form-group" v-if="item.directDeal == true">
-                                                <label id="name">직거래 장소</label>
-                                                <input type="text" class="form-control" id="name" v-model="item.dealRegion"/>
-                                            </div>
 
-                                            <div class="form-group">
-                                                <label id="price">가격</label>
-                                                <input type="number" class="form-control" id="price" v-model="item.price" />
-                                            </div>
-                                            <div class="form-group">
-                                                <label id="description">상품 설명</label>
-                                                <textarea class="form-control" id="description" v-model="item.explanation" placeholder=""></textarea>
-                                            </div>
-                                            <div class="form-group">
-                                                <label id="privateKey">지갑 개인키</label>
-                                                <input id="privateKey" v-model="privateKey" type="text" class="form-control" placeholder="지갑 개인키를 입력해주세요." />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <v-flex xl6 lg6 md6 sm12 xs12>
+                        <v-form ref="form" v-model="valid" lazy-validation>
+                            <v-text-field v-model="item.name" :counter="10" label="상품 이름" required></v-text-field>
+                            <v-select v-model="item.category" :items="items" :rules="[v => !!v || 'Item is required']" label="카테고리" required></v-select>
+                            <v-text-field type="number" v-model="item.price" label="가격" required></v-text-field>
+                            <v-text-field v-model="item.explanation" label="설명" required></v-text-field>
+                            <v-checkbox v-model="item.directDeal" label="직거래 여부" required></v-checkbox>
+                            <v-text-field v-if="item.directDeal == true"
+                                          v-model="item.dealRegion" label="장소" required></v-text-field>
+
+                            <v-btn color="success" class="mr-4" @click="save">취소</v-btn>
+                            <v-btn color="error" class="mr-4" @click="save">등록</v-btn>
+                        </v-form>
                     </v-flex>
                 </v-layout>
-                <v-layout row wrap>
-                    <v-flex>
-                        <button type="button" class="btn btn-primary" v-on:click="save" v-bind:disabled="isCreating">
-                            채팅
-                        </button>
-                    </v-flex>
-                    <v-flex>
-                        <button type="button" class="btn btn-primary" v-on:click="save" v-bind:disabled="isCreating">
-                            상품 등록
-                        </button>
-                    </v-flex>
-                    <v-flex>
-                        <button type="button" class="btn btn-primary" v-on:click="save" v-bind:disabled="isCreating">
-                            등록 취소
-                        </button>
-                    </v-flex>
-                </v-layout>
-            </div>
-        </v-container> -->
+            </v-container>
+        </div>
+        <br><br><br>
     </div>
 </template>
 
@@ -139,7 +80,7 @@ export default {
     name: "ItemCreate",
     data() {
         return {
-            files:[],
+            files: [],
             item: {
                 name: "",
                 category: "",
@@ -214,16 +155,18 @@ export default {
                     console.log('안녕');
                 }
             );
+
             savaImage( // 사진 등록
                 data,
                 this.id,
                 function(success) {
                     alert("이미지 등록 성공!");
+
                 },
-                function(error) {
+                function (error) {
                     console.log(error);
                 },
-                function(final){
+                function (final) {
                     console.log('안녕');
                 }
             );
@@ -234,36 +177,35 @@ export default {
              */
         },
 
+        onImageClick() {
+            this.$refs.uploader.click();
+        },
+
         onFileChange(input) {
-            if(input.length === 0) {
-                console.log("00000000000")
+            let length = input.target.files.length;
+            if (length === 0) {
                 return;
             }
-            for (let i = 0; i < input.length; i++) {
-                const file = input.__ob__.value[i];
-                console.log(file);
+
+            if (length > 9) length = 9;
+            for (let i = 1; i <= length; i++) {
+                if (this.item.image.length + i >= 9) {
+                    alert("더이상 이미지를 추가할수 없습니다")
+                    break;
+                }
+                const file = input.target.files[i - 1];
                 this.item.image.push(URL.createObjectURL(file));
                 this.files.push(file);
             }
-           //console.log(this.item.image)
-
-            // var files = input.target.files || input.dataTransfer.files;
-            // if (!files.length) return;
-            //
-            // this.isImageUpload = true;
-            // const file = input.target.files[0];
-            // this.item.image = URL.createObjectURL(file);
-            // console.log(URL.createObjectURL(file));
-            // var reader = new FileReader();
-            // reader.onload = (e) => {
-            //     this.imageURL = e.target.result;
-            // }
+            console.log(this.files);
+            this.$refs.uploader.value = null;
         },
 
-        removeImage(n){
+        removeImage(n) {
             alert(n);
             // this.item.image[n].removeImage();
             this.item.image.splice(n, 1);
+            this.files.splice(n, 1);
         }
     },
 };
