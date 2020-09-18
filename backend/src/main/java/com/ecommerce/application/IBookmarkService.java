@@ -13,6 +13,8 @@ public interface IBookmarkService {
 
 	List<Bookmark> list(long userId);
 
+	Bookmark get(long userId, long itemId);
+
 	@Transactional
 	long register(Bookmark bookmark);
 

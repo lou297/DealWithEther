@@ -11,6 +11,8 @@ public interface IBookmarkRepository {
 
 	List<Bookmark> list(long userId);
 
+	Bookmark get(long userId, long itemId);
+
 	@Transactional
 	long create(Bookmark bookmark);
 
