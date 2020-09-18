@@ -79,10 +79,10 @@ public class ItemRepository implements IItemRepository {
 	}
 
 	@Override
-	public List<Item> getByCategory(final String category) {
-		StringBuilder sbSql = new StringBuilder("SELECT * FROM items WHERE category=? ");
+	public List<Item> getByCategory(final String category, final int page) {
+		StringBuilder sbSql = new StringBuilder("SELECT * FROM items WHERE category=? limit 5 offset ?");
 		try {
-			return this.jdbcTemplate.query(sbSql.toString(), new Object[] { category },
+			return this.jdbcTemplate.query(sbSql.toString(), new Object[] { category, (page-1)*5 },
 					(rs, rowNum) -> ItemFactory.create(rs));
 		} catch (Exception e) {
 			throw new RepositoryException(e, e.getMessage());
