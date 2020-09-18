@@ -4,22 +4,22 @@
         <v-container>
             <ul>
                 <li>
-                    <v-btn color="orange" text @click="getAllList">
+                    <v-btn color="orange" text @click="setSearchBy(0)">
                         전체검색
                     </v-btn>
                 </li>
                 <li>
-                    <v-btn color="orange" text @click="getByCategory('가전')">
+                    <v-btn color="orange" text @click="setKeyword('가전'); setSearchBy(1)">
                         가전
                     </v-btn>
                 </li>
                 <li>
-                    <v-btn color="orange" text @click="getByCategory('유아')">
+                    <v-btn color="orange" text @click="setKeyword('유아'); setSearchBy(1)">
                         유아
                     </v-btn>
                 </li>
                 <li>
-                    <v-btn color="orange" text @click="getByCategory('메롱')">
+                    <v-btn color="orange" text @click="setKeyword('메롱'); setSearchBy(1)">
                         메롱
                     </v-btn>
                 </li>
@@ -67,7 +67,7 @@
                 :prev-icon="prevIcon"
                 :page="page"
                 :total-visible="totalVisible"
-                @input="getAllList"
+                @input="setPage"
             ></v-pagination>
         </div>
     </div>
@@ -96,9 +96,26 @@ export default {
             page: 1,
             totalVisible: 10,
             searchKeyword: "",
+            searchBy: 0,
         };
     },
     methods: {
+        setPage(page) {
+            this.page = page;
+            console.log(this.page);
+            if(this.searchBy === 0) this.getAllList();
+            else if(this.searchBy === 1)this.getByCategory(this.searchKeyword);
+        },
+        setSearchBy(searchBy) {
+            this.searchBy = searchBy;
+            console.log(this.searchBy);
+            if(this.searchBy === 0) this.getAllList();
+            else if(this.searchBy === 1)this.getByCategory(this.searchKeyword);
+        },
+        setKeyword(searchKeyword) {
+            this.searchKeyword = searchKeyword;
+            console.log(this.searchKeyword);
+        },
         onClickItem(itemId) {
             this.$router.push("item/detail/" + itemId);
         },
@@ -115,7 +132,7 @@ export default {
         },
         getAllList() {
             const vm = this;
-            findAll(this.page,function (response) {
+            findAll(this.page, function (response) {
                     if (response.data.length > 0) {
                         vm.items = response.data;
                         vm.items.forEach(i => {
