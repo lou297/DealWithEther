@@ -51,6 +51,17 @@ public class BookmarkRepository implements IBookmarkRepository {
 	}
 
 	@Override
+	public List<Bookmark> list(long userId) {
+		StringBuilder sbSql = new StringBuilder("SELECT * FROM bookmarks where user_id=?");
+		try {
+			return this.jdbcTemplate.query(sbSql.toString(), new Object[] { userId },
+					(rs, rowNum) -> BookmarkFactory.create(rs));
+		} catch (Exception e) {
+			throw new RepositoryException(e, e.getMessage());
+		}
+	}
+
+	@Override
 	public long create(final Bookmark bookmark) {
 		try {
 			log.debug(bookmark.toString());

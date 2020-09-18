@@ -9,6 +9,8 @@ import java.util.List;
 public interface IBookmarkRepository {
 	List<Bookmark> list();
 
+	List<Bookmark> list(long userId);
+
 	@Transactional
 	long create(Bookmark bookmark);
 

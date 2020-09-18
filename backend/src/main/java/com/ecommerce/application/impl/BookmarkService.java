@@ -36,6 +36,11 @@ public class BookmarkService implements IBookmarkService {
 	}
 
 	@Override
+	public List<Bookmark> list(long userId) {
+		return this.bookmarkRepository.list(userId);
+	}
+
+	@Override
 	public long register(final Bookmark bookmark) {
 		return this.bookmarkRepository.create(bookmark);
 	}
