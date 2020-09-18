@@ -50,7 +50,7 @@
             </v-card>
         </v-hover>
     </v-col> -->
-    </div>
+</div>
 </template>
 
 <script>
