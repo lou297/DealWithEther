@@ -41,6 +41,7 @@ public class ItemController {
 	@ApiOperation(value = "Register an item")
 	@RequestMapping(value = "/items", method = RequestMethod.POST)
 	public Item register(@RequestBody Item item) {
+		item.setImage("임시");
 		System.out.println(item.toString());
 		logger.info(item.toString());
 		return itemService.register(item);

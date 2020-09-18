@@ -263,3 +263,548 @@
 2020-09-18 11:23:11 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
 2020-09-18 11:23:11 [main] INFO  com.ecommerce.Application - Started Application in 3.586 seconds (JVM running for 3.971)
 2020-09-18 11:23:36 [http-nio-8080-exec-2] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-09-18 11:44:05 [main] INFO  com.ecommerce.Application - Starting Application on DESKTOP-KVCQHCD with PID 13824 (C:\SSAFY\BlockChain_SubPJT2\s03p22a103\backend\target\classes started by multicampus in C:\SSAFY\BlockChain_SubPJT2\s03p22a103)
+2020-09-18 11:44:05 [main] DEBUG com.ecommerce.Application - Running with Spring Boot v2.1.4.RELEASE, Spring v5.1.6.RELEASE
+2020-09-18 11:44:05 [main] INFO  com.ecommerce.Application - No active profile set, falling back to default profiles: default
+2020-09-18 11:44:06 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$731c0a69] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-09-18 11:44:06 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2020-09-18 11:44:06 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2020-09-18 11:44:06 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.17]
+2020-09-18 11:44:07 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2020-09-18 11:44:07 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [public org.springframework.http.ResponseEntity<springfox.documentation.spring.web.json.Json> springfox.documentation.swagger2.web.Swagger2Controller.getDocumentation(java.lang.String,javax.servlet.http.HttpServletRequest)]
+2020-09-18 11:44:08 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2020-09-18 11:44:08 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Context refreshed
+2020-09-18 11:44:08 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2020-09-18 11:44:08 [main] INFO  s.d.s.w.s.ApiListingReferenceScanner - Scanning for api listing references
+2020-09-18 11:44:08 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: deleteUsingDELETE_1
+2020-09-18 11:44:08 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: listUsingGET_1
+2020-09-18 11:44:08 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: registerUsingPOST_1
+2020-09-18 11:44:08 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: deleteUsingDELETE_2
+2020-09-18 11:44:08 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: listUsingGET_2
+2020-09-18 11:44:08 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: registerUsingPOST_2
+2020-09-18 11:44:08 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: deleteUsingDELETE_3
+2020-09-18 11:44:08 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getUsingGET_1
+2020-09-18 11:44:08 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: listUsingGET_3
+2020-09-18 11:44:08 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: updateUsingPUT_1
+2020-09-18 11:44:08 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getUsingGET_2
+2020-09-18 11:44:08 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getByUserUsingGET_1
+2020-09-18 11:44:08 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: registerUsingPOST_3
+2020-09-18 11:44:08 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2020-09-18 11:44:08 [main] INFO  com.ecommerce.Application - Started Application in 3.947 seconds (JVM running for 4.639)
+2020-09-18 11:53:19 [http-nio-8080-exec-2] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-09-18 11:53:19 [http-nio-8080-exec-3] INFO  com.ecommerce.api.ItemController - { id: 0
+	name: aaa
+	explanation: a
+	available: true
+	seller: 1
+	registeredAt: null
+	image: null
+	price: 12312
+	directDeal: false
+	dealRegion:  }
+2020-09-18 11:53:19 [http-nio-8080-exec-3] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2020-09-18 11:53:20 [http-nio-8080-exec-3] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2020-09-18 11:53:20 [http-nio-8080-exec-3] DEBUG c.e.i.repository.ItemRepository - { id: 0
+	name: aaa
+	explanation: a
+	available: true
+	seller: 1
+	registeredAt: null
+	image: null
+	price: 12312
+	directDeal: false
+	dealRegion:  }
+2020-09-18 11:53:20 [http-nio-8080-exec-3] DEBUG c.e.i.repository.ItemRepository - registered_at: 2020-09-18T11:53:20.033165200
+2020-09-18 11:55:14 [main] INFO  com.ecommerce.Application - Starting Application on DESKTOP-KVCQHCD with PID 16296 (C:\SSAFY\BlockChain_SubPJT2\s03p22a103\backend\target\classes started by multicampus in C:\SSAFY\BlockChain_SubPJT2\s03p22a103)
+2020-09-18 11:55:14 [main] DEBUG com.ecommerce.Application - Running with Spring Boot v2.1.4.RELEASE, Spring v5.1.6.RELEASE
+2020-09-18 11:55:14 [main] INFO  com.ecommerce.Application - No active profile set, falling back to default profiles: default
+2020-09-18 11:55:15 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$254038b3] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-09-18 11:55:16 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2020-09-18 11:55:16 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2020-09-18 11:55:16 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.17]
+2020-09-18 11:55:16 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2020-09-18 11:55:16 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [public org.springframework.http.ResponseEntity<springfox.documentation.spring.web.json.Json> springfox.documentation.swagger2.web.Swagger2Controller.getDocumentation(java.lang.String,javax.servlet.http.HttpServletRequest)]
+2020-09-18 11:55:17 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2020-09-18 11:55:17 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Context refreshed
+2020-09-18 11:55:17 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2020-09-18 11:55:17 [main] INFO  s.d.s.w.s.ApiListingReferenceScanner - Scanning for api listing references
+2020-09-18 11:55:17 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: deleteUsingDELETE_1
+2020-09-18 11:55:17 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: listUsingGET_1
+2020-09-18 11:55:17 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: registerUsingPOST_1
+2020-09-18 11:55:17 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: deleteUsingDELETE_2
+2020-09-18 11:55:17 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: listUsingGET_2
+2020-09-18 11:55:17 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: registerUsingPOST_2
+2020-09-18 11:55:17 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: deleteUsingDELETE_3
+2020-09-18 11:55:17 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getUsingGET_1
+2020-09-18 11:55:17 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: listUsingGET_3
+2020-09-18 11:55:17 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: updateUsingPUT_1
+2020-09-18 11:55:17 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getUsingGET_2
+2020-09-18 11:55:17 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getByUserUsingGET_1
+2020-09-18 11:55:17 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: registerUsingPOST_3
+2020-09-18 11:55:17 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2020-09-18 11:55:17 [main] INFO  com.ecommerce.Application - Started Application in 3.875 seconds (JVM running for 4.233)
+2020-09-18 11:55:30 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-09-18 11:55:30 [http-nio-8080-exec-1] INFO  com.ecommerce.api.ItemController - { id: 0
+	name: aaa
+	explanation: a
+	available: true
+	seller: 1
+	registeredAt: null
+	price: 12312
+	directDeal: false
+	dealRegion:  }
+2020-09-18 11:55:30 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2020-09-18 11:55:30 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2020-09-18 11:55:30 [http-nio-8080-exec-1] DEBUG c.e.i.repository.ItemRepository - { id: 0
+	name: aaa
+	explanation: a
+	available: true
+	seller: 1
+	registeredAt: null
+	price: 12312
+	directDeal: false
+	dealRegion:  }
+2020-09-18 11:55:30 [http-nio-8080-exec-1] DEBUG c.e.i.repository.ItemRepository - registered_at: 2020-09-18T11:55:30.411856
+2020-09-18 11:56:51 [main] INFO  com.ecommerce.Application - Starting Application on DESKTOP-KVCQHCD with PID 14920 (C:\SSAFY\BlockChain_SubPJT2\s03p22a103\backend\target\classes started by multicampus in C:\SSAFY\BlockChain_SubPJT2\s03p22a103)
+2020-09-18 11:56:51 [main] DEBUG com.ecommerce.Application - Running with Spring Boot v2.1.4.RELEASE, Spring v5.1.6.RELEASE
+2020-09-18 11:56:51 [main] INFO  com.ecommerce.Application - No active profile set, falling back to default profiles: default
+2020-09-18 11:56:52 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$2317e7f0] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-09-18 11:56:53 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2020-09-18 11:56:53 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2020-09-18 11:56:53 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.17]
+2020-09-18 11:56:53 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2020-09-18 11:56:54 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [public org.springframework.http.ResponseEntity<springfox.documentation.spring.web.json.Json> springfox.documentation.swagger2.web.Swagger2Controller.getDocumentation(java.lang.String,javax.servlet.http.HttpServletRequest)]
+2020-09-18 11:56:54 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2020-09-18 11:56:54 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Context refreshed
+2020-09-18 11:56:54 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2020-09-18 11:56:54 [main] INFO  s.d.s.w.s.ApiListingReferenceScanner - Scanning for api listing references
+2020-09-18 11:56:54 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: deleteUsingDELETE_1
+2020-09-18 11:56:54 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: listUsingGET_1
+2020-09-18 11:56:54 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: registerUsingPOST_1
+2020-09-18 11:56:54 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: deleteUsingDELETE_2
+2020-09-18 11:56:54 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: listUsingGET_2
+2020-09-18 11:56:54 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: registerUsingPOST_2
+2020-09-18 11:56:54 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: deleteUsingDELETE_3
+2020-09-18 11:56:54 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getUsingGET_1
+2020-09-18 11:56:54 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: listUsingGET_3
+2020-09-18 11:56:54 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: updateUsingPUT_1
+2020-09-18 11:56:54 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getUsingGET_2
+2020-09-18 11:56:54 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getByUserUsingGET_1
+2020-09-18 11:56:54 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: registerUsingPOST_3
+2020-09-18 11:56:55 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2020-09-18 11:56:55 [main] INFO  com.ecommerce.Application - Started Application in 3.862 seconds (JVM running for 4.249)
+2020-09-18 11:56:58 [http-nio-8080-exec-2] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-09-18 11:56:58 [http-nio-8080-exec-1] INFO  com.ecommerce.api.ItemController - { id: 0
+	name: aaa
+	explanation: a
+	available: true
+	seller: 1
+	registeredAt: null
+	image:  
+	price: 12312
+	directDeal: false
+	dealRegion:  }
+2020-09-18 11:56:58 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2020-09-18 11:56:58 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2020-09-18 11:56:59 [http-nio-8080-exec-1] DEBUG c.e.i.repository.ItemRepository - { id: 0
+	name: aaa
+	explanation: a
+	available: true
+	seller: 1
+	registeredAt: null
+	image:  
+	price: 12312
+	directDeal: false
+	dealRegion:  }
+2020-09-18 11:56:59 [http-nio-8080-exec-1] DEBUG c.e.i.repository.ItemRepository - registered_at: 2020-09-18T11:56:59.003837400
+2020-09-18 11:57:29 [main] INFO  com.ecommerce.Application - Starting Application on DESKTOP-KVCQHCD with PID 6884 (C:\SSAFY\BlockChain_SubPJT2\s03p22a103\backend\target\classes started by multicampus in C:\SSAFY\BlockChain_SubPJT2\s03p22a103)
+2020-09-18 11:57:29 [main] DEBUG com.ecommerce.Application - Running with Spring Boot v2.1.4.RELEASE, Spring v5.1.6.RELEASE
+2020-09-18 11:57:29 [main] INFO  com.ecommerce.Application - No active profile set, falling back to default profiles: default
+2020-09-18 11:57:31 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$61e5a595] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-09-18 11:57:31 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2020-09-18 11:57:31 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2020-09-18 11:57:31 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.17]
+2020-09-18 11:57:31 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2020-09-18 11:57:32 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [public org.springframework.http.ResponseEntity<springfox.documentation.spring.web.json.Json> springfox.documentation.swagger2.web.Swagger2Controller.getDocumentation(java.lang.String,javax.servlet.http.HttpServletRequest)]
+2020-09-18 11:57:32 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2020-09-18 11:57:32 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Context refreshed
+2020-09-18 11:57:32 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2020-09-18 11:57:32 [main] INFO  s.d.s.w.s.ApiListingReferenceScanner - Scanning for api listing references
+2020-09-18 11:57:33 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: deleteUsingDELETE_1
+2020-09-18 11:57:33 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: listUsingGET_1
+2020-09-18 11:57:33 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: registerUsingPOST_1
+2020-09-18 11:57:33 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: deleteUsingDELETE_2
+2020-09-18 11:57:33 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: listUsingGET_2
+2020-09-18 11:57:33 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: registerUsingPOST_2
+2020-09-18 11:57:33 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: deleteUsingDELETE_3
+2020-09-18 11:57:33 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getUsingGET_1
+2020-09-18 11:57:33 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: listUsingGET_3
+2020-09-18 11:57:33 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: updateUsingPUT_1
+2020-09-18 11:57:33 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getUsingGET_2
+2020-09-18 11:57:33 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getByUserUsingGET_1
+2020-09-18 11:57:33 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: registerUsingPOST_3
+2020-09-18 11:57:33 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2020-09-18 11:57:33 [main] INFO  com.ecommerce.Application - Started Application in 3.75 seconds (JVM running for 4.111)
+2020-09-18 11:57:46 [http-nio-8080-exec-2] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-09-18 11:57:46 [http-nio-8080-exec-1] INFO  com.ecommerce.api.ItemController - { id: 0
+	name: aaa
+	explanation: a
+	available: true
+	seller: 1
+	registeredAt: null
+	image: 임시
+	price: 12312
+	directDeal: false
+	dealRegion:  }
+2020-09-18 11:57:46 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2020-09-18 11:57:47 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2020-09-18 11:57:47 [http-nio-8080-exec-1] DEBUG c.e.i.repository.ItemRepository - { id: 0
+	name: aaa
+	explanation: a
+	available: true
+	seller: 1
+	registeredAt: null
+	image: 임시
+	price: 12312
+	directDeal: false
+	dealRegion:  }
+2020-09-18 11:57:47 [http-nio-8080-exec-1] DEBUG c.e.i.repository.ItemRepository - registered_at: 2020-09-18T11:57:47.129299300
+2020-09-18 11:58:33 [main] INFO  com.ecommerce.Application - Starting Application on DESKTOP-KVCQHCD with PID 15760 (C:\SSAFY\BlockChain_SubPJT2\s03p22a103\backend\target\classes started by multicampus in C:\SSAFY\BlockChain_SubPJT2\s03p22a103)
+2020-09-18 11:58:33 [main] DEBUG com.ecommerce.Application - Running with Spring Boot v2.1.4.RELEASE, Spring v5.1.6.RELEASE
+2020-09-18 11:58:33 [main] INFO  com.ecommerce.Application - No active profile set, falling back to default profiles: default
+2020-09-18 11:58:34 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$90e3937e] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-09-18 11:58:34 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2020-09-18 11:58:34 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2020-09-18 11:58:34 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.17]
+2020-09-18 11:58:35 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2020-09-18 11:58:35 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [public org.springframework.http.ResponseEntity<springfox.documentation.spring.web.json.Json> springfox.documentation.swagger2.web.Swagger2Controller.getDocumentation(java.lang.String,javax.servlet.http.HttpServletRequest)]
+2020-09-18 11:58:36 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2020-09-18 11:58:36 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Context refreshed
+2020-09-18 11:58:36 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2020-09-18 11:58:36 [main] INFO  s.d.s.w.s.ApiListingReferenceScanner - Scanning for api listing references
+2020-09-18 11:58:36 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: deleteUsingDELETE_1
+2020-09-18 11:58:36 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: listUsingGET_1
+2020-09-18 11:58:36 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: registerUsingPOST_1
+2020-09-18 11:58:36 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: deleteUsingDELETE_2
+2020-09-18 11:58:36 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: listUsingGET_2
+2020-09-18 11:58:36 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: registerUsingPOST_2
+2020-09-18 11:58:36 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: deleteUsingDELETE_3
+2020-09-18 11:58:36 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getUsingGET_1
+2020-09-18 11:58:36 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: listUsingGET_3
+2020-09-18 11:58:36 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: updateUsingPUT_1
+2020-09-18 11:58:36 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getUsingGET_2
+2020-09-18 11:58:36 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getByUserUsingGET_1
+2020-09-18 11:58:36 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: registerUsingPOST_3
+2020-09-18 11:58:36 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2020-09-18 11:58:36 [main] INFO  com.ecommerce.Application - Started Application in 3.782 seconds (JVM running for 4.175)
+2020-09-18 11:58:39 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-09-18 11:58:39 [http-nio-8080-exec-1] INFO  com.ecommerce.api.ItemController - { id: 0
+	name: aaa
+	explanation: a
+	available: true
+	seller: 1
+	registeredAt: null
+	image: 임시
+	price: 12312
+	directDeal: false
+	dealRegion:  }
+2020-09-18 11:58:39 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2020-09-18 11:58:39 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2020-09-18 11:58:39 [http-nio-8080-exec-1] DEBUG c.e.i.repository.ItemRepository - { id: 0
+	name: aaa
+	explanation: a
+	available: true
+	seller: 1
+	registeredAt: null
+	image: 임시
+	price: 12312
+	directDeal: false
+	dealRegion:  }
+2020-09-18 11:58:39 [http-nio-8080-exec-1] DEBUG c.e.i.repository.ItemRepository - registered_at: 2020-09-18T11:58:39.651663700
+2020-09-18 11:58:39 [http-nio-8080-exec-1] DEBUG c.e.i.repository.ItemRepository - INSERTED: 19
+2020-09-18 12:00:06 [http-nio-8080-exec-4] INFO  com.ecommerce.api.ItemController - { id: 0
+	name: aaa
+	explanation: aaa
+	available: true
+	seller: 1
+	registeredAt: null
+	image: 임시
+	price: 11123
+	directDeal: false
+	dealRegion:  }
+2020-09-18 12:00:06 [http-nio-8080-exec-4] DEBUG c.e.i.repository.ItemRepository - { id: 0
+	name: aaa
+	explanation: aaa
+	available: true
+	seller: 1
+	registeredAt: null
+	image: 임시
+	price: 11123
+	directDeal: false
+	dealRegion:  }
+2020-09-18 12:00:06 [http-nio-8080-exec-4] DEBUG c.e.i.repository.ItemRepository - registered_at: 2020-09-18T12:00:06.407485500
+2020-09-18 12:00:06 [http-nio-8080-exec-4] DEBUG c.e.i.repository.ItemRepository - INSERTED: 20
+2020-09-18 12:01:19 [http-nio-8080-exec-6] INFO  com.ecommerce.api.ItemController - { id: 0
+	name: asdfas
+	explanation: aaa
+	available: true
+	seller: 1
+	registeredAt: null
+	image: 임시
+	price: 1231231
+	directDeal: false
+	dealRegion:  }
+2020-09-18 12:01:19 [http-nio-8080-exec-6] DEBUG c.e.i.repository.ItemRepository - { id: 0
+	name: asdfas
+	explanation: aaa
+	available: true
+	seller: 1
+	registeredAt: null
+	image: 임시
+	price: 1231231
+	directDeal: false
+	dealRegion:  }
+2020-09-18 12:01:19 [http-nio-8080-exec-6] DEBUG c.e.i.repository.ItemRepository - registered_at: 2020-09-18T12:01:19.707137100
+2020-09-18 12:01:19 [http-nio-8080-exec-6] DEBUG c.e.i.repository.ItemRepository - INSERTED: 21
+2020-09-18 12:02:11 [http-nio-8080-exec-7] INFO  com.ecommerce.api.ItemController - { id: 0
+	name: aasdfas
+	explanation: aa
+	available: true
+	seller: 1
+	registeredAt: null
+	image: 임시
+	price: 12341234
+	directDeal: false
+	dealRegion:  }
+2020-09-18 12:02:11 [http-nio-8080-exec-7] DEBUG c.e.i.repository.ItemRepository - { id: 0
+	name: aasdfas
+	explanation: aa
+	available: true
+	seller: 1
+	registeredAt: null
+	image: 임시
+	price: 12341234
+	directDeal: false
+	dealRegion:  }
+2020-09-18 12:02:11 [http-nio-8080-exec-7] DEBUG c.e.i.repository.ItemRepository - registered_at: 2020-09-18T12:02:11.571790300
+2020-09-18 12:02:11 [http-nio-8080-exec-7] DEBUG c.e.i.repository.ItemRepository - INSERTED: 22
+2020-09-18 12:04:58 [http-nio-8080-exec-9] INFO  com.ecommerce.api.ItemController - { id: 0
+	name: aaa
+	explanation: 1
+	available: true
+	seller: 1
+	registeredAt: null
+	image: 임시
+	price: 123123
+	directDeal: false
+	dealRegion:  }
+2020-09-18 12:04:58 [http-nio-8080-exec-9] DEBUG c.e.i.repository.ItemRepository - { id: 0
+	name: aaa
+	explanation: 1
+	available: true
+	seller: 1
+	registeredAt: null
+	image: 임시
+	price: 123123
+	directDeal: false
+	dealRegion:  }
+2020-09-18 12:04:58 [http-nio-8080-exec-9] DEBUG c.e.i.repository.ItemRepository - registered_at: 2020-09-18T12:04:58.347560300
+2020-09-18 12:04:58 [http-nio-8080-exec-9] DEBUG c.e.i.repository.ItemRepository - INSERTED: 23
+2020-09-18 12:06:05 [http-nio-8080-exec-2] INFO  com.ecommerce.api.ItemController - { id: 0
+	name: aa
+	explanation: a
+	available: true
+	seller: 1
+	registeredAt: null
+	image: 임시
+	price: 123
+	directDeal: false
+	dealRegion:  }
+2020-09-18 12:06:05 [http-nio-8080-exec-2] DEBUG c.e.i.repository.ItemRepository - { id: 0
+	name: aa
+	explanation: a
+	available: true
+	seller: 1
+	registeredAt: null
+	image: 임시
+	price: 123
+	directDeal: false
+	dealRegion:  }
+2020-09-18 12:06:05 [http-nio-8080-exec-2] DEBUG c.e.i.repository.ItemRepository - registered_at: 2020-09-18T12:06:05.896182700
+2020-09-18 12:06:05 [http-nio-8080-exec-2] DEBUG c.e.i.repository.ItemRepository - INSERTED: 24
+2020-09-18 12:07:51 [http-nio-8080-exec-3] INFO  com.ecommerce.api.ItemController - { id: 0
+	name: asfasdf
+	explanation: aaa
+	available: true
+	seller: 1
+	registeredAt: null
+	image: 임시
+	price: 12341234
+	directDeal: false
+	dealRegion:  }
+2020-09-18 12:07:51 [http-nio-8080-exec-3] DEBUG c.e.i.repository.ItemRepository - { id: 0
+	name: asfasdf
+	explanation: aaa
+	available: true
+	seller: 1
+	registeredAt: null
+	image: 임시
+	price: 12341234
+	directDeal: false
+	dealRegion:  }
+2020-09-18 12:07:51 [http-nio-8080-exec-3] DEBUG c.e.i.repository.ItemRepository - registered_at: 2020-09-18T12:07:51.157425900
+2020-09-18 12:07:51 [http-nio-8080-exec-3] DEBUG c.e.i.repository.ItemRepository - INSERTED: 25
+2020-09-18 12:08:42 [http-nio-8080-exec-4] INFO  com.ecommerce.api.ItemController - { id: 0
+	name: asdfasdf
+	explanation: aa
+	available: true
+	seller: 1
+	registeredAt: null
+	image: 임시
+	price: 123123
+	directDeal: false
+	dealRegion:  }
+2020-09-18 12:08:42 [http-nio-8080-exec-4] DEBUG c.e.i.repository.ItemRepository - { id: 0
+	name: asdfasdf
+	explanation: aa
+	available: true
+	seller: 1
+	registeredAt: null
+	image: 임시
+	price: 123123
+	directDeal: false
+	dealRegion:  }
+2020-09-18 12:08:42 [http-nio-8080-exec-4] DEBUG c.e.i.repository.ItemRepository - registered_at: 2020-09-18T12:08:42.280242100
+2020-09-18 12:08:42 [http-nio-8080-exec-4] DEBUG c.e.i.repository.ItemRepository - INSERTED: 26
+2020-09-18 12:09:58 [http-nio-8080-exec-6] INFO  com.ecommerce.api.ItemController - { id: 0
+	name: asdfasdf
+	explanation: asdf
+	available: true
+	seller: 1
+	registeredAt: null
+	image: 임시
+	price: 12341234
+	directDeal: false
+	dealRegion:  }
+2020-09-18 12:09:58 [http-nio-8080-exec-6] DEBUG c.e.i.repository.ItemRepository - { id: 0
+	name: asdfasdf
+	explanation: asdf
+	available: true
+	seller: 1
+	registeredAt: null
+	image: 임시
+	price: 12341234
+	directDeal: false
+	dealRegion:  }
+2020-09-18 12:09:58 [http-nio-8080-exec-6] DEBUG c.e.i.repository.ItemRepository - registered_at: 2020-09-18T12:09:58.475918900
+2020-09-18 12:09:58 [http-nio-8080-exec-6] DEBUG c.e.i.repository.ItemRepository - INSERTED: 27
+2020-09-18 12:12:29 [http-nio-8080-exec-8] INFO  com.ecommerce.api.ItemController - { id: 0
+	name: asdadf
+	explanation: aa
+	available: true
+	seller: 1
+	registeredAt: null
+	image: 임시
+	price: 123414
+	directDeal: false
+	dealRegion:  }
+2020-09-18 12:12:29 [http-nio-8080-exec-8] DEBUG c.e.i.repository.ItemRepository - { id: 0
+	name: asdadf
+	explanation: aa
+	available: true
+	seller: 1
+	registeredAt: null
+	image: 임시
+	price: 123414
+	directDeal: false
+	dealRegion:  }
+2020-09-18 12:12:29 [http-nio-8080-exec-8] DEBUG c.e.i.repository.ItemRepository - registered_at: 2020-09-18T12:12:29.088250700
+2020-09-18 12:12:29 [http-nio-8080-exec-8] DEBUG c.e.i.repository.ItemRepository - INSERTED: 28
+2020-09-18 12:12:59 [http-nio-8080-exec-9] INFO  com.ecommerce.api.ItemController - { id: 0
+	name: asdfasdf
+	explanation: aaa
+	available: true
+	seller: 1
+	registeredAt: null
+	image: 임시
+	price: 123414
+	directDeal: false
+	dealRegion:  }
+2020-09-18 12:12:59 [http-nio-8080-exec-9] DEBUG c.e.i.repository.ItemRepository - { id: 0
+	name: asdfasdf
+	explanation: aaa
+	available: true
+	seller: 1
+	registeredAt: null
+	image: 임시
+	price: 123414
+	directDeal: false
+	dealRegion:  }
+2020-09-18 12:12:59 [http-nio-8080-exec-9] DEBUG c.e.i.repository.ItemRepository - registered_at: 2020-09-18T12:12:59.898915200
+2020-09-18 12:12:59 [http-nio-8080-exec-9] DEBUG c.e.i.repository.ItemRepository - INSERTED: 29
+2020-09-18 12:13:21 [http-nio-8080-exec-10] INFO  com.ecommerce.api.ItemController - { id: 0
+	name: asdfaf
+	explanation: aa
+	available: true
+	seller: 1
+	registeredAt: null
+	image: 임시
+	price: 12313
+	directDeal: false
+	dealRegion:  }
+2020-09-18 12:13:21 [http-nio-8080-exec-10] DEBUG c.e.i.repository.ItemRepository - { id: 0
+	name: asdfaf
+	explanation: aa
+	available: true
+	seller: 1
+	registeredAt: null
+	image: 임시
+	price: 12313
+	directDeal: false
+	dealRegion:  }
+2020-09-18 12:13:21 [http-nio-8080-exec-10] DEBUG c.e.i.repository.ItemRepository - registered_at: 2020-09-18T12:13:21.840121400
+2020-09-18 12:13:21 [http-nio-8080-exec-10] DEBUG c.e.i.repository.ItemRepository - INSERTED: 30
+2020-09-18 12:13:51 [http-nio-8080-exec-2] INFO  com.ecommerce.api.ItemController - { id: 0
+	name: 11qsdfa
+	explanation: asdfas
+	available: true
+	seller: 1
+	registeredAt: null
+	image: 임시
+	price: 12313
+	directDeal: false
+	dealRegion:  }
+2020-09-18 12:13:51 [http-nio-8080-exec-2] DEBUG c.e.i.repository.ItemRepository - { id: 0
+	name: 11qsdfa
+	explanation: asdfas
+	available: true
+	seller: 1
+	registeredAt: null
+	image: 임시
+	price: 12313
+	directDeal: false
+	dealRegion:  }
+2020-09-18 12:13:51 [http-nio-8080-exec-2] DEBUG c.e.i.repository.ItemRepository - registered_at: 2020-09-18T12:13:51.951584700
+2020-09-18 12:13:52 [http-nio-8080-exec-2] DEBUG c.e.i.repository.ItemRepository - INSERTED: 31
+2020-09-18 12:14:19 [http-nio-8080-exec-1] INFO  com.ecommerce.api.ItemController - { id: 0
+	name: asdfas
+	explanation: aaa
+	available: true
+	seller: 1
+	registeredAt: null
+	image: 임시
+	price: 1234124
+	directDeal: false
+	dealRegion:  }
+2020-09-18 12:14:19 [http-nio-8080-exec-1] DEBUG c.e.i.repository.ItemRepository - { id: 0
+	name: asdfas
+	explanation: aaa
+	available: true
+	seller: 1
+	registeredAt: null
+	image: 임시
+	price: 1234124
+	directDeal: false
+	dealRegion:  }
+2020-09-18 12:14:19 [http-nio-8080-exec-1] DEBUG c.e.i.repository.ItemRepository - registered_at: 2020-09-18T12:14:19.843062
+2020-09-18 12:14:19 [http-nio-8080-exec-1] DEBUG c.e.i.repository.ItemRepository - INSERTED: 32
