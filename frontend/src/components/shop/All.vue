@@ -30,7 +30,7 @@
         <v-container>
             <v-layout row wrap justify-center>
                 <v-flex xs3 sm3 md3 lg3 xl3>
-                    <v-select :items="types" label="카테고리" solo v-model="typeBox" style="margin-left:5px"></v-select>
+                    <v-select :items="types" label="카테고리" item-text="name" item-value="value" solo style="margin-left:5px" @change="changeSearchBy"></v-select>
                 </v-flex>
                 <v-flex xs8 sm8 md8 lg8 xl8>
                     <v-text-field
@@ -40,7 +40,7 @@
                         color="black"
                         placeholder="검색어를 입력하세요"
                         v-model="searchKeyword"
-                        @keyup.enter="searchRoute"
+                        @keyup.enter="search"
                         style="margin-left:5px"
                         solo
                         clearable
@@ -75,7 +75,7 @@
 </template>
 
 <script>
-import {findAll, findByCategory} from "@/api/item.js";
+import {findAll, findByCategory, findByName} from "@/api/item.js";
 import HShopCategories from "./HShopCategories.vue";
 import ItemCard from "./ItemCard.vue";
 import {getPrice} from '@/utils/itemInventory.js';
@@ -97,38 +97,41 @@ export default {
             totalVisible: 10,
             searchKeyword: "",
             searchBy: 0,
+            types: [
+                {name: '카테고리', value: 1},
+                {name: '제목', value: 2},
+                {name: '판매자', value: 3},
+                {name: '임시', value: 4},
+            ],
         };
     },
     methods: {
+        changeSearchBy(searchBy) {
+            console.log(searchBy);
+            this.searchBy = searchBy;
+        },
         setPage(page) {
             this.page = page;
             console.log(this.page);
-            if(this.searchBy === 0) this.getAllList();
-            else if(this.searchBy === 1)this.getByCategory(this.searchKeyword);
+            this.search();
         },
         setSearchBy(searchBy) {
             this.searchBy = searchBy;
             console.log(this.searchBy);
-            if(this.searchBy === 0) this.getAllList();
-            else if(this.searchBy === 1)this.getByCategory(this.searchKeyword);
+            this.page = 1;
+            this.search();
         },
         setKeyword(searchKeyword) {
             this.searchKeyword = searchKeyword;
             console.log(this.searchKeyword);
         },
+        search() {
+            if (this.searchBy === 0) this.getAllList();
+            else if (this.searchBy === 1) this.getByCategory(this.searchKeyword);
+            else if (this.searchBy === 2) this.getByName(this.searchKeyword);
+        },
         onClickItem(itemId) {
             this.$router.push("item/detail/" + itemId);
-        },
-        searchRoute() {
-            const vm = this;
-            findByCategory(vm.searchKeyword,
-                res => {
-                    vm.items = res.data
-                },
-                err => {
-                    alert(err)
-                })
-
         },
         getAllList() {
             const vm = this;
@@ -157,6 +160,30 @@ export default {
         getByCategory(category) {
             const vm = this;
             findByCategory(category, this.page, function (response) {
+                    if (response.data.length > 0) {
+                        vm.items = response.data;
+                        vm.items.forEach(i => {
+                            // [스마트 컨트랙트] 가격 조회
+                            getPrice(
+                                i.id,
+                                function (price) {
+                                    vm.$set(i, "price", price);
+                                },
+                                function (err) {
+                                    console.error('가격 조회 실패:', err);
+                                    // alert("상품 가격 조회를 실패했습니다.");
+                                }
+                            )
+                        })
+                    }
+                },
+                err => {
+                    alert(err)
+                });
+        },
+        getByName(name) {
+            const vm = this;
+            findByName(name, this.page, function (response) {
                     if (response.data.length > 0) {
                         vm.items = response.data;
                         vm.items.forEach(i => {

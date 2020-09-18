@@ -23,6 +23,13 @@ function findItemsByOwner(userId, success, fail) {
         .catch(fail);
 }
 
+function findByName(name, page, success, fail) {
+    instance
+        .get("/api/items/name/" + name + "/" + page)
+        .then(success)
+        .catch(fail);
+}
+
 function findById(itemId, success, fail) {
     instance
         .get("/api/items/" + itemId)
@@ -120,4 +127,5 @@ export {
     remove,
     confirm,
     findMySaleItems,
+    findByName,
 };

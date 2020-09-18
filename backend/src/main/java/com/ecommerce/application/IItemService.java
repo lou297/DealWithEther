@@ -12,7 +12,7 @@ public interface IItemService {
 
 	List<Item> getByUser(int uid);
 
-	List<Item> getByName(String title);
+	List<Item> getByName(String title, int page);
 
 	List<Item> getByCategory(String Category, int page);
 
