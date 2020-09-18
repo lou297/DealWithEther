@@ -49,8 +49,8 @@ public class ItemService implements IItemService {
 	}
 
 	@Override
-	public List<Item> getByCategory(String category) {
-		return this.itemRepository.getByCategory(category);
+	public List<Item> getByCategory(String category, int page) {
+		return this.itemRepository.getByCategory(category, page);
 	}
 
 	/**

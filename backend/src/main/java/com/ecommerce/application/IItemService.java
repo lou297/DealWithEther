@@ -14,7 +14,7 @@ public interface IItemService {
 
 	List<Item> getByName(String title);
 
-	List<Item> getByCategory(String Category);
+	List<Item> getByCategory(String Category, int page);
 
 	Item get(long id);
 

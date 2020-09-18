@@ -14,7 +14,7 @@ public interface IItemRepository {
 
 	List<Item> getByName(final String name);
 
-	List<Item> getByCategory(final String category);
+	List<Item> getByCategory(final String category, final int page);
 
 	Item get(long id);
 
