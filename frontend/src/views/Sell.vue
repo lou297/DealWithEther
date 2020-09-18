@@ -161,7 +161,6 @@ export default {
                 this.id,
                 function(success) {
                     alert("이미지 등록 성공!");
-
                 },
                 function (error) {
                     console.log(error);

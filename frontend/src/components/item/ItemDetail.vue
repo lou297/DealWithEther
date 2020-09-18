@@ -1,30 +1,27 @@
 <template>
     <div>
-        <h-breadcrumb title="상품 상세 보기" description="등록된 상품의 상세 내역을 볼 수 있습니다."></h-breadcrumb>
+        <h-breadcrumb title="상품 상세 보기" ></h-breadcrumb>
            <v-container fluid>
-                <v-row justify="space-around" style="margin-top:50px">
+                <v-row justify="space-around" style="margin-top:30px">
                     <v-col cols="5" style="margin-right:30px">
-                    <v-img
-                        :src="item.image"
-                        aspect-ratio="1"
-                        max-width="386"
-                        max-height="386"
-                    ></v-img>
+                        <v-img :src="item.image" aspect-ratio="1" max-width="386" max-height="386"></v-img>
                     </v-col>
                     <v-col cols="6">
                         <v-row>
-                            <v-col cols="6" style="float:left; text-align:left"><h4>{{item.name}}</h4></v-col>
-                            <v-col cols="3" style="float:left">{{item.price}}원</v-col>
-                            <v-col cols="3" style="padding: 5px;"><v-btn style="float:left;" >네고요청</v-btn></v-col>
+                            <v-col style="float:left; text-align:left"><h5>{{item.explanation}}</h5></v-col>
+                        </v-row>
+                        <v-row>
+                            <v-col style="float:right; text-align:left;"><h4 style="display:inline; font-weight: bold;">{{item.price}}</h4> 원</v-col>
                         </v-row>
                     <v-divider style="margin-top:0px;"/>
                     <v-row>
                         <v-col cols="3" style="text-align:left">판매자</v-col>
-                        <v-col cols="8" style="text-align:left">{{ item.seller.name }}({{ item.seller.email }})</v-col>
-                        <v-col cols="3" style="text-align:left">매너점수</v-col>
-                        <v-col cols="8" style="text-align:left">3.7</v-col>
+                        <v-col cols="8" style="text-align:left; padding-bottom:0px; height:48px;">
+                            <p style="float:left;">{{ item.seller.name }} (</p>
+                            <v-img style="text-align:left; width:15px; float:left; margin:3px 4px 0 4px;" :src="star"> </v-img> 3.7 )
+                        </v-col>
                         <v-col cols="3" style="text-align:left">상품 등록일</v-col>
-                        <v-col cols="8" style="text-align:left">{{ item.registeredAt }}</v-col>
+                        <v-col cols="8" style="text-align:left">{{ time }}</v-col>
                         <v-col cols="3" style="text-align:left">거래방법</v-col>
 
                         <v-col v-if="item.directDeal == true" cols="8" style="text-align:left">직거래</v-col>
@@ -33,75 +30,26 @@
                         <v-col v-else cols="8" style="text-align:left">택배</v-col>
                         <v-col cols="3" style="text-align:left">상태</v-col>
                         <v-col cols="8" style="text-align:left">{{ item.available ? "판매중" : "판매 종료" }}</v-col>
-
-                       
-
+                        
                         <v-row>
-                        <v-col cols="2.2"><v-btn large style="width:100%">찜</v-btn></v-col>
+                        <v-col cols="2.2"><v-btn large style="width:100%" @click="BookMark">찜</v-btn></v-col>
                         <v-col cols="2.2"><v-btn large color="primary" style="width:100%">문의톡</v-btn></v-col>
-                        <v-col cols="2.2"><v-btn large color="error" style="width:100%">네고요청</v-btn></v-col>
+                        <v-col cols="2.2"><v-btn large color="warning" style="width:100%">네고요청</v-btn></v-col>
                         <v-col cols="2.2"><v-btn large color="error" style="width:100%">바로구매</v-btn></v-col>
                         </v-row>
                     </v-row>
                     </v-col>
                 </v-row>
         <v-divider />
-      <h2 align="left">상품정보</h2>
-      <v-divider />
-      <p align="left">
-        {{item.explanation}}
-      </p>
     </v-container>
 
-
-
-
-        <div class="container">
-            <div class="row">
-                <div class="col-md-8 mx-auto">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="form-group">
-                                <h3>
-                                    <a href="">{{ item.category | symbolToFullName }}</a> >
-                                    {{ item.name }}
-                                </h3>
-                            </div>
-                            <img class="center" :src="getImg(item.image)" style="max-height: 500px;"/>
-                            <div class="form-group">
-                                <h4 class="alert alert-primary">{{ item.price }} CASH</h4>
-                            </div>
-                            <div class="form-group">
-                                <label id="user" class="text-secondary">판매자</label>
-                                <p>
-                                    {{ item.seller.name }}({{ item.seller.email }})
-                                </p>
-                            </div>
-                            <div class="form-group">
-                                <label class="text-secondary">상품 등록일</label>
-                                <p>{{ item.registeredAt }}</p>
-                            </div>
-                            <div class="form-group">
-                                <label id="explanation" class="text-secondary">상품 설명</label>
-                                <p v-if="item.explanation.length > 0">{{ item.explanation }}</p>
-                                <p v-else>-</p>
-                            </div>
-                            <div class="form-group">
-                                <label id="state" class="text-secondary">상태</label><br/>
-                                <p>{{ item.available ? "판매중" : "판매 종료" }}</p>
-                            </div>
-                            <div class="row" v-if="userId !== item.seller.id">
-                                <div class="col-md-12 text-right">
-                                    <router-link :to="{name: 'item.purchase',params: { id: item.id, seller: item.seller, image: item.image, name: item.name, price: item.price }, }" class="btn btn-lg btn-primary">
-                                        구매하기
-                                    </router-link>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <!-- <v-col v-for="n in item.image.length" :key="n" class="d-flex child-flex" cols="4">
+        <v-hover v-slot:default="{ hover }">
+            <v-card flat tile class="d-flex" :elevation="hover ? 16 : 2">
+                <v-img :src="item.image[n-1]" aspect-ratio="1" class="grey lighten-2" ></v-img>
+            </v-card>
+        </v-hover>
+    </v-col> -->
     </div>
 </template>
 
@@ -116,6 +64,7 @@ import {getLocalImg} from '@/utils/imgLoader.js';
 import {getPrice} from '@/utils/itemInventory.js';
 import {findById} from '@/api/item.js';
 import {CATEGORY} from '@/utils/category.js';
+import {bookMarkSave} from "@/api/bookmark.js";
 
 export default {
     name: 'ItemDetail',
@@ -135,11 +84,17 @@ export default {
                 },
                 directDeal: false,
                 dealRegion: "",
-                image: null,
+                image: [],
                 price: null,
                 registeredAt: null,
             },
+            bookMarkList: {
+                    userId: '',
+                    itemId: ''
+            },
             userId: this.$store.state.user.id,
+            star: require('../../../public/images/star.png'),
+            time: ""
         };
     },
     methods: {
@@ -179,6 +134,20 @@ export default {
                 }
             }
             sessionStorage.setItem("bookmark", JSON.stringify(bookMark))
+        },
+        BookMark(){
+            this.bookMarkList.userId = this.userId;
+            this.bookMarkList.itemId = this.item.id;
+
+            bookMarkSave(
+                this.bookMarkList,
+                function (success) {
+                    console.log('찜 성공');
+                },
+                function (fail) {
+                    console.dir(fail);
+                },
+            );
         }
     },
     filters: {
@@ -208,7 +177,13 @@ export default {
                 vm.item.dealRegion = result.dealRegion;
                 vm.item.registeredAt = result.registeredAt;
                 console.log(vm.item);
-                
+
+                var date = "";
+                date = vm.item.registeredAt.split("T");
+                vm.time += date[0];
+                vm.time += " ";
+                vm.time += date[1]; 
+       
                 // 판매자 정보
                 findUserById(result.seller, function (res) {
                     const result = res.data;
@@ -217,6 +192,7 @@ export default {
                     vm.saveBookMark()
                 });
             },
+            
             function (error) {
                 console.error(error);
                 alert('DB에서 상품 상세 정보 조회를 가져올 수 없습니다.');
