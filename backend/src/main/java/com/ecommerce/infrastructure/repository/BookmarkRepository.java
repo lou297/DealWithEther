@@ -94,4 +94,17 @@ public class BookmarkRepository implements IBookmarkRepository {
 
 	}
 
+	@Override
+	public Bookmark get(final long userId, final long itemId) {
+		StringBuilder sbSql = new StringBuilder("SELECT * FROM bookmarks WHERE user_id=? and item_id=?");
+		try {
+			return this.jdbcTemplate.queryForObject(sbSql.toString(), new Object[] { userId, itemId },
+					(rs, rowNum) -> BookmarkFactory.create(rs));
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		} catch (Exception e) {
+			throw new RepositoryException(e, e.getMessage());
+		}
+	}
+
 }

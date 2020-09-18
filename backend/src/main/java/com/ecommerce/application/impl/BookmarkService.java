@@ -49,4 +49,9 @@ public class BookmarkService implements IBookmarkService {
 	public int delete(final long id) {
 		return this.bookmarkRepository.delete(id);
 	}
+
+	@Override
+	public Bookmark get(long userId, long itemId) {
+		return this.bookmarkRepository.get(userId, itemId);
+	}
 }
