@@ -45,6 +45,17 @@ public class BookmarkController {
 		return list;
 	}
 
+	@ApiOperation(value = "Fetch Bookmarks with user id")
+	@RequestMapping(value = "/bookmarks/{userId}", method = RequestMethod.GET)
+	public List<Bookmark> list(@PathVariable long userId) {
+		List<Bookmark> list = bookmarkService.list(userId);
+
+		if (list == null || list.isEmpty())
+			throw new EmptyListException("NO DATA");
+
+		return list;
+	}
+
 	@ApiOperation(value = "Delete Bookmarks with id")
 	@RequestMapping(value = "/bookmarks/{id}", method = RequestMethod.DELETE)
 	public int delete(@PathVariable int id) {

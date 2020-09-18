@@ -11,6 +11,8 @@ import java.util.List;
 public interface IBookmarkService {
 	List<Bookmark> list();
 
+	List<Bookmark> list(long userId);
+
 	@Transactional
 	long register(Bookmark bookmark);
 
