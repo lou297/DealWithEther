@@ -12,7 +12,11 @@ import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -39,7 +43,8 @@ public class ItemController {
 	public Item register(@RequestBody Item item) {
 		System.out.println(item.toString());
 		logger.info(item.toString());
-		return itemService.register(item);
+		// return itemService.register(item);
+		return null;
 	}
 
 	@ApiOperation(value = "Fetch all items")
@@ -77,7 +82,7 @@ public class ItemController {
 
 	@ApiOperation(value = "Fetch an item with name")
 	@RequestMapping(value = "/items/name/{name}", method = RequestMethod.GET)
-	public List<Item> getByUser(@PathVariable String name) {
+	public List<Item> getByName(@PathVariable String name) {
 		List<Item> items = itemService.getByName(name);
 		if (items == null || items.size() == 0) {
 			logger.error("NOT FOUND LIST OF NAME: ", name);
@@ -126,12 +131,34 @@ public class ItemController {
 		return itemService.update(item);
 	}
 
-	@RequestMapping(value = "/items/images", method = RequestMethod.POST)
-	public int uploadFile(@RequestParam("file") MultipartFile[] file) {
+	@RequestMapping(value = "/items/images/{id}", method = RequestMethod.POST)
+	public void uploadFile(@PathVariable long id, @RequestParam("file") MultipartFile[] file)
+			throws IllegalStateException, IOException {
 		System.out.println("123");
 		for (int i = 0; i < file.length; i++)
 			System.out.println("파일이름: " + file[i].getOriginalFilename());
-		logger.info(file[0].getOriginalFilename());
-		return 1;
+
+		String baseDir = this.getClass().getResource("/").getPath() + "static/upload/";
+		baseDir = baseDir.substring(1);
+
+		// 리눅스를 위한 세팅
+		if (baseDir.substring(0, 1).equals("C")) {
+			baseDir = "C:/Users/multicampus/images/";
+		} else {
+			baseDir = "/home/ubuntu/dist/server/image/";
+		}
+		File folder = new File(baseDir);
+
+		if (!folder.exists())
+			folder.mkdirs();
+
+		System.out.println(baseDir);
+
+		int count = 1;
+		for (MultipartFile temp : file) {
+			String thisFile = Long.toString(id) + "_" + Integer.toString(count) + ".jpg";
+			temp.transferTo(new File(baseDir + thisFile));
+			count++;
+		}
 	}
 }
