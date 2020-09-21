@@ -116,7 +116,7 @@ export default {
     },
     computed: {
         /**
-         * public/images에 있는 로컬 이미지를 첨부해서 사용합니다.
+         * public/images에 있는 로컬 이미지를 첨부해서 사용합니다. 
          * DB에는 이미지 파일 이름만 저장되고
          * 화면에 보여줄 땐 'public/images/{파일이름}' 경로를 사용합니다.
          */
