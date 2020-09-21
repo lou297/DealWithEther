@@ -55,7 +55,6 @@ public class ItemController {
 	@ApiOperation(value = "Register an item")
 	@RequestMapping(value = "/items", method = RequestMethod.POST)
 	public Item register(@RequestBody Item item) {
-		item.setImage("임시");
 		System.out.println(item.toString());
 		logger.info(item.toString());
 		return itemService.register(item);
@@ -76,6 +75,7 @@ public class ItemController {
 	@ApiOperation(value = "Fetch an item with id")
 	@RequestMapping(value = "/items/{id}", method = RequestMethod.GET)
 	public Item get(@PathVariable int id) {
+		itemService.viewCountUpdate(id);
 		Item item = itemService.get(id);
 		if (item == null) {
 			logger.error("NOT FOUND ID: ", id);
@@ -177,6 +177,7 @@ public class ItemController {
 			temp.transferTo(new File(baseDir + thisFile));
 			count++;
 		}
+		itemService.imageUpdate(id, file.length);
 	}
 
 	@ApiOperation(value = "Select page list") // page에 대한거 db에서 쿼리로 넘기기
@@ -185,7 +186,8 @@ public class ItemController {
 
 		System.out.println(page);
 		List<Item> list = itemService.pageList(page);
-		for(Item temp : list) System.out.println(temp);
+		for (Item temp : list)
+			System.out.println(temp);
 		return list;
 	}
 

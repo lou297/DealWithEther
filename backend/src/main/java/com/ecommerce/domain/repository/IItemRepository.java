@@ -22,7 +22,13 @@ public interface IItemRepository {
 	long create(Item item);
 
 	@Transactional
+	int viewCountUpdate(long id);
+
+	@Transactional
 	int update(Item item);
+
+	@Transactional
+	int imageUpdate(final long id, final int image);
 
 	@Transactional
 	int delete(long id);

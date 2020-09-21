@@ -13,10 +13,11 @@ public class Item {
 	private Boolean available = true;
 	private long seller;
 	private LocalDateTime registeredAt;
-	private String image;
+	private int image;
 	private int price;
 	private boolean directDeal;
 	private String dealRegion;
+	private int viewCount;
 
 	@Override
 	public String toString() {

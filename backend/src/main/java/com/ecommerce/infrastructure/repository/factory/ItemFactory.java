@@ -17,12 +17,13 @@ public class ItemFactory {
 		item.setAvailable(rs.getBoolean("available"));
 		item.setSeller(rs.getLong("seller"));
 		item.setRegisteredAt(rs.getTimestamp("registered_at").toLocalDateTime());
-		item.setImage(rs.getString("image"));
+		item.setImage(rs.getInt("image"));
 		item.setPrice(rs.getInt("price"));
 		item.setDirectDeal(rs.getBoolean("direct_deal"));
 		if (item.isDirectDeal()) {
 			item.setDealRegion(rs.getString("deal_region"));
 		}
+		item.setViewCount(rs.getInt("view_count"));
 
 		return item;
 	}

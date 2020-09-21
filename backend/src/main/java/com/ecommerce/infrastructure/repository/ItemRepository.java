@@ -43,12 +43,13 @@ public class ItemRepository implements IItemRepository {
 			throw new RepositoryException(e, e.getMessage());
 		}
 	}
-	
+
 	@Override
 	public List<Item> pageList(final int page) {
-		StringBuilder sbSql = new StringBuilder("SELECT * FROM items WHERE available=1 limit 5 offset ?"); // where available
+		StringBuilder sbSql = new StringBuilder("SELECT * FROM items WHERE available=1 limit 5 offset ?"); // where
+																											// available
 		try {
-			return this.jdbcTemplate.query(sbSql.toString(), new Object[] { (page-1)*5 },
+			return this.jdbcTemplate.query(sbSql.toString(), new Object[] { (page - 1) * 5 },
 					(rs, rowNum) -> ItemFactory.create(rs));
 		} catch (Exception e) {
 			throw new RepositoryException(e, e.getMessage());
@@ -71,7 +72,7 @@ public class ItemRepository implements IItemRepository {
 		StringBuilder sbSql = new StringBuilder("SELECT * FROM items WHERE name like ? limit 5 offset ?");
 		String tname = "%" + name + "%";
 		try {
-			return this.jdbcTemplate.query(sbSql.toString(), new Object[] { tname, (page-1)*5 },
+			return this.jdbcTemplate.query(sbSql.toString(), new Object[] { tname, (page - 1) * 5 },
 					(rs, rowNum) -> ItemFactory.create(rs));
 		} catch (Exception e) {
 			throw new RepositoryException(e, e.getMessage());
@@ -82,7 +83,7 @@ public class ItemRepository implements IItemRepository {
 	public List<Item> getByCategory(final String category, final int page) {
 		StringBuilder sbSql = new StringBuilder("SELECT * FROM items WHERE category=? limit 5 offset ?");
 		try {
-			return this.jdbcTemplate.query(sbSql.toString(), new Object[] { category, (page-1)*5 },
+			return this.jdbcTemplate.query(sbSql.toString(), new Object[] { category, (page - 1) * 5 },
 					(rs, rowNum) -> ItemFactory.create(rs));
 		} catch (Exception e) {
 			throw new RepositoryException(e, e.getMessage());
@@ -121,6 +122,7 @@ public class ItemRepository implements IItemRepository {
 			if (item.isDirectDeal()) {
 				paramMap.put("deal_region", item.getDealRegion());
 			}
+			paramMap.put("view_count", 0);
 
 			log.debug("registered_at: " + paramMap.get("registered_at"));
 
@@ -161,6 +163,19 @@ public class ItemRepository implements IItemRepository {
 	}
 
 	@Override
+	public int imageUpdate(final long id, final int image) {
+		StringBuilder sbSql = new StringBuilder("UPDATE items ");
+		sbSql.append("SET image=? ");
+
+		sbSql.append("where id=?");
+		try {
+			return this.jdbcTemplate.update(sbSql.toString(), new Object[] { image, id });
+		} catch (Exception e) {
+			throw new RepositoryException(e, e.getMessage());
+		}
+	}
+
+	@Override
 	public int delete(final long id) {
 		StringBuilder sbSql = new StringBuilder("DELETE FROM items ");
 		sbSql.append("where id=?");
@@ -171,6 +186,19 @@ public class ItemRepository implements IItemRepository {
 			throw new RepositoryException(e, e.getMessage());
 		}
 
+	}
+
+	@Override
+	public int viewCountUpdate(long id) {
+		StringBuilder sbSql = new StringBuilder("UPDATE items ");
+		sbSql.append("SET view_count = view_count + 1 ");
+
+		sbSql.append("where id=?");
+		try {
+			return this.jdbcTemplate.update(sbSql.toString(), new Object[] { id });
+		} catch (Exception e) {
+			throw new RepositoryException(e, e.getMessage());
+		}
 	}
 
 }
