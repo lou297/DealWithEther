@@ -6,8 +6,16 @@ function bookMarkSave(body, success, fail) {
         .post("/api/bookmarks", JSON.stringify(body))
         .then(success)
         .catch(fail);
-  }
+}
+
+function loadBookMark(userId, success, fail) {
+    instance
+        .get("/api/bookmarks/" + userId)
+        .then(success)
+        .catch(fail);
+}
 
 export {
-    bookMarkSave
+    bookMarkSave,
+    loadBookMark
 };
