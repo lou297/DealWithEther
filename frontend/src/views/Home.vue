@@ -31,7 +31,7 @@
                                 text
                                 rounded
                                 class="my-2"
-                                style="margin-left: 30px;"
+                                style="margin-left: 20px; margin-right: 20px;"
                             >
                                 {{ link }}
                             </v-btn>
@@ -112,14 +112,14 @@ export default {
             page: 1,
             totalVisible: 10,
             links: [
-                '여성의류',
-                '남성의류',
-                '생활/문구',
+                '패션/잡화',
+                '뷰티/미용',
                 '디지털/가전',
                 '유아물품',
-                '패션잡화',
                 '도서/티켓',
                 '스포츠/레저',
+                '생활/문구/가구',
+                '기타',
             ],
         }
     },
