@@ -111,12 +111,12 @@ export default {
             isCreating: false,
             defaultImage: require("../../public/images/no_image.png"),
             isImageUpload: false,
-            items: ["여성의류", "남성의류", "생활/문구", "디지털/가전", "패션잡화"],
+            items: ["패션/잡화", "뷰티/미용", "디지털/가전", "유아물품", "도서/티켓", "스포츠/레저", "생활/문구/가구", "기타"],
         };
     },
     computed: {
         /**
-         * public/images에 있는 로컬 이미지를 첨부해서 사용합니다.
+         * public/images에 있는 로컬 이미지를 첨부해서 사용합니다. 
          * DB에는 이미지 파일 이름만 저장되고
          * 화면에 보여줄 땐 'public/images/{파일이름}' 경로를 사용합니다.
          */
