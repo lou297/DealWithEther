@@ -96,7 +96,7 @@ public class ItemService implements IItemService {
 			item.setExplanation(itemStored.getExplanation());
 		if (item.getAvailable() == null || "".equals(item.getAvailable()))
 			item.setAvailable(itemStored.getAvailable());
-		if (item.getImage() == null || "".equals(item.getImage()))
+		if (item.getImage() == 0 || "".equals(item.getImage()))
 			item.setImage(itemStored.getImage());
 		if (item.getPrice() == 0)
 			item.setPrice(itemStored.getPrice());
@@ -106,6 +106,11 @@ public class ItemService implements IItemService {
 			throw new ApplicationException("상품정보수정 처리가 반영되지 않았습니다.");
 
 		return this.itemRepository.get(item.getId());
+	}
+
+	@Override
+	public int imageUpdate(long id, int image) {
+		return this.itemRepository.imageUpdate(id, image);
 	}
 
 }

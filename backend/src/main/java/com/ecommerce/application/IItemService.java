@@ -25,5 +25,8 @@ public interface IItemService {
 	Item update(Item item);
 
 	@Transactional
+	int imageUpdate(long id, int image);
+
+	@Transactional
 	int delete(long id);
 }

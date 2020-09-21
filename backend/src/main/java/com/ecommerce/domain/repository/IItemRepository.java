@@ -25,5 +25,8 @@ public interface IItemRepository {
 	int update(Item item);
 
 	@Transactional
+	int imageUpdate(final long id, final int image);
+
+	@Transactional
 	int delete(long id);
 }
