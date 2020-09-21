@@ -22,6 +22,9 @@ public interface IItemRepository {
 	long create(Item item);
 
 	@Transactional
+	int viewCountUpdate(long id);
+
+	@Transactional
 	int update(Item item);
 
 	@Transactional

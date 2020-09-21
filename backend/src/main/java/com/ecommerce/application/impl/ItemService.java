@@ -76,6 +76,11 @@ public class ItemService implements IItemService {
 		return this.itemRepository.delete(id);
 	}
 
+	@Override
+	public int viewCountUpdate(final long id) {
+		return this.itemRepository.viewCountUpdate(id);
+	}
+
 	/**
 	 * 상품 정보 업데이트
 	 * 

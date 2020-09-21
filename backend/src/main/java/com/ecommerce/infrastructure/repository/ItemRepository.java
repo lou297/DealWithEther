@@ -122,6 +122,7 @@ public class ItemRepository implements IItemRepository {
 			if (item.isDirectDeal()) {
 				paramMap.put("deal_region", item.getDealRegion());
 			}
+			paramMap.put("view_count", 0);
 
 			log.debug("registered_at: " + paramMap.get("registered_at"));
 
@@ -185,6 +186,19 @@ public class ItemRepository implements IItemRepository {
 			throw new RepositoryException(e, e.getMessage());
 		}
 
+	}
+
+	@Override
+	public int viewCountUpdate(long id) {
+		StringBuilder sbSql = new StringBuilder("UPDATE items ");
+		sbSql.append("SET view_count = view_count + 1 ");
+
+		sbSql.append("where id=?");
+		try {
+			return this.jdbcTemplate.update(sbSql.toString(), new Object[] { id });
+		} catch (Exception e) {
+			throw new RepositoryException(e, e.getMessage());
+		}
 	}
 
 }

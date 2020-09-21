@@ -17,6 +17,7 @@ public class Item {
 	private int price;
 	private boolean directDeal;
 	private String dealRegion;
+	private int viewCount;
 
 	@Override
 	public String toString() {

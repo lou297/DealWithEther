@@ -23,6 +23,7 @@ public class ItemFactory {
 		if (item.isDirectDeal()) {
 			item.setDealRegion(rs.getString("deal_region"));
 		}
+		item.setViewCount(rs.getInt("view_count"));
 
 		return item;
 	}

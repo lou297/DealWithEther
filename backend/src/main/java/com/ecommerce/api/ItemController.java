@@ -75,6 +75,7 @@ public class ItemController {
 	@ApiOperation(value = "Fetch an item with id")
 	@RequestMapping(value = "/items/{id}", method = RequestMethod.GET)
 	public Item get(@PathVariable int id) {
+		itemService.viewCountUpdate(id);
 		Item item = itemService.get(id);
 		if (item == null) {
 			logger.error("NOT FOUND ID: ", id);
