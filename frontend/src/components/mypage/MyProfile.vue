@@ -1,37 +1,36 @@
 <template>
     <div>
-        <h-breadcrumb
-            title="프로필 페이지"
-            description="사용자 정보를 보여줍니다."
-            ></h-breadcrumb>
-        <v-container id="container">
-            <my-page-nav></my-page-nav>
-            <v-row style="justify-content:center;" id="profile-info-container">
-                <v-col cols="2" style="align-self: center;">
-                    <v-img
-                        :src="`https://picsum.photos/500/300?random`"
-                        :lazy-src="`https://picsum.photos/10/6?random`"
-                        aspect-ratio="1"
-                        class="grey lighten-2">
-                    </v-img>
-                </v-col>
-                <v-col cols="4" id="profile-info">
-                    <p class="font-weight-bold">{{userName}}</p>
+        <my-page-nav></my-page-nav>
+
+        <v-row>
+            <v-col cols="3" offset="3">
+                <v-img
+                    :src="`https://picsum.photos/500/300?random`"
+                    :lazy-src="`https://picsum.photos/10/6?random`"
+                    aspect-ratio="1"
+                    class="grey lighten-2">
+                </v-img>
+                <p class="font-weight-bold">{{userName}}</p>
+            </v-col>
+            <v-col cols="3" id="profile-info">
+                <div>
                     <p>등록 건수 : <span>0</span></p>
                     <p>판매 건수 : <span>0</span></p>
                     <p>구매 건수 : <span>0</span></p>
-                </v-col>
-            </v-row>
-            <v-row>
+                </div>
+            </v-col>
+        </v-row>
+
+        <v-row id="menu-bar">
+            <v-col cols="8" offset="2">
                 <v-tabs
-                    fixed-tabs
-                    background-color="#82B1FF"
-                    color="indigo darken-4"
-                >
-                    <v-tab
+                color="white"
+                background-color="#3949AB"
+            >
+                <v-tab
                     @click="showDealHistory">
                     거래내역
-                    </v-tab>
+                </v-tab>
                     <v-tab
                     @click="showRecentlyViewHistory">
                     최근 본 목록
@@ -45,45 +44,17 @@
                     등록한 상품
                     </v-tab>
                 </v-tabs>
-            </v-row>
-            <v-sheet
-                class="mx-auto"
-                >
-                <v-slide-group
-                    class="pa-4"
-                    id="slide-group"
-                >
-                    <v-slide-item
-                    v-for="item in items"
-                    :key="item"
-                    v-slot:default="{ active, toggle }"
-                    >
-                    <v-card
-                        :color="active ? 'primary' : 'grey lighten-1'"
-                        class="ma-4"
-                        height="100"
-                        width="100"
-                        @click="toggle"
-                    >
-                        <v-row
-                        class="fill-height"
-                        align="center"
-                        justify="center"
-                        >
-                        <v-scale-transition>
-                            <v-icon
-                            v-if="active"
-                            color="white"
-                            size="48"
-                            v-text="'mdi-close-circle-outline'"
-                            ></v-icon>
-                        </v-scale-transition>
-                        </v-row>
-                    </v-card>
-                    </v-slide-item>
-                </v-slide-group>
-                </v-sheet>
-        </v-container>
+                </v-col>
+        </v-row>
+        <v-row>
+            <v-col class="d-flex child-flex" cols="8" offset="2">
+                <v-container v-for="item in items" :key="item.id" >
+                    <item-card :item="item" @clicked="onClickItem(item.id)"></item-card>
+                </v-container>
+                
+            </v-col>
+        </v-row>
+           
     </div>
   
 </template>
@@ -91,11 +62,14 @@
 <script>
 import MyPageNav from "./MyPageNav.vue";
 import { findById } from "@/api/user.js";
+import {loadBookMark} from "@/api/bookmark.js";
 import * as itemService from "../../api/item.js";
+import ItemCard from "../shop/ItemCard.vue";
 
 export default {
   components: {
-    MyPageNav
+    MyPageNav,
+    ItemCard
   },
   data() {
     return {
@@ -115,8 +89,12 @@ export default {
       });
   },
   methods: {
+      onClickItem(itemId) {
+            this.$router.push({path:"item/detail/" + itemId});
+        },
       showDealHistory() {
         //   alert("deal history")
+        this.items = []
       },
       showRecentlyViewHistory() {
         const bookMark = JSON.parse(sessionStorage.getItem("bookmark"))
@@ -127,14 +105,24 @@ export default {
             this.items = []
       },
       showBookMarkList() {
+        //   this.items = []
+          loadBookMark(this.userId,
+            res => {
+                this.items = res.data
+            },
+            error => {
+                alert(err)
+            }
+          )
       },
       showRegistedItemList() {
           itemService.findMySaleItems(this.userId,
             res=> {
+                console.dir(res)
                 this.items = res.data
             },
-            error => {
-                alert(error)
+            err => {
+                alert(err)
             }
           )
       }
@@ -155,15 +143,23 @@ p {
 }
 
 #profile-info-container {
-    margin: 50px;
+    /* margin: 50px; */
 }
 
 #profile-info {
-    margin-left: 40px;
-    margin-top:15px;
+    align-self: center;
 }
 
 #slide-group {
     margin-top: 50px;
+}
+
+#menu-bar {
+    background-color: #3949AB;
+}
+
+p{
+    text-align: center;
+    color: #283593;
 }
 </style>
