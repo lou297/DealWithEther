@@ -139,7 +139,8 @@ public class ItemController {
 	@ApiOperation(value = "Delete an item with id")
 	@RequestMapping(value = "/items/{id}", method = RequestMethod.DELETE)
 	public int delete(@PathVariable int id) {
-		return itemService.delete(id);
+		// return itemService.delete(id);
+		return itemService.complete(id);
 	}
 
 	@ApiOperation(value = "Update an item")

@@ -118,4 +118,9 @@ public class ItemService implements IItemService {
 		return this.itemRepository.imageUpdate(id, image);
 	}
 
+	@Override
+	public int complete(long id) {
+		return this.itemRepository.complete(id);
+	}
+
 }

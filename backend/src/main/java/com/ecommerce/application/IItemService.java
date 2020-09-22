@@ -32,4 +32,7 @@ public interface IItemService {
 
 	@Transactional
 	int delete(long id);
+
+	@Transactional
+	int complete(long id);
 }
