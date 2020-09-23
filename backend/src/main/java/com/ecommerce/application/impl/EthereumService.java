@@ -88,10 +88,10 @@ public class EthereumService implements IEthereumService {
 		Path adminWalletFile = Paths.get(resource.getURI());
 		List<String> content = Files.readAllLines(adminWalletFile);
 
-		Web3j web3 = Web3j.build(new HttpService());  // defaults to http://localhost:8545/
+		web3j = Web3j.build(new HttpService());  // defaults to http://localhost:8545/
 		Credentials credentials = WalletUtils.loadJsonCredentials(PASSWORD, content.get(0) );
 		TransactionReceipt transactionReceipt = Transfer.sendFunds(
-			web3, credentials, address,
+			web3j, credentials, address,
 			BigDecimal.valueOf(10), Convert.Unit.ETHER
 		).send();
 		return transactionReceipt.getTransactionHash();
