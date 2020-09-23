@@ -17,7 +17,7 @@
                             내상점
                         </div>
                         <div style="float:left; padding:8px 0 0 15px;">
-                            문의톡해주세요
+                            문의톡해주세용
                         </div>
                         <div style="clear:both;"></div>
                     </div>
