@@ -3,6 +3,7 @@ package com.ecommerce.application;
 import com.ecommerce.domain.Item;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface IItemService {
@@ -19,7 +20,7 @@ public interface IItemService {
 	Item get(long id);
 
 	@Transactional
-	Item register(Item item);
+	Item register(Item item) throws IOException, Exception;
 
 	@Transactional
 	int viewCountUpdate(long id);
@@ -34,5 +35,5 @@ public interface IItemService {
 	int delete(long id);
 
 	@Transactional
-	int complete(long id);
+	int complete(long id, String eoa, String pk) throws Exception;
 }

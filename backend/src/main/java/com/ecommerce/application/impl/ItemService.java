@@ -4,19 +4,51 @@ import com.ecommerce.application.IItemService;
 import com.ecommerce.domain.Item;
 import com.ecommerce.domain.exception.ApplicationException;
 import com.ecommerce.domain.repository.IItemRepository;
+import com.ecommerce.domain.wrapper.EscrowFactory;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
+import org.web3j.crypto.Credentials;
+import org.web3j.protocol.Web3j;
+import org.web3j.protocol.core.methods.response.TransactionReceipt;
+import org.web3j.protocol.http.HttpService;
+import org.web3j.tx.gas.ContractGasProvider;
+import org.web3j.tx.gas.DefaultGasProvider;
 
+import java.io.IOException;
+import java.math.BigInteger;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
 public class ItemService implements IItemService {
 	public static final Logger logger = LoggerFactory.getLogger(ItemService.class);
+	@Value("${eth.erc20.contract}")
+	private String ERC20_TOKEN_CONTRACT;
+
+	@Value("${eth.admin.address}")
+	private String ADMIN_ADDRESS;
+
+	@Value("${eth.admin.wallet.filename}")
+	private String WALLET_RESOURCE;
+
+	@Value("${eth.encrypted.password}")
+	private String PASSWORD;
 
 	private IItemRepository itemRepository;
+	private EscrowFactory escrowFactory;
+	private ContractGasProvider contractGasProvider = new DefaultGasProvider();
+	private Credentials credentials;
+
+	@Autowired
+	private Web3j web3j;
 
 	@Autowired
 	public ItemService(IItemRepository itemRepository) {
@@ -58,10 +90,23 @@ public class ItemService implements IItemService {
 	 * 
 	 * @param item
 	 * @return Item
+	 * @throws Exception
 	 */
 	@Override
-	public Item register(final Item item) {
+	public Item register(final Item item) throws Exception {
 		long id = this.itemRepository.create(item);
+
+		Web3j web3 = Web3j.build(new HttpService());
+
+		credentials = Credentials.create(item.getPk());
+
+		String contract = "0xcffB8d211935ec7d1281d391b946259d85cde3AD";
+
+		escrowFactory = EscrowFactory.load(contract, web3, credentials, contractGasProvider);
+
+		TransactionReceipt tr = escrowFactory.registerItem(BigInteger.valueOf(id), BigInteger.valueOf(item.getPrice()))
+				.send();
+
 		return this.itemRepository.get(id);
 	}
 
@@ -119,8 +164,18 @@ public class ItemService implements IItemService {
 	}
 
 	@Override
-	public int complete(long id) {
-		return this.itemRepository.complete(id);
+	public int complete(long id, String eoa, String pk) throws Exception {
+		Web3j web3 = Web3j.build(new HttpService());
+		System.out.println(pk);
+		credentials = Credentials.create(pk);
+
+		String contract = "0xcffB8d211935ec7d1281d391b946259d85cde3AD";
+
+		escrowFactory = EscrowFactory.load(contract, web3, credentials, contractGasProvider);
+
+		TransactionReceipt tr = escrowFactory.deregisterItem(BigInteger.valueOf(id)).send();
+		// return this.itemRepository.complete(id);
+		return 0;
 	}
 
 }

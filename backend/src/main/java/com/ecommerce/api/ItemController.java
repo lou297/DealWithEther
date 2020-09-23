@@ -2,6 +2,7 @@ package com.ecommerce.api;
 
 import com.ecommerce.application.IItemService;
 import com.ecommerce.domain.BasicResponse;
+import com.ecommerce.domain.Cash;
 import com.ecommerce.domain.Item;
 import com.ecommerce.domain.exception.EmptyListException;
 import com.ecommerce.domain.exception.NotFoundException;
@@ -51,10 +52,12 @@ public class ItemController {
 	 * 
 	 * @param item
 	 * @return Item
+	 * @throws Exception
+	 * @throws IOException
 	 */
 	@ApiOperation(value = "Register an item")
 	@RequestMapping(value = "/items", method = RequestMethod.POST)
-	public Item register(@RequestBody Item item) {
+	public Item register(@RequestBody Item item) throws IOException, Exception {
 		System.out.println(item.toString());
 		logger.info(item.toString());
 		return itemService.register(item);
@@ -135,12 +138,13 @@ public class ItemController {
 	 * 
 	 * @param id 아이템 id
 	 * @return Item
+	 * @throws Exception
 	 */
 	@ApiOperation(value = "Delete an item with id")
 	@RequestMapping(value = "/items/{id}", method = RequestMethod.DELETE)
-	public int delete(@PathVariable int id) {
+	public int delete(@PathVariable long id, @RequestBody Cash cash) throws Exception {
 		// return itemService.delete(id);
-		return itemService.complete(id);
+		return itemService.complete(id, cash.getWalletAddress(), cash.getPrivateKey());
 	}
 
 	@ApiOperation(value = "Update an item")
