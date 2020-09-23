@@ -84,7 +84,7 @@ export default {
        * web3 api를 사용하여 지갑을 생성한다.
        */
       var web3 = new Web3();
-      web3.setProvider(new Web3.providers.HttpProvider('http://localhost:8545'));
+      web3.setProvider(new Web3.providers.HttpProvider('http://j3a103.p.ssafy.io:8545'));
 
       var newAccount = web3.eth.accounts.create();
       this.walletAddress = newAccount.address;
