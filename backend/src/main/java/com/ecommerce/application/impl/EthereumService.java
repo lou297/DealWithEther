@@ -40,7 +40,7 @@ public class EthereumService implements IEthereumService {
 	private static final Logger log = LoggerFactory.getLogger(EthereumService.class);
 
 	public static final BigInteger GAS_PRICE = BigInteger.valueOf(1L);
-	public static final BigInteger GAS_LIMIT = BigInteger.valueOf(21_000L);
+//	public static final BigInteger GAS_LIMIT = BigInteger.valueOf(21_000L);
 
 	// 사용할 이더리움 지갑의 주소
 	@Value("${eth.admin.address}")
