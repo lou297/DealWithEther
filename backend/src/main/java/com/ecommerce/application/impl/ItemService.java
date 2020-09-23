@@ -76,6 +76,11 @@ public class ItemService implements IItemService {
 		return this.itemRepository.delete(id);
 	}
 
+	@Override
+	public int viewCountUpdate(final long id) {
+		return this.itemRepository.viewCountUpdate(id);
+	}
+
 	/**
 	 * 상품 정보 업데이트
 	 * 
@@ -96,7 +101,7 @@ public class ItemService implements IItemService {
 			item.setExplanation(itemStored.getExplanation());
 		if (item.getAvailable() == null || "".equals(item.getAvailable()))
 			item.setAvailable(itemStored.getAvailable());
-		if (item.getImage() == null || "".equals(item.getImage()))
+		if (item.getImage() == 0 || "".equals(item.getImage()))
 			item.setImage(itemStored.getImage());
 		if (item.getPrice() == 0)
 			item.setPrice(itemStored.getPrice());
@@ -106,6 +111,11 @@ public class ItemService implements IItemService {
 			throw new ApplicationException("상품정보수정 처리가 반영되지 않았습니다.");
 
 		return this.itemRepository.get(item.getId());
+	}
+
+	@Override
+	public int imageUpdate(long id, int image) {
+		return this.itemRepository.imageUpdate(id, image);
 	}
 
 }

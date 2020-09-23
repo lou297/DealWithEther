@@ -22,7 +22,13 @@ public interface IItemService {
 	Item register(Item item);
 
 	@Transactional
+	int viewCountUpdate(long id);
+
+	@Transactional
 	Item update(Item item);
+
+	@Transactional
+	int imageUpdate(long id, int image);
 
 	@Transactional
 	int delete(long id);

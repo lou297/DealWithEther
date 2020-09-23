@@ -22,7 +22,7 @@ public class CashContractServiceTest {
     private String ADMIN_ADDRESS;
 
     @Test
-    public void testGetBalance() {
+    public void testGetBalance() throws Exception{
         int balance = this.cashContractService.getBalance(ADMIN_ADDRESS);
 
         log.info(balance + "");
