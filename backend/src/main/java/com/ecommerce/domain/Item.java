@@ -19,6 +19,10 @@ public class Item {
 	private String dealRegion;
 	private int viewCount;
 
+	// 임시
+	private String address;
+	private String pk;
+
 	@Override
 	public String toString() {
 		return "{ id: " + id + "\n\tname: " + name + "\n\texplanation: " + explanation + "\n\tavailable: " + available
