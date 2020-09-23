@@ -14,6 +14,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.web3j.protocol.Web3j;
+import org.web3j.protocol.core.DefaultBlockParameterName;
+import org.web3j.protocol.core.methods.response.EthGetBalance;
+import org.web3j.protocol.http.HttpService;
+import org.web3j.utils.Convert;
+import org.web3j.utils.Convert.Unit;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -116,8 +122,23 @@ public class WalletService implements IWalletService {
 		return wallet;
 	}
 
-	public Wallet buyCash(String eoa, String pk, double chargeAmount) throws Exception{
-		cashContractService.buyCash(eoa, pk, chargeAmount);
-		return null;
+	public Wallet buyCash(String walletAddress, String pk, double chargeAmount) throws Exception{
+		BigInteger balance = cashContractService.buyCash(walletAddress, pk, chargeAmount);
+		Wallet wallet = walletRepository.get(walletAddress);
+
+		Web3j web3 = Web3j.build(new HttpService("http://localhost:8545/"));
+		EthGetBalance balanceWei = null;
+		try {
+			balanceWei = web3.ethGetBalance(wallet.getAddress(), DefaultBlockParameterName.LATEST).send();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		BigDecimal balanceInEther = Convert.fromWei(balanceWei.getBalance().toString(), Unit.ETHER);
+		this.syncBalance(wallet.getAddress(), balanceInEther, balance.intValue() );
+		
+		wallet.setBalance(balanceInEther);
+		wallet.setCash(balance.intValue());
+
+		return wallet;
 	}
 }

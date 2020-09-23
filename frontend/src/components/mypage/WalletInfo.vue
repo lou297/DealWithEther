@@ -149,12 +149,13 @@ export default {
           console.dir(response);
           this.wallet.balance = response.data.balance;
           this.wallet.receivingCount = response.data.receivingCount;
-          this.isCharging = false;
           alert("충전 되었습니다.");
+          this.isCharging = false;
         },
         (error)=> {
           console.dir(error);
           alert("충전에 실패하였습니다.");
+          this.isCharging = false;
         }
       )
     },
@@ -173,15 +174,21 @@ export default {
             walletService.chargeCash(this.wallet.address, privateKey, this.cashChargeAmount,
               (response)=> {
                 console.dir(response);
+                this.wallet.balance = response.data.balance;
+                this.wallet.cash    = response.data.cash;
+                alert((this.cashChargeAmount*100000)+"Cash가 충전 되었습니다.");
+                this.isCashCharging = false;
               },
               (error)=>{
                 console.dir(error);
                 alert("캐쉬 충전에 실패하였습니다.");
+                this.isCashCharging = false;
               }
             )
     
           }else {
-            alert("개인키 인증에 실패하였습니다.")
+            alert("개인키 인증에 실패하였습니다.");
+            this.isCashCharging = false;
           }
         }
       )
