@@ -201,4 +201,17 @@ public class ItemRepository implements IItemRepository {
 		}
 	}
 
+	@Override
+	public int complete(long id) {
+		StringBuilder sbSql = new StringBuilder("UPDATE items ");
+		sbSql.append("SET available = ? ");
+
+		sbSql.append("where id=?");
+		try {
+			return this.jdbcTemplate.update(sbSql.toString(), new Object[] { false, id });
+		} catch (Exception e) {
+			throw new RepositoryException(e, e.getMessage());
+		}
+	}
+
 }
