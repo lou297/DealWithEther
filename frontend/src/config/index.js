@@ -1,7 +1,8 @@
 /**
  * TODO: 개발 및 배포 환경 에 맞추어 아래의 상수들을 지정합니다.
  */
-const API_BASE_URL = "http://j3a103.p.ssafy.io:8080";
+// const API_BASE_URL = "http://j3a103.p.ssafy.io:8080";
+const API_BASE_URL = process.env.VUE_APP_BACKEND;
 const BLOCKCHAIN_URL = "http://j3a103.p.ssafy.io:8545";
 const BLOCKCHAIN_WEBSOCKET_URL = "ws://j3a103.p.ssafy.io:8545";
 const ITEM_INVENTORY_CONTRACT_ADDRESS =
