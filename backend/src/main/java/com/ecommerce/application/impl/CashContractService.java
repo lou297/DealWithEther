@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 import org.web3j.abi.FunctionEncoder;
 import org.web3j.abi.datatypes.Function;
@@ -26,8 +27,12 @@ import org.web3j.tx.gas.DefaultGasProvider;
 
 import java.io.IOException;
 import java.math.BigInteger;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 @Service
 public class CashContractService implements ICashContractService {
@@ -59,35 +64,43 @@ public class CashContractService implements ICashContractService {
      * @return
      */
     @Override
-    public int getBalance(String eoa) {
+    public int getBalance(String eoa) throws Exception{
+        
+        ClassPathResource resource = new ClassPathResource(WALLET_RESOURCE);
+		Path adminWalletFile = Paths.get(resource.getURI());
+        List<String> content = Files.readAllLines(adminWalletFile);
 
-        return -1;
+        web3j = Web3j.build(new HttpService());  // defaults to http://localhost:8545/
+        credentials = WalletUtils.loadJsonCredentials(PASSWORD, content.get(0) );
+        
+        cashContract = CashContract.load(ERC20_TOKEN_CONTRACT, web3j, credentials, contractGasProvider);
+        return cashContract.balanceOf(eoa).send().intValue();
     }
 
     @Override
-    public String buyCash(String eoa, String pk, double chargeAmount) throws Exception {
+    public BigInteger buyCash(String eoa, String pk, double chargeAmount) throws Exception {
         
-        System.out.println(eoa);
-        System.out.println(pk);
-        System.out.println(chargeAmount);
-        Web3j web3 = Web3j.build(new HttpService());  // defaults to http://localhost:8545/
-        
-        Credentials dummyCredentials = Credentials.create(pk);
-        ECKeyPair keyPair = dummyCredentials.getEcKeyPair();
-        BigInteger privateKey = keyPair.getPrivateKey();
-        BigInteger publicKey = keyPair.getPublicKey();
-        System.out.println(privateKey);
-        System.out.println(publicKey);
-        
-        credentials = Credentials.create(pk);
-        cashContract = CashContract.load(ERC20_TOKEN_CONTRACT, web3, credentials, BigInteger.valueOf(2), BigInteger.valueOf(100000000));
-        
-        // long cashAmount = (long) (chargeAmount * 100000);
-        // TransactionReceipt transactionReceipt = contract.buy(BigInteger.valueOf(cashAmount)).send();
+        web3j = Web3j.build(new HttpService());  // defaults to http://localhost:8545/
 
-        System.out.println("ok");
-        return null;
+        credentials = Credentials.create(pk);
+        cashContract = CashContract.load(ERC20_TOKEN_CONTRACT, web3j, credentials, contractGasProvider);
+        long cashAmount = (long) (chargeAmount * Math.pow(10, 18));
+        TransactionReceipt transactionReceipt = cashContract.buy(BigInteger.valueOf(cashAmount)).send();
+
+        return cashContract.balanceOf(eoa).send();
     }
 
-    
+    @Override
+    public String deploy() throws Exception{
+
+        ClassPathResource resource = new ClassPathResource(WALLET_RESOURCE);
+		Path adminWalletFile = Paths.get(resource.getURI());
+		List<String> content = Files.readAllLines(adminWalletFile);
+
+		Web3j web3 = Web3j.build(new HttpService());  // defaults to http://localhost:8545/
+        Credentials credentials = WalletUtils.loadJsonCredentials(PASSWORD, content.get(0) );
+        cashContract = CashContract.deploy(web3, credentials, contractGasProvider).send();
+        
+        return cashContract.getContractAddress();
+    }
 }

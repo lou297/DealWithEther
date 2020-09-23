@@ -1,5 +1,6 @@
 package com.ecommerce.api;
 
+import com.ecommerce.application.ICashContractService;
 import com.ecommerce.application.IWalletService;
 import com.ecommerce.domain.Cash;
 import com.ecommerce.domain.Wallet;
@@ -34,7 +35,9 @@ public class WalletController {
 	public static final Logger logger = LoggerFactory.getLogger(WalletController.class);
 
 	private IWalletService walletService;
-
+	@Autowired
+	private ICashContractService cashContractService;
+	
 	@Autowired
 	public WalletController(IWalletService walletService) {
 		Assert.notNull(walletService, "walletService 개체가 반드시 필요!");
@@ -113,13 +116,26 @@ public class WalletController {
 	 */
 	@ApiOperation(value = "Buy cash")
 	@RequestMapping(value = "/wallets/cash", method = RequestMethod.PUT)
-	public Wallet buyCash(@RequestBody Cash cash) { // 캐쉬 구매
+	public Wallet buyCash(@RequestBody Cash cash) throws Exception{ // 캐쉬 구매
+		Wallet wallet = null;
 		try {
-			walletService.buyCash(cash.getWalletAddress(), cash.getPrivateKey(), cash.getChargeAmount());
+			wallet = walletService.buyCash(cash.getWalletAddress(), cash.getPrivateKey(), cash.getChargeAmount());
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new Exception();
+		}
+
+		return wallet;
+	}
+
+	@RequestMapping(value = "/contract", method = RequestMethod.GET)
+	public String deploy() {
+		String answer = null;
+		try {
+			answer = cashContractService.deploy();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
-		return null;
+		return answer;
 	}
 }

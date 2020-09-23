@@ -87,15 +87,9 @@ export default {
       web3.setProvider(new Web3.providers.HttpProvider('http://localhost:8545'));
 
       var newAccount = web3.eth.accounts.create();
-      var account = web3.eth.personal.newAccount(newAccount.privateKey).then((response) => { 
-        this.walletAddress = response;
-        console.log(response);
-        console.log(this.walletAddress);
-      });
-      console.log(this.walletAddress);
+      this.walletAddress = newAccount.address;
       this.privateKey = newAccount.privateKey;
       this.step += 1;
-      console.log('지갑 생성됨');
     },
     saveWallet: function() {
       /**
