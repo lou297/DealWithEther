@@ -10,6 +10,7 @@ import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpHeaders;
@@ -40,6 +41,9 @@ public class ItemController {
 
 	private IItemService itemService;
 
+	@Value("${testingvalue}")
+	private String test;
+
 	@Autowired
 	public ItemController(IItemService itemService) {
 		Assert.notNull(itemService, "itemService 개체가 반드시 필요!");
@@ -65,6 +69,7 @@ public class ItemController {
 	@RequestMapping(value = "/items", method = RequestMethod.GET)
 	public List<Item> list() {
 		List<Item> list = itemService.list();
+		System.out.println(test);
 
 		if (list == null || list.isEmpty())
 			throw new EmptyListException("NO DATA");
