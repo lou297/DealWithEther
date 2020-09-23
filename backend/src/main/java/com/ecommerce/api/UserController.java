@@ -8,6 +8,7 @@ import com.ecommerce.domain.exception.NotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,7 +21,8 @@ public class UserController {
     public static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     private IUserService userService;
-
+    @Value("${testingvalue}")
+    private String test;
     @Autowired
     public UserController(IUserService userService) {
         Assert.notNull(userService, "userService 개체가 반드시 필요!");
@@ -52,6 +54,9 @@ public class UserController {
     @RequestMapping(value = "/users/login", method = RequestMethod.POST)
     public User login(@RequestBody User user) {
         User userFetched = userService.get(user.getEmail());
+        System.out.println(test);
+        System.out.println(test);
+        System.out.println(test);
         if (!userFetched.getPassword().equals(user.getPassword()))
             throw new DomainException("비밀번호가 일치하지 않습니다.");
         userFetched.setPassword("");
