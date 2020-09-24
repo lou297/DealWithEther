@@ -2,7 +2,7 @@
     <v-hover v-slot:default="{ hover }">
         <v-card
             class="item-card mx-auto"
-            max-width="300"
+            max-width="400"
             max-height="400"
             :elevation="hover ? 16 : 2"
             @click.prevent="$emit('clicked')" href=""
