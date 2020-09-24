@@ -87,6 +87,7 @@ public class EthereumService implements IEthereumService {
 	@Override
 	public String requestEth(final String address) throws Exception// 특정 주소로 테스트 특정 양(5Eth) 만큼 충전해준다.
 	{
+		System.out.println(ADMIN_WALLET_FILE);
 		ClassPathResource resource = new ClassPathResource(ADMIN_WALLET_FILE);
 		Path adminWalletFile = Paths.get(resource.getURI());
 		List<String> content = Files.readAllLines(adminWalletFile);
