@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
+import org.springframework.util.FileCopyUtils;
 import org.web3j.crypto.Credentials;
 import org.web3j.crypto.WalletUtils;
 import org.web3j.protocol.Web3j;
@@ -26,6 +27,7 @@ import org.web3j.utils.Convert;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -87,16 +89,17 @@ public class EthereumService implements IEthereumService {
 	@Override
 	public String requestEth(final String address) throws Exception// 특정 주소로 테스트 특정 양(5Eth) 만큼 충전해준다.
 	{
-		System.out.println(ADMIN_WALLET_FILE);
-		ClassPathResource resource = new ClassPathResource(ADMIN_WALLET_FILE, getClass());
-		System.out.println(resource.getURI());
-		Path adminWalletFile = Paths.get(resource.getURI());
-		List<String> content = Files.readAllLines(adminWalletFile);
-		System.out.println("이더리움 서비스의 requestEth 93번째 줄");
+		ClassPathResource resource = new ClassPathResource(ADMIN_WALLET_FILE);
+		// Path adminWalletFile = Paths.get(resource.getURI());
+		// List<String> content = Files.readAllLines(adminWalletFile);
+
+		byte[] bdata = FileCopyUtils.copyToByteArray(resource.getInputStream());
+		String data = new String(bdata, StandardCharsets.UTF_8);
+
+		System.out.println(data);
 
 		web3j = Web3j.build(new HttpService(NETWORK_URL)); // defaults to http://localhost:8545/
-		System.out.println("이더리움 서비스의 requestEth web3j 만듬");
-		Credentials credentials = WalletUtils.loadJsonCredentials(PASSWORD, content.get(0));
+		Credentials credentials = WalletUtils.loadJsonCredentials(PASSWORD, data);
 		TransactionReceipt transactionReceipt = Transfer
 				.sendFunds(web3j, credentials, address, BigDecimal.valueOf(10), Convert.Unit.ETHER).send();
 		return transactionReceipt.getTransactionHash();
