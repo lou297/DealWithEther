@@ -17,6 +17,8 @@ public interface IItemService {
 
 	List<Item> getByCategory(String Category, int page);
 
+	List<Item> getByMainCategory(String category);
+
 	Item get(long id);
 
 	@Transactional

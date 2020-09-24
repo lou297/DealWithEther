@@ -91,6 +91,17 @@ public class ItemRepository implements IItemRepository {
 	}
 
 	@Override
+	public List<Item> getByMainCategory(final String category) { // 조회수 순으로 5개 보여주기
+		StringBuilder sbSql = new StringBuilder("SELECT * FROM items WHERE category=? limit 5 order by view_count desc");
+		try {
+			return this.jdbcTemplate.query(sbSql.toString(), new Object[] { category },
+					(rs, rowNum) -> ItemFactory.create(rs));
+		} catch (Exception e) {
+			throw new RepositoryException(e, e.getMessage());
+		}
+	}
+
+	@Override
 	public Item get(final long id) {
 		StringBuilder sbSql = new StringBuilder("SELECT * FROM items WHERE id=?");
 		try {

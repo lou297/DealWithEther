@@ -85,6 +85,11 @@ public class ItemService implements IItemService {
 		return this.itemRepository.getByCategory(category, page);
 	}
 
+	@Override
+	public List<Item> getByMainCategory(String category) {
+		return this.itemRepository.getByMainCategory(category);
+	}
+
 	/**
 	 * TODO Sub PJT Ⅲ 과제 3 상품 등록 시 상품 정보를 저장한다.
 	 * 

@@ -127,6 +127,18 @@ public class ItemController {
 		return items;
 	}
 
+	@ApiOperation(value = "Fetch an item with category")
+	@RequestMapping(value = "/items/category/{category}", method = RequestMethod.GET)
+	public List<Item> getByMainCategory(@PathVariable String category) {
+		System.out.println(category);
+		List<Item> items = itemService.getByMainCategory(category);
+		if (items == null || items.size() == 0) {
+			logger.error("NOT FOUND LIST OF CATEGORY: ", category);
+			return null;
+		}
+		return items;
+	}
+
 	@ApiOperation(value = "Fetch an item with id")
 	@RequestMapping(value = "/items/of/{uid}", method = RequestMethod.GET)
 	public List<Item> getByUser(@PathVariable int uid) {

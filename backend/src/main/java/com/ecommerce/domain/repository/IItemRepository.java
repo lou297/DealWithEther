@@ -16,6 +16,8 @@ public interface IItemRepository {
 
 	List<Item> getByCategory(final String category, final int page);
 
+	List<Item> getByMainCategory(final String category);
+
 	Item get(long id);
 
 	@Transactional

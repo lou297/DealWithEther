@@ -16,6 +16,13 @@ function findByCategory(keyword, page, success, fail) {
         .catch(fail);
 }
 
+function findByMainCategory(keyword, success, fail) {
+    instance
+        .get("/api/items/category/" + keyword)
+        .then(success)
+        .catch(fail);
+}
+
 function findItemsByOwner(userId, success, fail) {
     instance
         .get("/api/items/seller/" + userId)
@@ -128,4 +135,5 @@ export {
     confirm,
     findMySaleItems,
     findByName,
+    findByMainCategory
 };
