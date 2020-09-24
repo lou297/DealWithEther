@@ -1,31 +1,35 @@
 <template>
     <div>
         <h-breadcrumb title="상품 상세 보기"></h-breadcrumb>
-        <v-container fluid>
+        <v-container>
             <v-layout>
                 <v-flex xl6 lg6 md6 sm12 xs12>
-                    <v-flex xl8 lg8 md8 sm8 xs8>
-                        <v-card>
-                            <v-container fluid xl10>
-                                <v-row>
-                                    <v-col v-for="n in item.image" :key="n" class="d-flex child-flex" cols="4">
-                                        <v-hover v-slot:default="{ hover }">
-                                            <v-card flat tile class="d-flex" :elevation="hover ? 16 : 2">
-                                                <v-img
-                                                    :src="imgPath(n)"
-                                                    aspect-ratio="1"
-                                                    class="grey lighten-2"
-                                                ></v-img>
-                                            </v-card>
-                                        </v-hover>
-                                    </v-col>
-                                </v-row>
-                            </v-container>
-                        </v-card>
+                    <v-flex xl11 lg11 md11 sm11 xs11>
+                        <v-carousel
+                            cycle
+                            hide-delimiter-background
+                            show-arrows-on-hover
+                        >
+                            <v-carousel-item v-for="n in item.image" :key="n">
+                                <v-sheet height="100%">
+                                    <v-row
+                                        class="fill-height"
+                                        align="center"
+                                        justify="center"
+                                    >
+                                        <v-img
+                                            :src="imgPath(n)"
+                                            aspect-ratio="1"
+                                            class="grey lighten-2"
+                                        ></v-img>
+                                    </v-row>
+                                </v-sheet>
+                            </v-carousel-item>
+                        </v-carousel>
                     </v-flex>
                 </v-flex>
-                <v-flex>
-                    <v-col cols="6">
+                <v-flex xl6 lg6 md6 sm12 xs12>
+                    <v-col>
                         <v-row>
                             <v-col style="float:left; text-align:left"><h5>{{ item.explanation }}</h5></v-col>
                         </v-row>
@@ -71,14 +75,6 @@
                 <v-divider/>
             </v-layout>
         </v-container>
-
-        <!-- <v-col v-for="n in item.image.length" :key="n" class="d-flex child-flex" cols="4">
-            <v-hover v-slot:default="{ hover }">
-                <v-card flat tile class="d-flex" :elevation="hover ? 16 : 2">
-                    <v-img :src="item.image[n-1]" aspect-ratio="1" class="grey lighten-2" ></v-img>
-                </v-card>
-            </v-hover>
-        </v-col> -->
     </div>
 </template>
 
