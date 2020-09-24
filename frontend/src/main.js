@@ -26,4 +26,4 @@ Vue.component("HBreadcrumb", HBreadcumb);
 
 var cors = require('cors')
 
-// App.use(cors());
+App.use(cors());
