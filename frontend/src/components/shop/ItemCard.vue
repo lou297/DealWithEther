@@ -36,8 +36,8 @@ export default {
     props: ['item'],
     computed: {
         imgPath() {
-            // return process.env.BASE_URL + 'images/' + this.item.image;
-            return "https://picsum.photos/id/11/100/60";
+            return process.env.BASE_URL + 'images/' + this.item.id + "_1";
+            // return "https://picsum.photos/id/11/100/60";
         }
     }
 };
