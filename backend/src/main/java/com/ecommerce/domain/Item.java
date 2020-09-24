@@ -25,8 +25,9 @@ public class Item {
 
 	@Override
 	public String toString() {
-		return "{ id: " + id + "\n\tname: " + name + "\n\texplanation: " + explanation + "\n\tavailable: " + available
-				+ "\n\tseller: " + seller + "\n\tregisteredAt: " + registeredAt + "\n\timage: " + image + "\n\tprice: "
-				+ price + "\n\tdirectDeal: " + directDeal + "\n\tdealRegion: " + dealRegion + " }";
+		return "{ id: " + id + "\n\tname: " + name + "\n\tcategory: " + category + "\n\texplanation: " + explanation
+				+ "\n\tavailable: " + available + "\n\tseller: " + seller + "\n\tregisteredAt: " + registeredAt
+				+ "\n\timage: " + image + "\n\tprice: " + price + "\n\tdirectDeal: " + directDeal + "\n\tdealRegion: "
+				+ dealRegion + "\n\tviewCount: " + viewCount + " }";
 	}
 }

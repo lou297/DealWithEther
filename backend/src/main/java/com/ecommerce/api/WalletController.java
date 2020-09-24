@@ -37,7 +37,7 @@ public class WalletController {
 	private IWalletService walletService;
 	@Autowired
 	private ICashContractService cashContractService;
-	
+
 	@Autowired
 	public WalletController(IWalletService walletService) {
 		Assert.notNull(walletService, "walletService 개체가 반드시 필요!");
@@ -116,7 +116,7 @@ public class WalletController {
 	 */
 	@ApiOperation(value = "Buy cash")
 	@RequestMapping(value = "/wallets/cash", method = RequestMethod.PUT)
-	public Wallet buyCash(@RequestBody Cash cash) throws Exception{ // 캐쉬 구매
+	public Wallet buyCash(@RequestBody Cash cash) throws Exception { // 캐쉬 구매
 		Wallet wallet = null;
 		try {
 			wallet = walletService.buyCash(cash.getWalletAddress(), cash.getPrivateKey(), cash.getChargeAmount());

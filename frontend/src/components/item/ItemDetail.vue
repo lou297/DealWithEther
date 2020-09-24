@@ -1,56 +1,85 @@
 <template>
     <div>
-        <h-breadcrumb title="상품 상세 보기" ></h-breadcrumb>
-           <v-container fluid>
-                <v-row justify="space-around" style="margin-top:30px">
-                    <v-col cols="5" style="margin-right:30px">
-                        <v-img :src="item.image" aspect-ratio="1" max-width="386" max-height="386"></v-img>
-                    </v-col>
+        <h-breadcrumb title="상품 상세 보기"></h-breadcrumb>
+        <v-container fluid>
+            <v-layout>
+                <v-flex xl6 lg6 md6 sm12 xs12>
+                    <v-flex xl8 lg8 md8 sm8 xs8>
+                        <v-card>
+                            <v-container fluid xl10>
+                                <v-row>
+                                    <v-col v-for="n in item.image" :key="n" class="d-flex child-flex" cols="4">
+                                        <v-hover v-slot:default="{ hover }">
+                                            <v-card flat tile class="d-flex" :elevation="hover ? 16 : 2">
+                                                <v-img
+                                                    :src="imgPath(n)"
+                                                    aspect-ratio="1"
+                                                    class="grey lighten-2"
+                                                ></v-img>
+                                            </v-card>
+                                        </v-hover>
+                                    </v-col>
+                                </v-row>
+                            </v-container>
+                        </v-card>
+                    </v-flex>
+                </v-flex>
+                <v-flex>
                     <v-col cols="6">
                         <v-row>
-                            <v-col style="float:left; text-align:left"><h5>{{item.explanation}}</h5></v-col>
+                            <v-col style="float:left; text-align:left"><h5>{{ item.explanation }}</h5></v-col>
                         </v-row>
                         <v-row>
-                            <v-col style="float:right; text-align:left;"><h4 style="display:inline; font-weight: bold;">{{item.price}}</h4> 원</v-col>
+                            <v-col style="float:right; text-align:left;"><h4 style="display:inline; font-weight: bold;">{{ item.price }}</h4> 원</v-col>
                         </v-row>
-                    <v-divider style="margin-top:0px;"/>
-                    <v-row>
-                        <v-col cols="3" style="text-align:left">판매자</v-col>
-                        <v-col cols="8" style="text-align:left; padding-bottom:0px; height:48px;">
-                            <p style="float:left;">{{ item.seller.name }} (</p>
-                            <v-img style="text-align:left; width:15px; float:left; margin:3px 4px 0 4px;" :src="star"> </v-img> 3.7 )
-                        </v-col>
-                        <v-col cols="3" style="text-align:left">상품 등록일</v-col>
-                        <v-col cols="8" style="text-align:left">{{ time }}</v-col>
-                        <v-col cols="3" style="text-align:left">거래방법</v-col>
+                        <v-divider style="margin-top:0px;"/>
+                        <v-row>
+                            <v-col cols="3" style="text-align:left">판매자</v-col>
+                            <v-col cols="8" style="text-align:left; padding-bottom:0px; height:48px;">
+                                <p style="float:left;">{{ item.seller.name }} (</p>
+                                <v-img style="text-align:left; width:15px; float:left; margin:3px 4px 0 4px;" :src="star"></v-img>
+                                3.7 )
+                            </v-col>
+                            <v-col cols="3" style="text-align:left">상품 등록일</v-col>
+                            <v-col cols="8" style="text-align:left">{{ time }}</v-col>
+                            <v-col cols="3" style="text-align:left">거래방법</v-col>
 
-                        <v-col v-if="item.directDeal == true" cols="8" style="text-align:left">직거래</v-col>
-                        <v-col v-if="item.directDeal == true" cols="3" style="text-align:left">직거래 장소</v-col>
-                        <v-col v-if="item.directDeal == true" cols="8" style="text-align:left">{{item.dealRegion}}</v-col>
-                        <v-col v-else cols="8" style="text-align:left">택배</v-col>
-                        <v-col cols="3" style="text-align:left">상태</v-col>
-                        <v-col cols="8" style="text-align:left">{{ item.available ? "판매중" : "판매 종료" }}</v-col>
-                        
-                        <v-row>
-                        <v-col cols="2.2"><v-btn large style="width:100%" @click="BookMark">찜</v-btn></v-col>
-                        <v-col cols="2.2"><v-btn large color="primary" style="width:100%">문의톡</v-btn></v-col>
-                        <v-col cols="2.2"><v-btn large color="warning" style="width:100%">네고요청</v-btn></v-col>
-                        <v-col cols="2.2"><v-btn large color="error" style="width:100%">바로구매</v-btn></v-col>
+                            <v-col v-if="item.directDeal == true" cols="8" style="text-align:left">직거래</v-col>
+                            <v-col v-if="item.directDeal == true" cols="3" style="text-align:left">직거래 장소</v-col>
+                            <v-col v-if="item.directDeal == true" cols="8" style="text-align:left">{{ item.dealRegion }}</v-col>
+                            <v-col v-else cols="8" style="text-align:left">택배</v-col>
+                            <v-col cols="3" style="text-align:left">상태</v-col>
+                            <v-col cols="8" style="text-align:left">{{ item.available ? "판매중" : "판매 종료" }}</v-col>
+
+                            <v-row>
+                                <v-col cols="2.2">
+                                    <v-btn large style="width:100%" @click="BookMark">찜</v-btn>
+                                </v-col>
+                                <v-col cols="2.2">
+                                    <v-btn large color="primary" style="width:100%">문의톡</v-btn>
+                                </v-col>
+                                <v-col cols="2.2">
+                                    <v-btn large color="warning" style="width:100%">네고요청</v-btn>
+                                </v-col>
+                                <v-col cols="2.2">
+                                    <v-btn large color="error" style="width:100%">바로구매</v-btn>
+                                </v-col>
+                            </v-row>
                         </v-row>
-                    </v-row>
                     </v-col>
-                </v-row>
-        <v-divider />
-    </v-container>
+                </v-flex>
+                <v-divider/>
+            </v-layout>
+        </v-container>
 
-    <!-- <v-col v-for="n in item.image.length" :key="n" class="d-flex child-flex" cols="4">
-        <v-hover v-slot:default="{ hover }">
-            <v-card flat tile class="d-flex" :elevation="hover ? 16 : 2">
-                <v-img :src="item.image[n-1]" aspect-ratio="1" class="grey lighten-2" ></v-img>
-            </v-card>
-        </v-hover>
-    </v-col> -->
-</div>
+        <!-- <v-col v-for="n in item.image.length" :key="n" class="d-flex child-flex" cols="4">
+            <v-hover v-slot:default="{ hover }">
+                <v-card flat tile class="d-flex" :elevation="hover ? 16 : 2">
+                    <v-img :src="item.image[n-1]" aspect-ratio="1" class="grey lighten-2" ></v-img>
+                </v-card>
+            </v-hover>
+        </v-col> -->
+    </div>
 </template>
 
 <script>
@@ -84,13 +113,13 @@ export default {
                 },
                 directDeal: false,
                 dealRegion: "",
-                image: [],
+                image: 0,
                 price: null,
                 registeredAt: null,
             },
             bookMarkList: {
-                    userId: '',
-                    itemId: ''
+                userId: '',
+                itemId: ''
             },
             userId: this.$store.state.user.id,
             star: require('../../../public/images/star.png'),
@@ -116,26 +145,30 @@ export default {
             }
             return null;
         },
+        imgPath(n) {
+            console.log(process.env.VUE_APP_BACKEND)
+            return process.env.VUE_APP_BACKEND + 'api/items/images/' + this.item.id + "_" + n;
+        },
         saveBookMark() {
             var bookMark = JSON.parse(sessionStorage.getItem("bookmark"))
-            if(bookMark == undefined) {
+            if (bookMark == undefined) {
                 bookMark = new Set()
                 bookMark.add(this.item)
             } else {
                 var duplicate = false
-                for(var item of bookMark) {
-                    if(this.item.id == item.id) {
+                for (var item of bookMark) {
+                    if (this.item.id == item.id) {
                         duplicate = true
                         break;
                     }
                 }
-                if(!duplicate) {
-                    bookMark = new Set([... bookMark, this.item])
+                if (!duplicate) {
+                    bookMark = new Set([...bookMark, this.item])
                 }
             }
             sessionStorage.setItem("bookmark", JSON.stringify(bookMark))
         },
-        BookMark(){
+        BookMark() {
             this.bookMarkList.userId = this.userId;
             this.bookMarkList.itemId = this.item.id;
 
@@ -182,8 +215,8 @@ export default {
                 date = vm.item.registeredAt.split("T");
                 vm.time += date[0];
                 vm.time += " ";
-                vm.time += date[1]; 
-       
+                vm.time += date[1];
+
                 // 판매자 정보
                 findUserById(result.seller, function (res) {
                     const result = res.data;
@@ -192,7 +225,7 @@ export default {
                     vm.saveBookMark()
                 });
             },
-            
+
             function (error) {
                 console.error(error);
                 alert('DB에서 상품 상세 정보 조회를 가져올 수 없습니다.');

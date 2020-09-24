@@ -50,6 +50,9 @@ public class CashContractService implements ICashContractService {
     @Value("${eth.encrypted.password}")
     private String PASSWORD;
 
+    @Value("${spring.web3j.client-address}")
+    private String NETWORK_URL;
+
     private CashContract cashContract;
     private ContractGasProvider contractGasProvider = new DefaultGasProvider();
     private Credentials credentials;
@@ -64,23 +67,23 @@ public class CashContractService implements ICashContractService {
      * @return
      */
     @Override
-    public int getBalance(String eoa) throws Exception{
-        
+    public int getBalance(String eoa) throws Exception {
+
         ClassPathResource resource = new ClassPathResource(WALLET_RESOURCE);
-		Path adminWalletFile = Paths.get(resource.getURI());
+        Path adminWalletFile = Paths.get(resource.getURI());
         List<String> content = Files.readAllLines(adminWalletFile);
 
-        web3j = Web3j.build(new HttpService());  // defaults to http://localhost:8545/
-        credentials = WalletUtils.loadJsonCredentials(PASSWORD, content.get(0) );
-        
+        web3j = Web3j.build(new HttpService(NETWORK_URL)); // defaults to http://localhost:8545/
+        credentials = WalletUtils.loadJsonCredentials(PASSWORD, content.get(0));
+
         cashContract = CashContract.load(ERC20_TOKEN_CONTRACT, web3j, credentials, contractGasProvider);
         return cashContract.balanceOf(eoa).send().intValue();
     }
 
     @Override
     public BigInteger buyCash(String eoa, String pk, double chargeAmount) throws Exception {
-        
-        web3j = Web3j.build(new HttpService());  // defaults to http://localhost:8545/
+
+        web3j = Web3j.build(new HttpService(NETWORK_URL)); // defaults to http://localhost:8545/
 
         credentials = Credentials.create(pk);
         cashContract = CashContract.load(ERC20_TOKEN_CONTRACT, web3j, credentials, contractGasProvider);
@@ -91,16 +94,16 @@ public class CashContractService implements ICashContractService {
     }
 
     @Override
-    public String deploy() throws Exception{
+    public String deploy() throws Exception {
 
         ClassPathResource resource = new ClassPathResource(WALLET_RESOURCE);
-		Path adminWalletFile = Paths.get(resource.getURI());
-		List<String> content = Files.readAllLines(adminWalletFile);
+        Path adminWalletFile = Paths.get(resource.getURI());
+        List<String> content = Files.readAllLines(adminWalletFile);
 
-		Web3j web3 = Web3j.build(new HttpService());  // defaults to http://localhost:8545/
-        Credentials credentials = WalletUtils.loadJsonCredentials(PASSWORD, content.get(0) );
+        Web3j web3 = Web3j.build(new HttpService(NETWORK_URL)); // defaults to http://localhost:8545/
+        Credentials credentials = WalletUtils.loadJsonCredentials(PASSWORD, content.get(0));
         cashContract = CashContract.deploy(web3, credentials, contractGasProvider).send();
-        
+
         return cashContract.getContractAddress();
     }
 }

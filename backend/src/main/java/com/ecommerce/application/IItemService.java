@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.util.List;
 
 public interface IItemService {
+	String deploy() throws Exception;
+
 	List<Item> list();
 
 	List<Item> pageList(int page);
@@ -38,4 +40,5 @@ public interface IItemService {
 
 	@Transactional
 	int complete(long id, String eoa, String pk) throws Exception;
+
 }

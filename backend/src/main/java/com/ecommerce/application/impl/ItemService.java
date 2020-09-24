@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 import org.web3j.crypto.Credentials;
+import org.web3j.crypto.WalletUtils;
 import org.web3j.protocol.Web3j;
 import org.web3j.protocol.core.methods.response.TransactionReceipt;
 import org.web3j.protocol.http.HttpService;
@@ -33,6 +34,12 @@ public class ItemService implements IItemService {
 	@Value("${eth.erc20.contract}")
 	private String ERC20_TOKEN_CONTRACT;
 
+	@Value("${eth.item.contract}")
+	private String ITEM_CONTRACT;
+
+	@Value("${eth.purchase.record.contract}")
+	private String PURCHASE_CONTRACT_ADDRESS;
+
 	@Value("${eth.admin.address}")
 	private String ADMIN_ADDRESS;
 
@@ -41,6 +48,9 @@ public class ItemService implements IItemService {
 
 	@Value("${eth.encrypted.password}")
 	private String PASSWORD;
+
+	@Value("${spring.web3j.client-address}")
+	private String NETWORK_URL;
 
 	private IItemRepository itemRepository;
 	private EscrowFactory escrowFactory;
@@ -101,13 +111,11 @@ public class ItemService implements IItemService {
 	public Item register(final Item item) throws Exception {
 		long id = this.itemRepository.create(item);
 
-		Web3j web3 = Web3j.build(new HttpService());
+		Web3j web3 = Web3j.build(new HttpService(NETWORK_URL));
 
 		credentials = Credentials.create(item.getPk());
 
-		String contract = "0xcffB8d211935ec7d1281d391b946259d85cde3AD";
-
-		escrowFactory = EscrowFactory.load(contract, web3, credentials, contractGasProvider);
+		escrowFactory = EscrowFactory.load(ITEM_CONTRACT, web3, credentials, contractGasProvider);
 
 		TransactionReceipt tr = escrowFactory.registerItem(BigInteger.valueOf(id), BigInteger.valueOf(item.getPrice()))
 				.send();
@@ -170,17 +178,29 @@ public class ItemService implements IItemService {
 
 	@Override
 	public int complete(long id, String eoa, String pk) throws Exception {
-		Web3j web3 = Web3j.build(new HttpService());
+		Web3j web3 = Web3j.build(new HttpService(NETWORK_URL));
 		System.out.println(pk);
 		credentials = Credentials.create(pk);
 
-		String contract = "0xcffB8d211935ec7d1281d391b946259d85cde3AD";
-
-		escrowFactory = EscrowFactory.load(contract, web3, credentials, contractGasProvider);
+		escrowFactory = EscrowFactory.load(ITEM_CONTRACT, web3, credentials, contractGasProvider);
 
 		TransactionReceipt tr = escrowFactory.deregisterItem(BigInteger.valueOf(id)).send();
 		// return this.itemRepository.complete(id);
 		return 0;
+	}
+
+	@Override
+	public String deploy() throws Exception {
+		ClassPathResource resource = new ClassPathResource(WALLET_RESOURCE);
+		Path adminWalletFile = Paths.get(resource.getURI());
+		List<String> content = Files.readAllLines(adminWalletFile);
+
+		Web3j web3 = Web3j.build(new HttpService(NETWORK_URL)); // defaults to http://localhost:8545/
+		Credentials credentials = WalletUtils.loadJsonCredentials(PASSWORD, content.get(0));
+		escrowFactory = EscrowFactory
+				.deploy(web3, credentials, contractGasProvider, ERC20_TOKEN_CONTRACT, PURCHASE_CONTRACT_ADDRESS).send();
+
+		return escrowFactory.getContractAddress();
 	}
 
 }

@@ -1,6 +1,7 @@
 package com.ecommerce.api;
 
 import com.ecommerce.application.IItemService;
+import com.ecommerce.application.IPurchaseRecordContractService;
 import com.ecommerce.domain.BasicResponse;
 import com.ecommerce.domain.Cash;
 import com.ecommerce.domain.Item;
@@ -41,6 +42,9 @@ public class ItemController {
 	public static final Logger logger = LoggerFactory.getLogger(ItemController.class);
 
 	private IItemService itemService;
+
+	@Autowired
+	private IPurchaseRecordContractService purchaseRecordContractService;
 
 	@Value("${testingvalue}")
 	private String test;
@@ -164,6 +168,28 @@ public class ItemController {
 		return itemService.complete(id, cash.getWalletAddress(), cash.getPrivateKey());
 	}
 
+	@RequestMapping(value = "/items/purchaserecord", method = RequestMethod.GET)
+	public String deployPurchseRecord() throws Exception {
+		String answer = null;
+		try {
+			answer = purchaseRecordContractService.deploy();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return answer;
+	}
+
+	@RequestMapping(value = "/items/deploy", method = RequestMethod.GET)
+	public String deployItem() throws Exception {
+		String answer = null;
+		try {
+			answer = itemService.deploy();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return answer;
+	}
+
 	@ApiOperation(value = "Update an item")
 	@RequestMapping(value = "/items", method = RequestMethod.PUT)
 	public Item update(@RequestBody Item item) {
@@ -184,7 +210,7 @@ public class ItemController {
 		if (baseDir.substring(0, 1).equals("C")) {
 			baseDir = "C:/Users/multicampus/images/";
 		} else {
-			baseDir = "/home/ubuntu/dist/server/image/";
+			baseDir = "/home/ubuntu/deploy/backend/itemImage/";
 		}
 		File folder = new File(baseDir);
 
@@ -225,7 +251,7 @@ public class ItemController {
 		if (baseDir.substring(0, 1).equals("C")) {
 			baseDir = "C:/Users/multicampus/images/";
 		} else {
-			baseDir = "/home/ubuntu/dist/server/image/";
+			baseDir = "/home/ubuntu/deploy/backend/itemImage/";
 		}
 		String fileName = baseDir + id + ".jpg";
 
