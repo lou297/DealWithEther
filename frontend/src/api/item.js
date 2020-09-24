@@ -16,9 +16,9 @@ function findByCategory(keyword, page, success, fail) {
         .catch(fail);
 }
 
-function findByMainCategory(keyword, success, fail) {
+function findByMainCategory(category, success, fail) {
     instance
-        .get("/api/items/category/" + keyword)
+        .get("/api/items/category/" + category)
         .then(success)
         .catch(fail);
 }

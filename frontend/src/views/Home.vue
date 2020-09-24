@@ -16,75 +16,30 @@
     </div>
 
     <v-card color="basil" >
-    <v-card-title class="text-center justify-center py-6">
-      <h1 class="font-weight-bold text-secondary">카테고리별 인기상품</h1>
-    </v-card-title>
+        <v-card-title class="text-center justify-center py-6">
+        <h1 class="font-weight-bold text-secondary">카테고리별 인기상품</h1>
+        </v-card-title>
+        <v-tabs v-model="tab" background-color="transparent" color="basil" grow>
+        <v-tab v-for="item in items" :key="item" class="font-weight-bold"  @click="getCategory(item)" style="font-family: 'Jua', sans-serif; font-size:18px;">{{ item }}</v-tab>
+        </v-tabs>
 
-    <v-tabs v-model="tab" background-color="transparent" color="basil" grow>
-      <v-tab v-for="item in items" :key="item" class="font-weight-bold"  @click="category(item)" style="font-family: 'Jua', sans-serif; font-size:18px;">
-        {{ item }}
-      </v-tab>
-    </v-tabs>
-
-    <v-tabs-items v-model="tab">
-      <v-tab-item v-for="item in items" :key="item">
-        <v-card color="basil" flat>
-          <v-card-text>
-              <div class="row">
-                    <v-flex xs12 sm12 md6 lg4 xl3
-                            class="col-md-3 artwork"
-                            v-for="item in items"
-                            v-bind:key="item.id">
-                        <item-card :item="item" @clicked="onClickItem(item.id)"></item-card>
-                    </v-flex>
-               </div>
-          </v-card-text>
-        </v-card>
-      </v-tab-item>
-    </v-tabs-items>
-    </v-card>
-
-    
-
-
-        <div id="main-overview" class="container" style="margin-top: 52px;">
-            <v-row>
-                <v-col>
-<!--         
-                    <v-carousel hide-delimiters style="margin-top: 10px; height: 300px; padding:15px 15px 0 15px;">
-                        <v-carousel-item
-                            v-for="(item,i) in items2"
-                            :key="i"
-                        >
-                            <img :src="item.src" style="height:57%; width:100%">
-                        </v-carousel-item>
-                    </v-carousel> -->
-                    <br>
-
-                    <div class="row">
+        <v-tabs-items v-model="tab">
+        <v-tab-item v-for="item in items" :key="item">
+            <v-card color="basil" flat>
+            <v-card-text>
+                <div class="row">
                         <v-flex xs12 sm12 md6 lg4 xl3
                                 class="col-md-3 artwork"
-                                v-for="item in items"
+                                v-for="item in itemlist"
                                 v-bind:key="item.id">
                             <item-card :item="item" @clicked="onClickItem(item.id)"></item-card>
                         </v-flex>
-                    </div>
-                    <div class="text-center">
-                        <v-pagination
-                            v-model="page"
-                            :circle="circle"
-                            :disabled="disabled"
-                            :length="length"
-                            :next-icon="nextIcon"
-                            :prev-icon="prevIcon"
-                            :page="page"
-                            :total-visible="totalVisible"
-                        ></v-pagination>
-                    </div>
-
-                </v-col>
-            </v-row>
-        </div>
+                </div>
+            </v-card-text>
+            </v-card>
+        </v-tab-item>
+        </v-tabs-items>
+    </v-card>
     </div>
 </template>
 
@@ -98,26 +53,12 @@ import {mdiAccount} from '@mdi/js';
 import {findAll} from "@/api/item";
 import {getPrice} from "@/utils/itemInventory";
 import ItemCard from "@/components/shop/ItemCard";
-import {findByMainCategory} from "@/api/item";
+import {findByMainCategory} from "@/api/item.js";
 
 export default {
     data() {
         return {
-            items2: [
-                {
-                    src: require('../../public/images/test.jpg')
-                },
-                {
-                    src: 'https://cdn.vuetifyjs.com/images/carousel/sky.jpg'
-                },
-                {
-                    src: 'https://cdn.vuetifyjs.com/images/carousel/bird.jpg'
-                },
-                {
-                    src: 'https://cdn.vuetifyjs.com/images/carousel/planet.jpg'
-                }
-            ],
-            items: [],
+            itemlist: [],
             circle: false,
             disabled: false,
             length: 30,
@@ -125,16 +66,6 @@ export default {
             prevIcon: 'navigate_before',
             page: 1,
             totalVisible: 10,
-            links: [
-                '패션/잡화',
-                '뷰티/미용',
-                '디지털/가전',
-                '유아물품',
-                '도서/티켓',
-                '스포츠/레저',
-                '생활/문구/가구',
-                '기타',
-            ],
             tab: null,
             items: [
                 '패션/잡화',
@@ -155,7 +86,6 @@ export default {
         ItemCard
     },
     mounted: function () {
-        const vm = this;
 
         // findAll(function (response) {
         //     if (response.data.length > 0) {
@@ -180,22 +110,20 @@ export default {
         onClickItem(itemId) {
             this.$router.push("item/detail/" + itemId);
         },
-        category(category){ // 카테고리 누르면 받아오기
+        getCategory(category){ // 카테고리 누르면 받아오기
             console.log(category);
             const vm = this;
             findByMainCategory(
                 category,
                 function(success){ // 가져온 카테고리별 리스트 보여주기
-                    vm.items = success.data;
+                    vm.itemlist = success.data;
+                    console.log(vm.itemlist);
                 },
                 function(fail){
                     console.log('카테고리 목록 가져오기 실패!');
                 }
             )
         }
-    },
-    created() {
-        $("h1:contains('중')").css({color:"red"});
     },
 };
 </script>
