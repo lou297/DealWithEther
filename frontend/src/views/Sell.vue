@@ -1,56 +1,57 @@
 <template>
     <div>
+        <h-nav></h-nav>
         <h-breadcrumb title="상품 등록" style="margin:0px; padding-top:0px;"></h-breadcrumb>
         <div id="main-overview" class="container">
             <v-container>
-                <v-layout>
-                    <v-flex xl6 lg6 md6 sm12 xs12>
-                        <v-flex xl8 lg8 md8 sm8 xs8>
-                            <v-card>
-                                <v-container fluid xl10>
-                                    <v-row>
-                                        <v-col class="d-flex child-flex" cols="4">
-                                            <v-hover v-slot:default="{ hover }">
-                                                <div class="form-group">
-                                                    <v-card flat tile class="d-flex" :elevation="hover ? 16 : 2">
-                                                        <v-img
-                                                            src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2F20150805_174%2Feco33j_14387587048977dTo3_PNG%2F20150805_161129.png&type=sc960_832"
-                                                            aspect-ratio="1"
-                                                            class="grey lighten-2"
-                                                            @click="onImageClick"
-                                                        >
-                                                            <input
-                                                                ref="uploader"
-                                                                type="file"
-                                                                multiple
-                                                                accept="image/*"
-                                                                @change="onFileChange"
-                                                                hidden
-                                                            />
-                                                        </v-img>
-                                                    </v-card>
-                                                </div>
-                                            </v-hover>
-                                        </v-col>
-                                        <v-col v-for="n in image.length" :key="n" class="d-flex child-flex" cols="4">
-                                            <v-hover v-slot:default="{ hover }">
+                <v-layout row>
+                    <v-flex xl5 lg5 md5 sm12 xs12>
+                        <v-card>
+                            <v-container fluid xl10>
+                                <v-row>
+                                    <v-col class="d-flex child-flex" cols="4">
+                                        <v-hover v-slot:default="{ hover }">
+                                            <div class="form-group">
                                                 <v-card flat tile class="d-flex" :elevation="hover ? 16 : 2">
                                                     <v-img
-                                                        :src="image[n-1]"
+                                                        src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2F20150805_174%2Feco33j_14387587048977dTo3_PNG%2F20150805_161129.png&type=sc960_832"
                                                         aspect-ratio="1"
                                                         class="grey lighten-2"
-                                                        @click="removeImage(n-1)"
-                                                    ></v-img>
+                                                        @click="onImageClick"
+                                                    >
+                                                        <input
+                                                            ref="uploader"
+                                                            type="file"
+                                                            multiple
+                                                            accept="image/*"
+                                                            @change="onFileChange"
+                                                            hidden
+                                                        />
+                                                    </v-img>
                                                 </v-card>
-                                            </v-hover>
-                                        </v-col>
-                                    </v-row>
-                                </v-container>
-                            </v-card>
-                        </v-flex>
+                                            </div>
+                                        </v-hover>
+                                    </v-col>
+                                    <v-col v-for="n in image.length" :key="n" class="d-flex child-flex" cols="4">
+                                        <v-hover v-slot:default="{ hover }">
+                                            <v-card flat tile class="d-flex" :elevation="hover ? 16 : 2">
+                                                <v-img
+                                                    :src="image[n-1]"
+                                                    aspect-ratio="1"
+                                                    class="grey lighten-2"
+                                                    @click="removeImage(n-1)"
+                                                ></v-img>
+                                            </v-card>
+                                        </v-hover>
+                                    </v-col>
+                                </v-row>
+                            </v-container>
+                        </v-card>
                     </v-flex>
-
-                    <v-flex xl6 lg6 md6 sm12 xs12>
+                    <v-flex xl2 lg2 md2 sm0 xs0>
+                        <span></span>
+                    </v-flex>
+                    <v-flex xl5 lg5 md5 sm0 xs0>
                         <v-form ref="form" v-model="valid" lazy-validation>
                             <v-text-field v-model="item.name" :counter="10" label="상품 이름" required></v-text-field>
                             <v-select
@@ -87,9 +88,13 @@ import {create as createItem} from "@/api/item.js";
 import {save as savaImage} from "@/api/item.js";
 import {registerItem} from "@/utils/itemInventory.js";
 import * as walletService from "@/api/wallet.js";
+import HNav from "../components/common/HNav copy";
 
 export default {
     name: "ItemCreate",
+    components: {
+        HNav,
+    },
     data() {
         return {
             files: [],
