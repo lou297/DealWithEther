@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface IPurchaseRecordContractService {
     List<Record> getHistory(final String escrowContractAddress);
+
+    String deploy() throws Exception;
 }

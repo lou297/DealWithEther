@@ -52,6 +52,9 @@ public class EthereumService implements IEthereumService {
 	@Value("${eth.admin.wallet.filename}")
 	private String ADMIN_WALLET_FILE;
 
+	@Value("${spring.web3j.client-address}")
+	private String NETWORK_URL;
+
 	private ITransactionRepository transactionRepository;
 
 	@Autowired
@@ -88,12 +91,10 @@ public class EthereumService implements IEthereumService {
 		Path adminWalletFile = Paths.get(resource.getURI());
 		List<String> content = Files.readAllLines(adminWalletFile);
 
-		web3j = Web3j.build(new HttpService("http://j3a103.p.ssafy.io:8545"));  // defaults to http://localhost:8545/
-		Credentials credentials = WalletUtils.loadJsonCredentials(PASSWORD, content.get(0) );
-		TransactionReceipt transactionReceipt = Transfer.sendFunds(
-			web3j, credentials, address,
-			BigDecimal.valueOf(10), Convert.Unit.ETHER
-		).send();
+		web3j = Web3j.build(new HttpService(NETWORK_URL)); // defaults to http://localhost:8545/
+		Credentials credentials = WalletUtils.loadJsonCredentials(PASSWORD, content.get(0));
+		TransactionReceipt transactionReceipt = Transfer
+				.sendFunds(web3j, credentials, address, BigDecimal.valueOf(10), Convert.Unit.ETHER).send();
 		return transactionReceipt.getTransactionHash();
 	}
 

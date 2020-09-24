@@ -1,6 +1,7 @@
 package com.ecommerce.api;
 
 import com.ecommerce.application.IItemService;
+import com.ecommerce.application.IPurchaseRecordContractService;
 import com.ecommerce.domain.BasicResponse;
 import com.ecommerce.domain.Cash;
 import com.ecommerce.domain.Item;
@@ -41,6 +42,9 @@ public class ItemController {
 	public static final Logger logger = LoggerFactory.getLogger(ItemController.class);
 
 	private IItemService itemService;
+
+	@Autowired
+	private IPurchaseRecordContractService purchaseRecordContractService;
 
 	@Value("${testingvalue}")
 	private String test;
@@ -150,6 +154,28 @@ public class ItemController {
 	public int delete(@PathVariable long id, @RequestBody Cash cash) throws Exception {
 		// return itemService.delete(id);
 		return itemService.complete(id, cash.getWalletAddress(), cash.getPrivateKey());
+	}
+
+	@RequestMapping(value = "/items/purchaserecord", method = RequestMethod.GET)
+	public String deployPurchseRecord() throws Exception {
+		String answer = null;
+		try {
+			answer = purchaseRecordContractService.deploy();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return answer;
+	}
+
+	@RequestMapping(value = "/items/deploy", method = RequestMethod.GET)
+	public String deployItem() throws Exception {
+		String answer = null;
+		try {
+			answer = itemService.deploy();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return answer;
 	}
 
 	@ApiOperation(value = "Update an item")
