@@ -116,7 +116,7 @@ public class ItemRepository implements IItemRepository {
 			paramMap.put("available", true);
 			paramMap.put("seller", item.getSeller());
 			paramMap.put("registered_at", now);
-			paramMap.put("image", item.getImage());
+			paramMap.put("image", 0);
 			paramMap.put("price", item.getPrice());
 			paramMap.put("direct_deal", item.isDirectDeal());
 			if (item.isDirectDeal()) {
