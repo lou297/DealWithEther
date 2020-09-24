@@ -63,70 +63,73 @@ public class WalletService implements IWalletService {
 	@Override
 	public Wallet get(final long userId) {
 		Wallet wallet = walletRepository.get(userId);
-		
+
 		// Web3j web3 = Web3j.build(new HttpService("http://localhost:8545/"));
 		// EthGetBalance balanceWei = null;
 		// try {
-		// 	balanceWei = web3.ethGetBalance(wallet.getAddress(), DefaultBlockParameterName.LATEST).send();
+		// balanceWei = web3.ethGetBalance(wallet.getAddress(),
+		// DefaultBlockParameterName.LATEST).send();
 		// } catch (IOException e) {
-		// 	e.printStackTrace();
+		// e.printStackTrace();
 		// }
-		// BigDecimal balanceInEther = Convert.fromWei(balanceWei.getBalance().toString(), Unit.ETHER);
+		// BigDecimal balanceInEther =
+		// Convert.fromWei(balanceWei.getBalance().toString(), Unit.ETHER);
 		// wallet.setBalance(balanceInEther);
 		// this.syncBalance(wallet.getAddress(), balanceInEther, 0);
 
-
 		return wallet;
 	}
+
 	/**
 	 * 지갑을 DB에 등록한다.
+	 * 
 	 * @param wallet
 	 * @return
 	 */
 	@Override
-	public Wallet register(final Wallet wallet)
-	{
+	public Wallet register(final Wallet wallet) {
 		walletRepository.create(wallet);
 		return wallet;
 	}
 
 	/**
 	 * DB에 저장된 지갑주소의 정보와 이더리움의 잔액 정보를 동기화한다.
+	 * 
 	 * @param walletAddress
 	 * @return Wallet
 	 */
 	@Override
-	public Wallet syncBalance(final String walletAddress, final BigDecimal balance, final int cash)
-	{
+	public Wallet syncBalance(final String walletAddress, final BigDecimal balance, final int cash) {
 		walletRepository.updateBalance(walletAddress, balance, cash);
 		return walletRepository.get(walletAddress);
 	}
 
 	/**
-	 * [지갑주소]로 이더를 송금하는 충전 기능을 구현한다.
-	 * 무한정 충전을 요청할 수 없도록 조건을 두어도 좋다.
+	 * [지갑주소]로 이더를 송금하는 충전 기능을 구현한다. 무한정 충전을 요청할 수 없도록 조건을 두어도 좋다.
+	 * 
 	 * @param walletAddress
 	 * @return Wallet
 	 */
 	@Override
-	public Wallet requestEth(String walletAddress) throws Exception{
+	public Wallet requestEth(String walletAddress) throws Exception {
 		// if(wallet.getReceivingCount() >= 20) throw new Exception();
 		ethereumService.requestEth(walletAddress);
 		Wallet wallet = walletRepository.get(walletAddress);
 
 		walletRepository.updateRequestNo(walletAddress);
-		wallet.setReceivingCount(wallet.getReceivingCount()+1);
-		
-		walletRepository.updateBalance(walletAddress, wallet.getBalance().add(BigDecimal.valueOf(10)), wallet.getCash());
+		wallet.setReceivingCount(wallet.getReceivingCount() + 1);
+
+		walletRepository.updateBalance(walletAddress, wallet.getBalance().add(BigDecimal.valueOf(10)),
+				wallet.getCash());
 		wallet.setBalance(wallet.getBalance().add(BigDecimal.valueOf(10)));
 		return wallet;
 	}
 
-	public Wallet buyCash(String walletAddress, String pk, double chargeAmount) throws Exception{
+	public Wallet buyCash(String walletAddress, String pk, double chargeAmount) throws Exception {
 		BigInteger balance = cashContractService.buyCash(walletAddress, pk, chargeAmount);
 		Wallet wallet = walletRepository.get(walletAddress);
 
-		Web3j web3 = Web3j.build(new HttpService("http://localhost:8545/"));
+		Web3j web3 = Web3j.build(new HttpService("http://j3a103.p.ssafy.io:8545/"));
 		EthGetBalance balanceWei = null;
 		try {
 			balanceWei = web3.ethGetBalance(wallet.getAddress(), DefaultBlockParameterName.LATEST).send();
@@ -134,8 +137,8 @@ public class WalletService implements IWalletService {
 			e.printStackTrace();
 		}
 		BigDecimal balanceInEther = Convert.fromWei(balanceWei.getBalance().toString(), Unit.ETHER);
-		this.syncBalance(wallet.getAddress(), balanceInEther, balance.intValue() );
-		
+		this.syncBalance(wallet.getAddress(), balanceInEther, balance.intValue());
+
 		wallet.setBalance(balanceInEther);
 		wallet.setCash(balance.intValue());
 
