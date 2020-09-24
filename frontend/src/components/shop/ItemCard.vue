@@ -1,34 +1,37 @@
 <template>
-    <v-card
-        class="mx-auto"
-        max-width="400"
-    >
-        <v-img
-            class="white--text align-end"
-            height="200px"
-            :src="imgPath"
+    <v-hover v-slot:default="{ hover }">
+        <v-card
+            class="item-card mx-auto"
+            max-width="400"
+            :elevation="hover ? 16 : 2"
             @click.prevent="$emit('clicked')" href=""
         >
-        </v-img>
-        <v-card-title class="title">{{ item.name }}</v-card-title>
-        <v-card-subtitle class="pb-0">{{ item.price }} CASH</v-card-subtitle>
-        <v-card-actions>
-            <v-btn color="orange" text>
-                Share
-            </v-btn>
-
-            <v-btn color="orange" text>
-                Explore
-            </v-btn>
-            <v-spacer></v-spacer>
-            <v-btn icon>
-                <v-icon>mdi-heart</v-icon>
-            </v-btn>
-            <v-btn icon>
-                <v-icon>mdi-share-variant</v-icon>
-            </v-btn>
-        </v-card-actions>
-    </v-card>
+            <v-img
+                class="white--text align-end"
+                min-height="350"
+                :src="imgPath"
+            >
+            </v-img>
+            <v-card-title>{{ item.name }}</v-card-title>
+            <v-card-subtitle align="left">{{ item.price }} CASH</v-card-subtitle>
+            <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn
+                    color="red accent-4"
+                    icon
+                    @click.stop="alert('click')"
+                >
+                    <v-icon middle color="red accent-4" icon>mdi-heart</v-icon>
+                </v-btn>
+                <v-btn
+                    icon
+                    @click.stop="alert('click')"
+                >
+                    <v-icon>mdi-share-variant</v-icon>
+                </v-btn>
+            </v-card-actions>
+        </v-card>
+    </v-hover>
 </template>
 
 <script>
@@ -36,7 +39,7 @@ export default {
     props: ['item'],
     computed: {
         imgPath() {
-            console.log( process.env.VUE_APP_BACKEND)
+            console.log(process.env.VUE_APP_BACKEND)
             return process.env.VUE_APP_BACKEND + 'api/items/images/' + this.item.id + "_1";
             // return "https://picsum.photos/id/11/100/60";
         }
@@ -48,11 +51,6 @@ export default {
 .item-card img {
     height: 180px;
     width: 180px;
-}
-
-.item-card:hover {
-    text-decoration: underline !important;
-    border: 1.2px solid #0070bc;
 }
 
 </style>
