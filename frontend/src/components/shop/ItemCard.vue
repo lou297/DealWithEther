@@ -32,11 +32,13 @@
 </template>
 
 <script>
+import {download as downloadImage} from "@/api/item";
+
 export default {
     props: ['item'],
     computed: {
         imgPath() {
-            return process.env.BASE_URL + 'images/' + this.item.id + "_1";
+            return downloadImage(this.item.id, console.log('success'), console.log('fail'));
             // return "https://picsum.photos/id/11/100/60";
         }
     }
