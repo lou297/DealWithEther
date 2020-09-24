@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
+import org.springframework.util.FileCopyUtils;
 import org.web3j.abi.FunctionEncoder;
 import org.web3j.abi.datatypes.Function;
 import org.web3j.crypto.Credentials;
@@ -27,6 +28,7 @@ import org.web3j.tx.gas.DefaultGasProvider;
 
 import java.io.IOException;
 import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -70,11 +72,13 @@ public class CashContractService implements ICashContractService {
     public int getBalance(String eoa) throws Exception {
 
         ClassPathResource resource = new ClassPathResource(WALLET_RESOURCE);
-        Path adminWalletFile = Paths.get(resource.getURI());
-        List<String> content = Files.readAllLines(adminWalletFile);
+        // Path adminWalletFile = Paths.get(resource.getURI());
+        // List<String> content = Files.readAllLines(adminWalletFile);
+        byte[] bdata = FileCopyUtils.copyToByteArray(resource.getInputStream());
+        String data = new String(bdata, StandardCharsets.UTF_8);
 
         web3j = Web3j.build(new HttpService(NETWORK_URL)); // defaults to http://localhost:8545/
-        credentials = WalletUtils.loadJsonCredentials(PASSWORD, content.get(0));
+        credentials = WalletUtils.loadJsonCredentials(PASSWORD, data);
 
         cashContract = CashContract.load(ERC20_TOKEN_CONTRACT, web3j, credentials, contractGasProvider);
         return cashContract.balanceOf(eoa).send().intValue();
@@ -97,11 +101,13 @@ public class CashContractService implements ICashContractService {
     public String deploy() throws Exception {
 
         ClassPathResource resource = new ClassPathResource(WALLET_RESOURCE);
-        Path adminWalletFile = Paths.get(resource.getURI());
-        List<String> content = Files.readAllLines(adminWalletFile);
+        // Path adminWalletFile = Paths.get(resource.getURI());
+        // List<String> content = Files.readAllLines(adminWalletFile);
+        byte[] bdata = FileCopyUtils.copyToByteArray(resource.getInputStream());
+        String data = new String(bdata, StandardCharsets.UTF_8);
 
         Web3j web3 = Web3j.build(new HttpService(NETWORK_URL)); // defaults to http://localhost:8545/
-        Credentials credentials = WalletUtils.loadJsonCredentials(PASSWORD, content.get(0));
+        Credentials credentials = WalletUtils.loadJsonCredentials(PASSWORD, data);
         cashContract = CashContract.deploy(web3, credentials, contractGasProvider).send();
 
         return cashContract.getContractAddress();
