@@ -89,6 +89,7 @@ public class EthereumService implements IEthereumService {
 	{
 		System.out.println(ADMIN_WALLET_FILE);
 		ClassPathResource resource = new ClassPathResource(ADMIN_WALLET_FILE);
+		System.out.println(resource.getURI());
 		Path adminWalletFile = Paths.get(resource.getURI());
 		List<String> content = Files.readAllLines(adminWalletFile);
 		System.out.println("이더리움 서비스의 requestEth 93번째 줄");
