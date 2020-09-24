@@ -42,6 +42,9 @@ public class ItemService implements IItemService {
 	@Value("${eth.encrypted.password}")
 	private String PASSWORD;
 
+	@Value("${spring.web3j.client-address}")
+	private String NETWORK_URL;
+
 	private IItemRepository itemRepository;
 	private EscrowFactory escrowFactory;
 	private ContractGasProvider contractGasProvider = new DefaultGasProvider();
@@ -96,7 +99,7 @@ public class ItemService implements IItemService {
 	public Item register(final Item item) throws Exception {
 		long id = this.itemRepository.create(item);
 
-		Web3j web3 = Web3j.build(new HttpService());
+		Web3j web3 = Web3j.build(new HttpService(NETWORK_URL));
 
 		credentials = Credentials.create(item.getPk());
 
@@ -165,7 +168,7 @@ public class ItemService implements IItemService {
 
 	@Override
 	public int complete(long id, String eoa, String pk) throws Exception {
-		Web3j web3 = Web3j.build(new HttpService());
+		Web3j web3 = Web3j.build(new HttpService(NETWORK_URL));
 		System.out.println(pk);
 		credentials = Credentials.create(pk);
 
