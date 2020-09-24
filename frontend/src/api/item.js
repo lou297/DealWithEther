@@ -83,6 +83,14 @@ function save(data, id, success, fail, final) {
     .finally(final);
 }
 
+function download(id, success, fail, final) {
+    instance
+        .get("/api/items/images/" + id)
+        .then(success)
+        .catch(fail)
+        .finally(final);
+}
+
 function update(body, success, fail) {
     instance
         .put("/api/items", JSON.stringify(body))
@@ -128,4 +136,5 @@ export {
     confirm,
     findMySaleItems,
     findByName,
+    download,
 };
