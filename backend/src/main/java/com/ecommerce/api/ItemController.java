@@ -172,7 +172,7 @@ public class ItemController {
 		if (baseDir.substring(0, 1).equals("C")) {
 			baseDir = "C:/Users/multicampus/images/";
 		} else {
-			baseDir = "/home/ubuntu/deploy/server/itemImage/";
+			baseDir = "/home/ubuntu/deploy/backend/itemImage/";
 		}
 		File folder = new File(baseDir);
 
@@ -213,7 +213,7 @@ public class ItemController {
 		if (baseDir.substring(0, 1).equals("C")) {
 			baseDir = "C:/Users/multicampus/images/";
 		} else {
-			baseDir = "/home/ubuntu/dist/server/image/";
+			baseDir = "/home/ubuntu/deploy/backend/itemImage/";
 		}
 		String fileName = baseDir + id + ".jpg";
 
