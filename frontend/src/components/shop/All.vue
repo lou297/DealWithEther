@@ -1,5 +1,6 @@
 <template>
     <div>
+        <h-nav></h-nav>
         <h-shop-categories :category="'전체보기'"></h-shop-categories>
         <v-container>
             <ul>
@@ -79,11 +80,13 @@ import {findAll, findByCategory, findByName} from "@/api/item.js";
 import HShopCategories from "./HShopCategories.vue";
 import ItemCard from "./ItemCard.vue";
 import {getPrice} from '@/utils/itemInventory.js';
+import HNav from "@/components/common/HNav copy";
 
 export default {
     components: {
         HShopCategories,
-        ItemCard
+        ItemCard,
+        HNav,
     },
     data() {
         return {
@@ -151,6 +154,8 @@ export default {
                                 }
                             )
                         })
+                    }else{
+                        vm.items = response.data;
                     }
                 },
                 err => {
@@ -175,6 +180,8 @@ export default {
                                 }
                             )
                         })
+                    }else{
+                        vm.items = response.data;
                     }
                 },
                 err => {
@@ -199,6 +206,8 @@ export default {
                                 }
                             )
                         })
+                    }else{
+                        vm.items = response.data;
                     }
                 },
                 err => {

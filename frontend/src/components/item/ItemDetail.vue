@@ -1,34 +1,35 @@
 <template>
     <div>
+        <h-nav></h-nav>
         <h-breadcrumb title="상품 상세 보기"></h-breadcrumb>
         <v-container>
-            <v-layout>
-                <v-flex xl6 lg6 md6 sm12 xs12>
-                    <v-flex xl11 lg11 md11 sm11 xs11>
-                        <v-carousel
-                            cycle
-                            hide-delimiter-background
-                            show-arrows-on-hover
-                        >
-                            <v-carousel-item v-for="n in item.image" :key="n">
-                                <v-sheet height="100%">
-                                    <v-row
-                                        class="fill-height"
-                                        align="center"
-                                        justify="center"
-                                    >
-                                        <v-img
-                                            :src="imgPath(n)"
-                                            aspect-ratio="1"
-                                            class="grey lighten-2"
-                                        ></v-img>
-                                    </v-row>
-                                </v-sheet>
-                            </v-carousel-item>
-                        </v-carousel>
-                    </v-flex>
+            <v-layout row>
+                <v-flex col xl5 lg5 md5 sm12 xs12>
+                    <v-carousel
+                        cycle
+                        hide-delimiter-background
+                        show-arrows-on-hover
+                    >
+                        <v-carousel-item v-for="n in item.image" :key="n">
+                            <v-sheet height="100%">
+                                <v-row
+                                    class="fill-height"
+                                    align="center"
+                                    justify="center"
+                                >
+                                    <v-img
+                                        :src="imgPath(n)"
+                                        aspect-ratio="1"
+                                        class="grey lighten-2"
+                                    ></v-img>
+                                </v-row>
+                            </v-sheet>
+                        </v-carousel-item>
+                    </v-carousel>
                 </v-flex>
-                <v-flex xl6 lg6 md6 sm12 xs12>
+                <v-flex xl1 lg1 md1 sm0 xs0>
+                </v-flex>
+                <v-flex col xl6 lg6 md6 sm12 xs12>
                     <v-col>
                         <v-row>
                             <v-col style="float:left; text-align:left"><h5>{{ item.explanation }}</h5></v-col>
@@ -90,9 +91,13 @@ import {getPrice} from '@/utils/itemInventory.js';
 import {findById} from '@/api/item.js';
 import {CATEGORY} from '@/utils/category.js';
 import {bookMarkSave} from "@/api/bookmark.js";
+import HNav from "../../components/common/HNav copy";
 
 export default {
     name: 'ItemDetail',
+    components: {
+        HNav,
+    },
     data() {
         return {
             item: {
