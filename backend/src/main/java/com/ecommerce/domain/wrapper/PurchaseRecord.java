@@ -45,7 +45,7 @@ import org.web3j.tx.gas.ContractGasProvider;
  * Generated with web3j version 4.5.16.
  */
 @SuppressWarnings("rawtypes")
-public class PurchaseRecordContract extends Contract {
+public class PurchaseRecord extends Contract {
     public static final String BINARY = "608060405234801561001057600080fd5b5060008054336001600160a01b0319918216811783556001805490921617905561057890819061004090396000f3fe608060405234801561001057600080fd5b50600436106100a95760003560e01c80638ff06ab7116100715780638ff06ab71461016c578063cdb8acf014610192578063d96bfe0e14610202578063f2fde38b1461023e578063f851a44014610264578063fa89401a1461026c576100a9565b806312ad9f6e146100ae578063517807e4146100d65780636452fca1146100fc57806382b46df4146101225780638da5cb5b14610148575b600080fd5b6100d4600480360360208110156100c457600080fd5b50356001600160a01b0316610292565b005b6100d4600480360360208110156100ec57600080fd5b50356001600160a01b03166102bf565b6100d46004803603602081101561011257600080fd5b50356001600160a01b03166102cb565b6100d46004803603602081101561013857600080fd5b50356001600160a01b03166102e9565b610150610307565b604080516001600160a01b039092168252519081900360200190f35b6100d46004803603602081101561018257600080fd5b50356001600160a01b0316610316565b6101be600480360360408110156101a857600080fd5b506001600160a01b038135169060200135610334565b604051808460068111156101ce57fe5b60ff168152602001838152602001826001600160a01b03166001600160a01b03168152602001935050505060405180910390f35b6102286004803603602081101561021857600080fd5b50356001600160a01b0316610374565b6040805160ff9092168252519081900360200190f35b6100d46004803603602081101561025457600080fd5b50356001600160a01b0316610392565b610150610417565b6100d46004803603602081101561028257600080fd5b50356001600160a01b0316610426565b61029b33610444565b6102a457600080fd5b6102b081600333610464565b6102bc81600630610464565b50565b6102bc81600033610464565b6102d433610444565b6102dd57600080fd5b6102bc81600133610464565b6102f233610444565b6102fb57600080fd5b6102b081600433610464565b6000546001600160a01b031681565b61031f33610444565b61032857600080fd5b6102bc81600233610464565b6001600160a01b03918216600090815260026020818152604080842085855280835290842080546001820154969095529152015460ff9091169391921690565b6001600160a01b031660009081526003602052604090205460ff1690565b6000546001600160a01b031633146103a957600080fd5b6001600160a01b0381166103bc57600080fd5b600080546040516001600160a01b03808516939216917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e091a3600080546001600160a01b0319166001600160a01b0392909216919091179055565b6001546001600160a01b031681565b61042f33610444565b61043857600080fd5b6102b081600533610464565b6001600160a01b031660009081526003602052604090205460ff16151590565b6001600160a01b038316600090815260036020526040908190205481516060810190925260ff16908084600681111561049957fe5b8152426020808301919091526001600160a01b03808616604093840152871660009081526002825282812060ff861682529091522081518154829060ff191660018360068111156104e657fe5b0217905550602082810151600183810191909155604093840151600290930180546001600160a01b0319166001600160a01b03948516179055969091166000908152600390915220805460ff19169190940160ff1617909255505056fea265627a7a7231582084dbc13d3f11b1a1f026c9aca9771d02ae3158018d5a2b695300dfdba0437ac664736f6c634300050c0032";
 
     public static final String FUNC_ADDPURCHASE = "addPurchase";
@@ -76,23 +76,23 @@ public class PurchaseRecordContract extends Contract {
             }));;
 
     @Deprecated
-    protected PurchaseRecordContract(String contractAddress, Web3j web3j, Credentials credentials, BigInteger gasPrice,
+    protected PurchaseRecord(String contractAddress, Web3j web3j, Credentials credentials, BigInteger gasPrice,
             BigInteger gasLimit) {
         super(BINARY, contractAddress, web3j, credentials, gasPrice, gasLimit);
     }
 
-    protected PurchaseRecordContract(String contractAddress, Web3j web3j, Credentials credentials,
+    protected PurchaseRecord(String contractAddress, Web3j web3j, Credentials credentials,
             ContractGasProvider contractGasProvider) {
         super(BINARY, contractAddress, web3j, credentials, contractGasProvider);
     }
 
     @Deprecated
-    protected PurchaseRecordContract(String contractAddress, Web3j web3j, TransactionManager transactionManager,
+    protected PurchaseRecord(String contractAddress, Web3j web3j, TransactionManager transactionManager,
             BigInteger gasPrice, BigInteger gasLimit) {
         super(BINARY, contractAddress, web3j, transactionManager, gasPrice, gasLimit);
     }
 
-    protected PurchaseRecordContract(String contractAddress, Web3j web3j, TransactionManager transactionManager,
+    protected PurchaseRecord(String contractAddress, Web3j web3j, TransactionManager transactionManager,
             ContractGasProvider contractGasProvider) {
         super(BINARY, contractAddress, web3j, transactionManager, contractGasProvider);
     }
@@ -226,49 +226,47 @@ public class PurchaseRecordContract extends Contract {
     }
 
     @Deprecated
-    public static PurchaseRecordContract load(String contractAddress, Web3j web3j, Credentials credentials,
-            BigInteger gasPrice, BigInteger gasLimit) {
-        return new PurchaseRecordContract(contractAddress, web3j, credentials, gasPrice, gasLimit);
-    }
-
-    @Deprecated
-    public static PurchaseRecordContract load(String contractAddress, Web3j web3j,
-            TransactionManager transactionManager, BigInteger gasPrice, BigInteger gasLimit) {
-        return new PurchaseRecordContract(contractAddress, web3j, transactionManager, gasPrice, gasLimit);
-    }
-
-    public static PurchaseRecordContract load(String contractAddress, Web3j web3j, Credentials credentials,
-            ContractGasProvider contractGasProvider) {
-        return new PurchaseRecordContract(contractAddress, web3j, credentials, contractGasProvider);
-    }
-
-    public static PurchaseRecordContract load(String contractAddress, Web3j web3j,
-            TransactionManager transactionManager, ContractGasProvider contractGasProvider) {
-        return new PurchaseRecordContract(contractAddress, web3j, transactionManager, contractGasProvider);
-    }
-
-    public static RemoteCall<PurchaseRecordContract> deploy(Web3j web3j, Credentials credentials,
-            ContractGasProvider contractGasProvider) {
-        return deployRemoteCall(PurchaseRecordContract.class, web3j, credentials, contractGasProvider, BINARY, "");
-    }
-
-    public static RemoteCall<PurchaseRecordContract> deploy(Web3j web3j, TransactionManager transactionManager,
-            ContractGasProvider contractGasProvider) {
-        return deployRemoteCall(PurchaseRecordContract.class, web3j, transactionManager, contractGasProvider, BINARY,
-                "");
-    }
-
-    @Deprecated
-    public static RemoteCall<PurchaseRecordContract> deploy(Web3j web3j, Credentials credentials, BigInteger gasPrice,
+    public static PurchaseRecord load(String contractAddress, Web3j web3j, Credentials credentials, BigInteger gasPrice,
             BigInteger gasLimit) {
-        return deployRemoteCall(PurchaseRecordContract.class, web3j, credentials, gasPrice, gasLimit, BINARY, "");
+        return new PurchaseRecord(contractAddress, web3j, credentials, gasPrice, gasLimit);
     }
 
     @Deprecated
-    public static RemoteCall<PurchaseRecordContract> deploy(Web3j web3j, TransactionManager transactionManager,
+    public static PurchaseRecord load(String contractAddress, Web3j web3j, TransactionManager transactionManager,
             BigInteger gasPrice, BigInteger gasLimit) {
-        return deployRemoteCall(PurchaseRecordContract.class, web3j, transactionManager, gasPrice, gasLimit, BINARY,
-                "");
+        return new PurchaseRecord(contractAddress, web3j, transactionManager, gasPrice, gasLimit);
+    }
+
+    public static PurchaseRecord load(String contractAddress, Web3j web3j, Credentials credentials,
+            ContractGasProvider contractGasProvider) {
+        return new PurchaseRecord(contractAddress, web3j, credentials, contractGasProvider);
+    }
+
+    public static PurchaseRecord load(String contractAddress, Web3j web3j, TransactionManager transactionManager,
+            ContractGasProvider contractGasProvider) {
+        return new PurchaseRecord(contractAddress, web3j, transactionManager, contractGasProvider);
+    }
+
+    public static RemoteCall<PurchaseRecord> deploy(Web3j web3j, Credentials credentials,
+            ContractGasProvider contractGasProvider) {
+        return deployRemoteCall(PurchaseRecord.class, web3j, credentials, contractGasProvider, BINARY, "");
+    }
+
+    public static RemoteCall<PurchaseRecord> deploy(Web3j web3j, TransactionManager transactionManager,
+            ContractGasProvider contractGasProvider) {
+        return deployRemoteCall(PurchaseRecord.class, web3j, transactionManager, contractGasProvider, BINARY, "");
+    }
+
+    @Deprecated
+    public static RemoteCall<PurchaseRecord> deploy(Web3j web3j, Credentials credentials, BigInteger gasPrice,
+            BigInteger gasLimit) {
+        return deployRemoteCall(PurchaseRecord.class, web3j, credentials, gasPrice, gasLimit, BINARY, "");
+    }
+
+    @Deprecated
+    public static RemoteCall<PurchaseRecord> deploy(Web3j web3j, TransactionManager transactionManager,
+            BigInteger gasPrice, BigInteger gasLimit) {
+        return deployRemoteCall(PurchaseRecord.class, web3j, transactionManager, gasPrice, gasLimit, BINARY, "");
     }
 
     public static class OwnershipTransferredEventResponse extends BaseEventResponse {
