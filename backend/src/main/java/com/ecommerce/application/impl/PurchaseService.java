@@ -159,8 +159,6 @@ public class PurchaseService implements IPurchaseService {
 
                 escrow = Escrow.load(purchase.getContractAddress(), web3j, credentials, contractGasProvider);
 
-                TransactionReceipt tr2 = escrow.checkDeposit().send();
-
                 return purchaseRepository.create(purchase);
             }
         }
