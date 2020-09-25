@@ -1,11 +1,7 @@
 <template>
   <div>
-    <h-breadcrumb
-      title="마이페이지"
-      description="지갑을 생성하거나 상품 상태를 확인할 수 있습니다."
-    ></h-breadcrumb>
     <div class="container">
-      <my-page-nav></my-page-nav>
+      <!-- <my-page-nav></my-page-nav> -->
       <div id="my-item" class="row">
         <h4 class="col-md-12 mt-5">내가 판매한 거래</h4>
         <table

@@ -64,7 +64,7 @@ public class WalletController {
 	@ApiOperation(value = "Fetch wallet by address")
 	@RequestMapping(value = "/wallets/{address}", method = RequestMethod.GET)
 	public Wallet get(@PathVariable String address) {
-		return null;
+		return walletService.get(address);
 	}
 
 	/**

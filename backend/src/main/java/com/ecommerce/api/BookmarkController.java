@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,7 +57,7 @@ public class BookmarkController {
 
 	@ApiOperation(value = "Fetch Bookmarks with user id")
 	@RequestMapping(value = "/bookmarks/{userId}", method = RequestMethod.GET)
-	public List<Item> list(@PathVariable long userId) {
+	public List<Item> list(@PathVariable long userId) throws IOException, Exception {
 		List<Bookmark> list = bookmarkService.list(userId);
 
 		List<Item> iList = new ArrayList<Item>();

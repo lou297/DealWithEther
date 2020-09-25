@@ -1,85 +1,27 @@
 <template>
-    <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary" style="height: 50px;">
-        <div class="container">
-            <img id="nav-icon" src="../../../public/images/rocket.svg"/>
-            <!-- <div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div> -->
-            <router-link class="navbar-brand" to="/">중고마켓</router-link>
-            <div
-                class="navbar-collapse offcanvas-collapse"
-                id="navbarsExampleDefault"
-            >
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <router-link class="nav-link" to="/explorer/dashboard"
-                        >Explorer
-                        </router-link
-                        >
-                    </li>
-                    <li class="nav-item">
-                        <router-link class="nav-link" to="/shop">Shop</router-link>
-                    </li>
-                    <!-- 테스트용 -->
-                    <li class="nav-item">
-                        <router-link class="nav-link" :to="{name: 'item.detail2', params: {id:2}}">item</router-link>
-                    </li>
-                    <li class="nav-item" v-if="$store.state.isSigned">
-                        <router-link
-                            class="nav-link"
-                            to="/mypage/wallet_create"
-                            v-if="!$store.state.user.walletAddress"
-                        >MyPage
-                        </router-link
-                        >
-                        <router-link
-                            class="nav-link"
-                            to="/mypage/wallet_info"
-                            v-if="$store.state.user.walletAddress"
-                        >내상점
-                        </router-link
-                        >
-                    </li>
-                    <li class="nav-item" v-if="!$store.state.isSigned">
-                        <!--            <router-link class="nav-link" to="/login">Sign In</router-link>-->
-                        <v-btn
-                            text
-                            fab
-                            slot="activator"
-                            v-bind="attrs"
-                            v-on="{ ...dialog, ...tooltip }"
-                            min-width="100px"
-                            @click.stop="signin = true"
-                        >
-                            <v-icon>power_settings_new</v-icon>
-                            <span>Sign In</span>
-                        </v-btn>
-                        <v-dialog v-model="signin" max-width="500" min-width="300">
-                            <Login></Login>
-                        </v-dialog>
-                    </li>
-                    <li class="nav-item" v-if="!$store.state.isSigned">
-                        <v-btn
-                            text
-                            fab
-                            slot="activator"
-                            v-bind="attrs"
-                            v-on="{ ...dialog, ...tooltip }"
-                            min-width="100px"
-                            @click.stop="signup = true"
-                        >
-                            <v-icon>power_settings_new</v-icon>
-                            <span>Sign Up</span>
-                        </v-btn>
-                        <v-dialog v-model="signup" max-width="500" min-width="300">
+    <v-card
+        tile
+    >  
+        <v-app-bar color="#242526" dark>
+        <v-toolbar-title><router-link class="navbar-brand" to="/" id="title">중코마켓</router-link></v-toolbar-title>
+
+        <v-spacer></v-spacer>
+        <router-link id="link-to-shop" to="/shop">상점</router-link>
+        <router-link id="link-to-sell" to="/sell">판매하기</router-link>
+        <router-link id="link-to-mypage" to="/mypage/wallet_create" v-if="!$store.state.user.walletAddress">마이페이지</router-link>
+        <router-link id="link-to-myshop" to="/mypage/wallet_info" v-if="$store.state.user.walletAddress">내상점</router-link>
+        <router-link id="link-to-logout" to="/logout">로그아웃</router-link>
+        <router-link id="link-to-signup" to="/mypage/wallet_create" v-if="!$store.state.isSigned" @click.stop="signup = true">회원가입</router-link>
+        <router-link id="link-to-login" to="/logout" v-if="!$store.state.isSigned">로그인</router-link>
+        <v-dialog v-model="signup" max-width="500" min-width="300">
                             <Signup></Signup>
                         </v-dialog>
-                    </li>
-                    <li class="nav-item" v-if="$store.state.isSigned">
-                        <router-link class="nav-link" to="/logout">로그아웃</router-link>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+        <v-dialog v-model="signin" max-width="500" min-width="300">
+                            <Login></Login>
+                        </v-dialog>
+
+        </v-app-bar>
+    </v-card>
 </template>
 
 <script>
@@ -101,8 +43,13 @@ export default {
 </script>
 
 <style>
-#nav-icon {
-    height: 30px;
-    padding-right: 0.5rem;
+#title{
+    color: white;
+    margin-left: 60px;
+}
+
+#link-to-shop, #link-to-sell, #link-to-mypage, #link-to-myshop, #link-to-logout {
+    color: white;
+    margin: 0 10px;
 }
 </style>

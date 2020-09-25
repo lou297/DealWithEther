@@ -7,6 +7,7 @@ import com.ecommerce.domain.CryptoUtil;
 import com.ecommerce.domain.Purchase;
 import com.ecommerce.domain.PurchaseState;
 import com.ecommerce.domain.exception.ApplicationException;
+import com.ecommerce.domain.wrapper.Escrow;
 import com.ecommerce.domain.wrapper.EscrowContract;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,8 +27,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
 /**
- * EscrowContractService
- * Escrow.sol 스마트 컨트랙트의 checkDeposit() 함수를 호출한다.
+ * EscrowContractService Escrow.sol 스마트 컨트랙트의 checkDeposit() 함수를 호출한다.
  */
 @Service
 public class EscrowContractService implements IEscrowContractService {
@@ -45,7 +45,7 @@ public class EscrowContractService implements IEscrowContractService {
     @Value("${eth.encrypted.password}")
     private String PASSWORD;
 
-    private EscrowContract escrowContract;
+    private Escrow escrow;
     private ContractGasProvider contractGasProvider = new DefaultGasProvider();
     private Credentials credentials;
 
@@ -58,8 +58,7 @@ public class EscrowContractService implements IEscrowContractService {
     }
 
     /**
-     * TODO Sub PJT Ⅲ 과제 3
-     * 입금 상태 조회 - checkDeposit
+     * TODO Sub PJT Ⅲ 과제 3 입금 상태 조회 - checkDeposit
      */
     @Override
     public Purchase checkDeposit(int pid) {
