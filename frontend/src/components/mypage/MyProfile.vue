@@ -1,6 +1,6 @@
 <template>
     <div>
-        <my-page-nav></my-page-nav>
+        <!-- <my-page-nav></my-page-nav> -->
 
         <v-row>
             <v-col cols="8" offset="2">
