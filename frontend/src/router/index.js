@@ -56,6 +56,10 @@ const routes = [
         component: () => import("@/components/shop/All.vue"),
       },
       {
+        path: "",
+        component: () => import("@/components/shop/All.vue"),
+      },
+      {
         path: "digital",
         component: () => import("@/components/shop/Digital.vue"),
       },
@@ -149,6 +153,10 @@ const routes = [
     children: [
       {
         path: "",
+        component: () => import("@/components/shop/All.vue"),
+      },
+      {
+        path: ":searchKeyword",
         component: () => import("@/components/shop/All.vue"),
       },
       {

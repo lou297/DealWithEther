@@ -123,9 +123,9 @@ export default {
                 }
             )
         },
-        search() { // shop으로 넘기기
-            
-            alert(this.searchKeyword);
+        search() { // shop으로 검색 키워드 넘기기
+            var searchKeyword = this.searchKeyword;
+            this.$router.push("/shop/" + searchKeyword);
         },
     },
 };
