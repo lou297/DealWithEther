@@ -113,7 +113,7 @@ export default {
         getCategory(category){ // 카테고리 누르면 받아오기
             console.log(category);
             const vm = this;
-            findByMainCategory( 
+            findByMainCategory(  
                 category,
                 function(success){ // 가져온 카테고리별 리스트 보여주기
                     vm.itemlist = success.data;
