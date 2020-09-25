@@ -62,6 +62,8 @@ public class EscrowContractService implements IEscrowContractService {
      */
     @Override
     public Purchase checkDeposit(int pid) {
+        Purchase purchase = purchaseService.getByPurchaseId(pid);
+
         return null;
     }
 }

@@ -88,6 +88,11 @@ public class WalletController {
 		return walletService.get(uid);
 	}
 
+	@RequestMapping(value = "/wallets/temp/{eoa}", method = RequestMethod.GET)
+	public int getBalance(@PathVariable String eoa) throws Exception {
+		return cashContractService.getBalance(eoa);
+	}
+
 	/**
 	 * TODO Sub PJT Ⅱ 과제 1 이더 충전 요청
 	 * 
