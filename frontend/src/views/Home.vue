@@ -85,39 +85,39 @@ export default {
         StepFlow,
         ItemCard
     },
+    created() {
+
+        console.log('처음시작 ');
+        var default_category = "패션";
+        console.log(default_category);
+        const vm = this;
+        findByMainCategory(  
+            default_category,
+            function(success){ // 가져온 카테고리별 리스트 보여주기
+                vm.itemlist = success.data;
+            },
+            function(fail){
+                console.log('카테고리 목록 가져오기 실패!');
+            }
+        )
+        console.log(this.itemlist);
+    },
     mounted: function () {
 
-        // findAll(function (response) {
-        //     if (response.data.length > 0) {
-        //         vm.items = response.data;
-        //         vm.items.forEach(i => {
-        //             // [스마트 컨트랙트] 가격 조회
-        //             getPrice(
-        //                 i.id,
-        //                 function (price) {
-        //                     vm.$set(i, "price", price);
-        //                 },
-        //                 function (err) {
-        //                     console.error('가격 조회 실패:', err);
-        //                     // alert("상품 가격 조회를 실패했습니다.");
-        //                 }
-        //             )
-        //         })
-        //     }
-        // });
+        
     },
     methods: {
         onClickItem(itemId) {
             this.$router.push("item/detail/" + itemId);
         },
-        getCategory(category){ // 카테고리 누르면 받아오기
-            console.log(category);
+        getCategory(cate){ // 카테고리 누르면 받아오기
+            var category = cate.split("/");
+            console.log(category[0]);
             const vm = this;
             findByMainCategory(  
-                category,
+                category[0],
                 function(success){ // 가져온 카테고리별 리스트 보여주기
                     vm.itemlist = success.data;
-                    console.log(vm.itemlist);
                 },
                 function(fail){
                     console.log('카테고리 목록 가져오기 실패!');
