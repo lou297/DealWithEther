@@ -141,7 +141,7 @@ public class ItemController {
 		return items;
 	}
 
-	@ApiOperation(value = "Fetch an item with category")
+	@ApiOperation(value = "Fetch an item with main category")
 	@RequestMapping(value = "/items/category/{category}", method = RequestMethod.GET)
 	public List<Item> getByMainCategory(@PathVariable String category) {
 		System.out.println(category);

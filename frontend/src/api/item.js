@@ -16,9 +16,9 @@ function findByCategory(keyword, page, success, fail) {
         .catch(fail);
 }
 
-function findByMainCategory(keyword, success, fail) {
+function findByMainCategory(category, success, fail) {
     instance
-        .get("/api/items/category/" + keyword)
+        .get("/api/items/category/" + category)
         .then(success)
         .catch(fail);
 }
@@ -26,6 +26,13 @@ function findByMainCategory(keyword, success, fail) {
 function findItemsByOwner(userId, success, fail) {
     instance
         .get("/api/items/seller/" + userId)
+        .then(success)
+        .catch(fail);
+}
+
+function findByUsername(userName, page, success, fail) {
+    instance
+        .get("/api/items/userName/" + userName + "/" + page)
         .then(success)
         .catch(fail);
 }
@@ -143,5 +150,6 @@ export {
     confirm,
     findMySaleItems,
     findByName,
-    findByMainCategory
+    findByMainCategory,
+    findByUsername
 };

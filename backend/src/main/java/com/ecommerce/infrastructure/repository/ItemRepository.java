@@ -81,9 +81,11 @@ public class ItemRepository implements IItemRepository {
 
 	@Override
 	public List<Item> getByCategory(final String category, final int page) {
-		StringBuilder sbSql = new StringBuilder("SELECT * FROM items WHERE category=? limit 5 offset ?");
+		StringBuilder sbSql = new StringBuilder("SELECT * FROM items WHERE category like ? limit 5 offset ?");
+		String tempCategory = "%" + category + "%";
+		System.out.println(tempCategory);
 		try {
-			return this.jdbcTemplate.query(sbSql.toString(), new Object[] { category, (page - 1) * 5 },
+			return this.jdbcTemplate.query(sbSql.toString(), new Object[] { tempCategory, (page - 1) * 5 },
 					(rs, rowNum) -> ItemFactory.create(rs));
 		} catch (Exception e) {
 			throw new RepositoryException(e, e.getMessage());
@@ -103,10 +105,10 @@ public class ItemRepository implements IItemRepository {
 
 	@Override
 	public List<Item> getByMainCategory(final String category) { // 조회수 순으로 5개 보여주기
-		StringBuilder sbSql = new StringBuilder(
-				"SELECT * FROM items WHERE category=? limit 5 order by view_count desc");
+		StringBuilder sbSql = new StringBuilder("SELECT * FROM items WHERE category like ? order by view_count desc limit 5");
+		String tempCategory = "%" + category + "%";
 		try {
-			return this.jdbcTemplate.query(sbSql.toString(), new Object[] { category },
+			return this.jdbcTemplate.query(sbSql.toString(), new Object[] { tempCategory },
 					(rs, rowNum) -> ItemFactory.create(rs));
 		} catch (Exception e) {
 			throw new RepositoryException(e, e.getMessage());

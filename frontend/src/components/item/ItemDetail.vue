@@ -1,31 +1,36 @@
 <template>
     <div>
+        <h-nav></h-nav>
         <h-breadcrumb title="상품 상세 보기"></h-breadcrumb>
-        <v-container fluid>
-            <v-layout>
-                <v-flex xl6 lg6 md6 sm12 xs12>
-                    <v-flex xl8 lg8 md8 sm8 xs8>
-                        <v-card>
-                            <v-container fluid xl10>
-                                <v-row>
-                                    <v-col v-for="n in item.image" :key="n" class="d-flex child-flex" cols="4">
-                                        <v-hover v-slot:default="{ hover }">
-                                            <v-card flat tile class="d-flex" :elevation="hover ? 16 : 2">
-                                                <v-img
-                                                    :src="imgPath(n)"
-                                                    aspect-ratio="1"
-                                                    class="grey lighten-2"
-                                                ></v-img>
-                                            </v-card>
-                                        </v-hover>
-                                    </v-col>
+        <v-container>
+            <v-layout row>
+                <v-flex col xl5 lg5 md5 sm12 xs12>
+                    <v-carousel
+                        cycle
+                        hide-delimiter-background
+                        show-arrows-on-hover
+                    >
+                        <v-carousel-item v-for="n in item.image" :key="n">
+                            <v-sheet height="100%">
+                                <v-row
+                                    class="fill-height"
+                                    align="center"
+                                    justify="center"
+                                >
+                                    <v-img
+                                        :src="imgPath(n)"
+                                        aspect-ratio="1"
+                                        class="grey lighten-2"
+                                    ></v-img>
                                 </v-row>
-                            </v-container>
-                        </v-card>
-                    </v-flex>
+                            </v-sheet>
+                        </v-carousel-item>
+                    </v-carousel>
                 </v-flex>
-                <v-flex>
-                    <v-col cols="6">
+                <v-flex xl1 lg1 md1 sm0 xs0>
+                </v-flex>
+                <v-flex col xl6 lg6 md6 sm12 xs12>
+                    <v-col>
                         <v-row>
                             <v-col style="float:left; text-align:left"><h5>{{ item.explanation }}</h5></v-col>
                         </v-row>
@@ -71,14 +76,6 @@
                 <v-divider/>
             </v-layout>
         </v-container>
-
-        <!-- <v-col v-for="n in item.image.length" :key="n" class="d-flex child-flex" cols="4">
-            <v-hover v-slot:default="{ hover }">
-                <v-card flat tile class="d-flex" :elevation="hover ? 16 : 2">
-                    <v-img :src="item.image[n-1]" aspect-ratio="1" class="grey lighten-2" ></v-img>
-                </v-card>
-            </v-hover>
-        </v-col> -->
     </div>
 </template>
 
@@ -94,9 +91,13 @@ import {getPrice} from '@/utils/itemInventory.js';
 import {findById} from '@/api/item.js';
 import {CATEGORY} from '@/utils/category.js';
 import {bookMarkSave} from "@/api/bookmark.js";
+import HNav from "../../components/common/HNav copy";
 
 export default {
     name: 'ItemDetail',
+    components: {
+        HNav,
+    },
     data() {
         return {
             item: {
