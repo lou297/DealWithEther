@@ -2,9 +2,12 @@ package com.ecommerce.application.impl;
 
 import com.ecommerce.application.IItemService;
 import com.ecommerce.domain.Item;
+import com.ecommerce.domain.User;
 import com.ecommerce.domain.exception.ApplicationException;
 import com.ecommerce.domain.repository.IItemRepository;
+import com.ecommerce.domain.repository.IUserRepository;
 import com.ecommerce.domain.wrapper.EscrowFactory;
+import com.ecommerce.infrastructure.repository.UserRepository;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,11 +16,13 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileCopyUtils;
+import org.web3j.crypto.CipherException;
 import org.web3j.crypto.Credentials;
 import org.web3j.crypto.WalletUtils;
 import org.web3j.protocol.Web3j;
 import org.web3j.protocol.core.methods.response.TransactionReceipt;
 import org.web3j.protocol.http.HttpService;
+import org.web3j.tuples.generated.Tuple6;
 import org.web3j.tx.gas.ContractGasProvider;
 import org.web3j.tx.gas.DefaultGasProvider;
 
@@ -60,6 +65,9 @@ public class ItemService implements IItemService {
 	private Credentials credentials;
 
 	@Autowired
+	private IUserRepository userRepository;
+
+	@Autowired
 	private Web3j web3j;
 
 	@Autowired
@@ -78,13 +86,31 @@ public class ItemService implements IItemService {
 	}
 
 	@Override
-	public Item get(final long id) {
+	public Item get(final long id) throws Exception {
+		ClassPathResource resource = new ClassPathResource(WALLET_RESOURCE);
+		byte[] bdata = FileCopyUtils.copyToByteArray(resource.getInputStream());
+		String data = new String(bdata, StandardCharsets.UTF_8);
+
+		Web3j web3 = Web3j.build(new HttpService(NETWORK_URL)); // defaults to http://localhost:8545/
+		Credentials credentials = WalletUtils.loadJsonCredentials(PASSWORD, data);
+
+		escrowFactory = EscrowFactory.load(ITEM_CONTRACT, web3, credentials, contractGasProvider);
+
+		Tuple6<BigInteger, BigInteger, String, BigInteger, BigInteger, Boolean> t = escrowFactory
+				.items(BigInteger.valueOf(id)).send();
+
 		return this.itemRepository.get(id);
 	}
 
 	@Override
 	public List<Item> getByUser(int uid) {
 		return this.itemRepository.getByUser(uid);
+	}
+
+	@Override
+	public List<Item> getByUser(String name, int page) {
+		User user = userRepository.getUserId(name);
+		return this.itemRepository.getByUserName(user.getId(), page);
 	}
 
 	@Override

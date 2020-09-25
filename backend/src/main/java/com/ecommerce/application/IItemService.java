@@ -15,13 +15,15 @@ public interface IItemService {
 
 	List<Item> getByUser(int uid);
 
+	List<Item> getByUser(String name, int page);
+
 	List<Item> getByName(String title, int page);
 
 	List<Item> getByCategory(String Category, int page);
 
 	List<Item> getByMainCategory(String category);
 
-	Item get(long id);
+	Item get(long id) throws IOException, Exception;
 
 	@Transactional
 	Item register(Item item) throws IOException, Exception;

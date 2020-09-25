@@ -29,10 +29,9 @@ public class UserRepository implements IUserRepository {
 
     @Override
     public List<User> list() {
-        StringBuilder sbSql =  new StringBuilder("SELECT * FROM users ");
+        StringBuilder sbSql = new StringBuilder("SELECT * FROM users ");
         try {
-            return this.jdbcTemplate.query(sbSql.toString(),
-                    new Object[]{}, (rs, rowNum) -> UserFactory.create(rs));
+            return this.jdbcTemplate.query(sbSql.toString(), new Object[] {}, (rs, rowNum) -> UserFactory.create(rs));
         } catch (Exception e) {
             throw new RepositoryException(e, e.getMessage());
         }
@@ -40,10 +39,10 @@ public class UserRepository implements IUserRepository {
 
     @Override
     public User get(long id) {
-        StringBuilder sbSql =  new StringBuilder("SELECT * FROM users WHERE id=?");
+        StringBuilder sbSql = new StringBuilder("SELECT * FROM users WHERE id=?");
         try {
-            return this.jdbcTemplate.queryForObject(sbSql.toString(),
-                    new Object[] { id }, (rs, rowNum) -> UserFactory.create(rs) );
+            return this.jdbcTemplate.queryForObject(sbSql.toString(), new Object[] { id },
+                    (rs, rowNum) -> UserFactory.create(rs));
         } catch (EmptyResultDataAccessException e) {
             return null;
         } catch (Exception e) {
@@ -52,12 +51,24 @@ public class UserRepository implements IUserRepository {
     }
 
     @Override
-    public User get(final String email)
-    {
+    public User getUserId(final String name) {
+        StringBuilder sbSql = new StringBuilder("SELECT * FROM users WHERE name=?");
+        try {
+            return this.jdbcTemplate.queryForObject(sbSql.toString(), new Object[] { name },
+                    (rs, rowNum) -> UserFactory.create(rs));
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        } catch (Exception e) {
+            throw new RepositoryException(e, e.getMessage());
+        }
+    }
+
+    @Override
+    public User get(final String email) {
         StringBuilder sbSql = new StringBuilder("SELECT * FROM users WHERE email=?");
-        try{
-            return this.jdbcTemplate.queryForObject(sbSql.toString(),
-                                                    new Object[] {email}, (rs, rowNum) -> UserFactory.create(rs) );
+        try {
+            return this.jdbcTemplate.queryForObject(sbSql.toString(), new Object[] { email },
+                    (rs, rowNum) -> UserFactory.create(rs));
         } catch (EmptyResultDataAccessException e) {
             return null;
         } catch (Exception e) {
@@ -75,8 +86,7 @@ public class UserRepository implements IUserRepository {
             paramMap.put("created_at", LocalDateTime.now());
             paramMap.put("password", user.getPassword());
 
-            this.simpleJdbcInsert = new SimpleJdbcInsert(jdbcTemplate)
-                    .withTableName("users")
+            this.simpleJdbcInsert = new SimpleJdbcInsert(jdbcTemplate).withTableName("users")
                     .usingGeneratedKeyColumns("id");
 
             Number newId = simpleJdbcInsert.executeAndReturnKey(paramMap);
@@ -89,7 +99,7 @@ public class UserRepository implements IUserRepository {
 
     @Override
     public int update(User user) {
-        StringBuilder sbSql =  new StringBuilder("UPDATE users ");
+        StringBuilder sbSql = new StringBuilder("UPDATE users ");
         sbSql.append("SET name=?, email=?, password=? ");
         sbSql.append("WHERE id=?");
         try {
@@ -102,11 +112,10 @@ public class UserRepository implements IUserRepository {
 
     @Override
     public int delete(long id) {
-        StringBuilder sbSql =  new StringBuilder("DELETE FROM users ");
+        StringBuilder sbSql = new StringBuilder("DELETE FROM users ");
         sbSql.append("WHERE id=?");
         try {
-            return this.jdbcTemplate.update(sbSql.toString(),
-                    new Object[] { id });
+            return this.jdbcTemplate.update(sbSql.toString(), new Object[] { id });
         } catch (Exception e) {
             throw new RepositoryException(e, e.getMessage());
         }
