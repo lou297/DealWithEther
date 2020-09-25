@@ -30,7 +30,7 @@
 
 <script>
 import {findLikedList} from "@/api/item";
-import {deleteBookMark} from "@/api/bookmark";
+import {deleteBookMark, bookMarkSave} from "@/api/bookmark";
 import {getPrice} from "@/utils/itemInventory";
 
 export default {
@@ -74,14 +74,30 @@ export default {
         },
         changeLiked() {
             const vm = this;
-            deleteBookMark(this.$store.state.user.id, this.item.id, function (response) {
-                    if (response.data.length > 0) {
+            if (this.userLiked.data.includes(this.item.id)) {
+                deleteBookMark(this.$store.state.user.id, this.item.id, function (response) {
+                        vm.getLikedList()
+                    },
+                    err => {
+                        alert(err)
                     }
-                },
-                err => {
-                    alert(err)
-                }
-            );
+                );
+            } else {
+                console.log("좋아요")
+                const body = {
+                    userId: vm.$store.state.user.id,
+                    itemId: vm.item.id
+                };
+                console.log(body);
+                bookMarkSave(body, function (response) {
+                        vm.getLikedList()
+                    },
+                    err => {
+                        alert(err)
+                    }
+                );
+            }
+
         }
     }
 };
