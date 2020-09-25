@@ -134,6 +134,20 @@ function findMySaleItems(userId, success, fail) {
         .catch(err => fail(err));
 }
 
+function findLikedList(userId, success, fail) {
+    instance
+        .get("api/bookmarkedId/" + userId)
+        .then(res => success(res))
+        .catch(err => fail(err));
+}
+
+function addLike(userId, itemId, success, fail) {
+    instance
+        .get("api/bookmarkedId/" + userId)
+        .then(res => success(res))
+        .catch(err => fail(err));
+}
+
 export {
     findAll,
     findByCategory,
@@ -151,5 +165,6 @@ export {
     findMySaleItems,
     findByName,
     findByMainCategory,
-    findByUsername
+    findByUsername,
+    findLikedList
 };
