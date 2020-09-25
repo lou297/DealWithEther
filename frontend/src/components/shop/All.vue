@@ -4,13 +4,15 @@
         <h-shop-categories :category="'전체보기'"></h-shop-categories>
         <v-card color="basil">
             <v-tabs v-model="tab" background-color="transparent" color="basil" grow>
+                <v-flex xl1 lg1 md1 sm0 xs0><span></span></v-flex>
                 <v-tab class="font-weight-bold" @click="setSearchBy(0)" style="font-family: 'Jua', sans-serif; font-size:18px;">전체 보기</v-tab>
-            <v-tab v-for="item in categories" :key="item" class="font-weight-bold" @click="setKeyword(item); setSearchBy(1)" style="font-family: 'Jua', sans-serif; font-size:18px;">{{ item }}</v-tab>
+                <v-tab v-for="item in categories" :key="item" class="font-weight-bold" @click="setKeyword(item); setSearchBy(1)" style="font-family: 'Jua', sans-serif; font-size:18px;">{{ item }}</v-tab>
+                <v-flex xl1 lg1 md1 sm0 xs0><span></span></v-flex>
             </v-tabs>
             <v-container>
                 <v-layout row wrap justify-center>
                     <v-flex xs3 sm3 md3 lg3 xl3>
-                        <v-select :items="types" label="카테고리" item-text="name" item-value="value" solo style="margin-left:5px" @change="changeSearchBy"></v-select>
+                        <v-select :items="types" label="제목" item-text="name" item-value="value" solo style="margin-left:5px" @change="changeSearchBy"></v-select>
                     </v-flex>
                     <v-flex xs8 sm8 md8 lg8 xl8>
                         <v-text-field
@@ -31,12 +33,14 @@
             </v-container>
 
             <div class="row">
-                <v-flex xs12 sm6 md6 lg4 xl3
+                <v-flex xl1 lg1 md1 sm0 xs0><span></span></v-flex>
+                <v-flex xs12 sm6 md6 lg2 xl2
                         class="col-md-3 artwork"
                         v-for="item in items"
                         v-bind:key="item.id">
                     <item-card :item="item" @clicked="onClickItem(item.id)"></item-card>
                 </v-flex>
+                <v-flex xl1 lg1 md1 sm0 xs0><span></span></v-flex>
             </div>
             <div class="text-center">
                 <v-pagination
@@ -57,7 +61,7 @@
 </template>
 
 <script>
-import {findAll, findByCategory, findByMainCategory, findByUsername,findByName} from "@/api/item.js";
+import {findAll, findByCategory, findByMainCategory, findByUsername, findByName} from "@/api/item.js";
 import HShopCategories from "./HShopCategories.vue";
 import ItemCard from "./ItemCard.vue";
 import {getPrice} from '@/utils/itemInventory.js';
@@ -72,7 +76,7 @@ export default {
     data() {
         return {
             items: [],
-            categories: [ '패션/잡화',
+            categories: ['패션/잡화',
                 '뷰티/미용',
                 '디지털/가전',
                 '유아물품',
@@ -204,7 +208,7 @@ export default {
                     alert(err)
                 });
         },
-        getBySeller(seller){
+        getBySeller(seller) {
             const vm = this;
             findByUsername(seller, this.page, function (response) {
                     if (response.data.length > 0) {
@@ -233,6 +237,7 @@ export default {
     },
     mounted: function () {
         this.getAllList();
+        this.searchBy = 2;
     }
 };
 </script>
