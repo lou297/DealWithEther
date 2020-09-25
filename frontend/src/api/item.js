@@ -30,6 +30,13 @@ function findItemsByOwner(userId, success, fail) {
         .catch(fail);
 }
 
+function findByUsername(userName, page, success, fail) {
+    instance
+        .get("/api/items/userName/" + userName + "/" + page)
+        .then(success)
+        .catch(fail);
+}
+
 function findByName(name, page, success, fail) {
     instance
         .get("/api/items/name/" + name + "/" + page)
@@ -143,5 +150,6 @@ export {
     confirm,
     findMySaleItems,
     findByName,
-    findByMainCategory
+    findByMainCategory,
+    findByUsername
 };
