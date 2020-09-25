@@ -57,7 +57,7 @@
 </template>
 
 <script>
-import {findAll, findByCategory, findByMainCategory, findByName} from "@/api/item.js";
+import {findAll, findByCategory, findByMainCategory, findByUsername,findByName} from "@/api/item.js";
 import HShopCategories from "./HShopCategories.vue";
 import ItemCard from "./ItemCard.vue";
 import {getPrice} from '@/utils/itemInventory.js';
@@ -121,6 +121,7 @@ export default {
             if (this.searchBy === 0) this.getAllList();
             else if (this.searchBy === 1) this.getByCategory(this.searchKeyword);
             else if (this.searchBy === 2) this.getByName(this.searchKeyword);
+            else if (this.searchBy === 3) this.getBySeller(this.searchKeyword);
         },
         onClickItem(itemId) {
             this.$router.push("item/detail/" + itemId);
@@ -203,6 +204,32 @@ export default {
                     alert(err)
                 });
         },
+        getBySeller(seller){
+            const vm = this;
+            findByUsername(seller, this.page, function (response) {
+                    if (response.data.length > 0) {
+                        vm.items = response.data;
+                        vm.items.forEach(i => {
+                            // [스마트 컨트랙트] 가격 조회
+                            getPrice(
+                                i.id,
+                                function (price) {
+                                    vm.$set(i, "price", price);
+                                },
+                                function (err) {
+                                    console.error('가격 조회 실패:', err);
+                                    // alert("상품 가격 조회를 실패했습니다.");
+                                }
+                            )
+                        })
+                    } else {
+                        vm.items = response.data;
+                    }
+                },
+                err => {
+                    alert(err)
+                });
+        }
     },
     mounted: function () {
         this.getAllList();
