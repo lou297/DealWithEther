@@ -1,4 +1,5 @@
-import { createInstance } from "./index.js";
+import {createInstance} from "./index.js";
+
 const instance = createInstance();
 
 function bookMarkSave(body, success, fail) {
@@ -15,7 +16,15 @@ function loadBookMark(userId, success, fail) {
         .catch(fail);
 }
 
+function deleteBookMark(userId, itemId, success, fail) {
+    instance
+        .delete("/api/bookmarks/" + userId + "/" + itemId)
+        .then(success)
+        .catch(fail);
+}
+
 export {
     bookMarkSave,
-    loadBookMark
+    loadBookMark,
+    deleteBookMark
 };
