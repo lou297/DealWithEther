@@ -31,7 +31,7 @@ export default new Vuex.Store({
             state.isSigned = false;
             state.user.id = 0;
             state.user.walletAddress = null;
-        }
+        },
     },
     actions: {},
     modules: {},

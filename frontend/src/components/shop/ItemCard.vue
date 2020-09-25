@@ -30,6 +30,7 @@
 
 <script>
 import {findLikedList} from "@/api/item";
+import {deleteBookMark} from "@/api/bookmark";
 import {getPrice} from "@/utils/itemInventory";
 
 export default {
@@ -41,34 +42,46 @@ export default {
             // return "https://picsum.photos/id/11/100/60";
         }
     },
-    data(){
-        return{
-            userLiked:[],
+    data() {
+        return {
+            userLiked: [],
         }
     },
-    created(){
+    created() {
         console.log(this.item);
         var time = this.item.registeredAt.split("T");
         this.item.registeredAt = time[0];
-        const vm = this;
-        findLikedList(this.$store.state.user.id, function (response) {
-                if (response.data.length > 0) {
-                    vm.userLiked = response;
-                    console.log(vm.userLiked.data);
-                }
-            },
-            err => {
-                alert(err)
-            });
+        this.getLikedList();
     },
-    methods:{
+    methods: {
+        getLikedList() {
+            const vm = this;
+            findLikedList(this.$store.state.user.id, function (response) {
+                    if (response.data.length > 0) {
+                        vm.userLiked = response;
+                        console.log(vm.userLiked.data);
+                    }
+                },
+                err => {
+                    alert(err)
+                }
+            );
+        },
         checkLiked() {
             if (this.$store.state.isSigned !== null)
                 return this.userLiked.data.includes(this.item.id);
             else return false;
         },
-        changeLiked(){
-
+        changeLiked() {
+            const vm = this;
+            deleteBookMark(this.$store.state.user.id, this.item.id, function (response) {
+                    if (response.data.length > 0) {
+                    }
+                },
+                err => {
+                    alert(err)
+                }
+            );
         }
     }
 };
