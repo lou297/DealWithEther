@@ -51,7 +51,7 @@
             </v-layout>
         </v-container>
         <div class="row">
-            <v-flex xs12 sm12 md6 lg4 xl3
+            <v-flex xs12 sm6 md6 lg4 xl3
                     class="col-md-3 artwork"
                     v-for="item in items"
                     v-bind:key="item.id">
