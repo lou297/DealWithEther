@@ -2,32 +2,27 @@
     <div>
         <h-nav></h-nav>
     <div style="height:530px; background-color: rgb(255,212,85);">
-      
         <img src="../../public/images/avataaars.svg" alt="" style="width: 15rem; margin: 5rem 0 1rem 0;"><br>
-        
-        <h1 style="margin-top: 2rem; color:red; display: inline-block;">중</h1>
-        <h1 style="margin-top: 2rem; display: inline-block;">고마켓에서 </h1>
-        <h1 style="margin-top: 2rem; color:red; margin-left:12px; display: inline-block;"> 코</h1>
-        <h1 style="margin-top: 2rem; display: inline-block;">인으로 거래하자</h1><br><br>
+        <h1 style="margin: 2rem 0 1rem 0; color:red; display: inline-block;">중</h1>
+        <h1 style="margin: 2rem 0.7rem 1rem 0; display: inline-block;">고마켓에서 </h1>
+        <h1 style="margin: 2rem 0 1rem 0; color:red; margin-left:12px; display: inline-block;"> 코</h1>
+        <h1 style="margin: 2rem 0 1rem 0; display: inline-block;">인으로 거래하자</h1><br>
 
-        <form class="clearfix searchform" style="margin-bottom:8px;">
-            <input type="search" id="search-box" placeholder="상품명, 지역명 등을 검색해보세요!">
-        </form>
+        <v-text-field id="search-box" type="search" class="clearfix searchform" placeholder="상품명을 검색해보세요!"
+            v-model="searchKeyword" @keyup.enter="search" style="width: 40%; margin: auto;">
+        </v-text-field>
     </div>
 
     <v-card color="basil" >
         <v-card-title class="text-center justify-center py-6">
         <h1 class="font-weight-bold text-secondary">카테고리별 인기상품</h1>
         </v-card-title>
-                    <v-flex xl1 lg1 md1 sm0 xs0>
-                        <span></span>
-                    </v-flex>
-        <v-tabs v-model="tab" background-color="transparent" color="basil" grow>
             <v-flex xl1 lg1 md1 sm0 xs0><span></span></v-flex>
-        <v-tab v-for="item in items" :key="item" class="font-weight-bold"  @click="getCategory(item)" style="font-family: 'Jua', sans-serif; font-size:18px;">{{ item }}</v-tab>
+                <v-tabs v-model="tab" background-color="transparent" color="basil" grow>
             <v-flex xl1 lg1 md1 sm0 xs0><span></span></v-flex>
-        </v-tabs>
-
+            <v-tab v-for="item in items" :key="item" class="font-weight-bold"  @click="getCategory(item)" style="font-family: 'Jua', sans-serif; font-size:18px;">{{ item }}</v-tab>
+                <v-flex xl1 lg1 md1 sm0 xs0><span></span></v-flex>
+            </v-tabs>
         <v-tabs-items v-model="tab">
         <v-tab-item v-for="item in items" :key="item">
             <v-card color="basil" flat>
@@ -81,6 +76,7 @@ export default {
                 '생활/문구/가구',
                 '기타',
             ],
+            searchKeyword: "",
         }
     },
     components: {
@@ -126,7 +122,11 @@ export default {
                     console.log('카테고리 목록 가져오기 실패!');
                 }
             )
-        }
+        },
+        search() { // shop으로 검색 키워드 넘기기
+            var searchKeyword = this.searchKeyword;
+            this.$router.push("/shop/" + searchKeyword);
+        },
     },
 };
 </script>

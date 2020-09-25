@@ -236,9 +236,18 @@ export default {
         }
     },
     mounted: function () {
+        //this.getAllList();
+    },
+    created() {
         this.getAllList();
+        this.searchKeyword = this.$route.params.searchKeyword;
+        if(this.searchKeyword.length != 0) {
+            this.searchBy = 2; // 제목으로 검색
+            this.search();
+        }
         this.searchBy = 2;
-    }
+    },
+
 };
 </script>
 
