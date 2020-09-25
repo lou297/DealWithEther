@@ -9,7 +9,7 @@
         >
             <v-img
                 class="white--text align-end"
-                min-height="250"
+                height="250"
                 :src="imgPath"
             >
             </v-img>
