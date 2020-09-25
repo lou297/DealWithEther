@@ -99,6 +99,7 @@ export default {
                 {name: '판매자', value: 3},
                 {name: '임시', value: 4},
             ],
+            route: 0,
         };
     },
     methods: {
@@ -236,14 +237,14 @@ export default {
         }
     },
     mounted: function () {
-        //this.getAllList();
+        if(this.route != 1) this.getAllList(); // 상점 눌러서 들어왔을 때
     },
     created() {
-        this.getAllList();
         this.searchKeyword = this.$route.params.searchKeyword;
         if(this.searchKeyword.length != 0) {
             this.searchBy = 2; // 제목으로 검색
             this.search();
+            this.route = 1;
         }
         this.searchBy = 2;
     },
