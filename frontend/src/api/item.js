@@ -32,7 +32,7 @@ function findItemsByOwner(userId, success, fail) {
 
 function findByUsername(userName, page, success, fail) {
     instance
-        .get("/api/items/userName/" + userName + "/" + page)
+        .get("/api/items/seller/" + userName + "/" + page)
         .then(success)
         .catch(fail);
 }
