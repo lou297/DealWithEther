@@ -80,6 +80,11 @@ public class WalletService implements IWalletService {
 		return wallet;
 	}
 
+	@Override
+	public Wallet get(final String address) {
+		return walletRepository.get(address);
+	}
+
 	/**
 	 * 지갑을 DB에 등록한다.
 	 * 

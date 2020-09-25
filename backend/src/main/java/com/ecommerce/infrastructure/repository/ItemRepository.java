@@ -93,6 +93,17 @@ public class ItemRepository implements IItemRepository {
 	}
 
 	@Override
+	public List<Item> getByUserName(final long id, final int page) {
+		StringBuilder sbSql = new StringBuilder("SELECT * FROM items WHERE seller=? limit 5 offset ?");
+		try {
+			return this.jdbcTemplate.query(sbSql.toString(), new Object[] { id, (page - 1) * 5 },
+					(rs, rowNum) -> ItemFactory.create(rs));
+		} catch (Exception e) {
+			throw new RepositoryException(e, e.getMessage());
+		}
+	}
+
+	@Override
 	public List<Item> getByMainCategory(final String category) { // 조회수 순으로 5개 보여주기
 		StringBuilder sbSql = new StringBuilder("SELECT * FROM items WHERE category like ? order by view_count desc limit 5");
 		String tempCategory = "%" + category + "%";

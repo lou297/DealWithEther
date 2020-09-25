@@ -86,7 +86,7 @@ public class ItemController {
 
 	@ApiOperation(value = "Fetch an item with id")
 	@RequestMapping(value = "/items/{id}", method = RequestMethod.GET)
-	public Item get(@PathVariable int id) {
+	public Item get(@PathVariable int id) throws Exception {
 		itemService.viewCountUpdate(id);
 		Item item = itemService.get(id);
 		if (item == null) {
@@ -103,6 +103,16 @@ public class ItemController {
 		if (item == null) {
 			logger.error("NOT FOUND ID: ", id);
 			throw new NotFoundException(id + " 상품 정보를 찾을 수 없습니다.");
+		}
+		return item;
+	}
+
+	@RequestMapping(value = "/items/seller/{name}/{page}", method = RequestMethod.GET)
+	public List<Item> getBySellerItem(@PathVariable String name, @PathVariable int page) {
+		List<Item> item = itemService.getByUser(name, page);
+		if (item == null) {
+			logger.error("NOT FOUND NAME: ", name);
+			throw new NotFoundException(name + "의 상품 정보를 찾을 수 없습니다.");
 		}
 		return item;
 	}
