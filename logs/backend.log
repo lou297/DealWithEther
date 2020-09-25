@@ -774,3 +774,69 @@ Consider injecting the bean as one of its interfaces or forcing the use of CGLib
 	createdAt: 2020-09-25T17:22:50.921724800
 	contractAddress: 0xe7afc84ac056badae11894e90652da49c473b4ce }
 2020-09-25 17:23:30 [http-nio-8080-exec-3] DEBUG c.e.i.repository.PurchaseRepository - INSERTED: 3
+2020-09-25 18:15:32 [main] INFO  com.ecommerce.Application - Starting Application on DESKTOP-KVCQHCD with PID 12988 (C:\SSAFY\BlockChain_SubPJT3\s03p23a103\backend\target\classes started by multicampus in C:\SSAFY\BlockChain_SubPJT3\s03p23a103)
+2020-09-25 18:15:32 [main] DEBUG com.ecommerce.Application - Running with Spring Boot v2.1.4.RELEASE, Spring v5.1.6.RELEASE
+2020-09-25 18:15:32 [main] INFO  com.ecommerce.Application - No active profile set, falling back to default profiles: default
+2020-09-25 18:15:33 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$9d370ea3] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-09-25 18:15:34 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2020-09-25 18:15:34 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2020-09-25 18:15:34 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.17]
+2020-09-25 18:15:34 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2020-09-25 18:15:35 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [public org.springframework.http.ResponseEntity<springfox.documentation.spring.web.json.Json> springfox.documentation.swagger2.web.Swagger2Controller.getDocumentation(java.lang.String,javax.servlet.http.HttpServletRequest)]
+2020-09-25 18:15:35 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2020-09-25 18:15:35 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Context refreshed
+2020-09-25 18:15:35 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2020-09-25 18:15:35 [main] INFO  s.d.s.w.s.ApiListingReferenceScanner - Scanning for api listing references
+2020-09-25 18:15:35 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: listUsingGET_1
+2020-09-25 18:15:36 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: deleteUsingDELETE_1
+2020-09-25 18:15:36 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: listUsingGET_2
+2020-09-25 18:15:36 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: registerUsingPOST_1
+2020-09-25 18:15:36 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: deleteUsingDELETE_2
+2020-09-25 18:15:36 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: listUsingGET_3
+2020-09-25 18:15:36 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: registerUsingPOST_2
+2020-09-25 18:15:36 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: deleteUsingDELETE_3
+2020-09-25 18:15:36 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getUsingGET_1
+2020-09-25 18:15:36 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: listUsingGET_4
+2020-09-25 18:15:36 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: updateUsingPUT_1
+2020-09-25 18:15:36 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getUsingGET_2
+2020-09-25 18:15:36 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getByUserUsingGET_1
+2020-09-25 18:15:36 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: registerUsingPOST_3
+2020-09-25 18:15:36 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2020-09-25 18:15:36 [main] INFO  com.ecommerce.Application - Started Application in 4.313 seconds (JVM running for 5.054)
+2020-09-25 18:15:46 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-09-25 18:16:32 [main] INFO  com.ecommerce.Application - Starting Application on DESKTOP-KVCQHCD with PID 17192 (C:\SSAFY\BlockChain_SubPJT3\s03p23a103\backend\target\classes started by multicampus in C:\SSAFY\BlockChain_SubPJT3\s03p23a103)
+2020-09-25 18:16:32 [main] DEBUG com.ecommerce.Application - Running with Spring Boot v2.1.4.RELEASE, Spring v5.1.6.RELEASE
+2020-09-25 18:16:32 [main] INFO  com.ecommerce.Application - No active profile set, falling back to default profiles: default
+2020-09-25 18:16:33 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$bdad39a4] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-09-25 18:16:34 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2020-09-25 18:16:34 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2020-09-25 18:16:34 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.17]
+2020-09-25 18:16:34 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2020-09-25 18:16:35 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [public org.springframework.http.ResponseEntity<springfox.documentation.spring.web.json.Json> springfox.documentation.swagger2.web.Swagger2Controller.getDocumentation(java.lang.String,javax.servlet.http.HttpServletRequest)]
+2020-09-25 18:16:35 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2020-09-25 18:16:35 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Context refreshed
+2020-09-25 18:16:35 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2020-09-25 18:16:35 [main] INFO  s.d.s.w.s.ApiListingReferenceScanner - Scanning for api listing references
+2020-09-25 18:16:35 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: listUsingGET_1
+2020-09-25 18:16:35 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: deleteUsingDELETE_1
+2020-09-25 18:16:35 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: listUsingGET_2
+2020-09-25 18:16:35 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: registerUsingPOST_1
+2020-09-25 18:16:35 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: deleteUsingDELETE_2
+2020-09-25 18:16:35 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: listUsingGET_3
+2020-09-25 18:16:35 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: registerUsingPOST_2
+2020-09-25 18:16:35 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: deleteUsingDELETE_3
+2020-09-25 18:16:35 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getUsingGET_1
+2020-09-25 18:16:35 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: listUsingGET_4
+2020-09-25 18:16:35 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: updateUsingPUT_1
+2020-09-25 18:16:35 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getUsingGET_2
+2020-09-25 18:16:35 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getByUserUsingGET_1
+2020-09-25 18:16:35 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: registerUsingPOST_3
+2020-09-25 18:16:36 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2020-09-25 18:16:36 [main] INFO  com.ecommerce.Application - Started Application in 3.95 seconds (JVM running for 4.322)
+2020-09-25 18:16:37 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-09-25 18:16:59 [http-nio-8080-exec-9] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2020-09-25 18:16:59 [http-nio-8080-exec-9] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2020-09-25 18:16:59 [http-nio-8080-exec-9] DEBUG c.e.i.repository.BookmarkRepository - { id: 0
+	user_id: 1
+	item_id: 52 }
+2020-09-25 18:16:59 [http-nio-8080-exec-9] DEBUG c.e.i.repository.BookmarkRepository - INSERTED: 7

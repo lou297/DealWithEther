@@ -107,4 +107,16 @@ public class BookmarkRepository implements IBookmarkRepository {
 		}
 	}
 
+	@Override
+	public int deleteById(long userId, long itemId) {
+		StringBuilder sbSql = new StringBuilder("DELETE FROM bookmarks ");
+		sbSql.append("where user_id=? and item_id=?");
+
+		try {
+			return this.jdbcTemplate.update(sbSql.toString(), new Object[] { userId, itemId });
+		} catch (Exception e) {
+			throw new RepositoryException(e, e.getMessage());
+		}
+	}
+
 }

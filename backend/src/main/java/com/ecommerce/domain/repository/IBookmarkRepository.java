@@ -18,4 +18,7 @@ public interface IBookmarkRepository {
 
 	@Transactional
 	int delete(long id);
+
+	@Transactional
+	int deleteById(long userId, long itemId);
 }

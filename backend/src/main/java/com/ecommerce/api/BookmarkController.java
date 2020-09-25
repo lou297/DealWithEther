@@ -77,4 +77,9 @@ public class BookmarkController {
 	public int delete(@PathVariable int id) {
 		return bookmarkService.delete(id);
 	}
+
+	@RequestMapping(value = "/bookmarks/{userId}/{itemId}", method = RequestMethod.DELETE)
+	public int deleteById(@PathVariable long userId, @PathVariable long itemId) {
+		return bookmarkService.deleteById(userId, itemId);
+	}
 }
