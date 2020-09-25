@@ -48,7 +48,7 @@
 </template>
 
 <script>
-import HNav from "../components/common/HNav copy";
+import HNav from "../components/common/HNav";
 import StepFlow from '@/components/common/StepFlow';
 import Vue from 'vue';
 import Vuetify from 'vuetify/lib';

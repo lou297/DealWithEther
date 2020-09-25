@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h-nav></h-nav>
+        <!-- <h-nav></h-nav> -->
         <h-shop-categories :category="'전체보기'"></h-shop-categories>
         <v-card color="basil">
             <v-tabs v-model="tab" background-color="transparent" color="basil" grow>
@@ -61,7 +61,7 @@ import {findAll, findByCategory, findByMainCategory, findByUsername,findByName} 
 import HShopCategories from "./HShopCategories.vue";
 import ItemCard from "./ItemCard.vue";
 import {getPrice} from '@/utils/itemInventory.js';
-import HNav from "@/components/common/HNav copy";
+import HNav from "@/components/common/HNav";
 
 export default {
     components: {

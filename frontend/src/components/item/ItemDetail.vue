@@ -1,7 +1,5 @@
 <template>
     <div>
-        <h-nav></h-nav>
-        <h-breadcrumb title="상품 상세 보기"></h-breadcrumb>
         <v-container>
             <v-layout row>
                 <v-flex col xl5 lg5 md5 sm12 xs12>
@@ -91,7 +89,7 @@ import {getPrice} from '@/utils/itemInventory.js';
 import {findById} from '@/api/item.js';
 import {CATEGORY} from '@/utils/category.js';
 import {bookMarkSave} from "@/api/bookmark.js";
-import HNav from "../../components/common/HNav copy";
+import HNav from "../../components/common/HNav";
 
 export default {
     name: 'ItemDetail',
