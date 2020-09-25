@@ -1,9 +1,5 @@
 <template>
   <div>
-    <h-breadcrumb
-      title="상품 구매하기"
-      description="선택한 상품을 구매합니다."
-    ></h-breadcrumb>
     <div class="container">
       <div class="row">
         <div class="col-md-8 mx-auto">

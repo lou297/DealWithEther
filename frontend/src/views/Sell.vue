@@ -89,7 +89,7 @@ import {create as createItem} from "@/api/item.js";
 import {save as savaImage} from "@/api/item.js";
 import {registerItem} from "@/utils/itemInventory.js";
 import * as walletService from "@/api/wallet.js";
-import HNav from "../components/common/HNav copy";
+import HNav from "../components/common/HNav";
 
 export default {
     name: "ItemCreate",
