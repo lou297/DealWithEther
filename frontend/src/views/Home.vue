@@ -1,44 +1,44 @@
 <template>
     <div>
         <h-nav></h-nav>
-    <div style="height:530px; background-color: rgb(255,212,85);">
-        <img src="../../public/images/avataaars.svg" alt="" style="width: 15rem; margin: 5rem 0 1rem 0;"><br>
-        <h1 style="margin: 2rem 0 1rem 0; color:red; display: inline-block;">중</h1>
-        <h1 style="margin: 2rem 0.7rem 1rem 0; display: inline-block;">고마켓에서 </h1>
-        <h1 style="margin: 2rem 0 1rem 0; color:red; margin-left:12px; display: inline-block;"> 코</h1>
-        <h1 style="margin: 2rem 0 1rem 0; display: inline-block;">인으로 거래하자</h1><br>
+        <div style="height:530px; background-color: rgb(255,212,85);">
+            <img src="../../public/images/avataaars.svg" alt="" style="width: 15rem; margin: 5rem 0 1rem 0;"><br>
+            <h1 style="margin: 2rem 0 1rem 0; color:red; display: inline-block;">중</h1>
+            <h1 style="margin: 2rem 0.7rem 1rem 0; display: inline-block;">고마켓에서 </h1>
+            <h1 style="margin: 2rem 0 1rem 0; color:red; margin-left:12px; display: inline-block;"> 코</h1>
+            <h1 style="margin: 2rem 0 1rem 0; display: inline-block;">인으로 거래하자</h1><br>
 
-        <v-text-field id="search-box" type="search" class="clearfix searchform" placeholder="상품명을 검색해보세요!"
-            v-model="searchKeyword" @keyup.enter="search" style="width: 40%; margin: auto;">
-        </v-text-field>
-    </div>
+            <v-text-field id="search-box" type="search" class="clearfix searchform" placeholder="상품명을 검색해보세요!"
+                          v-model="searchKeyword" @keyup.enter="search" style="width: 40%; margin: auto;">
+            </v-text-field>
+        </div>
 
-    <v-card color="basil" >
-        <v-card-title class="text-center justify-center py-6">
-        <h1 class="font-weight-bold text-secondary">카테고리별 인기상품</h1>
-        </v-card-title>
+        <v-card color="basil">
+            <v-card-title class="text-center justify-center py-6">
+                <h1 class="font-weight-bold text-secondary">카테고리별 인기상품</h1>
+            </v-card-title>
             <v-flex xl1 lg1 md1 sm0 xs0><span></span></v-flex>
-                <v-tabs v-model="tab" background-color="transparent" color="basil" grow>
-            <v-flex xl1 lg1 md1 sm0 xs0><span></span></v-flex>
-            <v-tab v-for="item in items" :key="item" class="font-weight-bold"  @click="getCategory(item)" style="font-family: 'Jua', sans-serif; font-size:18px;">{{ item }}</v-tab>
+            <v-tabs v-model="tab" background-color="transparent" color="basil" grow>
+                <v-flex xl1 lg1 md1 sm0 xs0><span></span></v-flex>
+                <v-tab v-for="item in items" :key="item" class="font-weight-bold" @click="getCategory(item)" style="font-family: 'Jua', sans-serif; font-size:18px;">{{ item }}</v-tab>
                 <v-flex xl1 lg1 md1 sm0 xs0><span></span></v-flex>
             </v-tabs>
-        <v-tabs-items v-model="tab">
-        <v-tab-item v-for="item in items" :key="item">
-            <v-card color="basil" flat>
-            <v-card-text>
-                <div class="row">
-                    <v-flex xl1 lg1 md1 sm0 xs0><span></span></v-flex>
-                    <v-flex xs12 sm6 md6 lg2 xl2 class="col-md-3 artwork" v-for="item in itemlist" v-bind:key="item.id">
-                        <item-card :item="item" @clicked="onClickItem(item.id)"></item-card>
-                    </v-flex>
-                    <v-flex xl1 lg1 md1 sm0 xs0><span></span></v-flex>
-                </div>
-            </v-card-text>
-            </v-card>
-        </v-tab-item>
-        </v-tabs-items>
-    </v-card>
+            <v-tabs-items v-model="tab">
+                <v-tab-item v-for="item in items" :key="item">
+                    <v-card color="basil" flat>
+                        <v-card-text>
+                            <div class="row">
+                                <v-flex xl1 lg1 md1 sm0 xs0><span></span></v-flex>
+                                <v-flex xs12 sm6 md6 lg2 xl2 class="col-md-3 artwork" v-for="item in itemlist" v-bind:key="item.id">
+                                    <item-card :item="item" @clicked="onClickItem(item.id)"></item-card>
+                                </v-flex>
+                                <v-flex xl1 lg1 md1 sm0 xs0><span></span></v-flex>
+                            </div>
+                        </v-card-text>
+                    </v-card>
+                </v-tab-item>
+            </v-tabs-items>
+        </v-card>
     </div>
 </template>
 
@@ -90,12 +90,12 @@ export default {
         var default_category = "패션";
         console.log(default_category);
         const vm = this;
-        findByMainCategory(  
+        findByMainCategory(
             default_category,
-            function(success){ // 가져온 카테고리별 리스트 보여주기
+            function (success) { // 가져온 카테고리별 리스트 보여주기
                 vm.itemlist = success.data;
             },
-            function(fail){
+            function (fail) {
                 console.log('카테고리 목록 가져오기 실패!');
             }
         )
@@ -103,22 +103,22 @@ export default {
     },
     mounted: function () {
 
-        
+
     },
     methods: {
         onClickItem(itemId) {
             this.$router.push("item/detail/" + itemId);
         },
-        getCategory(cate){ // 카테고리 누르면 받아오기
+        getCategory(cate) { // 카테고리 누르면 받아오기
             var category = cate.split("/");
             console.log(category[0]);
             const vm = this;
-            findByMainCategory(  
+            findByMainCategory(
                 category[0],
-                function(success){ // 가져온 카테고리별 리스트 보여주기
+                function (success) { // 가져온 카테고리별 리스트 보여주기
                     vm.itemlist = success.data;
                 },
-                function(fail){
+                function (fail) {
                     console.log('카테고리 목록 가져오기 실패!');
                 }
             )
@@ -135,19 +135,19 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
 
 
-.searchform label, 
+.searchform label,
 .searchform input {
-  color: #737373;
-  vertical-align: baseline;
+    color: #737373;
+    vertical-align: baseline;
 }
 
 .searchform input[type=search] {
-  font: 1em/1.618 Open Sans, Arial, Sans-serif;
-  border: .125em solid #737373;
-  border-width: 0 0 3px;
-  background-color: transparent;
-  padding: .1875em .375em;
-  width: 80%;
+    font: 1em/1.618 Open Sans, Arial, Sans-serif;
+    border: .125em solid #737373;
+    border-width: 0 0 3px;
+    background-color: transparent;
+    padding: .1875em .375em;
+    width: 80%;
 }
 
 .searchform input[type=search]:focus {
@@ -158,12 +158,14 @@ export default {
 }
 
 @media only screen and (min-width: 48em) {
-  .searchform input[type=search]{ width: 40%; }
+    .searchform input[type=search] {
+        width: 40%;
+    }
 }
 
 .text-secondary {
-  color: #2c3e50 !important;
-  font-size: 25px;
+    color: #2c3e50 !important;
+    font-size: 25px;
 }
 
 .box {
@@ -190,12 +192,13 @@ input::placeholder {
     font-family: 'Jua', sans-serif;
 }
 
-#search-box{
+#search-box {
     height: 34.6px;
     padding: 3px 6px;
     font-family: 'Jua', sans-serif;
     font-size: 22px;
 }
+
 button {
     width: 50px;
     height: 100%;
@@ -208,20 +211,21 @@ button {
 
 h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
-  margin-bottom: 0.5rem;
-  font-family: 'Jua', sans-serif;
-  font-weight: 800;
-  line-height: 1.2;
-  font-size: 2.75rem;
-  line-height: 2.75rem;
-  letter-spacing: 3px;
+    margin-bottom: 0.5rem;
+    font-family: 'Jua', sans-serif;
+    font-weight: 800;
+    line-height: 1.2;
+    font-size: 2.75rem;
+    line-height: 2.75rem;
+    letter-spacing: 3px;
 }
 
 /* Helper classes */
 .basil {
-  background-color: #FFFBE6 !important;
+    background-color: #FFFBE6 !important;
 }
+
 .basil--text {
-  color: #356859 !important;
+    color: #356859 !important;
 }
 </style>
