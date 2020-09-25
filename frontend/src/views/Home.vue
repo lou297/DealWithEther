@@ -19,8 +19,13 @@
         <v-card-title class="text-center justify-center py-6">
         <h1 class="font-weight-bold text-secondary">카테고리별 인기상품</h1>
         </v-card-title>
+                    <v-flex xl1 lg1 md1 sm0 xs0>
+                        <span></span>
+                    </v-flex>
         <v-tabs v-model="tab" background-color="transparent" color="basil" grow>
+            <v-flex xl1 lg1 md1 sm0 xs0><span></span></v-flex>
         <v-tab v-for="item in items" :key="item" class="font-weight-bold"  @click="getCategory(item)" style="font-family: 'Jua', sans-serif; font-size:18px;">{{ item }}</v-tab>
+            <v-flex xl1 lg1 md1 sm0 xs0><span></span></v-flex>
         </v-tabs>
 
         <v-tabs-items v-model="tab">
@@ -28,12 +33,11 @@
             <v-card color="basil" flat>
             <v-card-text>
                 <div class="row">
-                        <v-flex xs12 sm12 md6 lg4 xl3
-                                class="col-md-3 artwork"
-                                v-for="item in itemlist"
-                                v-bind:key="item.id">
-                            <item-card :item="item" @clicked="onClickItem(item.id)"></item-card>
-                        </v-flex>
+                    <v-flex xl1 lg1 md1 sm0 xs0><span></span></v-flex>
+                    <v-flex xs12 sm6 md6 lg2 xl2 class="col-md-3 artwork" v-for="item in itemlist" v-bind:key="item.id">
+                        <item-card :item="item" @clicked="onClickItem(item.id)"></item-card>
+                    </v-flex>
+                    <v-flex xl1 lg1 md1 sm0 xs0><span></span></v-flex>
                 </div>
             </v-card-text>
             </v-card>
@@ -77,7 +81,6 @@ export default {
                 '생활/문구/가구',
                 '기타',
             ],
-            text: 'Lorem',
         }
     },
     components: {
