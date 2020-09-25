@@ -7,7 +7,19 @@
             :elevation="hover ? 16 : 2"
             @click.prevent="$emit('clicked')" href=""
         >
-            <v-img class="white--text align-end" height="250" :src="imgPath"></v-img>
+            <v-img class="white--text align-end" height="250" :src="imgPath">
+                <v-btn
+                    color="red accent-4"
+                    icon
+                    v-if="checkLiked()"
+                    @click.stop="changeLiked()"
+                >
+                    <v-icon middle color="red accent-4" icon>mdi-heart</v-icon>
+                </v-btn>
+                <v-btn color="red accent-4" icon v-else @click.stop="!changeLiked()">
+                    <v-icon middle color="red accent-4">mdi-heart-outline</v-icon>
+                </v-btn>
+            </v-img>
             <v-card-title style="font-size:18px;">{{ item.name }}</v-card-title>
             <v-card-actions style="padding:16px 0 0 16px; color:black; float:left; font-weight:bold; font-size:15px;">{{ item.price }} CASH</v-card-actions>
             <v-card-actions style="padding:16px 16px 0 0; color:black; float:right; font-size:14px;">{{ item.registeredAt }}</v-card-actions>
@@ -17,6 +29,9 @@
 </template>
 
 <script>
+import {findLikedList} from "@/api/item";
+import {getPrice} from "@/utils/itemInventory";
+
 export default {
     props: ['item'],
     computed: {
@@ -26,10 +41,35 @@ export default {
             // return "https://picsum.photos/id/11/100/60";
         }
     },
+    data(){
+        return{
+            userLiked:[],
+        }
+    },
     created(){
         console.log(this.item);
         var time = this.item.registeredAt.split("T");
         this.item.registeredAt = time[0];
+        const vm = this;
+        findLikedList(this.$store.state.user.id, function (response) {
+                if (response.data.length > 0) {
+                    vm.userLiked = response;
+                    console.log(vm.userLiked.data);
+                }
+            },
+            err => {
+                alert(err)
+            });
+    },
+    methods:{
+        checkLiked() {
+            if (this.$store.state.isSigned !== null)
+                return this.userLiked.data.includes(this.item.id);
+            else return false;
+        },
+        changeLiked(){
+
+        }
     }
 };
 </script>

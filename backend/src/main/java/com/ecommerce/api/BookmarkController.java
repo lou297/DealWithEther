@@ -72,9 +72,31 @@ public class BookmarkController {
 		return iList;
 	}
 
+	@ApiOperation(value = "Fetch Bookmarks with user id")
+	@RequestMapping(value = "/bookmarkedId/{userId}", method = RequestMethod.GET)
+	public List<Long> list2(@PathVariable long userId) throws IOException, Exception {
+		List<Bookmark> list = bookmarkService.list(userId);
+
+		List<Long> iList = new ArrayList<>();
+
+		for (Bookmark b : list) {
+			iList.add(b.getItemId());
+		}
+
+		if (list == null || list.isEmpty())
+			throw new EmptyListException("NO DATA");
+
+		return iList;
+	}
+
 	@ApiOperation(value = "Delete Bookmarks with id")
 	@RequestMapping(value = "/bookmarks/{id}", method = RequestMethod.DELETE)
 	public int delete(@PathVariable int id) {
 		return bookmarkService.delete(id);
+	}
+
+	@RequestMapping(value = "/bookmarks/{userId}/{itemId}", method = RequestMethod.DELETE)
+	public int deleteById(@PathVariable long userId, @PathVariable long itemId) {
+		return bookmarkService.deleteById(userId, itemId);
 	}
 }
