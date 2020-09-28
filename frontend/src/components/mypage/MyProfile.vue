@@ -200,7 +200,7 @@ export default {
   },
   methods: {
       onClickItem(itemId) {
-            this.$router.push({path:"item/detail/" + itemId});
+            this.$router.push("../item/detail/" + itemId);
         },
       showDealHistory() {
         //   alert("deal history")

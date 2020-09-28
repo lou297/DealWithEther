@@ -134,6 +134,7 @@ export default {
         getAllList() {
             const vm = this;
             findAll(this.page, function (response) {
+                console.log(response.data)
                     if (response.data.length > 0) {
                         vm.items = response.data;
                         vm.items.forEach(i => {
