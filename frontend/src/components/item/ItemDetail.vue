@@ -67,7 +67,34 @@
                                     <v-btn large color="warning" style="width:100%">네고요청</v-btn>
                                 </v-col>
                                 <v-col cols="2.2">
-                                    <v-btn large color="error" style="width:100%">바로구매</v-btn>
+                                    
+                                        <div class="example-modal-window">
+                                            <v-btn large color="error" style="width:100%" @click="openModal">바로구매</v-btn>
+
+                                            <MyModal @close="closeModal" v-if="modal">
+                                            <div style="text-align:left;" @click="getAddress">
+                                                <p style="margin-top: 5px; font-weight:bold; float:left;">택배거래</p>
+                                                <div style="float:right; margin-left:200px;">
+                                                    <img src="../../../public/images/arrow.png" style="width:12px;">
+                                                </div>
+                                                <div style="clear:both;">
+                                                    <div style="float: left;">
+                                                        <div style="font-size:14px; ">안전하게 상품을 받을때까지,</div>
+                                                        <div style="font-size:14px;">중코마켓이 결제금액을 보관해요</div>
+                                                    </div>
+                                                </div>
+                                                <div v-if="postState == true">
+                                                    <br><br>
+                                                    <vue-daum-postcode />
+                                                </div>
+                                                <hr v-if="directState==true">
+                                            </div>
+                                            <div style="text-align:left;" v-if="directState==true">
+                                                <p style="margin-top: 5px; font-weight:bold;">직거래</p>
+                                                <p style="font-size:14px; margin:5px 0px 5px 0px;">직거래도 현금없이 간편하게 결제할 수 있어요</p>
+                                            </div>
+                                            </MyModal>
+                                        </div>
                                 </v-col>
                             </v-row>
                         </v-row>
@@ -92,11 +119,16 @@ import {findById} from '@/api/item.js';
 import {CATEGORY} from '@/utils/category.js';
 import {bookMarkSave} from "@/api/bookmark.js";
 import HNav from "../../components/common/HNav copy";
+import Vue from "vue"
+import VueDaumPostcode from "vue-daum-postcode"
+import MyModal from './Modal.vue'
+import img from '../../../public/images/arrow.png'
+Vue.use(VueDaumPostcode)
 
 export default {
     name: 'ItemDetail',
     components: {
-        HNav,
+        HNav,MyModal
     },
     data() {
         return {
@@ -112,7 +144,7 @@ export default {
                     name: '',
                     email: '',
                 },
-                directDeal: false,
+                directDeal: false, // 직거래 여부
                 dealRegion: "",
                 image: 0,
                 price: null,
@@ -124,7 +156,11 @@ export default {
             },
             userId: this.$store.state.user.id,
             star: require('../../../public/images/star.png'),
-            time: ""
+            time: "",
+            modal: false,
+            message: '',
+            directState: false,
+            postState: false,
         };
     },
     methods: {
@@ -182,6 +218,25 @@ export default {
                     console.dir(fail);
                 },
             );
+        },
+        getAddress() { // 주소 입력 창 띄우기
+            this.postState = true;
+        },
+        openModal() {
+            this.directState = this.item.directDeal;
+            this.modal = true
+            },
+            closeModal() {
+            this.modal = false
+            },
+            doSend() {
+            if (this.message.length > 0) {
+                alert(this.message)
+                this.message = ''
+                this.closeModal()
+            } else {
+                alert('메시지를 입력해주세요.')
+            }
         }
     },
     filters: {
@@ -232,6 +287,7 @@ export default {
                 alert('DB에서 상품 상세 정보 조회를 가져올 수 없습니다.');
             },
         );
+
         // [Smart Contract] 가격 조회
         getPrice(
             this.item.id,
@@ -247,9 +303,62 @@ export default {
 };
 </script>
 
+
+
 <style>
+
 img.center {
     display: block;
     margin: 2rem auto;
+}
+.modal-mask {
+  position: fixed;
+  z-index: 9998;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, .5);
+  display: table;
+  transition: opacity .3s ease;
+}
+
+.modal-wrapper {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.modal-container {
+  width: 300px;
+  margin: 0px auto;
+  padding: 20px 30px;
+  background-color: #fff;
+  border-radius: 2px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
+  transition: all .3s ease;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+.modal-header h3 {
+  margin-top: 0;
+  color: #42b983;
+}
+
+.modal-body {
+  margin: 20px 0;
+}
+
+.modal-default-button {
+  float: right;
+}
+
+.modal-enter, .modal-leave {
+  opacity: 0;
+}
+
+.modal-enter .modal-container,
+.modal-leave .modal-container {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
 }
 </style>

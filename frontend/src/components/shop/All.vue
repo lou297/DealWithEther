@@ -1,7 +1,6 @@
 <template>
     <div>
         <h-nav></h-nav>
-        <h-shop-categories :category="'전체보기'"></h-shop-categories>
         <v-card color="basil">
             <v-tabs v-model="tab" background-color="transparent" color="basil" grow>
                 <v-flex xl1 lg1 md1 sm0 xs0><span></span></v-flex>
