@@ -11,6 +11,7 @@ import com.ecommerce.domain.Wallet;
 import com.ecommerce.domain.exception.ApplicationException;
 import com.ecommerce.domain.repository.IItemRepository;
 import com.ecommerce.domain.repository.IPurchaseRepository;
+import com.ecommerce.domain.wrapper.CashContract;
 import com.ecommerce.domain.wrapper.Escrow;
 import com.ecommerce.domain.wrapper.EscrowFactory;
 import com.ecommerce.domain.wrapper.EscrowFactory.NewEscrowEventResponse;
@@ -59,6 +60,7 @@ public class PurchaseService implements IPurchaseService {
     private String NETWORK_URL;
 
     private EscrowFactory escrowFactory;
+    private CashContract cashContract;
     private Escrow escrow;
     private ContractGasProvider contractGasProvider = new DefaultGasProvider();
     private Credentials credentials;
@@ -157,13 +159,36 @@ public class PurchaseService implements IPurchaseService {
                 purchase.setItemId(id);
                 purchase.setPurchaseId(neer.purchaseId.longValue());
 
+                cashContract = CashContract.load(ERC20_TOKEN_CONTRACT, web3j, credentials, contractGasProvider);
+
+                Item item = itemRepository.get(id);
+
+                TransactionReceipt tr3 = cashContract
+                        .transfer(purchase.getContractAddress(), BigInteger.valueOf(item.getPrice() + 20)).send();
+
                 escrow = Escrow.load(purchase.getContractAddress(), web3j, credentials, contractGasProvider);
+
+                TransactionReceipt tr2 = escrow.checkDeposit().send();
 
                 return purchaseRepository.create(purchase);
             }
         }
         return -1;
 
+    }
+
+    @Override
+    public long send(long purchaseId, Cash cash) throws Exception {
+        web3j = Web3j.build(new HttpService(NETWORK_URL));
+
+        credentials = Credentials.create(cash.getPrivateKey());
+
+        Purchase purchase = purchaseRepository.getByPurchaseId(purchaseId);
+
+        escrow = Escrow.load(purchase.getContractAddress(), web3j, credentials, contractGasProvider);
+
+        TransactionReceipt tr = escrow.send().send();
+        return 0;
     }
 
 }
