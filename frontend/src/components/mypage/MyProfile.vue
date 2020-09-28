@@ -139,6 +139,11 @@
                         </v-container>
                         
                 </v-row>
+                <v-row>
+                    <v-container v-for="buyPurchase in buyPurchases" :key="buyPurchase.id">
+                        <buy-history :buyPurchase="buyPurchase"></buy-history>
+                    </v-container>
+                </v-row>
             </v-col>
         </v-row>
            
@@ -151,7 +156,10 @@ import MyPageNav from "./MyPageNav.vue";
 import { findById } from "@/api/user.js";
 import {loadBookMark} from "@/api/bookmark.js";
 import * as itemService from "../../api/item.js";
+import * as purchaseService from "@/api/purchase.js";
+
 import ItemCard from "../shop/ItemCard.vue";
+import BuyHistory from "./BuyHistory.vue";
 
 //이더리움 통신
 import * as walletService from "@/api/wallet.js";
@@ -163,7 +171,8 @@ import BN from "bn.js";
 export default {
   components: {
     MyPageNav,
-    ItemCard
+    ItemCard,
+    BuyHistory
   },
   data() {
     return {
@@ -183,6 +192,7 @@ export default {
         cash: 0,
         receivingCount: 0
       },
+      buyPurchases : [],
       isCharging: false, // 현재 코인을 충전하고 있는 중인지 확인
       isCashCharging: false, // 현재 캐시을 충전하고 있는 중인지 확인
       cashChargeAmount: 0.1,
@@ -192,6 +202,7 @@ export default {
   created() {
       this.fetchUserInfo()
       this.fetchWalletInfo()
+      this.fetchBuyHistory()
   },
   computed: {
     canCashCharge() {
@@ -343,6 +354,17 @@ export default {
             this.user.email = data["email"];
       });
     },
+    fetchBuyHistory() {
+        purchaseService.findMyPurchases(this.user.id,
+            res => {
+                this.buyPurchases = res.data
+                console.dir(res)
+            },
+            err => {
+                alert(err)
+            }
+        )
+    }
   },
   mounted: function() {
       

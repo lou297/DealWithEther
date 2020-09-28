@@ -1,5 +1,10 @@
 package com.ecommerce.application.impl;
 
+import java.math.BigInteger;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
 import com.ecommerce.application.IEscrowContractService;
 import com.ecommerce.application.IPurchaseService;
 import com.ecommerce.application.IWalletService;
@@ -8,7 +13,6 @@ import com.ecommerce.domain.Item;
 import com.ecommerce.domain.Purchase;
 import com.ecommerce.domain.PurchaseInfo;
 import com.ecommerce.domain.Wallet;
-import com.ecommerce.domain.exception.ApplicationException;
 import com.ecommerce.domain.repository.IItemRepository;
 import com.ecommerce.domain.repository.IPurchaseRepository;
 import com.ecommerce.domain.wrapper.CashContract;
@@ -27,11 +31,6 @@ import org.web3j.protocol.core.methods.response.TransactionReceipt;
 import org.web3j.protocol.http.HttpService;
 import org.web3j.tx.gas.ContractGasProvider;
 import org.web3j.tx.gas.DefaultGasProvider;
-
-import java.math.BigInteger;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 public class PurchaseService implements IPurchaseService {
@@ -111,7 +110,13 @@ public class PurchaseService implements IPurchaseService {
      */
     @Override
     public List<PurchaseInfo> getByBuyer(int id) {
-        return null;
+        List<PurchaseInfo> purchaseInfo = new ArrayList<PurchaseInfo>();
+
+        List<Purchase> purchases = purchaseRepository.getByBuyer(id);
+        for(Purchase purchase : purchases) {
+            purchaseInfo.add(new PurchaseInfo(purchase));
+        }
+        return purchaseInfo;
     }
 
     /**
