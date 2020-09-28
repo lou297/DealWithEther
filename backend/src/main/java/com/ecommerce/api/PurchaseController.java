@@ -112,6 +112,10 @@ public class PurchaseController {
     @RequestMapping(value = "/purchases/seller/{id}", method = RequestMethod.GET)
     public List<PurchaseInfo> getSellerPurchases(@PathVariable int id) {
         List<PurchaseInfo> list = this.purchaseService.getBySeller(id);
+        System.out.println("내가 판매한 내역 : " + id);
+
+        System.out.println(list.toString());
+        System.out.println(list.size());
 
         if (list == null || list.isEmpty())
             throw new EmptyListException("사용자가 판매한/판매 중인 거래가 없습니다.");

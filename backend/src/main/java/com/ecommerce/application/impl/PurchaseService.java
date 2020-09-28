@@ -103,7 +103,14 @@ public class PurchaseService implements IPurchaseService {
      */
     @Override
     public List<PurchaseInfo> getBySeller(int id) {
-        return null;
+        List<Purchase> temps = this.purchaseRepository.getBySeller(id);
+        List<PurchaseInfo> list = new ArrayList<>();
+
+        for (Purchase temp : temps) {
+            PurchaseInfo info = new PurchaseInfo(temp);
+            list.add(info);
+        }
+        return list;
     }
 
     /**
