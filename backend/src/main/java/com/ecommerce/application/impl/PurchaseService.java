@@ -169,7 +169,7 @@ public class PurchaseService implements IPurchaseService {
                 escrow = Escrow.load(purchase.getContractAddress(), web3j, credentials, contractGasProvider);
 
                 TransactionReceipt tr2 = escrow.checkDeposit().send();
-
+                purchase.setState("P");
                 return purchaseRepository.create(purchase);
             }
         }
@@ -188,7 +188,39 @@ public class PurchaseService implements IPurchaseService {
         escrow = Escrow.load(purchase.getContractAddress(), web3j, credentials, contractGasProvider);
 
         TransactionReceipt tr = escrow.send().send();
-        return 0;
+        purchase.setState("S");
+        purchaseRepository.update(purchase);
+        return purchaseRepository.update(purchase);
+    }
+
+    @Override
+    public long confirm(long purchaseId, Cash cash) throws Exception {
+        web3j = Web3j.build(new HttpService(NETWORK_URL));
+
+        credentials = Credentials.create(cash.getPrivateKey());
+
+        Purchase purchase = purchaseRepository.getByPurchaseId(purchaseId);
+
+        escrow = Escrow.load(purchase.getContractAddress(), web3j, credentials, contractGasProvider);
+
+        TransactionReceipt tr = escrow.confirm().send();
+        purchase.setState("C");
+        return purchaseRepository.update(purchase);
+    }
+
+    @Override
+    public long cancel(long purchaseId, Cash cash) throws Exception {
+        web3j = Web3j.build(new HttpService(NETWORK_URL));
+
+        credentials = Credentials.create(cash.getPrivateKey());
+
+        Purchase purchase = purchaseRepository.getByPurchaseId(purchaseId);
+
+        escrow = Escrow.load(purchase.getContractAddress(), web3j, credentials, contractGasProvider);
+
+        TransactionReceipt tr = escrow.cancel().send();
+        purchase.setState("X");
+        return purchaseRepository.update(purchase);
     }
 
 }
