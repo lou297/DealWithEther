@@ -65,10 +65,17 @@ public class PurchaseController {
 
     @RequestMapping(value = "/purchases/send/{purchaseId}", method = RequestMethod.POST)
     public long send(@PathVariable long purchaseId, @RequestBody Cash cash) throws Exception {
-        // -1이면 실패
-        // 0은 디비 등록 실패
-        // 1은 성공
         return this.purchaseService.send(purchaseId, cash);
+    }
+
+    @RequestMapping(value = "/purchases/confirm/{purchaseId}", method = RequestMethod.POST)
+    public long confirm(@PathVariable long purchaseId, @RequestBody Cash cash) throws Exception {
+        return this.purchaseService.confirm(purchaseId, cash);
+    }
+
+    @RequestMapping(value = "/purchases/cancel/{purchaseId}", method = RequestMethod.POST)
+    public long cancel(@PathVariable long purchaseId, @RequestBody Cash cash) throws Exception {
+        return this.purchaseService.cancel(purchaseId, cash);
     }
 
     /**

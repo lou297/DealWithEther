@@ -27,4 +27,8 @@ public interface IPurchaseService {
     long startPurchase(long id, Cash cash) throws Exception;
 
     long send(long id, Cash cash) throws Exception;
+
+    long confirm(long id, Cash cash) throws Exception;
+
+    long cancel(long id, Cash cash) throws Exception;
 }
