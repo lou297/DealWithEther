@@ -63,6 +63,14 @@ public class PurchaseController {
         return this.purchaseService.startPurchase(id, cash);
     }
 
+    @RequestMapping(value = "/purchases/send/{purchaseId}", method = RequestMethod.POST)
+    public long send(@PathVariable long purchaseId, @RequestBody Cash cash) throws Exception {
+        // -1이면 실패
+        // 0은 디비 등록 실패
+        // 1은 성공
+        return this.purchaseService.send(purchaseId, cash);
+    }
+
     /**
      * Purchase 상태 업데이트
      * 
