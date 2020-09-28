@@ -57,11 +57,19 @@ function getHistory(id, success, fail) {
     .catch(fail)
 }
 
+function getDetail(id, success, fail) {
+  instance
+      .get("/api/purchases/getDetail/" + id)
+      .then(success)
+      .catch(fail)
+}
+
 export {
   create,
   findMySalePurchases,
   findMyPurchases,
   checkDeposit,
   changeState,
-  getHistory
+  getHistory,
+  getDetail
 }
