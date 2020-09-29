@@ -1,9 +1,9 @@
 <template>
     <div>
-        <h-nav></h-nav>
-        <div style="height:100px; background-color: rgb(255,212,85);">
-            <h1 style="margin: 2rem 0.7rem 1rem 2rem; display: inline-block;">거래 결과</h1>
-        </div>
+        <!--        <h-nav></h-nav>-->
+        <!--        <div style="height:100px; background-color: rgb(255,212,85);">-->
+        <!--            <h1 style="margin: 2rem 0.7rem 1rem 2rem; display: inline-block;">거래 결과</h1>-->
+        <!--        </div>-->
         <v-card color="basil">
             <div>
                 <v-flex xl1 lg1 md1 sm0 xs0><span></span></v-flex>
@@ -19,31 +19,38 @@
                                 </v-list-item-avatar>
                                 <sell-list-card :item="item"></sell-list-card>
                             </v-list-item>
-                            <v-col id="progress-container">
-                                <v-stepper alt-labels v-model="item.state">
-                                    <v-stepper-header>
-                                        <v-stepper-step step="1" :complete="item.state === 'I'">
-                                            입금 대기
-                                        </v-stepper-step>
-                                        <v-divider></v-divider>
-                                        <v-stepper-step step="2" :complete="item.state === 'P'">
-                                            입금 완료
-                                        </v-stepper-step>
-                                        <v-divider></v-divider>
-                                        <v-stepper-step step="3" :complete="item.state === 'S'">
-                                            배송 시작
-                                        </v-stepper-step>
-                                        <v-divider></v-divider>
-                                        <v-stepper-step step="4" :complete="item.state === 'C'">
-                                            거래 완료
-                                        </v-stepper-step>
-                                    </v-stepper-header>
-                                </v-stepper>
-                                <span>
-                                    <v-btn color="success" :disabled="item.state !== 'P'" @click="send(index)">배송시작</v-btn>
-                                    <v-btn color="primary" :disabled="item.state !== 'C'" @click="decidePurchase">평가하기</v-btn>
-                                </span>
-                            </v-col>
+                            <v-row>
+                                <v-col cols="10" id="progress-container">
+                                    <v-stepper alt-labels v-model="item.state">
+                                        <v-stepper-header>
+                                            <v-stepper-step step="1" :complete="item.state === 'I'">
+                                                입금 대기
+                                            </v-stepper-step>
+                                            <v-divider></v-divider>
+                                            <v-stepper-step step="2" :complete="item.state === 'P'">
+                                                입금 완료
+                                            </v-stepper-step>
+                                            <v-divider></v-divider>
+                                            <v-stepper-step step="3" :complete="item.state === 'S'">
+                                                배송 시작
+                                            </v-stepper-step>
+                                            <v-divider></v-divider>
+                                            <v-stepper-step step="4" :complete="item.state === 'C'">
+                                                거래 완료
+                                            </v-stepper-step>
+                                        </v-stepper-header>
+                                    </v-stepper>
+                                </v-col>
+                                <v-col cols="1">
+                                    <v-row>
+                                        <v-btn color="success" :disabled="item.state !== 'P'" @click="send(index)">배송시작</v-btn>
+                                    </v-row>
+                                    <v-row>
+                                        <v-btn color="primary" :disabled="item.state !== 'C'" @click="decidePurchase">평가하기</v-btn>
+                                    </v-row>
+                                    <v-spacer></v-spacer>
+                                </v-col>
+                            </v-row>
                         </template>
                     </v-list>
                 </v-card>
