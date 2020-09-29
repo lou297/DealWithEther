@@ -39,7 +39,7 @@
             <v-container>
                 <v-row>
                     <v-flex xs12 sm6 md4 lg3 xl3
-                            class="myItem"
+                            class="itemCard"
                             v-for="item in items"
                             v-bind:key="item.id">
                         <item-card :item="item" @clicked="onClickItem(item.id)"></item-card>
@@ -268,7 +268,7 @@ ul {
     display: flex;
     list-style: none;
 }
-.myItem {
+.itemCard {
     padding : 12px;
 }
 </style>
