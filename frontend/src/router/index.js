@@ -53,6 +53,10 @@ const routes = [
         component: Shop,
         children: [
             {
+                path: ":searchKeyword",
+                component: () => import("@/components/shop/All.vue"),
+            },
+            {
                 path: "",
                 component: () => import("@/components/shop/All.vue"),
             },
