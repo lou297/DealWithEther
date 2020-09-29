@@ -14,36 +14,36 @@
                                 v-if="index !== 0"
                             ></v-divider>
                             <v-list-item>
-                                <v-list-item-avatar >
+                                <v-list-item-avatar size="100px">
                                     <v-img :src="imgPath(item.itemId)"></v-img>
                                 </v-list-item-avatar>
-                            </v-list-item>
                             <sell-list-card :item="item"></sell-list-card>
-                            <v-col id="progress-container">
-                                <v-stepper alt-labels v-model="state">
+                            </v-list-item>
+                            <v-col id="progress-container" >
+                                <v-stepper alt-labels v-model="item.state">
                                     <v-stepper-header>
-                                        <v-stepper-step step="1" :complete="state >= 1">
+                                        <v-stepper-step step="1" :complete="item.state === 'I'">
                                             입금 대기
                                         </v-stepper-step>
                                         <v-divider></v-divider>
-                                        <v-stepper-step step="2" :complete="state >= 2">
+                                        <v-stepper-step step="2" :complete="item.state === 'P'">
                                             입금 완료
                                         </v-stepper-step>
                                         <v-divider></v-divider>
-                                        <v-stepper-step step="3" :complete="state >= 3">
+                                        <v-stepper-step step="3" :complete="item.state === 'S'">
                                             배송 시작
                                         </v-stepper-step>
                                         <v-divider></v-divider>
-                                        <v-stepper-step step="4" :complete="state >= 4">
+                                        <v-stepper-step step="4" :complete="item.state === 'C'">
                                             거래 완료
                                         </v-stepper-step>
                                     </v-stepper-header>
                                 </v-stepper>
-                                <div>
-                                    <v-btn color="success" :disabled="state != 4" @click="estimate">평가하기</v-btn>
-                                    <v-btn color="primary" :disabled="state != 3" @click="decidePurchase">구매 확정</v-btn>
-                                    <v-btn color="error" :disabled="state > 2" @click="canclePurchase">구매취소</v-btn>
-                                </div>
+                                <span>
+                                    <v-btn color="success" :disabled="item.state !== 'P'" @click="estimate">배송시작</v-btn>
+                                    <v-btn color="primary" :disabled="item.state !== 'C'" @click="decidePurchase">평가하기</v-btn>
+                                    {{item.state}}
+                                </span>
                             </v-col>
                         </template>
                     </v-list>
