@@ -139,18 +139,19 @@ import { findById as findUserById } from "@/api/user.js";
 import * as purchaseService from "@/api/purchase.js";
 import { weiToEth } from "@/utils/ethereumUnitUtils.js";
 // import { ITEM_STATUS } from "../../config/constants.js";
-import { getLocalImg } from "@/utils/imgLoader.js";
-import { getPrice } from "@/utils/itemInventory.js";
-import { findById } from "@/api/item.js";
-import { CATEGORY } from "@/utils/category.js";
-import { bookMarkSave } from "@/api/bookmark.js";
+import {getLocalImg} from '@/utils/imgLoader.js';
+import {getPrice} from '@/utils/itemInventory.js';
+import {findById} from '@/api/item.js';
+import {CATEGORY} from '@/utils/category.js';
+import {bookMarkSave} from "@/api/bookmark.js";
 import * as walletService from "@/api/wallet.js";
 import HNav from "../../components/common/HNav copy";
-import Vue from "vue";
-import VueDaumPostcode from "vue-daum-postcode";
-import MyModal from "./Modal.vue";
-import img from "../../../public/images/arrow.png";
-Vue.use(VueDaumPostcode);
+import Vue from "vue"
+import VueDaumPostcode from "vue-daum-postcode"
+import MyModal from './Modal.vue'
+import img from '../../../public/images/arrow.png'
+Vue.use(VueDaumPostcode)
+
 
 export default {
     name: 'ItemDetail',
@@ -201,23 +202,29 @@ export default {
             desc: `Seattle is a seaport city on the west coast of the United States...`
         };
     },
-    getImg(name) {
-      if (name) {
-        console.log(name);
-        return getLocalImg(name);
-      }
-      return null;
-    },
-    imgPath(n) {
-      console.log(process.env.VUE_APP_BACKEND);
-      return (
-        process.env.VUE_APP_BACKEND +
-        "api/items/images/" +
-        this.item.id +
-        "_" +
-        n
-      );
-    },
+    methods: {
+        goBack: function () {
+            // 이전 페이지로 이동한다.
+            this.$router.go(-1);
+        },
+        convertWeiToEth(value) {
+            if (value) {
+                return weiToEth(value.toString()) + ' ETH';
+            } else {
+                return '-';
+            }
+        },
+        getImg(name) {
+            if (name) {
+                console.log(name);
+                return getLocalImg(name);
+            }
+            return null;
+        },
+        imgPath(n) {
+            console.log(process.env.VUE_APP_BACKEND)
+            return process.env.VUE_APP_BACKEND + 'api/items/images/' + this.item.id + "_" + n;
+        },
 
         purchase() {
             var address = "";
@@ -247,6 +254,20 @@ export default {
                 this.isCashCharging = false;
                 }
             });
+        },
+        BookMark() {
+            this.bookMarkList.userId = this.userId;
+            this.bookMarkList.itemId = this.item.id;
+
+            bookMarkSave(
+                this.bookMarkList,
+                function (success) {
+                    console.log('찜 성공');
+                },
+                function (fail) {
+                    console.dir(fail);
+                },
+            );
         },
         getAddress() { // 주소 입력 창 띄우기
             this.postState = true;
@@ -280,6 +301,14 @@ export default {
                 alert('메시지를 입력해주세요.')
             }
         },
+      
+    getImg(name) {
+      if (name) {
+        console.log(name);
+        return getLocalImg(name);
+      }
+      return null;
+    },
     saveBookMark() {
       var bookMark = JSON.parse(sessionStorage.getItem("bookmark"));
       if (bookMark == undefined) {
