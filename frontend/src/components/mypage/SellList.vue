@@ -9,7 +9,7 @@
                 <v-flex xl1 lg1 md1 sm0 xs0><span></span></v-flex>
                 <v-card>
                     <v-list three-line xl10 lg10 md10 sm12 xs12>
-                        <template v-for="(item, index) in items" >
+                        <template v-for="(item, index) in items">
                             <v-divider
                                 v-if="index !== 0"
                             ></v-divider>
@@ -19,6 +19,32 @@
                                 </v-list-item-avatar>
                             </v-list-item>
                             <sell-list-card :item="item"></sell-list-card>
+                            <v-col cols="8" id="progress-container">
+                                <v-stepper alt-labels v-model="state">
+                                    <v-stepper-header>
+                                        <v-stepper-step step="1" :complete="state >= 1">
+                                            입금 대기
+                                        </v-stepper-step>
+                                        <v-divider></v-divider>
+                                        <v-stepper-step step="2" :complete="state >= 2">
+                                            입금 완료
+                                        </v-stepper-step>
+                                        <v-divider></v-divider>
+                                        <v-stepper-step step="3" :complete="state >= 3">
+                                            배송 시작
+                                        </v-stepper-step>
+                                        <v-divider></v-divider>
+                                        <v-stepper-step step="4" :complete="state >= 4">
+                                            거래 완료
+                                        </v-stepper-step>
+                                    </v-stepper-header>
+                                </v-stepper>
+                                <div>
+                                    <v-btn color="success" :disabled="state != 4" @click="estimate">평가하기</v-btn>
+                                    <v-btn color="primary" :disabled="state != 3" @click="decidePurchase">구매 확정</v-btn>
+                                    <v-btn color="error" :disabled="state > 2" @click="canclePurchase">구매취소</v-btn>
+                                </div>
+                            </v-col>
                         </template>
                     </v-list>
                 </v-card>
@@ -72,6 +98,20 @@ export default {
                 }
             });
         },
+        estimate(){
+            alert("estimate")
+            // 평가하기 버튼
+        },
+        decidePurchase(){
+            alert("decide")
+            // 구매 확정 버튼
+        },
+        canclePurchase(){
+            alert("cancle")
+            // 구매 취소 버튼
+        }
+
+
     },
     mounted: function () {
 
