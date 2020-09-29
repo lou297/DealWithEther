@@ -8697,8 +8697,6 @@ vm-browserify@^1.0.1:
   resolved "https://registry.yarnpkg.com/vm-browserify/-/vm-browserify-1.1.2.tgz#78641c488b8e6ca91a75f511e7a3b32a86e5dda0"
   integrity sha512-2ham8XPWTONajOR0ohOKOHXkm3+gaBmGut3SRuu75xLd/RRaY6vqgh8NBYYk7+RW3u5AtzPQZG8F10LHkl0lAQ==
 
-<<<<<<< HEAD
-=======
 vue-cli-plugin-vuetify@~2.0.7:
   version "2.0.7"
   resolved "https://registry.yarnpkg.com/vue-cli-plugin-vuetify/-/vue-cli-plugin-vuetify-2.0.7.tgz#fcb4f1655e7c9199ee40dcbf6465e2355fd074d5"
@@ -8708,7 +8706,6 @@ vue-cli-plugin-vuetify@~2.0.7:
     semver "^7.1.2"
     shelljs "^0.8.3"
 
->>>>>>> 7131a9f202990c3e4946343f2c72b880b75671d3
 vue-daum-postcode@^0.9.0:
   version "0.9.0"
   resolved "https://registry.yarnpkg.com/vue-daum-postcode/-/vue-daum-postcode-0.9.0.tgz#2982b8946c6c756e1f9faccc4cb8fc7c93b4b117"
