@@ -30,16 +30,23 @@ function findItemsByOwner(userId, success, fail) {
         .catch(fail);
 }
 
-function findByUsername(userName, page, success, fail) {
+function findByUsername(category, userName, page, success, fail) {
     instance
-        .get("/api/items/seller/" + userName + "/" + page)
+        .get("/api/items/seller/" + category + "/" + userName + "/" + page)
         .then(success)
         .catch(fail);
 }
 
-function findByName(name, page, success, fail) {
+function findByName(category, name, page, success, fail) {
     instance
-        .get("/api/items/name/" + name + "/" + page)
+        .get("/api/items/name/"+ category + "/" + name + "/" + page)
+        .then(success)
+        .catch(fail);
+}
+
+function findByOnlyName(name, page, success, fail) {
+    instance
+        .get("/api/items/name/"+ name + "/" + page)
         .then(success)
         .catch(fail);
 }
@@ -166,5 +173,6 @@ export {
     findByName,
     findByMainCategory,
     findByUsername,
-    findLikedList
+    findLikedList,
+    findByOnlyName
 };

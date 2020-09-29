@@ -10,8 +10,8 @@
         <v-card color="basil">
             <v-tabs v-model="tab" background-color="transparent" color="basil" grow>
                 <v-flex xl1 lg1 md1 sm0 xs0><span></span></v-flex>
-                <v-tab class="font-weight-bold" @click="setSearchBy(0)" style="font-family: 'Jua', sans-serif; font-size:18px;">전체 보기</v-tab>
-                <v-tab v-for="item in categories" :key="item" class="font-weight-bold" @click="setKeyword(item); setSearchBy(1)" style="font-family: 'Jua', sans-serif; font-size:18px;">{{ item }}</v-tab>
+                <v-tab class="font-weight-bold" @click="getAllList(); setSearchBy(0);" style="font-family: 'Jua', sans-serif; font-size:18px;">전체 보기</v-tab>
+                <v-tab v-for="item in categories" :key="item" class="font-weight-bold" @click="categoryNow = item; getByCategory(item)" style="font-family: 'Jua', sans-serif; font-size:18px;">{{ item }}</v-tab>
                 <v-flex xl1 lg1 md1 sm0 xs0><span></span></v-flex>
             </v-tabs>
             <v-container>
@@ -65,7 +65,7 @@
 </template>
 
 <script>
-import {findAll, findByCategory, findByMainCategory, findByUsername, findByName} from "@/api/item.js";
+import {findAll, findByCategory, findByMainCategory, findByUsername, findByName,findByOnlyName} from "@/api/item.js";
 import HShopCategories from "./HShopCategories.vue";
 import ItemCard from "./ItemCard.vue";
 import {getPrice} from '@/utils/itemInventory.js';
@@ -103,11 +103,10 @@ export default {
             totalVisible: 10,
             searchKeyword: "",
             searchBy: 0,
+            categoryNow: "",
             types: [
-                {name: '카테고리', value: 1},
                 {name: '제목', value: 2},
                 {name: '판매자', value: 3},
-                {name: '임시', value: 4},
             ],
             route: 0,
         };
@@ -133,10 +132,13 @@ export default {
             console.log(this.searchKeyword);
         },
         search() {
-            if (this.searchBy === 0) this.getAllList();
-            else if (this.searchBy === 1) this.getByCategory(this.searchKeyword);
-            else if (this.searchBy === 2) this.getByName(this.searchKeyword);
-            else if (this.searchBy === 3) this.getBySeller(this.searchKeyword);
+            if (this.searchBy === 0) this.getByOnlyName(this.searchKeyword);
+            else if (this.searchBy === 1) {
+                alert(this.categoryNow);
+                this.getByCategory(this.categoryNow);
+            }
+            else if (this.searchBy === 2) this.getByName(this.categoryNow, this.searchKeyword);
+            else if (this.searchBy === 3) this.getBySeller(this.categoryNow, this.searchKeyword);
         },
         onClickItem(itemId) {
             this.$router.push("item/detail/" + itemId);
@@ -194,9 +196,9 @@ export default {
                     alert(err)
                 });
         },
-        getByName(name) {
+        getByName(category, name) {
             const vm = this;
-            findByName(name, this.page, function (response) {
+            findByName(category.split("/")[0], name, this.page, function (response) {
                     if (response.data.length > 0) {
                         vm.items = response.data;
                         vm.items.forEach(i => {
@@ -220,9 +222,35 @@ export default {
                     alert(err)
                 });
         },
-        getBySeller(seller) {
+        getByOnlyName(name) {
             const vm = this;
-            findByUsername(seller, this.page, function (response) {
+            findByOnlyName(name, this.page, function (response) {
+                    if (response.data.length > 0) {
+                        vm.items = response.data;
+                        vm.items.forEach(i => {
+                            // [스마트 컨트랙트] 가격 조회
+                            getPrice(
+                                i.id,
+                                function (price) {
+                                    vm.$set(i, "price", price);
+                                },
+                                function (err) {
+                                    console.error('가격 조회 실패:', err);
+                                    // alert("상품 가격 조회를 실패했습니다.");
+                                }
+                            )
+                        })
+                    } else {
+                        vm.items = response.data;
+                    }
+                },
+                err => {
+                    alert(err)
+                });
+        },
+        getBySeller(category, seller) {
+            const vm = this;
+            findByUsername(category.split("/")[0], seller, this.page, function (response) {
                     if (response.data.length > 0) {
                         vm.items = response.data;
                         vm.items.forEach(i => {
@@ -257,7 +285,7 @@ export default {
             this.search();
             this.route = 1;
         }
-        this.searchBy = 2;
+        this.searchBy = 0;
     },
 
 };
