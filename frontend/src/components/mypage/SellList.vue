@@ -5,7 +5,7 @@
             <h1 style="margin: 2rem 0.7rem 1rem 2rem; display: inline-block;">거래 결과</h1>
         </div>
         <v-card color="basil">
-            <div class="row">
+            <div >
                 <v-flex xl1 lg1 md1 sm0 xs0><span></span></v-flex>
                 <v-card>
                     <v-list three-line xl10 lg10 md10 sm12 xs12>
@@ -19,7 +19,7 @@
                                 </v-list-item-avatar>
                             </v-list-item>
                             <sell-list-card :item="item"></sell-list-card>
-                            <v-col cols="8" id="progress-container">
+                            <v-col id="progress-container">
                                 <v-stepper alt-labels v-model="state">
                                     <v-stepper-header>
                                         <v-stepper-step step="1" :complete="state >= 1">
