@@ -1,7 +1,7 @@
 <template>
     <v-list-item-content xl10 lg10 md10 sm12 xs12>
-        <v-list-item-title>{{name}}</v-list-item-title>
-        <v-list-item-subtitle>현재 결제 진행중입니다</v-list-item-subtitle>
+        <v-list-item-title style="font-size: xx-large">{{ name }}</v-list-item-title>
+        <v-list-item-subtitle style="font-size: x-large">{{ price }}</v-list-item-subtitle>
         <v-spacer></v-spacer>
     </v-list-item-content>
 </template>
@@ -17,7 +17,8 @@ export default {
     data() {
         return {
             name: "",
-            state : this.item.state
+            price: 0,
+            state: this.item.state
         }
     },
     created() {
@@ -25,11 +26,12 @@ export default {
         this.getItemName(this.item.itemId)
     },
     methods: {
-        getItemName(itemId){
+        getItemName(itemId) {
             const vm = this;
             findById(itemId, (res) => {
                 if (res) {
                     vm.name = res.data.name;
+                    vm.price = res.data.price;
                     console.log(vm.name)
                 } else {
                     alert("개인키 인증에 실패하였습니다.");
