@@ -46,10 +46,10 @@ public class ItemRepository implements IItemRepository {
 
 	@Override
 	public List<Item> pageList(final int page) {
-		StringBuilder sbSql = new StringBuilder("SELECT * FROM items WHERE available=1 limit 5 offset ?"); // where
-																											// available
+		StringBuilder sbSql = new StringBuilder("SELECT * FROM items WHERE available=1 ORDER BY registered_at DESC limit 12 offset ?"); // where
+																																		// available
 		try {
-			return this.jdbcTemplate.query(sbSql.toString(), new Object[] { (page - 1) * 5 },
+			return this.jdbcTemplate.query(sbSql.toString(), new Object[] { (page - 1) * 12 },
 					(rs, rowNum) -> ItemFactory.create(rs));
 		} catch (Exception e) {
 			throw new RepositoryException(e, e.getMessage());
@@ -69,10 +69,10 @@ public class ItemRepository implements IItemRepository {
 
 	@Override
 	public List<Item> getByName(final String name, final int page) {
-		StringBuilder sbSql = new StringBuilder("SELECT * FROM items WHERE name like ? limit 5 offset ?");
+		StringBuilder sbSql = new StringBuilder("SELECT * FROM items WHERE name like ? ORDER BY registered_at DESC limit 12 offset ?");
 		String tname = "%" + name + "%";
 		try {
-			return this.jdbcTemplate.query(sbSql.toString(), new Object[] { tname, (page - 1) * 5 },
+			return this.jdbcTemplate.query(sbSql.toString(), new Object[] { tname, (page - 1) * 12 },
 					(rs, rowNum) -> ItemFactory.create(rs));
 		} catch (Exception e) {
 			throw new RepositoryException(e, e.getMessage());
@@ -81,11 +81,11 @@ public class ItemRepository implements IItemRepository {
 
 	@Override
 	public List<Item> getByCategory(final String category, final int page) {
-		StringBuilder sbSql = new StringBuilder("SELECT * FROM items WHERE category like ? limit 5 offset ?");
+		StringBuilder sbSql = new StringBuilder("SELECT * FROM items WHERE category like ? ORDER BY registered_at DESC limit 12 offset ?");
 		String tempCategory = "%" + category + "%";
 		System.out.println(tempCategory);
 		try {
-			return this.jdbcTemplate.query(sbSql.toString(), new Object[] { tempCategory, (page - 1) * 5 },
+			return this.jdbcTemplate.query(sbSql.toString(), new Object[] { tempCategory, (page - 1) * 12 },
 					(rs, rowNum) -> ItemFactory.create(rs));
 		} catch (Exception e) {
 			throw new RepositoryException(e, e.getMessage());
@@ -94,9 +94,9 @@ public class ItemRepository implements IItemRepository {
 
 	@Override
 	public List<Item> getByUserName(final long id, final int page) {
-		StringBuilder sbSql = new StringBuilder("SELECT * FROM items WHERE seller=? limit 5 offset ?");
+		StringBuilder sbSql = new StringBuilder("SELECT * FROM items WHERE seller=? ORDER BY registered_at DESC limit 12 offset ?");
 		try {
-			return this.jdbcTemplate.query(sbSql.toString(), new Object[] { id, (page - 1) * 5 },
+			return this.jdbcTemplate.query(sbSql.toString(), new Object[] { id, (page - 1) * 12 },
 					(rs, rowNum) -> ItemFactory.create(rs));
 		} catch (Exception e) {
 			throw new RepositoryException(e, e.getMessage());

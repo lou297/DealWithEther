@@ -1,7 +1,12 @@
 <template>
     <div>
         <!-- <h-nav></h-nav> -->
-        <h-shop-categories :category="'전체보기'"></h-shop-categories>
+        <div style="height:530px; background-color: rgb(255,212,85);">
+            <img src="../../../public/images/avataaars.svg" alt="" style="width: 15rem; margin: 5rem 0 1rem 0;"><br>
+            <h1 style="margin: 2rem 0 1rem 0; color:red; display: inline-block;">상</h1>
+            <h1 style="margin: 2rem 0.7rem 1rem 0; display: inline-block;">품목록</h1>
+
+        </div>
         <v-card color="basil">
             <v-tabs v-model="tab" background-color="transparent" color="basil" grow>
                 <v-flex xl1 lg1 md1 sm0 xs0><span></span></v-flex>
@@ -31,17 +36,16 @@
                     </v-flex>
                 </v-layout>
             </v-container>
-
-            <div class="row">
-                <v-flex xl1 lg1 md1 sm0 xs0><span></span></v-flex>
-                <v-flex xs12 sm6 md6 lg2 xl2
-                        class="col-md-3 artwork"
-                        v-for="item in items"
-                        v-bind:key="item.id">
-                    <item-card :item="item" @clicked="onClickItem(item.id)"></item-card>
-                </v-flex>
-                <v-flex xl1 lg1 md1 sm0 xs0><span></span></v-flex>
-            </div>
+            <v-container>
+                <v-row>
+                    <v-flex xs12 sm6 md4 lg3 xl3
+                            class="itemCard"
+                            v-for="item in items"
+                            v-bind:key="item.id">
+                        <item-card :item="item" @clicked="onClickItem(item.id)"></item-card>
+                    </v-flex>
+                </v-row>
+            </v-container>
             <div class="text-center">
                 <v-pagination
                     v-model="page"
@@ -76,6 +80,12 @@ export default {
     data() {
         return {
             items: [],
+            newItem: {
+                id: 999,
+                name : "dummy",
+                price: "1",
+                registeredAt : "2020-09-29"
+            },
             categories: ['패션/잡화',
                 '뷰티/미용',
                 '디지털/가전',
@@ -257,5 +267,8 @@ export default {
 ul {
     display: flex;
     list-style: none;
+}
+.itemCard {
+    padding : 12px;
 }
 </style>
