@@ -107,9 +107,10 @@ public class ItemController {
 		return item;
 	}
 
-	@RequestMapping(value = "/items/seller/{name}/{page}", method = RequestMethod.GET)
-	public List<Item> getBySellerItem(@PathVariable String name, @PathVariable int page) {
-		List<Item> item = itemService.getByUser(name, page);
+	@RequestMapping(value = "/items/seller/{category}/{name}/{page}", method = RequestMethod.GET)
+	public List<Item> getBySellerItem(@PathVariable String category, @PathVariable String name, @PathVariable int page) {
+		List<Item> item = itemService.getByUser(category, name, page);
+		System.out.println(category + ":" + name + ":" + page);
 		if (item == null) {
 			logger.error("NOT FOUND NAME: ", name);
 			throw new NotFoundException(name + "의 상품 정보를 찾을 수 없습니다.");
@@ -118,9 +119,22 @@ public class ItemController {
 	}
 
 	@ApiOperation(value = "Fetch an item with name")
+	@RequestMapping(value = "/items/name/{category}/{name}/{page}", method = RequestMethod.GET)
+	public List<Item> getByName(@PathVariable String category, @PathVariable String name, @PathVariable int page) {
+		System.out.println(category + ":" + name + ":" + page);
+		List<Item> items = itemService.getByName(category, name, page);
+		if (items == null || items.size() == 0) {
+			logger.error("NOT FOUND LIST OF NAME: ", name);
+			return null;
+		}
+		return items;
+	}
+
+	@ApiOperation(value = "Fetch an item with name")
 	@RequestMapping(value = "/items/name/{name}/{page}", method = RequestMethod.GET)
-	public List<Item> getByName(@PathVariable String name, @PathVariable int page) {
-		List<Item> items = itemService.getByName(name, page);
+	public List<Item> getByOnlyName(@PathVariable String name, @PathVariable int page) {
+		System.out.println(name + ":" + page);
+		List<Item> items = itemService.getByOnlyName(name, page);
 		if (items == null || items.size() == 0) {
 			logger.error("NOT FOUND LIST OF NAME: ", name);
 			return null;

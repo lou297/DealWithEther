@@ -15,9 +15,9 @@ public interface IItemService {
 
 	List<Item> getByUser(int uid);
 
-	List<Item> getByUser(String name, int page);
+	List<Item> getByUser(String category, String name, int page);
 
-	List<Item> getByName(String title, int page);
+	List<Item> getByName(String category, String title, int page);
 
 	List<Item> getByCategory(String Category, int page);
 
@@ -43,4 +43,5 @@ public interface IItemService {
 	@Transactional
 	int complete(long id, String eoa, String pk) throws Exception;
 
+	List<Item> getByOnlyName(String name, int page);
 }

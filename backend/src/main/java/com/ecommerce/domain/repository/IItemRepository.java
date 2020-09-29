@@ -12,11 +12,11 @@ public interface IItemRepository {
 
 	List<Item> getByUser(final long userId);
 
-	List<Item> getByName(final String name, final int page);
+	List<Item> getByName(final String category, final String name, final int page);
 
 	List<Item> getByCategory(final String category, final int page);
 
-	List<Item> getByUserName(final long id, final int page);
+	List<Item> getByUserName(final String category, final long id, final int page);
 
 	List<Item> getByMainCategory(final String category);
 
@@ -39,4 +39,6 @@ public interface IItemRepository {
 
 	@Transactional
 	int complete(long id);
+
+	List<Item> getByOnlyName(String name, int page);
 }

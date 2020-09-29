@@ -111,14 +111,14 @@ public class ItemService implements IItemService {
 	}
 
 	@Override
-	public List<Item> getByUser(String name, int page) {
+	public List<Item> getByUser(String category, String name, int page) {
 		User user = userRepository.getUserId(name);
-		return this.itemRepository.getByUserName(user.getId(), page);
+		return this.itemRepository.getByUserName(category, user.getId(), page);
 	}
 
 	@Override
-	public List<Item> getByName(String title, int page) {
-		return this.itemRepository.getByName(title, page);
+	public List<Item> getByName(String category, String title, int page) {
+		return this.itemRepository.getByName(category, title, page);
 	}
 
 	@Override
@@ -218,6 +218,11 @@ public class ItemService implements IItemService {
 		TransactionReceipt tr = escrowFactory.deregisterItem(BigInteger.valueOf(id)).send();
 		// return this.itemRepository.complete(id);
 		return 0;
+	}
+
+	@Override
+	public List<Item> getByOnlyName(String name, int page) {
+		return this.itemRepository.getByOnlyName(name, page);
 	}
 
 	@Override
