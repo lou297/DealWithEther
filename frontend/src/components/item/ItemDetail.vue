@@ -1,37 +1,32 @@
 <template>
   <div>
     <v-container>
-      <v-layout row>
+      <v-row>
         <v-flex col xl5 lg5 md5 sm12 xs12>
-          <v-carousel cycle hide-delimiter-background show-arrows-on-hover>
+          <v-carousel cycle hide-delimiter-background show-arrows-on-hover style="width:300px; margin-left:90px;">
             <v-carousel-item v-for="n in item.image" :key="n">
-              <v-sheet height="100%">
                 <v-row class="fill-height" align="center" justify="center">
                   <v-img
                     :src="imgPath(n)"
                     aspect-ratio="1"
                     class="grey lighten-2"
+                    
                   ></v-img>
                 </v-row>
-              </v-sheet>
             </v-carousel-item>
           </v-carousel>
         </v-flex>
-        <v-flex xl1 lg1 md1 sm0 xs0> </v-flex>
-        <v-flex col xl6 lg6 md6 sm12 xs12>
+        <v-flex col xl5 lg5 md5 sm12 xs12 style="margin:40px 0 0 30px;" id="font" >
           <v-col>
             <v-row>
-              <v-col style="float: left; text-align: left"
-                ><h5>{{ item.explanation }}</h5></v-col
-              >
+                <v-col style="float: left; text-align: left">
+                  <div id="font" style="font-size:19px;">{{ item.name }}</div>
+                </v-col>
             </v-row>
             <v-row>
-              <v-col style="float: right; text-align: left"
-                ><h4 style="display: inline; font-weight: bold">
-                  {{ item.price }}
-                </h4>
-                원</v-col
-              >
+                <v-col style="float: right; text-align: left">
+                  <div id="font" style="display: inline; font-weight: bold; font-size:21px;">{{ item.price }} </div>CASH
+                </v-col>
             </v-row>
             <v-divider style="margin-top: 0px" />
             <v-row>
@@ -78,106 +73,62 @@
               <v-col cols="3" style="text-align: left">상태</v-col>
               <v-col cols="8" style="text-align: left">{{
                 item.available ? "판매중" : "판매 종료"
-              }}</v-col>
+              }}</v-col><br><br><br>
 
-              <v-row>
-                <v-col cols="2.2">
-                  <v-btn large style="width:100%" @click="BookMark">찜</v-btn>
-                </v-col>
-                <v-col cols="2.2">
-                  <v-btn large color="primary" style="width:100%">문의톡</v-btn>
-                </v-col>
-                <v-col cols="2.2">
-                  <v-btn large color="warning" style="width:100%"
-                    >네고요청</v-btn
-                  >
-                </v-col>
-                <v-col cols="2.2">
-                  <div class="example-modal-window">
-                    <v-btn
-                      large
-                      color="error"
-                      style="width:100%"
-                      @click="openModal"
-                      >바로구매</v-btn
-                    >
-                    <MyModal @close="closeModal" v-if="modal">
-                      <div
-                        v-if="postState == false"
-                        style="text-align:left;"
-                        @click="getAddress"
-                      >
-                        <p
-                          style="margin-top: 5px; font-weight:bold; float:left;"
-                        >
-                          택배거래
-                        </p>
-                        <div style="float:right; margin-left:200px;">
-                          <img
-                            src="../../../public/images/arrow.png"
-                            style="width:12px;"
-                          />
-                        </div>
-                        <div style="clear:both;">
-                          <div style="float: left;">
-                            <div style="font-size:14px; ">
-                              안전하게 상품을 받을때까지,
-                            </div>
-                            <div style="font-size:14px;">
-                              중코마켓이 결제금액을 보관해요
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div v-if="postState == true">
-                        <div v-if="Addressresult == false">
-                          <p style="margin-top: 5px;">배송지를 입력해주세요.</p>
-                          <hr />
-                          <vue-daum-postcode
-                            @complete="handleAddress($event)"
-                          />
-                        </div>
-                        <div v-else>
-                          <p style="margin-top: 5px;">
-                            상세주소를 입력해주세요.
-                          </p>
-                          <hr />
-                          <div style="text-align:left;">
-                            {{ address }}<br />
-                            <input
-                              type="text"
-                              class="input"
-                              size="10"
-                              v-model="detailAddress"
-                            />
-                          </div>
-                          <v-btn
-                            color="error"
-                            primary
-                            style="margin-top:8px"
-                            @click="movePage"
-                            >구매하기</v-btn
-                          >
-                        </div>
-                      </div>
-                      <hr v-if="directState == true" />
-                      <div style="text-align:left;" v-if="directState == true">
-                        <p style="margin-top: 5px; font-weight:bold;">직거래</p>
-                        <p style="font-size:14px; margin:5px 0px 5px 0px;">
-                          직거래도 현금없이 간편하게 결제할 수 있어요
-                        </p>
-                      </div>
-                    </MyModal>
-                  </div>
-                </v-col>
-              </v-row>
+                            <v-row>
+                                <v-col cols="2.1">
+                                    <v-btn large color="primary" style="width:100%">문의톡</v-btn>
+                                </v-col>
+                                <v-col cols="2.1">
+                                    <v-btn large color="warning" style="width:100%">네고요청</v-btn>
+                                </v-col>
+                                <v-col cols="2.1">
+                                    
+                                        <div class="example-modal-window">
+                                            <v-btn large color="error" style="width:100%" @click="openModal">바로구매</v-btn>
+                                            <MyModal @close="closeModal" v-if="modal">
+                                            <div v-if="postState == false" style="text-align:left;" @click="getAddress">
+                                                <p style="margin-top: 5px; font-weight:bold; float:left;">택배거래</p>
+                                                <div style="float:right; margin-left:200px;">
+                                                    <img src="../../../public/images/arrow.png" style="width:12px;">
+                                                </div>
+                                                <div style="clear:both;">
+                                                    <div style="float: left;">
+                                                        <div style="font-size:14px; ">안전하게 상품을 받을때까지,</div>
+                                                        <div style="font-size:14px;">중코마켓이 결제금액을 보관해요</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div v-if="postState == true">
+                                                <div v-if="Addressresult == false">
+                                                <p style="margin-top: 5px;">배송지를 입력해주세요.</p> <hr>
+                                                    <vue-daum-postcode @complete="handleAddress($event)" />
+                                                </div>
+                                                <div v-else>
+                                                    <p style="margin-top: 5px;">상세주소를 입력해주세요.</p> <hr>
+                                                     <div style="text-align:left;">{{address}}<br>
+                                                        <input type="text" class="input" size="10" v-model="detailAddress">
+                                                     </div>
+                                                     <v-btn color="error" primary style="margin-top:8px" @click="movePage">구매하기</v-btn>
+                                                </div>
+                                
+                                            </div>
+                                            <hr v-if="directState==true">
+                                            <div style="text-align:left;" v-if="directState==true">
+                                                <p style="margin-top: 5px; font-weight:bold;">직거래</p>
+                                                <p style="font-size:14px; margin:5px 0px 5px 0px;">직거래도 현금없이 간편하게 결제할 수 있어요</p>
+                                            </div>
+                                            </MyModal>
+                                        </div>
+                                </v-col>
+                            </v-row>
+                        </v-row>
+                    </v-col>
+                </v-flex>
+                <v-divider/>
             </v-row>
-          </v-col>
-        </v-flex>
-        <v-divider />
-      </v-layout>
-    </v-container>
-  </div>
+        </v-container>
+    </div>
 </template>
 
 <script>
@@ -202,61 +153,53 @@ import img from "../../../public/images/arrow.png";
 Vue.use(VueDaumPostcode);
 
 export default {
-  name: "ItemDetail",
-  components: {
-    HNav,
-    MyModal,
-  },
-  data() {
-    return {
-      item: {
-        id: null,
-        name: "",
-        category: null,
-        explanation: "",
-        available: null,
-        state: "",
-        seller: {
-          id: null,
-          name: "",
-          email: "",
-        },
-        directDeal: false, // 직거래 여부
-        dealRegion: "",
-        image: 0,
-        price: null,
-        registeredAt: null,
-      },
-      bookMarkList: {
-        userId: "",
-        itemId: "",
-      },
-      userId: this.$store.state.user.id,
-      star: require("../../../public/images/star.png"),
-      time: "",
-      modal: false,
-      message: "",
-      directState: false,
-      postState: false,
-      Addressresult: false,
-      address: "",
-      detailAddress: "",
-      allAddress: "",
-      cash: 0,
-      walletAddress: "",
-    };
-  },
-  methods: {
-    goBack: function() {
-      // 이전 페이지로 이동한다.
-      this.$router.go(-1);
+    name: 'ItemDetail',
+    components: {
+        HNav,MyModal,
     },
-    convertWeiToEth(value) {
-      if (value) {
-        return weiToEth(value.toString()) + " ETH";
-      } else {
-        return "-";
-      }
+    data() {
+        return {
+            item: {
+                id: null,
+                name: '',
+                category: null,
+                explanation: '',
+                available: null,
+                state: '',
+                seller: {
+                    id: null,
+                    name: '',
+                    email: '',
+                },
+                directDeal: false, // 직거래 여부
+                dealRegion: "",
+                image: 0,
+                price: null,
+                registeredAt: null,
+            },
+            bookMarkList: {
+                userId: '',
+                itemId: ''
+            },
+            userId: this.$store.state.user.id,
+            star: require('../../../public/images/star.png'),
+            time: "",
+            modal: false,
+            message: '',
+            directState: false,
+            postState: false,
+            Addressresult: false,
+            address: "",
+            detailAddress: "",
+            allAddress: "",
+            cash: 0,
+            walletAddress: "",
+            name: '10 Best Things to Do in Seattle',
+            category: 'Travel',
+            image: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/1159990/pike-place.jpg',
+            author: 'Katherine Kato',
+            desc: `Seattle is a seaport city on the west coast of the United States...`
+        };
     },
     getImg(name) {
       if (name) {
@@ -462,6 +405,9 @@ export default {
 </script>
 
 <style>
+#font{
+  font-family: Helvetica, Arial, sans-serif;
+}
 .input {
   width: 300px;
   margin: 3px 0;
