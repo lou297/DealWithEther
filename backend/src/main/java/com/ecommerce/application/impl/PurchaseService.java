@@ -120,7 +120,7 @@ public class PurchaseService implements IPurchaseService {
         List<PurchaseInfo> purchaseInfo = new ArrayList<PurchaseInfo>();
 
         List<Purchase> purchases = purchaseRepository.getByBuyer(id);
-        for(Purchase purchase : purchases) {
+        for (Purchase purchase : purchases) {
             purchaseInfo.add(new PurchaseInfo(purchase));
         }
         return purchaseInfo;
@@ -179,7 +179,9 @@ public class PurchaseService implements IPurchaseService {
                         .transfer(purchase.getContractAddress(), BigInteger.valueOf(item.getPrice() + 20)).send();
 
                 escrow = Escrow.load(purchase.getContractAddress(), web3j, credentials, contractGasProvider);
-                // 여기서 지갑 갱신
+                walletService.syncBalance(wallet.getAddress(), wallet.getBalance(),
+                        wallet.getCash() - (item.getPrice() + 20));
+
                 TransactionReceipt tr2 = escrow.checkDeposit().send();
                 purchase.setState("P");
                 return purchaseRepository.create(purchase);
@@ -216,6 +218,10 @@ public class PurchaseService implements IPurchaseService {
         escrow = Escrow.load(purchase.getContractAddress(), web3j, credentials, contractGasProvider);
 
         TransactionReceipt tr = escrow.confirm().send();
+
+        Wallet wallet = walletService.get(purchase.getBuyerId());
+
+        walletService.syncBalance(wallet.getAddress(), wallet.getBalance(), wallet.getCash() + 20);
         // 여기서 지갑 갱신
         purchase.setState("C");
         return purchaseRepository.update(purchase);
@@ -231,6 +237,11 @@ public class PurchaseService implements IPurchaseService {
 
         escrow = Escrow.load(purchase.getContractAddress(), web3j, credentials, contractGasProvider);
         // 여기서도 지갑 갱신
+        Wallet wallet = walletService.get(purchase.getBuyerId());
+
+        walletService.syncBalance(wallet.getAddress(), wallet.getBalance(),
+                wallet.getCash() + itemRepository.get(purchase.getItemId()).getPrice() + 20);
+
         TransactionReceipt tr = escrow.cancel().send();
         purchase.setState("X");
         return purchaseRepository.update(purchase);

@@ -162,6 +162,7 @@ export default {
       star: require("../../../public/images/star.png"),
       time: "",
       cash: 0,
+      walletAddress: "",
     };
   },
   methods: {
@@ -181,6 +182,7 @@ export default {
           purchaseService.create(
             id,
             privateKey,
+            vm.walletAddress,
             (response) => {
               alert("구매 의사를 전달하였습니다");
             },
@@ -319,6 +321,7 @@ export default {
     walletService.findByUserId(this.userId, (res) => {
       if (res) {
         vm.cash = res.data.cash;
+        vm.walletAddress = res.data.address;
         console.log(vm.cash);
       }
     });
