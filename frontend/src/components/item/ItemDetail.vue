@@ -173,12 +173,12 @@ export default {
         return;
       }
       const privateKey = prompt("상품을 구매하시려면 개인키를 입력하세요.");
-      address = prompt("배송받을 주소를 입력하세요!");
       let check = false;
       var id = this.userId;
       walletService.isValidPrivateKey(this.userId, privateKey, (res) => {
         if (res) {
-          purchaseService.created(
+          address = prompt("배송받을 주소를 입력하세요!");
+          purchaseService.create(
             id,
             privateKey,
             (response) => {
