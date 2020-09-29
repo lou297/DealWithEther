@@ -3,7 +3,7 @@
         <!-- <my-page-nav></my-page-nav> -->
 
         <v-row>
-            <v-col cols="8" offset="2">
+            <v-col cols="12" lg="8" offset-lg="2">
                 <v-row id="profile-container">
                     <v-col cols="4" id="profile-image-container">
                         <div>
@@ -113,7 +113,12 @@
                         <v-tab
                             class="tab-menu"
                             @click="showDealHistory">
-                            거래내역
+                            등록 상품 목록
+                        </v-tab>
+                        <v-tab
+                            class="tab-menu"
+                            @click="showRegistedItemList">
+                            구매 내역 목록
                         </v-tab>
                         <v-tab
                             class="tab-menu"
@@ -125,11 +130,6 @@
                             @click="showBookMarkList">
                             찜한 목록
                         </v-tab>
-                        <v-tab
-                            class="tab-menu"
-                            @click="showRegistedItemList">
-                            등록한 상품
-                        </v-tab>
                     </v-tabs>
                 </v-row>
                 <v-row>
@@ -137,7 +137,6 @@
                         <v-container v-for="item in items" :key="item.id" >
                             <item-card :item="item" @clicked="onClickItem(item.id)"></item-card>
                         </v-container>
-                        
                 </v-row>
                 <v-row>
                     <v-container v-for="buyPurchase in buyPurchases" :key="buyPurchase.id">
@@ -182,7 +181,6 @@ export default {
           name : "",
           email : ""
       },
-      items: [],
       size : 0,
       wallet: {
         id: 0,
@@ -192,6 +190,7 @@ export default {
         cash: 0,
         receivingCount: 0
       },
+      items: [],
       buyPurchases : [],
       isCharging: false, // 현재 코인을 충전하고 있는 중인지 확인
       isCashCharging: false, // 현재 캐시을 충전하고 있는 중인지 확인
