@@ -87,17 +87,20 @@ public class ItemService implements IItemService {
 
 	@Override
 	public Item get(final long id) throws Exception {
-		ClassPathResource resource = new ClassPathResource(WALLET_RESOURCE);
-		byte[] bdata = FileCopyUtils.copyToByteArray(resource.getInputStream());
-		String data = new String(bdata, StandardCharsets.UTF_8);
+		// ClassPathResource resource = new ClassPathResource(WALLET_RESOURCE);
+		// byte[] bdata = FileCopyUtils.copyToByteArray(resource.getInputStream());
+		// String data = new String(bdata, StandardCharsets.UTF_8);
 
-		Web3j web3 = Web3j.build(new HttpService(NETWORK_URL)); // defaults to http://localhost:8545/
-		Credentials credentials = WalletUtils.loadJsonCredentials(PASSWORD, data);
+		// Web3j web3 = Web3j.build(new HttpService(NETWORK_URL)); // defaults to
+		// http://localhost:8545/
+		// Credentials credentials = WalletUtils.loadJsonCredentials(PASSWORD, data);
 
-		escrowFactory = EscrowFactory.load(ITEM_CONTRACT, web3, credentials, contractGasProvider);
+		// escrowFactory = EscrowFactory.load(ITEM_CONTRACT, web3, credentials,
+		// contractGasProvider);
 
-		Tuple6<BigInteger, BigInteger, String, BigInteger, BigInteger, Boolean> t = escrowFactory
-				.items(BigInteger.valueOf(id)).send();
+		// Tuple6<BigInteger, BigInteger, String, BigInteger, BigInteger, Boolean> t =
+		// escrowFactory
+		// .items(BigInteger.valueOf(id)).send();
 
 		return this.itemRepository.get(id);
 	}
