@@ -167,7 +167,7 @@ public class PurchaseService implements IPurchaseService {
                         .transfer(purchase.getContractAddress(), BigInteger.valueOf(item.getPrice() + 20)).send();
 
                 escrow = Escrow.load(purchase.getContractAddress(), web3j, credentials, contractGasProvider);
-
+                // 여기서 지갑 갱신
                 TransactionReceipt tr2 = escrow.checkDeposit().send();
                 purchase.setState("P");
                 return purchaseRepository.create(purchase);
@@ -204,6 +204,7 @@ public class PurchaseService implements IPurchaseService {
         escrow = Escrow.load(purchase.getContractAddress(), web3j, credentials, contractGasProvider);
 
         TransactionReceipt tr = escrow.confirm().send();
+        // 여기서 지갑 갱신
         purchase.setState("C");
         return purchaseRepository.update(purchase);
     }
@@ -217,7 +218,7 @@ public class PurchaseService implements IPurchaseService {
         Purchase purchase = purchaseRepository.getByPurchaseId(purchaseId);
 
         escrow = Escrow.load(purchase.getContractAddress(), web3j, credentials, contractGasProvider);
-
+        // 여기서도 지갑 갱신
         TransactionReceipt tr = escrow.cancel().send();
         purchase.setState("X");
         return purchaseRepository.update(purchase);
