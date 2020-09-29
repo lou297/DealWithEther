@@ -21,17 +21,18 @@
             </v-stepper-step>
             <v-divider></v-divider>
             <v-stepper-step step="3" :complete="state >= 3">
-              배송 중
+              배송 시작
             </v-stepper-step>
             <v-divider></v-divider>
             <v-stepper-step step="4" :complete="state >= 4">
-              배송 완료
+              거래 완료
             </v-stepper-step>
           </v-stepper-header>
         </v-stepper>
         <div>
-          <v-btn color="error" :disabled="state > 1">구매취소</v-btn>
-          <v-btn color="success" :disabled="state < 4">평가하기</v-btn>
+          <v-btn color="success" :disabled="state != 4">평가하기</v-btn>
+          <v-btn color="primary" :disabled="state != 3">구매 확정</v-btn>
+          <v-btn color="error" :disabled="state > 2">구매취소</v-btn>
         </div>
       </v-col>
     </v-row>
