@@ -178,16 +178,16 @@ export default {
       var id = this.userId;
       walletService.isValidPrivateKey(this.userId, privateKey, (res) => {
         if (res) {
-          //   purchaseService.created(
-          //     id,
-          //     privateKey,
-          //     (response) => {
-          //       alert("구매 의사를 전달하였습니다");
-          //     },
-          //     (error) => {
-          //       alert("에러가 발생하였습니다.");
-          //     }
-          //   );
+          purchaseService.created(
+            id,
+            privateKey,
+            (response) => {
+              alert("구매 의사를 전달하였습니다");
+            },
+            (error) => {
+              alert("에러가 발생하였습니다.");
+            }
+          );
         } else {
           alert("개인키 인증에 실패하였습니다.");
           this.isCashCharging = false;
