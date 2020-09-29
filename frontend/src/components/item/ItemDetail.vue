@@ -70,9 +70,8 @@
                                     
                                         <div class="example-modal-window">
                                             <v-btn large color="error" style="width:100%" @click="openModal">바로구매</v-btn>
-
                                             <MyModal @close="closeModal" v-if="modal">
-                                            <div style="text-align:left;" @click="getAddress">
+                                            <div v-if="postState == false" style="text-align:left;" @click="getAddress">
                                                 <p style="margin-top: 5px; font-weight:bold; float:left;">택배거래</p>
                                                 <div style="float:right; margin-left:200px;">
                                                     <img src="../../../public/images/arrow.png" style="width:12px;">
@@ -83,12 +82,22 @@
                                                         <div style="font-size:14px;">중코마켓이 결제금액을 보관해요</div>
                                                     </div>
                                                 </div>
-                                                <div v-if="postState == true">
-                                                    <br><br>
-                                                    <vue-daum-postcode />
-                                                </div>
-                                                <hr v-if="directState==true">
                                             </div>
+                                            <div v-if="postState == true">
+                                                <div v-if="Addressresult == false">
+                                                <p style="margin-top: 5px;">배송지를 입력해주세요.</p> <hr>
+                                                    <vue-daum-postcode @complete="handleAddress($event)" />
+                                                </div>
+                                                <div v-else>
+                                                    <p style="margin-top: 5px;">상세주소를 입력해주세요.</p> <hr>
+                                                     <div style="text-align:left;">{{address}}<br>
+                                                        <input type="text" class="input" size="10" v-model="detailAddress">
+                                                     </div>
+                                                     <v-btn color="error" primary style="margin-top:8px" @click="movePage">구매하기</v-btn>
+                                                </div>
+                                
+                                            </div>
+                                            <hr v-if="directState==true">
                                             <div style="text-align:left;" v-if="directState==true">
                                                 <p style="margin-top: 5px; font-weight:bold;">직거래</p>
                                                 <p style="font-size:14px; margin:5px 0px 5px 0px;">직거래도 현금없이 간편하게 결제할 수 있어요</p>
@@ -124,6 +133,7 @@ import VueDaumPostcode from "vue-daum-postcode"
 import MyModal from './Modal.vue'
 import img from '../../../public/images/arrow.png'
 Vue.use(VueDaumPostcode)
+
 
 export default {
     name: 'ItemDetail',
@@ -161,6 +171,10 @@ export default {
             message: '',
             directState: false,
             postState: false,
+            Addressresult: false,
+            address: "",
+            detailAddress: "",
+            allAddress: "",
         };
     },
     methods: {
@@ -222,14 +236,26 @@ export default {
         getAddress() { // 주소 입력 창 띄우기
             this.postState = true;
         },
+        movePage(){
+            this.allAddress += this.address;
+            this.allAddress += " ";
+            this.allAddress += this.detailAddress;
+            console.log(this.allAddress);
+        },
+        handleAddress(input){
+            this.Addressresult = true;
+            this.address = input.address;
+            console.log(input);
+        },
         openModal() {
             this.directState = this.item.directDeal;
             this.modal = true
-            },
-            closeModal() {
-            this.modal = false
-            },
-            doSend() {
+        },
+        closeModal() {
+            this.modal = false;
+            this.postState = false;
+        },
+        doSend() {
             if (this.message.length > 0) {
                 alert(this.message)
                 this.message = ''
@@ -237,7 +263,8 @@ export default {
             } else {
                 alert('메시지를 입력해주세요.')
             }
-        }
+        },
+      
     },
     filters: {
         symbolToFullName(symbol) {
@@ -306,6 +333,13 @@ export default {
 
 
 <style>
+
+.input {
+        width: 300px;
+        margin: 3px 0;
+        text-align: left;
+        border: 1px ridge gray;
+}
 
 img.center {
     display: block;
