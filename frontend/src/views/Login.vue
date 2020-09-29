@@ -25,10 +25,10 @@
             </div>
             <v-card-actions>
                 <v-btn text>
-                    <v-img src="../images/kakaolink_btn_medium.png" max-width="45px"></v-img>
+                    <v-img src="../../public/images/kakaolink_btn_medium.png" max-width="45px"></v-img>
                 </v-btn>
                 <v-btn text>
-                    <v-img src="../images/naver_btn2.png" max-width="45px"></v-img>
+                    <v-img src="../../public/images/naver_btn2.png" max-width="45px"></v-img>
                 </v-btn>
                 <v-spacer></v-spacer>
                 <v-btn color="green darken-1" text @click="login" min-width="100px">

@@ -5,6 +5,7 @@ import store from "./store";
 import HNav from "./components/common/HNav.vue";
 import HBreadcumb from "./components/common/HBreadcrumb.vue";
 import vuetify from '@/plugins/vuetify';
+import './components/Chat/socketPlugin';
 
 Vue.config.productionTip = false;
 Vue.filter("truncate", function(text, length, clamp) {
