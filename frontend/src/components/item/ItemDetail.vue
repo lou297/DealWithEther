@@ -1,37 +1,32 @@
 <template>
   <div>
     <v-container>
-      <v-layout row>
+      <v-row>
         <v-flex col xl5 lg5 md5 sm12 xs12>
-          <v-carousel cycle hide-delimiter-background show-arrows-on-hover>
+          <v-carousel cycle hide-delimiter-background show-arrows-on-hover style="width:300px; margin-left:90px;">
             <v-carousel-item v-for="n in item.image" :key="n">
-              <v-sheet height="100%">
                 <v-row class="fill-height" align="center" justify="center">
                   <v-img
                     :src="imgPath(n)"
                     aspect-ratio="1"
                     class="grey lighten-2"
+                    
                   ></v-img>
                 </v-row>
-              </v-sheet>
             </v-carousel-item>
           </v-carousel>
         </v-flex>
-        <v-flex xl1 lg1 md1 sm0 xs0> </v-flex>
-        <v-flex col xl6 lg6 md6 sm12 xs12>
+        <v-flex col xl5 lg5 md5 sm12 xs12 style="margin:40px 0 0 30px;" id="font" >
           <v-col>
             <v-row>
-              <v-col style="float: left; text-align: left"
-                ><h5>{{ item.explanation }}</h5></v-col
-              >
+                <v-col style="float: left; text-align: left">
+                  <div id="font" style="font-size:19px;">{{ item.name }}</div>
+                </v-col>
             </v-row>
             <v-row>
-              <v-col style="float: right; text-align: left"
-                ><h4 style="display: inline; font-weight: bold">
-                  {{ item.price }}
-                </h4>
-                원</v-col
-              >
+                <v-col style="float: right; text-align: left">
+                  <div id="font" style="display: inline; font-weight: bold; font-size:21px;">{{ item.price }} </div>CASH
+                </v-col>
             </v-row>
             <v-divider style="margin-top: 0px" />
             <v-row>
@@ -78,19 +73,16 @@
               <v-col cols="3" style="text-align: left">상태</v-col>
               <v-col cols="8" style="text-align: left">{{
                 item.available ? "판매중" : "판매 종료"
-              }}</v-col>
+              }}</v-col><br><br><br>
 
                             <v-row>
-                                <v-col cols="2.2">
-                                    <v-btn large style="width:100%" @click="BookMark">찜</v-btn>
-                                </v-col>
-                                <v-col cols="2.2">
+                                <v-col cols="2.1">
                                     <v-btn large color="primary" style="width:100%">문의톡</v-btn>
                                 </v-col>
-                                <v-col cols="2.2">
+                                <v-col cols="2.1">
                                     <v-btn large color="warning" style="width:100%">네고요청</v-btn>
                                 </v-col>
-                                <v-col cols="2.2">
+                                <v-col cols="2.1">
                                     
                                         <div class="example-modal-window">
                                             <v-btn large color="error" style="width:100%" @click="openModal">바로구매</v-btn>
@@ -134,7 +126,7 @@
                     </v-col>
                 </v-flex>
                 <v-divider/>
-            </v-layout>
+            </v-row>
         </v-container>
     </div>
 </template>
@@ -164,7 +156,7 @@ Vue.use(VueDaumPostcode)
 export default {
     name: 'ItemDetail',
     components: {
-        HNav,MyModal
+        HNav,MyModal,
     },
     data() {
         return {
@@ -203,6 +195,11 @@ export default {
             allAddress: "",
             cash: 0,
             walletAddress: "",
+            name: '10 Best Things to Do in Seattle',
+            category: 'Travel',
+            image: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/1159990/pike-place.jpg',
+            author: 'Katherine Kato',
+            desc: `Seattle is a seaport city on the west coast of the United States...`
         };
     },
     methods: {
@@ -430,12 +427,14 @@ export default {
 
 
 <style>
-
+#font{
+  font-family: Helvetica, Arial, sans-serif;
+}
 .input {
-        width: 300px;
-        margin: 3px 0;
-        text-align: left;
-        border: 1px ridge gray;
+  width: 300px;
+  margin: 3px 0;
+  text-align: left;
+  border: 1px ridge gray;
 }
 
 img.center {
