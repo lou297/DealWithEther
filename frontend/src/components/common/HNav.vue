@@ -28,13 +28,13 @@
                 <v-menu transition="scroll-x-transition">
                     <template v-slot:activator="{ on, attrs }">
                         <v-btn
-                            color="primary"
+                            color="white"
                             dark
                             icon
                             v-bind="attrs"
                             v-on="on"
                         >
-                            <v-icon>mdi-dots-vertical</v-icon>
+                            <v-icon>mdi-dialpad</v-icon>
                         </v-btn>
                     </template>
                     <v-list>
