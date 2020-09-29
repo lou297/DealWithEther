@@ -4,7 +4,7 @@ const instance = createInstance();
 
 function create(id, body, success, fail) {
   instance
-    .post("/api/start/" + id, JSON.stringify(body))
+    .post("/api/purchases/start/" + id, JSON.stringify(body))
     .then(success)
     .catch(fail);
 }
