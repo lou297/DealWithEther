@@ -29,7 +29,7 @@
                         <v-card-text>
                             <div class="row">
                                 <v-flex xl1 lg1 md1 sm0 xs0><span></span></v-flex>
-                                <v-flex xs12 sm6 md6 lg2 xl2 class="col-md-3 artwork" v-for="item in itemlist" v-bind:key="item.id">
+                                <v-flex xs12 sm6 md5 lg2 xl2 class="col-md-3 artwork" v-for="item in itemlist" v-bind:key="item.id">
                                     <item-card :item="item" @clicked="onClickItem(item.id)"></item-card>
                                 </v-flex>
                                 <v-flex xl1 lg1 md1 sm0 xs0><span></span></v-flex>
