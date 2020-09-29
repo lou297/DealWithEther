@@ -60,6 +60,9 @@ public class PurchaseController {
         // -1이면 실패
         // 0은 디비 등록 실패
         // 1은 성공
+        System.out.println(id);
+        System.out.println("start 들어왔는가");
+        System.out.println(cash.toString());
         return this.purchaseService.startPurchase(id, cash);
     }
 

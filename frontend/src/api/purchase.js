@@ -2,7 +2,11 @@ import { createInstance } from "./index.js";
 
 const instance = createInstance();
 
-function create(id, body, success, fail) {
+function create(id, pk, eoa, success, fail) {
+  const body = {
+    walletAddress: eoa,
+    privateKey: pk,
+  };
   instance
     .post("/api/purchases/start/" + id, JSON.stringify(body))
     .then(success)

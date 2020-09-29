@@ -27,6 +27,7 @@ import org.web3j.tx.gas.ContractGasProvider;
 import org.web3j.tx.gas.DefaultGasProvider;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -91,8 +92,9 @@ public class CashContractService implements ICashContractService {
 
         credentials = Credentials.create(pk);
         cashContract = CashContract.load(ERC20_TOKEN_CONTRACT, web3j, credentials, contractGasProvider);
-        long cashAmount = (long) (chargeAmount * Math.pow(10, 18));
-        TransactionReceipt transactionReceipt = cashContract.buy(BigInteger.valueOf(cashAmount)).send();
+        BigDecimal cashAmount = new BigDecimal(chargeAmount * Math.pow(10, 18));
+        BigInteger cash = cashAmount.toBigInteger();
+        TransactionReceipt transactionReceipt = cashContract.buy(cash).send();
 
         return cashContract.balanceOf(eoa).send();
     }
