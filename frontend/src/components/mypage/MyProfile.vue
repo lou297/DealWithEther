@@ -3,7 +3,7 @@
         <!-- <my-page-nav></my-page-nav> -->
 
         <v-row>
-            <v-col cols="12" lg="8" offset-lg="2">
+            <v-col offset-lg="2" lg="8" cols="12" >
                 <v-row id="profile-container">
                     <v-col cols="4" id="profile-image-container">
                         <div>
@@ -112,12 +112,12 @@
                     <v-tabs color="#356859" grow background-color="#FFFBE6">
                         <v-tab
                             class="tab-menu"
-                            @click="showDealHistory">
+                            @click="showRegistedItemList">
                             등록 상품 목록
                         </v-tab>
                         <v-tab
                             class="tab-menu"
-                            @click="showRegistedItemList">
+                            @click="showBuyHistory">
                             구매 내역 목록
                         </v-tab>
                         <v-tab
@@ -132,13 +132,13 @@
                         </v-tab>
                     </v-tabs>
                 </v-row>
-                <v-row>
-                        <p>{{size}}건</p>
-                        <v-container v-for="item in items" :key="item.id" >
+                <v-row v-if="tabStatus > 2">
+                        <v-flex v-for="item in items" :key="item.id" >
                             <item-card :item="item" @clicked="onClickItem(item.id)"></item-card>
-                        </v-container>
+                        </v-flex>
                 </v-row>
-                <v-row>
+                <sell-hitsory v-if="tabStatus == 1"></sell-hitsory>
+                <v-row v-if="tabStatus == 2">
                     <v-container v-for="buyPurchase in buyPurchases" :key="buyPurchase.id">
                         <buy-history :buyPurchase="buyPurchase"></buy-history>
                     </v-container>
@@ -159,6 +159,7 @@ import * as purchaseService from "@/api/purchase.js";
 
 import ItemCard from "../shop/ItemCard.vue";
 import BuyHistory from "./BuyHistory.vue";
+import SellHitsory from "./SellList.vue";
 
 //이더리움 통신
 import * as walletService from "@/api/wallet.js";
@@ -171,16 +172,17 @@ export default {
   components: {
     MyPageNav,
     ItemCard,
-    BuyHistory
+    BuyHistory,
+    SellHitsory
   },
   data() {
     return {
     //   userId: this.$store.state.user.id,
-      user : {
-          id : this.$store.state.user.id,
-          name : "",
-          email : ""
-      },
+        user : {
+            id : this.$store.state.user.id,
+            name : "",
+            email : ""
+        },
       size : 0,
       wallet: {
         id: 0,
@@ -190,6 +192,8 @@ export default {
         cash: 0,
         receivingCount: 0
       },
+      //선택된 탭
+      tabStatus : 1,
       items: [],
       buyPurchases : [],
       isCharging: false, // 현재 코인을 충전하고 있는 중인지 확인
@@ -212,11 +216,27 @@ export default {
       onClickItem(itemId) {
             this.$router.push("../item/detail/" + itemId);
         },
-      showDealHistory() {
-        //   alert("deal history")
-        this.items = []
+      showRegistedItemList() {
+            this.tabStatus = 1;
+            this.items = []
+          itemService.findMySaleItems(this.user.id,
+            res=> {
+                console.dir(res)
+                this.items = res.data
+            },
+            err => {
+                alert(err)
+            }
+          )
+      },
+      showBuyHistory() {
+            this.tabStatus = 2;
+            this.items = []
+            this.fetchBuyHistory()
       },
       showRecentlyViewHistory() {
+        this.tabStatus = 3;
+        this.items = []
         const bookMark = JSON.parse(sessionStorage.getItem("bookmark"))
         
         if(bookMark != undefined)
@@ -225,23 +245,13 @@ export default {
             this.items = []
       },
       showBookMarkList() {
-        //   this.items = []
+            this.tabStatus = 4;
+            this.items = []
           loadBookMark(this.user.id,
             res => {
                 this.items = res.data
             },
             error => {
-                alert(err)
-            }
-          )
-      },
-      showRegistedItemList() {
-          itemService.findMySaleItems(this.user.id,
-            res=> {
-                console.dir(res)
-                this.items = res.data
-            },
-            err => {
                 alert(err)
             }
           )
