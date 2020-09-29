@@ -178,7 +178,7 @@ export default {
       var id = this.userId;
       walletService.isValidPrivateKey(this.userId, privateKey, (res) => {
         if (res) {
-          purchaseService.created(
+          purchaseService.create(
             id,
             privateKey,
             (response) => {
