@@ -1,8 +1,5 @@
 <template>
-    <v-card
-        tile
-        v-resize="onResize"
-    >
+    <v-card tile v-resize="onResize">
         <v-app-bar color="#242526" dark>
             <v-toolbar-title>
                 <router-link class="navbar-brand" to="/" id="title">중코마켓</router-link>
@@ -14,9 +11,7 @@
                 <router-link id="link-to-sell" to="/sell">판매하기</router-link>
                 <router-link id="link-to-mypage" to="/mypage/wallet_create" v-if="!$store.state.user.walletAddress">마이페이지</router-link>
                 <router-link id="link-to-myshop" to="/mypage/wallet_info" v-if="$store.state.user.walletAddress">내상점</router-link>
-                <router-link id="link-to-logout" to="/logout"
-                             v-if="$store.state.isSigned">로그아웃
-                </router-link>
+                <router-link id="link-to-logout" to="/logout" v-if="$store.state.isSigned">로그아웃</router-link>
                 <a id="link-to-signup"
                    v-if="!$store.state.isSigned"
                    @click.stop="signup = true">회원가입</a>
