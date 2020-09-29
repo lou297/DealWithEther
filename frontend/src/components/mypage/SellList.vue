@@ -9,7 +9,7 @@
                 <v-flex xl1 lg1 md1 sm0 xs0><span></span></v-flex>
                 <v-card>
                     <v-list three-line xl10 lg10 md10 sm12 xs12>
-                        <template v-for="(item, index) in items">
+                        <v-list-item-group v-for="(item, index) in items" :key="item.itemId">
                             <v-divider
                                 v-if="index !== 0"
                             ></v-divider>
@@ -45,7 +45,7 @@
                                     <v-btn color="error" :disabled="state > 2" @click="canclePurchase">구매취소</v-btn>
                                 </div>
                             </v-col>
-                        </template>
+                        </v-list-item-group>
                     </v-list>
                 </v-card>
                 <v-flex xl1 lg1 md1 sm0 xs0><span></span></v-flex>
