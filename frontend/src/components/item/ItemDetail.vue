@@ -139,19 +139,18 @@ import { findById as findUserById } from "@/api/user.js";
 import * as purchaseService from "@/api/purchase.js";
 import { weiToEth } from "@/utils/ethereumUnitUtils.js";
 // import { ITEM_STATUS } from "../../config/constants.js";
-import {getLocalImg} from '@/utils/imgLoader.js';
-import {getPrice} from '@/utils/itemInventory.js';
-import {findById} from '@/api/item.js';
-import {CATEGORY} from '@/utils/category.js';
-import {bookMarkSave} from "@/api/bookmark.js";
+import { getLocalImg } from "@/utils/imgLoader.js";
+import { getPrice } from "@/utils/itemInventory.js";
+import { findById } from "@/api/item.js";
+import { CATEGORY } from "@/utils/category.js";
+import { bookMarkSave } from "@/api/bookmark.js";
 import * as walletService from "@/api/wallet.js";
 import HNav from "../../components/common/HNav copy";
-import Vue from "vue"
-import VueDaumPostcode from "vue-daum-postcode"
-import MyModal from './Modal.vue'
-import img from '../../../public/images/arrow.png'
-Vue.use(VueDaumPostcode)
-
+import Vue from "vue";
+import VueDaumPostcode from "vue-daum-postcode";
+import MyModal from "./Modal.vue";
+import img from "../../../public/images/arrow.png";
+Vue.use(VueDaumPostcode);
 
 export default {
     name: 'ItemDetail',
@@ -202,106 +201,6 @@ export default {
             desc: `Seattle is a seaport city on the west coast of the United States...`
         };
     },
-    methods: {
-        goBack: function () {
-            // 이전 페이지로 이동한다.
-            this.$router.go(-1);
-        },
-        convertWeiToEth(value) {
-            if (value) {
-                return weiToEth(value.toString()) + ' ETH';
-            } else {
-                return '-';
-            }
-        },
-        getImg(name) {
-            if (name) {
-                console.log(name);
-                return getLocalImg(name);
-            }
-            return null;
-        },
-        imgPath(n) {
-            console.log(process.env.VUE_APP_BACKEND)
-            return process.env.VUE_APP_BACKEND + 'api/items/images/' + this.item.id + "_" + n;
-        },
-
-        purchase() {
-            var address = "";
-            var vm = this;
-            if (this.cash < this.item.price) {
-                alert("캐시가 부족합니다!");
-                return;
-            }
-            const privateKey = prompt("상품을 구매하시려면 개인키를 입력하세요.");
-            let check = false;
-            var id = this.item.id;
-            walletService.isValidPrivateKey(this.userId, privateKey, (res) => {
-                if (res) {
-                    address = prompt("배송받을 주소를 입력하세요!");
-                    purchaseService.create(
-                        id,
-                        privateKey,
-                        vm.walletAddress,
-                        (response) => {
-                        alert("구매 의사를 전달하였습니다");
-                        },
-                        (error) => {
-                        alert("에러가 발생하였습니다.");
-                    });
-                } else {
-                alert("개인키 인증에 실패하였습니다.");
-                this.isCashCharging = false;
-                }
-            });
-        },
-        BookMark() {
-            this.bookMarkList.userId = this.userId;
-            this.bookMarkList.itemId = this.item.id;
-
-            bookMarkSave(
-                this.bookMarkList,
-                function (success) {
-                    console.log('찜 성공');
-                },
-                function (fail) {
-                    console.dir(fail);
-                },
-            );
-        },
-        getAddress() { // 주소 입력 창 띄우기
-            this.postState = true;
-        },
-        movePage(){
-            this.allAddress += this.address;
-            this.allAddress += " ";
-            this.allAddress += this.detailAddress;
-            // 주소 디비에 저장
-            this.$router.push("../../mypage/SellList");
-        },
-        handleAddress(input){
-            this.Addressresult = true;
-            this.address = input.address;
-            console.log(input);
-        },
-        openModal() {
-            this.directState = this.item.directDeal;
-            this.modal = true
-        },
-        closeModal() {
-            this.modal = false;
-            this.postState = false;
-        },
-        doSend() {
-            if (this.message.length > 0) {
-                alert(this.message)
-                this.message = ''
-                this.closeModal()
-            } else {
-                alert('메시지를 입력해주세요.')
-            }
-        },
-      
     getImg(name) {
       if (name) {
         console.log(name);
@@ -318,6 +217,87 @@ export default {
         "_" +
         n
       );
+    },
+
+    purchase() {
+      var address = "";
+      var vm = this;
+      const privateKey = prompt("상품을 구매하시려면 개인키를 입력하세요.");
+      let check = false;
+      var id = this.item.id;
+      walletService.isValidPrivateKey(this.userId, privateKey, (res) => {
+        if (res) {
+          purchaseService.create(
+            id,
+            privateKey,
+            vm.walletAddress,
+            (response) => {
+              alert("구매 의사를 전달하였습니다");
+              this.$router.push("../../mypage/SellList");
+            },
+            (error) => {
+              alert("에러가 발생하였습니다.");
+            }
+          );
+        } else {
+          alert("개인키 인증에 실패하였습니다.");
+          this.isCashCharging = false;
+        }
+      });
+    },
+    BookMark() {
+      this.bookMarkList.userId = this.userId;
+      this.bookMarkList.itemId = this.item.id;
+
+      bookMarkSave(
+        this.bookMarkList,
+        function(success) {
+          console.log("찜 성공");
+        },
+        function(fail) {
+          console.dir(fail);
+        }
+      );
+    },
+    getAddress() {
+      // 주소 입력 창 띄우기
+      this.postState = true;
+    },
+    movePage() {
+      this.allAddress += this.address;
+      this.allAddress += " ";
+      this.allAddress += this.detailAddress;
+      this.purchase();
+      // 주소 디비에 저장
+    },
+    handleAddress(input) {
+      this.Addressresult = true;
+      this.address = input.address;
+      console.log(input);
+    },
+    openModal() {
+      if (this.cash < this.item.price) {
+        alert("캐시가 부족합니다!");
+        return;
+      }
+      this.directState = this.item.directDeal;
+      this.modal = true;
+    },
+    closeModal() {
+      this.modal = false;
+      this.postState = false;
+    },
+    doSend() {
+      if (this.message.length > 0) {
+        alert(this.message);
+        this.message = "";
+        this.closeModal();
+      } else {
+        alert("메시지를 입력해주세요.");
+      }
+    },
+    function(fail) {
+      console.dir(fail);
     },
     saveBookMark() {
       var bookMark = JSON.parse(sessionStorage.getItem("bookmark"));
@@ -344,10 +324,10 @@ export default {
 
       bookMarkSave(
         this.bookMarkList,
-        function (success) {
+        function(success) {
           console.log("찜 성공");
         },
-        function (fail) {
+        function(fail) {
           console.dir(fail);
         }
       );
@@ -361,13 +341,13 @@ export default {
   created() {
     this.item.id = this.$route.params.id;
   },
-  mounted: function () {
+  mounted: function() {
     const vm = this;
 
     // [DB] 상품 상세 정보 조회
     findById(
       this.item.id,
-      function (res) {
+      function(res) {
         const result = res.data;
         vm.item.name = result.name;
         vm.item.category = result.category;
@@ -388,7 +368,7 @@ export default {
         vm.time += date[1];
 
         // 판매자 정보
-        findUserById(result.seller, function (res) {
+        findUserById(result.seller, function(res) {
           const result = res.data;
           vm.item.seller.name = result.name;
           vm.item.seller.email = result.email;
@@ -396,7 +376,7 @@ export default {
         });
       },
 
-      function (error) {
+      function(error) {
         console.error(error);
         alert("DB에서 상품 상세 정보 조회를 가져올 수 없습니다.");
       }
@@ -404,11 +384,11 @@ export default {
     // [Smart Contract] 가격 조회
     getPrice(
       this.item.id,
-      function (price) {
+      function(price) {
         vm.item.price = price;
         console.log(price);
       },
-      function (err) {
+      function(err) {
         console.error("가격 조회 실패:", err);
       }
     );
@@ -423,8 +403,6 @@ export default {
   },
 };
 </script>
-
-
 
 <style>
 #font{
@@ -448,9 +426,9 @@ img.center {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, .5);
+  background-color: rgba(0, 0, 0, 0.5);
   display: table;
-  transition: opacity .3s ease;
+  transition: opacity 0.3s ease;
 }
 
 .modal-wrapper {
@@ -464,8 +442,8 @@ img.center {
   padding: 20px 30px;
   background-color: #fff;
   border-radius: 2px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
-  transition: all .3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
+  transition: all 0.3s ease;
   font-family: Helvetica, Arial, sans-serif;
 }
 
@@ -482,7 +460,8 @@ img.center {
   float: right;
 }
 
-.modal-enter, .modal-leave {
+.modal-enter,
+.modal-leave {
   opacity: 0;
 }
 

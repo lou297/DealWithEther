@@ -13,6 +13,16 @@ function create(id, pk, eoa, success, fail) {
     .catch(fail);
 }
 
+function send(id, pk, success, fail) {
+  const body = {
+    privateKey: pk,
+  };
+  instance
+    .post("/api/purchases/send/" + id, JSON.stringify(body))
+    .then(success)
+    .catch(fail);
+}
+
 function findMySalePurchases(id, success, fail) {
   instance
     .get("/api/purchases/seller/" + id)
@@ -76,4 +86,5 @@ export {
   changeState,
   getHistory,
   getDetail,
+  send,
 };
