@@ -42,7 +42,6 @@
                                 <span>
                                     <v-btn color="success" :disabled="item.state !== 'P'" @click="send(index)">배송시작</v-btn>
                                     <v-btn color="primary" :disabled="item.state !== 'C'" @click="decidePurchase">평가하기</v-btn>
-                                    {{ item.state }}
                                 </span>
                             </v-col>
                         </template>
