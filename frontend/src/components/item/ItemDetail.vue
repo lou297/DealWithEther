@@ -328,7 +328,8 @@ export default {
       this.allAddress += this.address;
       this.allAddress += " ";
       this.allAddress += this.detailAddress;
-      console.log(this.allAddress);
+      // 주소 디비에 저장
+      this.$router.push("../../mypage/SellList");
     },
     handleAddress(input) {
       this.Addressresult = true;
@@ -352,57 +353,88 @@ export default {
         alert("메시지를 입력해주세요.");
       }
     },
+    function(fail) {
+      console.dir(fail);
+    },
+  },
+  getAddress() {
+    // 주소 입력 창 띄우기
+    this.postState = true;
+  },
+  movePage() {
+    this.allAddress += this.address;
+    this.allAddress += " ";
+    this.allAddress += this.detailAddress;
+    console.log(this.allAddress);
+  },
+  handleAddress(input) {
+    this.Addressresult = true;
+    this.address = input.address;
+    console.log(input);
+  },
+  openModal() {
+    this.directState = this.item.directDeal;
+    this.modal = true;
+  },
+  closeModal() {
+    this.modal = false;
+    this.postState = false;
+  },
+  doSend() {
+    if (this.message.length > 0) {
+      alert(this.message);
+      this.message = "";
+      this.closeModal();
+    } else {
+      alert("메시지를 입력해주세요.");
+    }
+  },
 
-    getImg(name) {
-      if (name) {
-        console.log(name);
-        return getLocalImg(name);
-      }
-      return null;
-    },
-    imgPath(n) {
-      console.log(process.env.VUE_APP_BACKEND);
-      return (
-        process.env.VUE_APP_BACKEND +
-        "api/items/images/" +
-        this.item.id +
-        "_" +
-        n
-      );
-    },
-    saveBookMark() {
-      var bookMark = JSON.parse(sessionStorage.getItem("bookmark"));
-      if (bookMark == undefined) {
-        bookMark = new Set();
-        bookMark.add(this.item);
-      } else {
-        var duplicate = false;
-        for (var item of bookMark) {
-          if (this.item.id == item.id) {
-            duplicate = true;
-            break;
-          }
-        }
-        if (!duplicate) {
-          bookMark = new Set([...bookMark, this.item]);
+  getImg(name) {
+    if (name) {
+      console.log(name);
+      return getLocalImg(name);
+    }
+    return null;
+  },
+  imgPath(n) {
+    console.log(process.env.VUE_APP_BACKEND);
+    return (
+      process.env.VUE_APP_BACKEND + "api/items/images/" + this.item.id + "_" + n
+    );
+  },
+  saveBookMark() {
+    var bookMark = JSON.parse(sessionStorage.getItem("bookmark"));
+    if (bookMark == undefined) {
+      bookMark = new Set();
+      bookMark.add(this.item);
+    } else {
+      var duplicate = false;
+      for (var item of bookMark) {
+        if (this.item.id == item.id) {
+          duplicate = true;
+          break;
         }
       }
-      sessionStorage.setItem("bookmark", JSON.stringify(bookMark));
-    },
-    BookMark() {
-      this.bookMarkList.userId = this.userId;
-      this.bookMarkList.itemId = this.item.id;
+      if (!duplicate) {
+        bookMark = new Set([...bookMark, this.item]);
+      }
+    }
+    sessionStorage.setItem("bookmark", JSON.stringify(bookMark));
+  },
+  BookMark() {
+    this.bookMarkList.userId = this.userId;
+    this.bookMarkList.itemId = this.item.id;
 
-      bookMarkSave(
-        this.bookMarkList,
-        function(success) {
-          console.log("찜 성공");
-        },
-        function(fail) {
-          console.dir(fail);
-        }
-      );
-    },
+    bookMarkSave(
+      this.bookMarkList,
+      function(success) {
+        console.log("찜 성공");
+      },
+      function(fail) {
+        console.dir(fail);
+      }
+    );
   },
   filters: {
     symbolToFullName(symbol) {
