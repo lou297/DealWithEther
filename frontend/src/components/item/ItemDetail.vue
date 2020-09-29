@@ -279,7 +279,8 @@ export default {
             this.allAddress += this.address;
             this.allAddress += " ";
             this.allAddress += this.detailAddress;
-            console.log(this.allAddress);
+            // 주소 디비에 저장
+            this.$router.push("../../mypage/SellList");
         },
         handleAddress(input){
             this.Addressresult = true;
