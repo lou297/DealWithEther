@@ -8,6 +8,10 @@
             @click.prevent="$emit('clicked')" href=""
         >
             <v-img class="white--text align-end" height="250" :src="imgPath">
+                
+            </v-img>
+            <v-card-title style="font-size:18px; float:left;">{{ item.name }}</v-card-title>
+            <v-card-actions style="float:right;">
                 <v-btn
                     color="red accent-4"
                     icon
@@ -19,8 +23,8 @@
                 <v-btn color="red accent-4" icon v-else @click.stop="!changeLiked()">
                     <v-icon middle color="red accent-4">mdi-heart-outline</v-icon>
                 </v-btn>
-            </v-img>
-            <v-card-title style="font-size:18px;">{{ item.name }}</v-card-title>
+            </v-card-actions>
+            <v-card-actions style="clear:both;"></v-card-actions>
             <v-card-actions style="padding:16px 0 0 16px; color:black; float:left; font-weight:bold; font-size:15px;">{{ item.price }} CASH</v-card-actions>
             <v-card-actions style="padding:16px 16px 0 0; color:black; float:right; font-size:14px;">{{ item.registeredAt }}</v-card-actions>
             <v-card-actions style="clear:both;"></v-card-actions>
