@@ -287,16 +287,6 @@ export default {
                 alert('메시지를 입력해주세요.')
             }
         },
-    imgPath(n) {
-      console.log(process.env.VUE_APP_BACKEND);
-      return (
-        process.env.VUE_APP_BACKEND +
-        "api/items/images/" +
-        this.item.id +
-        "_" +
-        n
-      );
-    },
     saveBookMark() {
       var bookMark = JSON.parse(sessionStorage.getItem("bookmark"));
       if (bookMark == undefined) {
