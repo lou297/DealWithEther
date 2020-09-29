@@ -17,7 +17,7 @@ export default {
     data() {
         return {
             name: "",
-            state : this.buyPurchase.state
+            state : this.item.state
         }
     },
     created() {
