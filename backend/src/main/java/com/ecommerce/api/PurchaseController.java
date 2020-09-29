@@ -60,7 +60,25 @@ public class PurchaseController {
         // -1이면 실패
         // 0은 디비 등록 실패
         // 1은 성공
+        System.out.println(id);
+        System.out.println("start 들어왔는가");
+        System.out.println(cash.toString());
         return this.purchaseService.startPurchase(id, cash);
+    }
+
+    @RequestMapping(value = "/purchases/send/{purchaseId}", method = RequestMethod.POST)
+    public long send(@PathVariable long purchaseId, @RequestBody Cash cash) throws Exception {
+        return this.purchaseService.send(purchaseId, cash);
+    }
+
+    @RequestMapping(value = "/purchases/confirm/{purchaseId}", method = RequestMethod.POST)
+    public long confirm(@PathVariable long purchaseId, @RequestBody Cash cash) throws Exception {
+        return this.purchaseService.confirm(purchaseId, cash);
+    }
+
+    @RequestMapping(value = "/purchases/cancel/{purchaseId}", method = RequestMethod.POST)
+    public long cancel(@PathVariable long purchaseId, @RequestBody Cash cash) throws Exception {
+        return this.purchaseService.cancel(purchaseId, cash);
     }
 
     /**
@@ -97,6 +115,10 @@ public class PurchaseController {
     @RequestMapping(value = "/purchases/seller/{id}", method = RequestMethod.GET)
     public List<PurchaseInfo> getSellerPurchases(@PathVariable int id) {
         List<PurchaseInfo> list = this.purchaseService.getBySeller(id);
+        System.out.println("내가 판매한 내역 : " + id);
+
+        System.out.println(list.toString());
+        System.out.println(list.size());
 
         if (list == null || list.isEmpty())
             throw new EmptyListException("사용자가 판매한/판매 중인 거래가 없습니다.");

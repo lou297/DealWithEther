@@ -1,5 +1,10 @@
 package com.ecommerce.application.impl;
 
+import java.math.BigInteger;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
 import com.ecommerce.application.IEscrowContractService;
 import com.ecommerce.application.IPurchaseService;
 import com.ecommerce.application.IWalletService;
@@ -8,9 +13,9 @@ import com.ecommerce.domain.Item;
 import com.ecommerce.domain.Purchase;
 import com.ecommerce.domain.PurchaseInfo;
 import com.ecommerce.domain.Wallet;
-import com.ecommerce.domain.exception.ApplicationException;
 import com.ecommerce.domain.repository.IItemRepository;
 import com.ecommerce.domain.repository.IPurchaseRepository;
+import com.ecommerce.domain.wrapper.CashContract;
 import com.ecommerce.domain.wrapper.Escrow;
 import com.ecommerce.domain.wrapper.EscrowFactory;
 import com.ecommerce.domain.wrapper.EscrowFactory.NewEscrowEventResponse;
@@ -26,11 +31,6 @@ import org.web3j.protocol.core.methods.response.TransactionReceipt;
 import org.web3j.protocol.http.HttpService;
 import org.web3j.tx.gas.ContractGasProvider;
 import org.web3j.tx.gas.DefaultGasProvider;
-
-import java.math.BigInteger;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 public class PurchaseService implements IPurchaseService {
@@ -59,6 +59,7 @@ public class PurchaseService implements IPurchaseService {
     private String NETWORK_URL;
 
     private EscrowFactory escrowFactory;
+    private CashContract cashContract;
     private Escrow escrow;
     private ContractGasProvider contractGasProvider = new DefaultGasProvider();
     private Credentials credentials;
@@ -101,7 +102,14 @@ public class PurchaseService implements IPurchaseService {
      */
     @Override
     public List<PurchaseInfo> getBySeller(int id) {
-        return null;
+        List<Purchase> temps = this.purchaseRepository.getBySeller(id);
+        List<PurchaseInfo> list = new ArrayList<>();
+
+        for (Purchase temp : temps) {
+            PurchaseInfo info = new PurchaseInfo(temp);
+            list.add(info);
+        }
+        return list;
     }
 
     /**
@@ -109,7 +117,13 @@ public class PurchaseService implements IPurchaseService {
      */
     @Override
     public List<PurchaseInfo> getByBuyer(int id) {
-        return null;
+        List<PurchaseInfo> purchaseInfo = new ArrayList<PurchaseInfo>();
+
+        List<Purchase> purchases = purchaseRepository.getByBuyer(id);
+        for (Purchase purchase : purchases) {
+            purchaseInfo.add(new PurchaseInfo(purchase));
+        }
+        return purchaseInfo;
     }
 
     /**
@@ -157,13 +171,80 @@ public class PurchaseService implements IPurchaseService {
                 purchase.setItemId(id);
                 purchase.setPurchaseId(neer.purchaseId.longValue());
 
-                escrow = Escrow.load(purchase.getContractAddress(), web3j, credentials, contractGasProvider);
+                cashContract = CashContract.load(ERC20_TOKEN_CONTRACT, web3j, credentials, contractGasProvider);
 
+                Item item = itemRepository.get(id);
+
+                TransactionReceipt tr3 = cashContract
+                        .transfer(purchase.getContractAddress(), BigInteger.valueOf(item.getPrice() + 20)).send();
+
+                escrow = Escrow.load(purchase.getContractAddress(), web3j, credentials, contractGasProvider);
+                walletService.syncBalance(wallet.getAddress(), wallet.getBalance(),
+                        wallet.getCash() - (item.getPrice() + 20));
+
+                TransactionReceipt tr2 = escrow.checkDeposit().send();
+                purchase.setState("P");
                 return purchaseRepository.create(purchase);
             }
         }
         return -1;
 
+    }
+
+    @Override
+    public long send(long purchaseId, Cash cash) throws Exception {
+        web3j = Web3j.build(new HttpService(NETWORK_URL));
+
+        credentials = Credentials.create(cash.getPrivateKey());
+
+        Purchase purchase = purchaseRepository.getByPurchaseId(purchaseId);
+
+        escrow = Escrow.load(purchase.getContractAddress(), web3j, credentials, contractGasProvider);
+
+        TransactionReceipt tr = escrow.send().send();
+        purchase.setState("S");
+        purchaseRepository.update(purchase);
+        return purchaseRepository.update(purchase);
+    }
+
+    @Override
+    public long confirm(long purchaseId, Cash cash) throws Exception {
+        web3j = Web3j.build(new HttpService(NETWORK_URL));
+
+        credentials = Credentials.create(cash.getPrivateKey());
+
+        Purchase purchase = purchaseRepository.getByPurchaseId(purchaseId);
+
+        escrow = Escrow.load(purchase.getContractAddress(), web3j, credentials, contractGasProvider);
+
+        TransactionReceipt tr = escrow.confirm().send();
+
+        Wallet wallet = walletService.get(purchase.getBuyerId());
+
+        walletService.syncBalance(wallet.getAddress(), wallet.getBalance(), wallet.getCash() + 20);
+        // 여기서 지갑 갱신
+        purchase.setState("C");
+        return purchaseRepository.update(purchase);
+    }
+
+    @Override
+    public long cancel(long purchaseId, Cash cash) throws Exception {
+        web3j = Web3j.build(new HttpService(NETWORK_URL));
+
+        credentials = Credentials.create(cash.getPrivateKey());
+
+        Purchase purchase = purchaseRepository.getByPurchaseId(purchaseId);
+
+        escrow = Escrow.load(purchase.getContractAddress(), web3j, credentials, contractGasProvider);
+        // 여기서도 지갑 갱신
+        Wallet wallet = walletService.get(purchase.getBuyerId());
+
+        walletService.syncBalance(wallet.getAddress(), wallet.getBalance(),
+                wallet.getCash() + itemRepository.get(purchase.getItemId()).getPrice() + 20);
+
+        TransactionReceipt tr = escrow.cancel().send();
+        purchase.setState("X");
+        return purchaseRepository.update(purchase);
     }
 
 }

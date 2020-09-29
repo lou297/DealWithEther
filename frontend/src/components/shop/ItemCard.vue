@@ -45,6 +45,7 @@ export default {
     data() {
         return {
             userLiked: [],
+            isLiked: false
         }
     },
     created() {
@@ -57,9 +58,11 @@ export default {
         getLikedList() {
             const vm = this;
             findLikedList(this.$store.state.user.id, function (response) {
+                    vm.userLiked = response
                     if (response.data.length > 0) {
-                        vm.userLiked = response;
-                        console.log(vm.userLiked.data);
+                        if(response.data.includes(vm.item.id)) {
+                            vm.isLiked = true;
+                        }
                     }
                 },
                 err => {
@@ -68,9 +71,12 @@ export default {
             );
         },
         checkLiked() {
-            if (this.$store.state.isSigned !== null)
-                return this.userLiked.data.includes(this.item.id);
-            else return false;
+            if (this.$store.state.isSigned !== null) {
+                if(this.isLiked == false)
+                    return false
+                else
+                    return true;
+            }
         },
         changeLiked() {
             const vm = this;
@@ -83,7 +89,6 @@ export default {
                     }
                 );
             } else {
-                console.log("좋아요")
                 const body = {
                     userId: vm.$store.state.user.id,
                     itemId: vm.item.id

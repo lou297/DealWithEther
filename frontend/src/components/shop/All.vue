@@ -1,6 +1,11 @@
 <template>
     <div>
+<<<<<<< HEAD
         <h-nav></h-nav>
+=======
+        <!-- <h-nav></h-nav> -->
+        <h-shop-categories :category="'전체보기'"></h-shop-categories>
+>>>>>>> bb968ddc31f601781a109f79805d9ba695d8716e
         <v-card color="basil">
             <v-tabs v-model="tab" background-color="transparent" color="basil" grow>
                 <v-flex xl1 lg1 md1 sm0 xs0><span></span></v-flex>
@@ -64,7 +69,7 @@ import {findAll, findByCategory, findByMainCategory, findByUsername, findByName}
 import HShopCategories from "./HShopCategories.vue";
 import ItemCard from "./ItemCard.vue";
 import {getPrice} from '@/utils/itemInventory.js';
-import HNav from "@/components/common/HNav copy";
+import HNav from "@/components/common/HNav";
 
 export default {
     components: {
@@ -133,6 +138,7 @@ export default {
         getAllList() {
             const vm = this;
             findAll(this.page, function (response) {
+                console.log(response.data)
                     if (response.data.length > 0) {
                         vm.items = response.data;
                         vm.items.forEach(i => {

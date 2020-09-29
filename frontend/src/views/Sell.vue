@@ -1,8 +1,12 @@
 <template>
     <div>
         <h-nav></h-nav>
-        <h-breadcrumb title="상품 등록" style="margin:0px; padding-top:0px;"></h-breadcrumb>
-        <div id="main-overview" class="container">
+        <div style="height:530px; background-color: rgb(255,212,85);">
+            <img src="../../public/images/avataaars.svg" alt="" style="width: 15rem; margin: 5rem 0 1rem 0;"><br>
+            <h1 style="margin: 2rem 0 1rem 0; color:red; display: inline-block;">상</h1>
+            <h1 style="margin: 2rem 0.7rem 1rem 0; display: inline-block;">품등록</h1>
+        </div>
+        <v-card color="basil">
             <v-container>
                 <v-layout row>
                     <v-flex xl5 lg5 md5 sm12 xs12>
@@ -76,10 +80,7 @@
                     </v-flex>
                 </v-layout>
             </v-container>
-        </div>
-        <br/>
-        <br/>
-        <br/>
+        </v-card>
     </div>
 </template>
 
@@ -88,7 +89,7 @@ import {create as createItem} from "@/api/item.js";
 import {save as savaImage} from "@/api/item.js";
 import {registerItem} from "@/utils/itemInventory.js";
 import * as walletService from "@/api/wallet.js";
-import HNav from "../components/common/HNav copy";
+import HNav from "../components/common/HNav";
 
 export default {
     name: "ItemCreate",

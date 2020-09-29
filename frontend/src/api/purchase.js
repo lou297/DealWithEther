@@ -2,9 +2,13 @@ import { createInstance } from "./index.js";
 
 const instance = createInstance();
 
-function create(body, success, fail) {
+function create(id, pk, eoa, success, fail) {
+  const body = {
+    walletAddress: eoa,
+    privateKey: pk,
+  };
   instance
-    .post("/api/purchases", JSON.stringify(body))
+    .post("/api/purchases/start/" + id, JSON.stringify(body))
     .then(success)
     .catch(fail);
 }
@@ -35,7 +39,7 @@ function checkDeposit(id, success, fail) {
 }
 
 /**
- * 
+ *
  * @param {Number} id purchaseId
  * @param {String} state S/C/X 중 하나
  */
@@ -48,13 +52,20 @@ function changeState(id, state, success, fail) {
 
 /**
  * 거래 이력을 가져온다.
- * @param {Number} id purchaseId 
+ * @param {Number} id purchaseId
  */
 function getHistory(id, success, fail) {
   instance
     .get("/api/purchases/history/" + id)
     .then(success)
-    .catch(fail)
+    .catch(fail);
+}
+
+function getDetail(id, success, fail) {
+  instance
+    .get("/api/purchases/getDetail/" + id)
+    .then(success)
+    .catch(fail);
 }
 
 export {
@@ -63,5 +74,6 @@ export {
   findMyPurchases,
   checkDeposit,
   changeState,
-  getHistory
-}
+  getHistory,
+  getDetail,
+};
