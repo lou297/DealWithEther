@@ -1,7 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import VuexPersistence from 'vuex-persist';
-import socket from './modules/socket';
 
 const persistor = new VuexPersistence({
     key: 'root',
@@ -9,7 +8,6 @@ const persistor = new VuexPersistence({
 });
 
 Vue.use(Vuex);
-const debug = process.env.NODE_ENV !== 'production';
 
 export default new Vuex.Store({
     state: {
@@ -37,8 +35,6 @@ export default new Vuex.Store({
     },
     actions: {},
     modules: {
-        socket,
     },
-    strict: debug,
     plugins: [persistor.plugin]
 });

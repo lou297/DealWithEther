@@ -10,6 +10,8 @@ import java.util.List;
 public interface IRatingService {
 	List<Rating> list();
 
+	double get(long userId);
+
 	@Transactional
 	long register(Rating rating);
 

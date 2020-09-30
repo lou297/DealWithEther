@@ -37,7 +37,7 @@
         <v-btn color="primary" :disabled="state != 3" @click="confirm"
           >구매 확정</v-btn
         >
-        <v-btn color="success" :disabled="state != 4">평가하기</v-btn>
+        <v-btn color="success" :disabled="state != 4" @click="evaluate">평가하기</v-btn>
       </div>
     </v-col>
   </v-row>
@@ -45,6 +45,7 @@
 <script>
 import * as purchaseService from "@/api/purchase.js";
 import * as walletService from "@/api/wallet.js";
+import * as ratingService from "@/api/rating.js";
 import * as itemService from "@/api/item.js";
 export default {
   props: ["buyPurchase"],
@@ -53,6 +54,13 @@ export default {
       userId: this.$store.state.user.id,
       state: -1,
       item: {},
+      ratings: {
+        id: 0,
+        purchasesId: 0,
+        evaluator: 0,
+        getter: 0,
+        score: 0,
+      },
     };
   },
   created() {
@@ -96,6 +104,27 @@ export default {
     onClickItem() {
       alert("클릭");
       this.$router.push("../item/detail/" + this.buyPurchase.itemId);
+    },
+    evaluate() {
+      var score = prompt("점수를 입력해주세요 (1~5)");
+      if (score != 5 && score != 1 && score != 2 && score != 3 && score != 4) {
+        alert("잘못된 점수입니다!");
+        return;
+      }
+      this.ratings.purchasesId = this.buyPurchase.id;
+      this.ratings.evaluator = this.buyPurchase.buyerId;
+      this.ratings.getter = this.buyPurchase.sellerId;
+      this.ratings.score = parseInt(score);
+
+      ratingService.create(
+        this.ratings,
+        (res) => {
+          alert("평가 성공!");
+        },
+        (err) => {
+          alert("평가 실패!");
+        }
+      );
     },
     confirm() {
       const privateKey = prompt("구매를 확정하려면 개인키를 입력하세요.");
