@@ -11,8 +11,7 @@ import Explorer from "@/views/Explorer.vue";
 import Escrow from "@/views/Escrow.vue";
 import Sell from "@/views/Sell.vue";
 import PurchaseResult from "@/components/mypage/PurchaseResult";
-import ChatRoom from '@/views/ChatRoom.vue';
-import LoginChat from '@/views/LoginChat.vue';
+import Chat from '@/views/Chat.vue';
 
 Vue.use(VueRouter);
 
@@ -21,14 +20,9 @@ Vue.use(VueRouter);
  */
 const routes = [
     {
-        path: '/loginChat',
-        name: 'LoginChat',
-        component: LoginChat,
-    },
-    {
         path: '/chat',
-        name: 'ChatRoom',
-        component: ChatRoom,
+        name: 'Chat',
+        component: Chat,
     },
     {
         path: "/",
