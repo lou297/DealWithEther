@@ -9,7 +9,7 @@
                 <v-flex xl1 lg1 md1 sm0 xs0><span></span></v-flex>
                 <v-card>
                     <v-list three-line xl10 lg10 md10 sm12 xs12>
-                        <template v-for="(item, index) in items">
+                        <div v-for="(item, index) in items" :key="item.itemId">
                             <v-divider
                                 v-if="index !== 0"
                             ></v-divider>
@@ -51,7 +51,7 @@
                                     <v-spacer></v-spacer>
                                 </v-col>
                             </v-row>
-                        </template>
+                        </div>
                     </v-list>
                 </v-card>
                 <v-flex xl1 lg1 md1 sm0 xs0><span></span></v-flex>
