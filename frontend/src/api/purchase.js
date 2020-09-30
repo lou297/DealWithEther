@@ -23,6 +23,26 @@ function send(id, pk, success, fail) {
     .catch(fail);
 }
 
+function confirm(id, pk, success, fail) {
+  const body = {
+    privateKey: pk,
+  };
+  instance
+    .post("/api/purchases/confirm/" + id, JSON.stringify(body))
+    .then(success)
+    .catch(fail);
+}
+
+function cancel(id, pk, success, fail) {
+  const body = {
+    privateKey: pk,
+  };
+  instance
+    .post("/api/purchases/cancel/" + id, JSON.stringify(body))
+    .then(success)
+    .catch(fail);
+}
+
 function findMySalePurchases(id, success, fail) {
   instance
     .get("/api/purchases/seller/" + id)
@@ -87,4 +107,6 @@ export {
   getHistory,
   getDetail,
   send,
+  confirm,
+  cancel,
 };

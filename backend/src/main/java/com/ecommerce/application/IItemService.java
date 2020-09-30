@@ -43,5 +43,11 @@ public interface IItemService {
 	@Transactional
 	int complete(long id, String eoa, String pk) throws Exception;
 
+	@Transactional
+	int changeProgressTrue(long id);
+
+	@Transactional
+	int changeProgressFalse(long id);
+
 	List<Item> getByOnlyName(String name, int page);
 }

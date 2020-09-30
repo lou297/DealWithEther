@@ -241,4 +241,15 @@ public class ItemService implements IItemService {
 		return escrowFactory.getContractAddress();
 	}
 
+	@Override
+	public int changeProgressTrue(long id) {
+		return this.itemRepository.changeProgressTrue(id);
+	}
+
+	@Override
+	public int changeProgressFalse(long id) {
+		// TODO Auto-generated method stub
+		return this.itemRepository.changeProgressFalse(id);
+	}
+
 }

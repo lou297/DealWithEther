@@ -184,6 +184,9 @@ public class PurchaseService implements IPurchaseService {
 
                 TransactionReceipt tr2 = escrow.checkDeposit().send();
                 purchase.setState("P");
+
+                itemRepository.changeProgressTrue(id);
+
                 return purchaseRepository.create(purchase);
             }
         }
@@ -210,19 +213,21 @@ public class PurchaseService implements IPurchaseService {
     @Override
     public long confirm(long purchaseId, Cash cash) throws Exception {
         web3j = Web3j.build(new HttpService(NETWORK_URL));
-
         credentials = Credentials.create(cash.getPrivateKey());
-
         Purchase purchase = purchaseRepository.getByPurchaseId(purchaseId);
-
         escrow = Escrow.load(purchase.getContractAddress(), web3j, credentials, contractGasProvider);
-
         TransactionReceipt tr = escrow.confirm().send();
-
-        Wallet wallet = walletService.get(purchase.getBuyerId());
-
-        walletService.syncBalance(wallet.getAddress(), wallet.getBalance(), wallet.getCash() + 20);
         // 여기서 지갑 갱신
+        Wallet wallet = walletService.get(purchase.getBuyerId());
+        walletService.syncBalance(wallet.getAddress(), wallet.getBalance(), wallet.getCash() + 20);
+
+        Wallet sellerWallet = walletService.get(purchase.getSellerId());
+        Item item = itemRepository.get(purchase.getItemId());
+        int price = item.getPrice();
+        walletService.syncBalance(sellerWallet.getAddress(), sellerWallet.getBalance(), sellerWallet.getCash() + price);
+
+        itemRepository.complete(item.getId());
+
         purchase.setState("C");
         return purchaseRepository.update(purchase);
     }
@@ -230,19 +235,19 @@ public class PurchaseService implements IPurchaseService {
     @Override
     public long cancel(long purchaseId, Cash cash) throws Exception {
         web3j = Web3j.build(new HttpService(NETWORK_URL));
-
         credentials = Credentials.create(cash.getPrivateKey());
-
         Purchase purchase = purchaseRepository.getByPurchaseId(purchaseId);
-
         escrow = Escrow.load(purchase.getContractAddress(), web3j, credentials, contractGasProvider);
         // 여기서도 지갑 갱신
         Wallet wallet = walletService.get(purchase.getBuyerId());
-
         walletService.syncBalance(wallet.getAddress(), wallet.getBalance(),
                 wallet.getCash() + itemRepository.get(purchase.getItemId()).getPrice() + 20);
 
         TransactionReceipt tr = escrow.cancel().send();
+
+        Item item = itemRepository.get(purchase.getItemId());
+        itemRepository.changeProgressFalse(item.getId());
+
         purchase.setState("X");
         return purchaseRepository.update(purchase);
     }
