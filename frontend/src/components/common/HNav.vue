@@ -10,7 +10,8 @@
                 <router-link id="link-to-shop" to="/shop">상점</router-link>
                 <router-link id="link-to-sell" to="/sell">판매하기</router-link>
                 <router-link id="link-to-mypage" to="/mypage/wallet_create" v-if="!$store.state.user.walletAddress">마이페이지</router-link>
-                <router-link id="link-to-myshop" to="/mypage/wallet_info" v-if="$store.state.user.walletAddress">내상점</router-link>
+                <!-- <router-link id="link-to-myshop" to="/mypage/wallet_info" v-if="$store.state.user.walletAddress">내상점</router-link> -->
+                <router-link id="link-to-myshop" to="/mypage/profile" v-if="$store.state.user.walletAddress">프로필</router-link>
                 <router-link id="link-to-logout" to="/logout" v-if="$store.state.isSigned">로그아웃</router-link>
                 <a id="link-to-signup"
                    v-if="!$store.state.isSigned"
@@ -55,7 +56,7 @@
                         </v-list-item> -->
                         <v-list-item v-if="$store.state.user.walletAddress">
                             <v-list-item-title>
-                                <router-link id="link-to-myshop-2" to="{ name: 'mypage.profile' }">프로필</router-link>
+                                <router-link id="link-to-myshop-2" to="/mypage/profile">프로필</router-link>
                             </v-list-item-title>
                         </v-list-item>
                         <v-list-item v-if="$store.state.isSigned">
