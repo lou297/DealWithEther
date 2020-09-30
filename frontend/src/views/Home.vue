@@ -197,6 +197,7 @@ input::placeholder {
     padding: 3px 6px;
     font-family: 'Jua', sans-serif;
     font-size: 22px;
+    text-align: center;
 }
 
 
