@@ -85,6 +85,8 @@ export default {
                             } else {
                                 alert("Unexpected status code: " + response.status);
                             }
+                            // 창 닫기
+                            location.reload();
                         },
                         function (err) {
                             if (err.response != 404) {
@@ -93,8 +95,6 @@ export default {
                             }
                         }
                     );
-                    // 창 닫기
-                    location.reload();
                 },
                 function (error) {
                     console.error(error);

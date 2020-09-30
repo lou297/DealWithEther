@@ -85,7 +85,7 @@ export default {
         ItemCard
     },
     created() {
-
+        console.dir(this.$store.state)
         console.log('처음시작 ');
         var default_category = "패션";
         console.log(default_category);
