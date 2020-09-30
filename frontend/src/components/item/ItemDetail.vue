@@ -64,7 +64,7 @@
                   "
                   :src="star"
                 ></v-img>
-                3.7 )
+                {{ rating }}
               </v-col>
               <v-col cols="3" style="text-align: left">상품 등록일</v-col>
               <v-col cols="8" style="text-align: left">{{ time }}</v-col>
@@ -258,6 +258,7 @@ export default {
       walletAddress: "",
       name: "10 Best Things to Do in Seattle",
       category: "Travel",
+      rating: 0,
       image:
         "https://s3-us-west-2.amazonaws.com/s.cdpn.io/1159990/pike-place.jpg",
       author: "Katherine Kato",

@@ -48,6 +48,17 @@ public class RatingRepository implements IRatingRepository {
 	}
 
 	@Override
+	public List<Rating> get(long userId) {
+		StringBuilder sbSql = new StringBuilder("SELECT * FROM ratings where seller = ?");
+		try {
+			return this.jdbcTemplate.query(sbSql.toString(), new Object[] { userId },
+					(rs, rowNum) -> RatingFactory.create(rs));
+		} catch (Exception e) {
+			throw new RepositoryException(e, e.getMessage());
+		}
+	}
+
+	@Override
 	public long create(final Rating rating) {
 		try {
 			log.debug(rating.toString());
@@ -55,7 +66,7 @@ public class RatingRepository implements IRatingRepository {
 			paramMap.put("purchases_id", rating.getPurchasesId());
 			paramMap.put("evaluator", rating.getEvaluator());
 			paramMap.put("getter", rating.getGetter());
-			paramMap.put("seller", rating.isSeller());
+			paramMap.put("seller", true);
 			paramMap.put("score", rating.getScore());
 
 			this.simpleJdbcInsert = new SimpleJdbcInsert(jdbcTemplate).withTableName("ratings")

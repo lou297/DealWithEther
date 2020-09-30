@@ -9,6 +9,8 @@ import java.util.List;
 public interface IRatingRepository {
 	List<Rating> list();
 
+	List<Rating> get(long userId);
+
 	@Transactional
 	long create(Rating rating);
 
