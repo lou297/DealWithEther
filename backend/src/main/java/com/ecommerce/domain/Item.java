@@ -18,6 +18,7 @@ public class Item {
 	private boolean directDeal;
 	private String dealRegion;
 	private int viewCount;
+	private boolean progress;
 
 	// 임시
 	private String address;

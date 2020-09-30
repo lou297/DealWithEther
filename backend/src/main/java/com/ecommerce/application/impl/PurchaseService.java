@@ -184,6 +184,9 @@ public class PurchaseService implements IPurchaseService {
 
                 TransactionReceipt tr2 = escrow.checkDeposit().send();
                 purchase.setState("P");
+
+                itemRepository.changeProgressTrue(id);
+
                 return purchaseRepository.create(purchase);
             }
         }
@@ -223,6 +226,8 @@ public class PurchaseService implements IPurchaseService {
         int price = item.getPrice();
         walletService.syncBalance(sellerWallet.getAddress(), sellerWallet.getBalance(), sellerWallet.getCash() + price);
 
+        itemRepository.complete(item.getId());
+
         purchase.setState("C");
         return purchaseRepository.update(purchase);
     }
@@ -239,6 +244,10 @@ public class PurchaseService implements IPurchaseService {
                 wallet.getCash() + itemRepository.get(purchase.getItemId()).getPrice() + 20);
 
         TransactionReceipt tr = escrow.cancel().send();
+
+        Item item = itemRepository.get(purchase.getItemId());
+        itemRepository.changeProgressFalse(item.getId());
+
         purchase.setState("X");
         return purchaseRepository.update(purchase);
     }

@@ -40,5 +40,11 @@ public interface IItemRepository {
 	@Transactional
 	int complete(long id);
 
+	@Transactional
+	int changeProgressTrue(long id);
+
+	@Transactional
+	int changeProgressFalse(long id);
+
 	List<Item> getByOnlyName(String name, int page);
 }
