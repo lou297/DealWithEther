@@ -2,7 +2,7 @@
     <v-list-item-content xl10 lg10 md10 sm12 xs12>
         <v-col>
             <v-row>
-                <v-col cols="3" style="text-align: left; font-size:30px">판매자</v-col>
+                <v-col cols="3" style="text-align: left; font-size:30px">제목</v-col>
                 <v-col style="float: left; text-align: left">
                     <div id="font" style="font-size:30px;">{{ name }}</div>
                 </v-col>

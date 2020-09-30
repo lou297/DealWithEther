@@ -20,6 +20,7 @@
                                 <sell-list-card :item="item"></sell-list-card>
                             </v-list-item>
                             <v-row>
+                                <v-col cols="1"></v-col>
                                 <v-col cols="10" id="progress-container">
                                     <v-stepper alt-labels v-model="item.state">
                                         <v-stepper-header>
