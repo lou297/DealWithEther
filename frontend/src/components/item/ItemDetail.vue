@@ -64,7 +64,7 @@
                   "
                   :src="star"
                 ></v-img>
-                {{ rating }}
+                {{ rating }} )
               </v-col>
               <v-col cols="3" style="text-align: left">상품 등록일</v-col>
               <v-col cols="8" style="text-align: left">{{ time }}</v-col>
@@ -211,6 +211,7 @@ import Vue from "vue";
 import VueDaumPostcode from "vue-daum-postcode";
 import MyModal from "./Modal.vue";
 import img from "../../../public/images/arrow.png";
+import * as ratingService from "@/api/rating.js";
 Vue.use(VueDaumPostcode);
 
 export default {
@@ -455,6 +456,17 @@ export default {
           vm.item.seller.email = result.email;
           vm.saveBookMark();
         });
+
+        ratingService.get(
+          vm.item.seller.id,
+          (res) => {
+            if (res) {
+              vm.rating = res.data;
+              vm.rating = vm.rating.toFixed(1);
+            }
+          },
+          (err) => {}
+        );
       },
 
       function(error) {

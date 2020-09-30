@@ -9,4 +9,11 @@ function create(rating, success, fail) {
     .catch(fail);
 }
 
-export { create };
+function get(userId, success, fail) {
+  instance
+    .get("/api/ratings/" + userId)
+    .then(success)
+    .catch(fail);
+}
+
+export { create, get };

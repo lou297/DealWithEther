@@ -49,7 +49,7 @@ public class RatingRepository implements IRatingRepository {
 
 	@Override
 	public List<Rating> get(long userId) {
-		StringBuilder sbSql = new StringBuilder("SELECT * FROM ratings where seller = ?");
+		StringBuilder sbSql = new StringBuilder("SELECT * FROM ratings where getter = ?");
 		try {
 			return this.jdbcTemplate.query(sbSql.toString(), new Object[] { userId },
 					(rs, rowNum) -> RatingFactory.create(rs));
