@@ -177,14 +177,14 @@ export default {
     float: left;
 }
 
-input {
+/* input {
     font-size: 20px;
     width: 325px;
     border: 0px;
     outline: none;
     text-align: center;
     font-family: 'Jua', sans-serif;
-}
+} */
 
 input::placeholder {
     color: black;
@@ -199,26 +199,6 @@ input::placeholder {
     font-size: 22px;
 }
 
-button {
-    width: 50px;
-    height: 100%;
-    border: 0px;
-    background: #1b5ac2;
-    outline: none;
-    float: right;
-    color: #ffffff;
-}
-
-h1, h2, h3, h4, h5, h6,
-.h1, .h2, .h3, .h4, .h5, .h6 {
-    margin-bottom: 0.5rem;
-    font-family: 'Jua', sans-serif;
-    font-weight: 800;
-    line-height: 1.2;
-    font-size: 2.75rem;
-    line-height: 2.75rem;
-    letter-spacing: 3px;
-}
 
 /* Helper classes */
 .basil {
