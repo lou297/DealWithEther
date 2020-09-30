@@ -226,6 +226,17 @@ public class ItemService implements IItemService {
 	}
 
 	@Override
+	public int getLengthByUser(String category, String name) {
+		User user = userRepository.getUserId(name);
+		return this.itemRepository.getLengthByUser(category, user.getId());
+	}
+
+	@Override
+	public int getLengthByname(String category, String name) {
+		return this.itemRepository.getLengthByName(category, name);
+	}
+
+	@Override
 	public String deploy() throws Exception {
 		ClassPathResource resource = new ClassPathResource(WALLET_RESOURCE);
 		// Path adminWalletFile = Paths.get(resource.getURI());

@@ -65,7 +65,7 @@
 </template>
 
 <script>
-import {findAll, findByCategory, findByMainCategory, findByUsername, findByName,findByOnlyName} from "@/api/item.js";
+import {findAll, findByCategory, findByMainCategory, findByUsername, findByName, findByOnlyName, findLengthByUsername, findLengthByName} from "@/api/item.js";
 import HShopCategories from "./HShopCategories.vue";
 import ItemCard from "./ItemCard.vue";
 import {getPrice} from '@/utils/itemInventory.js';
@@ -82,9 +82,9 @@ export default {
             items: [],
             newItem: {
                 id: 999,
-                name : "dummy",
+                name: "dummy",
                 price: "1",
-                registeredAt : "2020-09-29"
+                registeredAt: "2020-09-29"
             },
             categories: ['패션/잡화',
                 '뷰티/미용',
@@ -136,8 +136,7 @@ export default {
             else if (this.searchBy === 1) {
                 alert(this.categoryNow);
                 this.getByCategory(this.categoryNow);
-            }
-            else if (this.searchBy === 2) this.getByName(this.categoryNow, this.searchKeyword);
+            } else if (this.searchBy === 2) this.getByName(this.categoryNow, this.searchKeyword);
             else if (this.searchBy === 3) this.getBySeller(this.categoryNow, this.searchKeyword);
         },
         onClickItem(itemId) {
@@ -146,7 +145,7 @@ export default {
         getAllList() {
             const vm = this;
             findAll(this.page, function (response) {
-                console.log(response.data)
+                    console.log(response.data)
                     if (response.data.length > 0) {
                         vm.items = response.data;
                         vm.items.forEach(i => {
@@ -199,6 +198,7 @@ export default {
         getByName(category, name) {
             const vm = this;
             findByName(category.split("/")[0], name, this.page, function (response) {
+                    console.log(response)
                     if (response.data.length > 0) {
                         vm.items = response.data;
                         vm.items.forEach(i => {
@@ -217,6 +217,13 @@ export default {
                     } else {
                         vm.items = response.data;
                     }
+                    findLengthByName(category.split("/")[0], name, vm.page, function (response) {
+                            vm.length = response.data;
+                            console.log(response.data);
+                        },
+                        err => {
+                            alert(err)
+                        });
                 },
                 err => {
                     alert(err)
@@ -243,6 +250,7 @@ export default {
                     } else {
                         vm.items = response.data;
                     }
+
                 },
                 err => {
                     alert(err)
@@ -269,6 +277,13 @@ export default {
                     } else {
                         vm.items = response.data;
                     }
+                    findLengthByUsername(category.split("/")[0], seller, vm.page, function (response) {
+                            vm.length = response.data;
+                            console.log(response.data);
+                        },
+                        err => {
+                            alert(err)
+                        });
                 },
                 err => {
                     alert(err)
@@ -276,11 +291,11 @@ export default {
         }
     },
     mounted: function () {
-        if(this.route != 1) this.getAllList(); // 상점 눌러서 들어왔을 때
+        if (this.route != 1) this.getAllList(); // 상점 눌러서 들어왔을 때
     },
     created() {
         this.searchKeyword = this.$route.params.searchKeyword;
-        if(this.searchKeyword.length != 0) {
+        if (this.searchKeyword.length != 0) {
             this.searchBy = 2; // 제목으로 검색
             this.search();
             this.route = 1;
@@ -296,7 +311,8 @@ ul {
     display: flex;
     list-style: none;
 }
+
 .itemCard {
-    padding : 12px;
+    padding: 12px;
 }
 </style>

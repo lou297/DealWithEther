@@ -34,6 +34,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -110,12 +111,17 @@ public class ItemController {
 	@RequestMapping(value = "/items/seller/{category}/{name}/{page}", method = RequestMethod.GET)
 	public List<Item> getBySellerItem(@PathVariable String category, @PathVariable String name, @PathVariable int page) {
 		List<Item> item = itemService.getByUser(category, name, page);
-		System.out.println(category + ":" + name + ":" + page);
 		if (item == null) {
 			logger.error("NOT FOUND NAME: ", name);
 			throw new NotFoundException(name + "의 상품 정보를 찾을 수 없습니다.");
 		}
 		return item;
+	}
+
+	@RequestMapping(value = "/items/sellerLength/{category}/{name}/{page}", method = RequestMethod.GET)
+	public int getLengthBySellerItem(HttpServletResponse res, @PathVariable String category, @PathVariable String name, @PathVariable int page) {
+		int length = itemService.getLengthByUser(category, name) / 12 + 1;
+		return  length;
 	}
 
 	@ApiOperation(value = "Fetch an item with name")
@@ -128,6 +134,12 @@ public class ItemController {
 			return null;
 		}
 		return items;
+	}
+
+	@RequestMapping(value = "/items/nameLength/{category}/{name}/{page}", method = RequestMethod.GET)
+	public int getLengthByName(HttpServletResponse res, @PathVariable String category, @PathVariable String name, @PathVariable int page) {
+		int length = itemService.getLengthByname(category, name) / 12 + 1;
+		return  length;
 	}
 
 	@ApiOperation(value = "Fetch an item with name")
@@ -255,7 +267,6 @@ public class ItemController {
 	@ApiOperation(value = "Select page list") // page에 대한거 db에서 쿼리로 넘기기
 	@RequestMapping(value = "/items/page/{page}", method = RequestMethod.GET)
 	public List<Item> getPage(@PathVariable int page) {
-
 		System.out.println(page);
 		List<Item> list = itemService.pageList(page);
 		for (Item temp : list)

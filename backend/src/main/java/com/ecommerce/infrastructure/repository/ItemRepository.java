@@ -261,6 +261,31 @@ public class ItemRepository implements IItemRepository {
 	}
 
 	@Override
+	public int getLengthByUser(String category, long id) {
+		StringBuilder sbSql = new StringBuilder(
+				"SELECT count(*) FROM items WHERE seller=? and category like ?");
+		String tcategory = "%" + category + "%";
+		try {
+			return this.jdbcTemplate.queryForObject(sbSql.toString(), new Object[] { id, tcategory },	int.class);
+		} catch (Exception e) {
+			throw new RepositoryException(e, e.getMessage());
+		}
+	}
+
+	@Override
+	public int getLengthByName(String category, String name) {
+		StringBuilder sbSql = new StringBuilder(
+				"SELECT count(*) FROM items WHERE name like ? and category like ?");
+		String tcategory = "%" + category + "%";
+		String tname = "%" + name + "%";
+		try {
+			return this.jdbcTemplate.queryForObject(sbSql.toString(), new Object[] { tname, tcategory },	int.class);
+		} catch (Exception e) {
+			throw new RepositoryException(e, e.getMessage());
+		}
+	}
+
+	@Override
 	public int changeProgressTrue(long id) {
 		StringBuilder sbSql = new StringBuilder("UPDATE items ");
 		sbSql.append("SET progress = true ");

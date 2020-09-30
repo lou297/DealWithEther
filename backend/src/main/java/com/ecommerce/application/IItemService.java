@@ -50,4 +50,8 @@ public interface IItemService {
 	int changeProgressFalse(long id);
 
 	List<Item> getByOnlyName(String name, int page);
+
+    int getLengthByUser(String category, String name);
+
+	int getLengthByname(String category, String name);
 }

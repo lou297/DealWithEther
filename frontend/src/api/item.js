@@ -37,9 +37,23 @@ function findByUsername(category, userName, page, success, fail) {
         .catch(fail);
 }
 
+function findLengthByUsername(category, userName, page, success, fail) {
+    instance
+        .get("/api/items/sellerLength/" + category + "/" + userName + "/" + page)
+        .then(success)
+        .catch(fail);
+}
+
 function findByName(category, name, page, success, fail) {
     instance
         .get("/api/items/name/"+ category + "/" + name + "/" + page)
+        .then(success)
+        .catch(fail);
+}
+
+function findLengthByName(category, name, page, success, fail) {
+    instance
+        .get("/api/items/nameLength/"+ category + "/" + name + "/" + page)
         .then(success)
         .catch(fail);
 }
@@ -174,5 +188,7 @@ export {
     findByMainCategory,
     findByUsername,
     findLikedList,
-    findByOnlyName
+    findByOnlyName,
+    findLengthByUsername,
+    findLengthByName
 };
