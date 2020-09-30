@@ -19,6 +19,7 @@
                             <p class="font-weight-bold">{{user.email}}</p>
                             <router-link
                             :to="{ name: 'mypage.password' }"
+                            style="color:green;"
                             >비밀번호 변경</router-link
                             >
                         </div>
