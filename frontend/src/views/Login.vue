@@ -93,8 +93,8 @@ export default {
                             }
                         }
                     );
-
-                    scope.$router.push("/");
+                    // 창 닫기
+                    location.reload();
                 },
                 function (error) {
                     console.error(error);

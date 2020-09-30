@@ -11,6 +11,8 @@ import Explorer from "@/views/Explorer.vue";
 import Escrow from "@/views/Escrow.vue";
 import Sell from "@/views/Sell.vue";
 import PurchaseResult from "@/components/mypage/PurchaseResult";
+import ChatRoom from '@/views/ChatRoom.vue';
+import LoginChat from '@/views/LoginChat.vue';
 
 Vue.use(VueRouter);
 
@@ -18,6 +20,16 @@ Vue.use(VueRouter);
  * 아래의 router를 변경하여 구현할 수 있습니다.
  */
 const routes = [
+    {
+        path: '/loginChat',
+        name: 'LoginChat',
+        component: LoginChat,
+    },
+    {
+        path: '/chat',
+        name: 'ChatRoom',
+        component: ChatRoom,
+    },
     {
         path: "/",
         name: "home",
