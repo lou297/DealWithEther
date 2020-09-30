@@ -42,4 +42,12 @@ function update(user, success, fail) {
     .catch(fail);
 }
 
-export { findById, signup, login, update };
+function save(data, id, success, fail, final) {
+  instance
+      .post("/api/users/upload/" + id , data, {headers: { "Content-Type": "multipart/form-data"}})
+      .then(success)
+      .catch(fail)
+      .finally(final);
+}
+
+export { findById, signup, login, update, save };
