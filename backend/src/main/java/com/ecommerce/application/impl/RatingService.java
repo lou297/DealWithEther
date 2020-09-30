@@ -33,6 +33,18 @@ public class RatingService implements IRatingService {
 	}
 
 	@Override
+	public double get(long userId) {
+		List<Rating> rating = this.ratingRepository.get(userId);
+
+		long score1 = 0;
+		for (Rating r : rating) {
+			score1 += r.getScore();
+		}
+
+		return (double) score1 / rating.size();
+	}
+
+	@Override
 	public long register(final Rating rating) {
 		return this.ratingRepository.create(rating);
 	}
