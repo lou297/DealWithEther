@@ -1,7 +1,12 @@
-<template>
-    
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Socket.io Chat Example</title>
+</head>
+<body>
   <div class="container">
-    <h3>Socket.io Chat Examplssddde</h3>
+    <h3>Socket.io Chat Example</h3>
     <!-- <form class="form-inline"> -->
     <form class="form-horizontal">
       <div class="form-group">
@@ -30,12 +35,11 @@
     </form>
     <ul id="chat"></ul>
   </div>
-</template>
-
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
   <script src="/socket.io/socket.io.js"></script>
   <script>
 
+    var name = $("#name").val();
     $(function() {
       // 지정 namespace로 접속한다
       var chat = io('http://localhost:3000/chat'),
@@ -54,8 +58,9 @@
 
       // 서버로부터의 메시지가 수신되면
       chat.on("chat message", function(data) {
-        $("#chat").append($('<li>').text(data));
-        $("#chat").append("하세요");
+        $("#chat").append($("#name").val()).append(" : "+data).append($('<br>'));
       });
     });
   </script>
+</body>
+</html>
