@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import HNav from "@/components/common/HNav copy";
+import HNav from "@/components/common/HNav";
 import {getDetail} from "@/api/purchase";
 
 export default {

@@ -48,9 +48,14 @@
                                 <router-link id="link-to-mypage-2" to="/mypage/wallet_create">마이페이지</router-link>
                             </v-list-item-title>
                         </v-list-item>
-                        <v-list-item v-if="$store.state.user.walletAddress">
+                        <!-- <v-list-item v-if="$store.state.user.walletAddress">
                             <v-list-item-title>
                                 <router-link id="link-to-myshop-2" to="/mypage/wallet_info">내상점</router-link>
+                            </v-list-item-title>
+                        </v-list-item> -->
+                        <v-list-item v-if="$store.state.user.walletAddress">
+                            <v-list-item-title>
+                                <router-link id="link-to-myshop-2" to="{ name: 'mypage.profile' }">프로필</router-link>
                             </v-list-item-title>
                         </v-list-item>
                         <v-list-item v-if="$store.state.isSigned">

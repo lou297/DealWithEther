@@ -1,9 +1,9 @@
 <template>
     <div>
         <!-- <my-page-nav></my-page-nav> -->
-
         <v-row>
-            <v-col offset-lg="2" lg="8" cols="12" >
+            <v-flex md2></v-flex>
+            <v-col cols="12" md="8">
                 <v-row id="profile-container">
                     <v-col cols="4" id="profile-image-container">
                         <div>
@@ -17,41 +17,12 @@
                             </v-avatar>
                             <p class="font-weight-bold" style="margin: 10px 0 0 0; font-size:18px">{{user.name}}</p>
                             <p class="font-weight-bold">{{user.email}}</p>
+                            <router-link
+                            :to="{ name: 'mypage.password' }"
+                            >비밀번호 변경</router-link
+                            >
                         </div>
-                        <div>
-                            <v-row id="shop-info-container">
-                                <v-col cols="12" sm="4">
-                                    <p style="margin:0;">
-                                        0
-                                    </p>
-                                    <p>
-                                        등록 건수
-                                    </p>
-                                </v-col>
-                                <v-col cols="12" sm="4">
-                                    <p style="margin:0;">
-                                        0
-                                    </p>
-                                    <p>
-                                        판매 건수
-                                    </p>
-                                    <!-- <span>
-                                        판매 건수 : <span>0</span>
-                                    </span> -->
-                                </v-col>
-                                <v-col cols="12" sm="4">
-                                    <p style="margin:0;">
-                                        0
-                                    </p>
-                                    <p>
-                                        구매 건수
-                                    </p>
-                                    <!-- <span>
-                                        구매 건수 : <span>0</span>
-                                    </span> -->
-                                </v-col>
-                            </v-row>
-                        </div>
+                        
                     </v-col>
                     <v-col cols="8" id="wallet-info-container">
                         <v-row>
@@ -133,9 +104,9 @@
                     </v-tabs>
                 </v-row>
                 <v-row v-if="tabStatus > 2">
-                        <v-flex v-for="item in items" :key="item.id" >
-                            <item-card :item="item" @clicked="onClickItem(item.id)"></item-card>
-                        </v-flex>
+                    <v-col v-for="item in items" :key="item.id" cols="6" sm="4" lg="3">
+                        <item-card :item="item" @clicked="onClickItem(item.id)"></item-card>
+                    </v-col>
                 </v-row>
                 <sell-hitsory v-if="tabStatus == 1"></sell-hitsory>
                 <v-row v-if="tabStatus == 2">
@@ -213,6 +184,9 @@ export default {
     }
   },
   methods: {
+      changePassword() {
+
+      },
       onClickItem(itemId) {
             this.$router.push("../item/detail/" + itemId);
         },
@@ -221,7 +195,6 @@ export default {
             this.items = []
           itemService.findMySaleItems(this.user.id,
             res=> {
-                console.dir(res)
                 this.items = res.data
             },
             err => {
@@ -251,7 +224,7 @@ export default {
             res => {
                 this.items = res.data
             },
-            error => {
+            err => {
                 alert(err)
             }
           )
@@ -272,7 +245,6 @@ export default {
         },
         (error)=> {
           alert("지갑 조회 중 에러 발생");
-          console.dir(error);
         }
       )
 
@@ -290,14 +262,12 @@ export default {
       this.isCharging = true;
       walletService.chargeEther(this.walletAddress,
         (response)=> {
-          console.dir(response);
           this.wallet.balance = response.data.balance;
           this.wallet.receivingCount = response.data.receivingCount;
           alert("충전 되었습니다.");
           this.isCharging = false;
         },
         (error)=> {
-          console.dir(error);
           alert("충전에 실패하였습니다.");
           this.isCharging = false;
         }
@@ -317,14 +287,12 @@ export default {
              */
             walletService.chargeCash(this.wallet.address, privateKey, this.cashChargeAmount,
               (response)=> {
-                console.dir(response);
                 this.wallet.balance = response.data.balance;
                 this.wallet.cash    = response.data.cash;
                 alert((this.cashChargeAmount*100000)+"Cash가 충전 되었습니다.");
                 this.isCashCharging = false;
               },
               (error)=>{
-                console.dir(error);
                 alert("캐쉬 충전에 실패하였습니다.");
                 this.isCashCharging = false;
               }
@@ -367,7 +335,6 @@ export default {
         purchaseService.findMyPurchases(this.user.id,
             res => {
                 this.buyPurchases = res.data
-                console.dir(res)
             },
             err => {
                 alert(err)

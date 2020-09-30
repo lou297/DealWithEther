@@ -44,8 +44,27 @@ export default {
   ],
   data() {
     return {
-      state : this.buyPurchase.state
+      state : -1
     };
+  },
+  created() {
+    switch (this.buyPurchase.state) {
+      case 'I':
+        this.state = 1;
+        break;
+      case 'P':
+        this.state = 2;
+        break;
+      case 'S':
+        this.state = 3;
+        break;
+      case 'C':
+        this.state = 4;
+        break;
+      case 'X':
+        this.state = 5;
+        break;
+    }
   },
   mounted: function() {
   },
