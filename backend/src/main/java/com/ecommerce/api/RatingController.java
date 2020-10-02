@@ -43,6 +43,13 @@ public class RatingController {
 		return list;
 	}
 
+	@RequestMapping(value = "/ratings/{userId}", method = RequestMethod.GET)
+	public double get(@PathVariable long userId) {
+		double score = ratingService.get(userId);
+		System.out.println("점수 : " + score);
+		return score;
+	}
+
 	@ApiOperation(value = "Delete rating with id")
 	@RequestMapping(value = "/ratings/{id}", method = RequestMethod.DELETE)
 	public int delete(@PathVariable int id) {

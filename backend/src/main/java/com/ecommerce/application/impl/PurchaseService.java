@@ -179,6 +179,9 @@ public class PurchaseService implements IPurchaseService {
                         .transfer(purchase.getContractAddress(), BigInteger.valueOf(item.getPrice() + 20)).send();
 
                 escrow = Escrow.load(purchase.getContractAddress(), web3j, credentials, contractGasProvider);
+
+                wallet = walletService.get(neer.buyer);
+
                 walletService.syncBalance(wallet.getAddress(), wallet.getBalance(),
                         wallet.getCash() - (item.getPrice() + 20));
 
