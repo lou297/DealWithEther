@@ -11,7 +11,7 @@ public interface IUserRepository {
 
     User get(String email);
 
-    List<User> getUserId(final String name);
+    User getUserId(final String name);
 
     long create(User user);
 
