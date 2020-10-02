@@ -11,7 +11,7 @@
       <p style="margin: 0">{{ item.name }}</p>
     </v-col>
     <v-col cols="10" id="progress-container">
-      <p>취소된 거래입니다.</p>
+      <p id="cancel-message" v-if="state == 5">취소된 거래입니다.</p>
       <v-stepper alt-labels v-model="state">
         <v-stepper-header>
           <v-stepper-step step="1" :complete="state >= 1">
@@ -108,7 +108,7 @@ export default {
           this.state = 4;
           break;
         case "X":
-          this.state = 0;
+          this.state = 5;
           break;
       }
     },
@@ -208,6 +208,12 @@ export default {
 
 #progress-container {
   align-self: center;
+}
+
+#cancel-message {
+  color: red;
+  font-size: 17px;
+  text-align-last: left;
 }
 
 #btn-container {
