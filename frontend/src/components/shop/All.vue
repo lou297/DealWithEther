@@ -10,28 +10,20 @@
 
         </div> -->
 
-        <section class="hero-banner">
-            <div class="container">
-                <div class="row no-gutters align-items-center pt-60px">
-                    <div class="col-5 d-none d-sm-block">
-                        <div class="hero-banner__img">
-                            <img class="img-fluid" src="../../../public/images/hero-banner.png" alt="">
-                        </div>
-                    </div>
-                    <div class="col-sm-7 col-lg-6 offset-lg-1 pl-4 pl-md-5 pl-lg-0">
-                        <div class="hero-banner__content">
-                            <h4>Shop is fun</h4>
-                            <h1>Browse Our Premium Product</h1>
-                            <p>Us which over of signs divide dominion deep fill bring they're meat beho upon own earth without morning over third. Their male dry. They are great appear whose land fly grass.</p>
-                            <a class="button button-hero" href="#">Browse Now</a>
-                        </div>
+        <section class="blog-banner-area" id="category">
+            <div class="container h-100">
+                <div class="blog-banner">
+                    <div class="text-center">
+                        <h1 style="font-size:35px;">Shop Category</h1>
+                        <nav aria-label="breadcrumb" class="banner-breadcrumb"></nav>
                     </div>
                 </div>
             </div>
         </section>
 
 
-        <v-card color="basil">
+
+        <v-card color="white">
             <v-card-title class="text-center justify-center py-6">
                 <h1 class="font-weight-bold text-secondary">카테고리별 상품목록</h1>
             </v-card-title>
@@ -264,6 +256,8 @@ export default {
 </script>
 
 <style>
+.blog-banner-area{height:280px;position:relative;z-index:1}@media (min-width: 1000px){.blog-banner-area{height:410px}}.blog-banner-area .blog-banner{position:absolute;top:50%;left:50%;width:100%;transform:translate(-50%, -50%)}.blog-banner-area::after{content:"";display:block;position:absolute;top:0;left:0;width:100%;height:100%;background:#f1f6f7;z-index:-1}.blog-banner-btn{border:2px solid #384aeb;padding:10px 45px}.blog-banner-btn:hover{background:#384aeb;color:#fff}.banner-breadcrumb{display:inline-block}.banner-breadcrumb .breadcrumb{background:transparent;padding:0}.banner-breadcrumb .breadcrumb-item{padding:.1rem}.banner-breadcrumb .breadcrumb-item a{text-transform:capitalize;color:#777777}.banner-breadcrumb .breadcrumb-item+.breadcrumb-item::before{color:#777777;padding-right:.1rem;content:"-"}.banner-breadcrumb .breadcrumb-item.active{color:#777777}
+
 ul {
     display: flex;
     list-style: none;

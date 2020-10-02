@@ -7,7 +7,7 @@
             :elevation="hover ? 16 : 2"
             @click.prevent="$emit('clicked')" href=""
         >
-            <v-img class="white--text align-end" height="280" :src="imgPath">
+            <v-img class="white--text align-end" height="280" width="263" :src="imgPath">
                  <v-card-actions style="float:right; padding: 2px 0 0 0px;">
                 <v-btn
                     color="red accent-4"
@@ -25,7 +25,7 @@
             </v-img>
            
         </v-card>
-        <div style="margin-top:14px; color:black;">
+        <div style="margin-top:20px; color:black;">
             <div style="font-weight:bold;">{{ item.name }}</div>
             <div style="font-size:15px;margin-top:3px;">{{ item.price }} CASH</div>
         </div>
