@@ -16,4 +16,11 @@ function get(userId, success, fail) {
     .catch(fail);
 }
 
-export { create, get };
+function getList(success, fail) {
+  instance
+    .get("/api/ratings/")
+    .then(success)
+    .catch(fail);
+}
+
+export { create, get, getList };

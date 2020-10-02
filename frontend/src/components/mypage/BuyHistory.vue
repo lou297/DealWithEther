@@ -8,7 +8,7 @@
         @click="onClickItem()"
       >
       </v-img>
-      <p style="margin:0">{{ item.name }}</p>
+      <p style="margin: 0">{{ item.name }}</p>
     </v-col>
     <v-col cols="10" id="progress-container">
       <v-stepper alt-labels v-model="state">
@@ -37,7 +37,9 @@
         <v-btn color="primary" :disabled="state != 3" @click="confirm"
           >구매 확정</v-btn
         >
-        <v-btn color="success" :disabled="state != 4" @click="evaluate">평가하기</v-btn>
+        <v-btn color="success" :disabled="state != 4" @click="evaluate"
+          >평가하기</v-btn
+        >
       </div>
     </v-col>
   </v-row>
@@ -54,7 +56,7 @@ export default {
       userId: this.$store.state.user.id,
       state: -1,
       item: {},
-      ratings: {
+      rating: {
         id: 0,
         purchasesId: 0,
         evaluator: 0,
@@ -64,10 +66,31 @@ export default {
     };
   },
   created() {
-    this.updateState()
-    this.fetchPurchaseInfo()
+    this.updateState();
+    this.fetchPurchaseInfo();
   },
-  mounted: function() {},
+  mounted: function () {
+    const vm = this;
+    ratingService.getList(
+      (res) => {
+        if (res) {
+          vm.ratings = res.data;
+          for (var key in vm.ratings) {
+            // console.log(vm.ratings[key]);
+            if (
+              vm.ratings[key].purchasesId == vm.buyPurchase.id &&
+              vm.ratings[key].evaluator == vm.buyPurchase.buyerId
+            ) {
+              vm.state = 6;
+            }
+          }
+        }
+      },
+      (err) => {
+        console.log("에러");
+      }
+    );
+  },
   methods: {
     updateState() {
       switch (this.buyPurchase.state) {
@@ -92,14 +115,15 @@ export default {
       return process.env.VUE_APP_BACKEND + "api/items/images/" + id + "_1";
     },
     fetchPurchaseInfo() {
-      itemService.findById(this.buyPurchase.itemId,
-        res => {
-          this.item = res.data
+      itemService.findById(
+        this.buyPurchase.itemId,
+        (res) => {
+          this.item = res.data;
         },
-        err => {
-          alert(err)
+        (err) => {
+          alert(err);
         }
-      )
+      );
     },
     onClickItem() {
       alert("클릭");
@@ -111,13 +135,13 @@ export default {
         alert("잘못된 점수입니다!");
         return;
       }
-      this.ratings.purchasesId = this.buyPurchase.id;
-      this.ratings.evaluator = this.buyPurchase.buyerId;
-      this.ratings.getter = this.buyPurchase.sellerId;
-      this.ratings.score = parseInt(score);
+      this.rating.purchasesId = this.buyPurchase.id;
+      this.rating.evaluator = this.buyPurchase.buyerId;
+      this.rating.getter = this.buyPurchase.sellerId;
+      this.rating.score = parseInt(score);
 
       ratingService.create(
-        this.ratings,
+        this.rating,
         (res) => {
           alert("평가 성공!");
         },
@@ -177,7 +201,7 @@ export default {
   border: 1px solid black;
 }
 
-#item-info-container{
+#item-info-container {
   align-self: center;
 }
 
