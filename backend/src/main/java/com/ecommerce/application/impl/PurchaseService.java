@@ -64,8 +64,8 @@ public class PurchaseService implements IPurchaseService {
     private ContractGasProvider contractGasProvider = new DefaultGasProvider();
     private Credentials credentials;
 
-    @Autowired
-    private IEscrowContractService escrowContractService;
+    // @Autowired
+    // private IEscrowContractService escrowContractService;
 
     @Autowired
     private IWalletService walletService;
