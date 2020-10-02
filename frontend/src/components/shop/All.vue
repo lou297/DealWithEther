@@ -35,7 +35,7 @@
             <v-container>
                 <v-layout row wrap justify-center>
                     <v-flex xs3 sm3 md3 lg3 xl3>
-                        <v-select :items="types" label="제목" item-text="name" item-value="value" solo style="margin-left:5px" @change="changeSearchBy; setPage(1); search()"></v-select>
+                        <v-select :items="types" label="제목" item-text="name" item-value="value" solo style="margin-left:5px" @change="changeSearchBy"></v-select>
                     </v-flex>
                     <v-flex xs8 sm8 md8 lg8 xl8>
                         <v-text-field
@@ -135,7 +135,6 @@ export default {
     },
     methods: {
         changeSearchBy(searchBy) {
-            console.log(searchBy);
             this.searchBy = searchBy;
         },
         setPage(page) {
