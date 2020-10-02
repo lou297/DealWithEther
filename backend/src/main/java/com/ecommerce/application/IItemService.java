@@ -1,6 +1,9 @@
 package com.ecommerce.application;
 
 import com.ecommerce.domain.Item;
+import com.ecommerce.domain.ItemJpa;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
@@ -50,4 +53,15 @@ public interface IItemService {
 	int changeProgressFalse(long id);
 
 	List<Item> getByOnlyName(String name, int page);
+
+    int getLengthByUser(String category, String name);
+
+	int getLengthByname(String category, String name);
+
+
+	///////////////////////////////////////////// jpa 구간 //////////////////////////////////////////////
+	Page<ItemJpa> getByNameContaining(int page, String name);
+	Page<ItemJpa> getBySeller(int page, String seller);
+	Page<ItemJpa> getByNameContainingAndCategoryContaining(int page, String name, String category);
+	Page<ItemJpa> getBySellerAndCategoryContaining(int page, String seller, String category);
 }

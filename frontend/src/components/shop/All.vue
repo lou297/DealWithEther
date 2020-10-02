@@ -10,6 +10,26 @@
 
         </div> -->
 
+        <section class="hero-banner">
+            <div class="container">
+                <div class="row no-gutters align-items-center pt-60px">
+                    <div class="col-5 d-none d-sm-block">
+                        <div class="hero-banner__img">
+                            <img class="img-fluid" src="../../../public/images/hero-banner.png" alt="">
+                        </div>
+                    </div>
+                    <div class="col-sm-7 col-lg-6 offset-lg-1 pl-4 pl-md-5 pl-lg-0">
+                        <div class="hero-banner__content">
+                            <h4>Shop is fun</h4>
+                            <h1>Browse Our Premium Product</h1>
+                            <p>Us which over of signs divide dominion deep fill bring they're meat beho upon own earth without morning over third. Their male dry. They are great appear whose land fly grass.</p>
+                            <a class="button button-hero" href="#">Browse Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
 
         <v-card color="basil">
             <v-card-title class="text-center justify-center py-6">
@@ -17,14 +37,13 @@
             </v-card-title>
             <v-tabs v-model="tab" background-color="transparent" color="basil" grow>
                 <v-flex xl1 lg1 md1 sm0 xs0><span></span></v-flex>
-                <v-tab class="font-weight-bold" @click="getAllList(); setSearchBy(0);" style="font-family: 'Jua', sans-serif; font-size:18px;">전체 보기</v-tab>
-                <v-tab v-for="item in categories" :key="item" class="font-weight-bold" @click="categoryNow = item; getByCategory(item)" style="font-family: 'Jua', sans-serif; font-size:18px;">{{ item }}</v-tab>
+                <v-tab v-for="item in categories" :key="item" class="font-weight-bold" @click="categoryNow = item; setPage(1); search();" style="font-family: 'Jua', sans-serif; font-size:18px;">{{ item }}</v-tab>
                 <v-flex xl1 lg1 md1 sm0 xs0><span></span></v-flex>
             </v-tabs>
             <v-container>
                 <v-layout row wrap justify-center>
                     <v-flex xs3 sm3 md3 lg3 xl3>
-                        <v-select :items="types" label="제목" item-text="name" item-value="value" solo style="margin-left:5px" @change="changeSearchBy"></v-select>
+                        <v-select :items="types" label="제목" item-text="name" item-value="value" solo style="margin-left:5px" @change="changeSearchBy; setPage(1); search()"></v-select>
                     </v-flex>
                     <v-flex xs8 sm8 md8 lg8 xl8>
                         <v-text-field
@@ -34,7 +53,7 @@
                             color="black"
                             placeholder="검색어를 입력하세요"
                             v-model="searchKeyword"
-                            @keyup.enter="search"
+                            @keyup.enter="setPage(1); search"
                             style="margin-left:5px"
                             solo
                             clearable
@@ -63,7 +82,7 @@
                     :prev-icon="prevIcon"
                     :page="page"
                     :total-visible="totalVisible"
-                    @input="setPage"
+                    @input="setPage; search()"
                 ></v-pagination>
             </div>
         </v-card>
@@ -72,8 +91,7 @@
 </template>
 
 <script>
-
-import {findAll, findByCategory, findByMainCategory, findByUsername, findByName,findByOnlyName} from "@/api/item.js";
+import {getListNoKeyword, getList} from "@/api/item.js";
 import HShopCategories from "./HShopCategories.vue";
 import ItemCard from "./ItemCard.vue";
 import {getPrice} from '@/utils/itemInventory.js';
@@ -90,18 +108,22 @@ export default {
             items: [],
             newItem: {
                 id: 999,
-                name : "dummy",
+                name: "dummy",
                 price: "1",
-                registeredAt : "2020-09-29"
+                registeredAt: "2020-09-29"
             },
-            categories: ['패션/잡화',
+            categories: [
+                '전체보기',
+                '패션/잡화',
                 '뷰티/미용',
                 '디지털/가전',
                 '유아물품',
                 '도서/티켓',
                 '스포츠/레저',
                 '생활/문구/가구',
-                '기타',],
+                '기타',
+            ],
+
             circle: false,
             disabled: false,
             length: 30,
@@ -110,11 +132,11 @@ export default {
             page: 1,
             totalVisible: 10,
             searchKeyword: "",
-            searchBy: 0,
-            categoryNow: "",
+            searchBy: 1,
+            categoryNow: "전체보기",
             types: [
-                {name: '제목', value: 2},
-                {name: '판매자', value: 3},
+                {name: '제목', value: 1},
+                {name: '판매자', value: 2},
             ],
             route: 0,
         };
@@ -126,7 +148,7 @@ export default {
         },
         setPage(page) {
             this.page = page;
-            console.log(this.page);
+            console.log(this.page + " : " + this.searchBy);
             this.search();
         },
         setSearchBy(searchBy) {
@@ -140,24 +162,38 @@ export default {
             console.log(this.searchKeyword);
         },
         search() {
-            alert(this.searchBy);
-            if (this.searchBy === 0) this.getByOnlyName(this.searchKeyword);
-            else if (this.searchBy === 1) {
-                alert(this.categoryNow);
-                this.getByCategory(this.categoryNow);
+            console.log("searchby : " + this.searchBy);
+            console.log("keyword : " + this.searchKeyword);
+            console.log("category : " + this.categoryNow);
+
+            let temp = 0;
+
+            if (this.categoryNow === "전체보기") temp = 0;
+            else temp = 1;
+
+            console.log(temp)
+            if (!this.searchKeyword) {
+                if (this.searchBy === 1 && temp === 0) this.getListNoKeyword(0);
+                else if (this.searchBy === 1 && temp === 1) this.getListNoKeyword(1);
+                else if (this.searchBy === 2 && temp === 0) this.getListNoKeyword(2);
+                else if (this.searchBy === 2 && temp === 1) this.getListNoKeyword(3);
+            } else {
+                if (this.searchBy === 1 && temp === 0) this.getList(0);
+                else if (this.searchBy === 1 && temp === 1) this.getList(1);
+                else if (this.searchBy === 2 && temp === 0) this.getList(2);
+                else if (this.searchBy === 2 && temp === 1) this.getList(3);
             }
-            else if (this.searchBy === 2) this.getByName(this.categoryNow, this.searchKeyword);
-            else if (this.searchBy === 3) this.getBySeller(this.categoryNow, this.searchKeyword);
         },
         onClickItem(itemId) {
             this.$router.push("item/detail/" + itemId);
         },
-        getAllList() {
+
+        getList(kind) {
             const vm = this;
-            findAll(this.page, function (response) {
-                console.log(response.data)
+            getList(vm.page - 1, vm.categoryNow.split("/")[0], vm.searchKeyword, kind, function (response) {
+                    console.log(response.data.totalPages);
                     if (response.data.length > 0) {
-                        vm.items = response.data;
+                        vm.items = response.data.content;
                         vm.items.forEach(i => {
                             // [스마트 컨트랙트] 가격 조회
                             getPrice(
@@ -172,18 +208,21 @@ export default {
                             )
                         })
                     } else {
-                        vm.items = response.data;
+                        vm.items = response.data.content;
                     }
+                    vm.length = response.data.totalPages;
                 },
                 err => {
                     alert(err)
                 });
         },
-        getByCategory(category) {
+        getListNoKeyword(kind) {
             const vm = this;
-            findByCategory(category.split("/")[0], this.page, function (response) {
+            getListNoKeyword(vm.page - 1, vm.categoryNow.split("/")[0], kind, function (response) {
+                    console.log(response.data.totalPages);
                     if (response.data.length > 0) {
-                        vm.items = response.data;
+                        vm.items = response.data.content;
+
                         vm.items.forEach(i => {
                             // [스마트 컨트랙트] 가격 조회
                             getPrice(
@@ -198,91 +237,9 @@ export default {
                             )
                         })
                     } else {
-                        vm.items = response.data;
+                        vm.items = response.data.content;
                     }
-                },
-                err => {
-                    alert(err)
-                });
-        },
-        getByName(category, name) {
-            const vm = this;
-            console.log('오긴옴')
-            console.log(category);
-            findByName(category.split("/")[0], name, this.page, function (response) {
-                    if (response.data.length > 0) {
-                        vm.items = response.data;
-                        vm.items.forEach(i => {
-                            // [스마트 컨트랙트] 가격 조회
-                            getPrice(
-                                i.id,
-                                function (price) {
-                                    vm.$set(i, "price", price);
-                                },
-                                function (err) {
-                                    console.error('가격 조회 실패:', err);
-                                    // alert("상품 가격 조회를 실패했습니다.");
-                                }
-                            )
-                        })
-                    } else {
-                        vm.items = response.data;
-                    }
-                },
-                err => {
-                    alert(err)
-                });
-        },
-        getByOnlyName(name) {
-            console.log('이름으로만 검색하기')
-            const vm = this;
-            findByOnlyName(name, this.page, function (response) {
-                    if (response.data.length > 0) {
-                        vm.items = response.data;
-                        vm.items.forEach(i => {
-                            // [스마트 컨트랙트] 가격 조회
-                            getPrice(
-                                i.id,
-                                function (price) {
-                                    vm.$set(i, "price", price);
-                                },
-                                function (err) {
-                                    console.error('가격 조회 실패:', err);
-                                    // alert("상품 가격 조회를 실패했습니다.");
-                                }
-                            )
-                        })
-                    } else {
-                        vm.items = response.data;
-                    }
-                },
-                err => {
-                    alert(err)
-                });
-        },
-        getBySeller(category, seller) {
-            const vm = this;
-             console.log(category+"카테고리")
-            console.log(category.split("/")[0]);
-            findByUsername(category.split("/")[0], seller, this.page, function (response) {
-                    if (response.data.length > 0) {
-                        vm.items = response.data;
-                        vm.items.forEach(i => {
-                            // [스마트 컨트랙트] 가격 조회
-                            getPrice(
-                                i.id,
-                                function (price) {
-                                    vm.$set(i, "price", price);
-                                },
-                                function (err) {
-                                    console.error('가격 조회 실패:', err);
-                                    // alert("상품 가격 조회를 실패했습니다.");
-                                }
-                            )
-                        })
-                    } else {
-                        vm.items = response.data;
-                    }
+                    vm.length = response.data.totalPages;
                 },
                 err => {
                     alert(err)
@@ -290,16 +247,17 @@ export default {
         }
     },
     mounted: function () {
-        if(this.route != 1) this.getAllList(); // 상점 눌러서 들어왔을 때
+        if (this.route != 1) this.search(); // 상점 눌러서 들어왔을 때
     },
     created() {
         this.searchKeyword = this.$route.params.searchKeyword;
-        if(this.searchKeyword.length != 0) {
-            this.searchBy = 2; // 제목으로 검색
+        if (this.searchKeyword.length != 0) {
+            this.searchBy = 1; // 제목으로 검색
             this.search();
             this.route = 1;
         }
-        this.searchBy = 0;
+        this.searchBy = 1;
+
     },
 
 };
@@ -310,9 +268,98 @@ ul {
     display: flex;
     list-style: none;
 }
+
 .itemCard {
-    padding : 12px;
+    padding: 12px;
 }
 
-.hero-banner{background:#F1F6F7;position:relative;margin-bottom:10px}@media (min-width: 991px){.hero-banner{z-index:111}}.hero-banner::before{content:"";display:block;width:5%;height:100%;background:#384aeb;position:absolute;top:0;left:0}@media (min-width: 575px){.hero-banner::before{width:20%}}@media (min-width: 991px){.hero-banner::before{width:35%}}.hero-banner__img{position:relative;top:1px}@media (max-width: 575px){.hero-banner__content{padding-bottom:50px}}@media (min-width: 1000px){.hero-banner__content{max-width:495px}}.hero-banner__content h4{font-size:30px;font-family:"Roboto",sans-serif;color:#555555;margin-bottom:12px}.hero-banner__content h1{font-family:"Roboto",sans-serif;font-size:25px;text-transform:uppercase;font-weight:700;margin-bottom:10px}@media (min-width: 767px){.hero-banner__content h1{font-size:30px;margin-bottom:25px}}@media (min-width: 991px){.hero-banner__content h1{font-size:50px}}.hero-banner__content p{margin-bottom:10px}@media (min-width: 767px){.hero-banner__content p{margin-bottom:40px}}
+.hero-banner {
+    background: #F1F6F7;
+    position: relative;
+    margin-bottom: 10px
+}
+
+@media (min-width: 991px) {
+    .hero-banner {
+        z-index: 111
+    }
+}
+
+.hero-banner::before {
+    content: "";
+    display: block;
+    width: 5%;
+    height: 100%;
+    background: #384aeb;
+    position: absolute;
+    top: 0;
+    left: 0
+}
+
+@media (min-width: 575px) {
+    .hero-banner::before {
+        width: 20%
+    }
+}
+
+@media (min-width: 991px) {
+    .hero-banner::before {
+        width: 35%
+    }
+}
+
+.hero-banner__img {
+    position: relative;
+    top: 1px
+}
+
+@media (max-width: 575px) {
+    .hero-banner__content {
+        padding-bottom: 50px
+    }
+}
+
+@media (min-width: 1000px) {
+    .hero-banner__content {
+        max-width: 495px
+    }
+}
+
+.hero-banner__content h4 {
+    font-size: 30px;
+    font-family: "Roboto", sans-serif;
+    color: #555555;
+    margin-bottom: 12px
+}
+
+.hero-banner__content h1 {
+    font-family: "Roboto", sans-serif;
+    font-size: 25px;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 10px
+}
+
+@media (min-width: 767px) {
+    .hero-banner__content h1 {
+        font-size: 30px;
+        margin-bottom: 25px
+    }
+}
+
+@media (min-width: 991px) {
+    .hero-banner__content h1 {
+        font-size: 50px
+    }
+}
+
+.hero-banner__content p {
+    margin-bottom: 10px
+}
+
+@media (min-width: 767px) {
+    .hero-banner__content p {
+        margin-bottom: 40px
+    }
+}
 </style>
