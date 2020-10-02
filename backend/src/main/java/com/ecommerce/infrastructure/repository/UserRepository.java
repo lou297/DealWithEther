@@ -59,6 +59,8 @@ public class UserRepository implements IUserRepository {
         } catch (EmptyResultDataAccessException e) {
             return null;
         } catch (Exception e) {
+            System.out.println(e);
+            System.out.println(e.getMessage());
             throw new RepositoryException(e, e.getMessage());
         }
     }
