@@ -1,7 +1,28 @@
 <template>
     <div>
         <h-nav></h-nav>
-        <div style="height:530px; background-color: rgb(255,212,85);">
+
+        <section class="hero-banner">
+            <div class="container">
+                <div class="row no-gutters align-items-center pt-60px">
+                <div class="col-5 d-none d-sm-block">
+                    <div class="hero-banner__img">
+                    <img class="img-fluid" src="../../public/images/hero-banner.png" alt="">
+                    </div>
+                </div>
+                <div class="col-sm-7 col-lg-6 offset-lg-1 pl-4 pl-md-5 pl-lg-0">
+                    <div class="hero-banner__content">
+                    <h4>Shop is fun</h4>
+                    <h1>Browse Our Premium Product</h1>
+                    <p>Us which over of signs divide dominion deep fill bring they're meat beho upon own earth without morning over third. Their male dry. They are great appear whose land fly grass.</p>
+                    <a class="button button-hero" href="#">Browse Now</a>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- <div style="height:530px; background-color: rgb(255,212,85);">
             <img src="../../public/images/avataaars.svg" alt="" style="width: 15rem; margin: 5rem 0 1rem 0;"><br>
             <h1 style="margin: 2rem 0 1rem 0; color:red; display: inline-block;">중</h1>
             <h1 style="margin: 2rem 0.7rem 1rem 0; display: inline-block;">고마켓에서 </h1>
@@ -11,7 +32,7 @@
             <v-text-field id="search-box" type="search" class="clearfix searchform" placeholder="상품명을 검색해보세요!"
                           v-model="searchKeyword" @keyup.enter="search" style="width: 40%; margin: auto;">
             </v-text-field>
-        </div>
+        </div> -->
 
         <v-card color="basil">
             <v-card-title class="text-center justify-center py-6">
