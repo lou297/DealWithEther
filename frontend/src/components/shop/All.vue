@@ -1,15 +1,5 @@
 <template>
     <div>
-        <!-- <h-nav></h-nav> -->
-        <!-- <div style="height:530px; background-color: rgb(253,248,244);">
-            <div style="float:left; font-size:40px; ">
-             <div style="margin: 13rem 0 1rem 11rem; float:left;">한번의 터치로 쉽고 간편하게</div><br>
-             <div style="margin: 13rem 0 1rem 15rem; ">로켓배송 가능한 중코마켓</div><br>
-            </div>
-            <img src="../../../public/images/hero-img.svg" alt="" style="width: 30rem; float:right; margin: 6rem 5rem 1rem 0rem;"><br>
-
-        </div> -->
-
         <section class="blog-banner-area" id="category">
             <div class="container h-100">
                 <div class="blog-banner">
@@ -45,7 +35,7 @@
             <div style="clear:both;"></div>
             <v-tabs v-model="tab" background-color="transparent" color="basil" grow>
                 <v-flex xl1 lg1 md1 sm0 xs0><span></span></v-flex>
-                <v-tab v-for="item in categories" :key="item" class="font-weight-bold" @click="categoryNow = item; setPage(1); search();" style="font-family: 'Jua', sans-serif; font-size:18px;">{{ item }}</v-tab>
+                <v-tab v-for="item in categories" :key="item" class="font-weight-bold" @click="categoryNow = item;" style="font-family: 'Jua', sans-serif; font-size:18px;">{{ item }}</v-tab>
                 <v-flex xl1 lg1 md1 sm0 xs0><span></span></v-flex>
             </v-tabs>
             <v-container>
