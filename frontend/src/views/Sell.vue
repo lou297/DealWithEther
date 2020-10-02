@@ -114,7 +114,7 @@
                 required
               ></v-text-field>
               <v-btn color="success" class="mr-4" @click="save">취소</v-btn>
-              <v-btn color="error" class="mr-4" @click="save">등록</v-btn>
+              <v-btn color="error" class="mr-4" @click="save">등록</v-btn><br><br>
             </v-form>
           </v-flex>
         </v-layout>
