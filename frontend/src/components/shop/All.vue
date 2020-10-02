@@ -21,39 +21,33 @@
             </div>
         </section>
 
-
-
         <v-card color="white">
-            <v-card-title class="text-center justify-center py-6">
-                <h1 class="font-weight-bold text-secondary">카테고리별 상품목록</h1>
-            </v-card-title>
+             <v-layout row wrap justify-center style="padding:25px 0px 0 0;">
+                        <v-col cols="1" style="padding:0px;">
+                            <v-select :items="types" label="제목" item-text="name" item-value="value" solo style="margin-left:5px" @change="changeSearchBy; setPage(1); search()"></v-select>
+                        </v-col>
+                        <v-col cols="6" style="padding:0px;">
+                            <v-text-field
+                                id="search"
+                                name="search"
+                                type="text"
+                                color="black"
+                                label="검색어를 입력하세요"
+                                v-model="searchKeyword"
+                                @keyup.enter="setPage(1); search"
+                                style="margin-left:5px"
+                                solo
+                                clearable
+                                single-line
+                            ></v-text-field>
+                        </v-col>
+            </v-layout>
+            <div style="clear:both;"></div>
             <v-tabs v-model="tab" background-color="transparent" color="basil" grow>
                 <v-flex xl1 lg1 md1 sm0 xs0><span></span></v-flex>
                 <v-tab v-for="item in categories" :key="item" class="font-weight-bold" @click="categoryNow = item; setPage(1); search();" style="font-family: 'Jua', sans-serif; font-size:18px;">{{ item }}</v-tab>
                 <v-flex xl1 lg1 md1 sm0 xs0><span></span></v-flex>
             </v-tabs>
-            <v-container>
-                <v-layout row wrap justify-center>
-                    <v-flex xs3 sm3 md3 lg3 xl3>
-                        <v-select :items="types" label="제목" item-text="name" item-value="value" solo style="margin-left:5px" @change="changeSearchBy; setPage(1); search()"></v-select>
-                    </v-flex>
-                    <v-flex xs8 sm8 md8 lg8 xl8>
-                        <v-text-field
-                            id="search"
-                            name="search"
-                            type="text"
-                            color="black"
-                            placeholder="검색어를 입력하세요"
-                            v-model="searchKeyword"
-                            @keyup.enter="setPage(1); search"
-                            style="margin-left:5px"
-                            solo
-                            clearable
-                            single-line
-                        ></v-text-field>
-                    </v-flex>
-                </v-layout>
-            </v-container>
             <v-container>
                 <v-row>
                     <v-flex xs12 sm6 md4 lg3 xl3
@@ -75,7 +69,7 @@
                     :page="page"
                     :total-visible="totalVisible"
                     @input="setPage; search()"
-                ></v-pagination>
+                ></v-pagination><br>
             </div>
         </v-card>
     </div>

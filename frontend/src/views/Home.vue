@@ -10,13 +10,13 @@
                     </div>
                 </div>
                 <div class="col-sm-7 col-lg-6 offset-lg-1 pl-4 pl-md-5 pl-lg-0">
-                    <div class="hero-banner__content" style="margin-top:30px; margin-left:50px;">
+                    <div class="hero-banner__content" style="margin-top:38px; margin-left:50px;">
                     <h4>중코마켓</h4>
                     <h1 style="margin:0px;">중고마켓에서</h1>
                     <h1>코인으로 거래하자</h1>
-                    <p>1이더 = 400,000원 상당</p>
-                    <p>1이더 = 100,000 CASH</p>
-                    <p>이더로 코인을 충전하여 거래하세요</p>
+                    <p style="margin-bottom:8px;">1이더 = 400,000원 상당</p>
+                    <p style="margin-bottom:8px;">1이더 = 100,000 CASH</p>
+                    <p style="margin-bottom:8px;">이더로 코인을 충전하여 거래하세요</p>
                     </div>
                 </div>
                 </div>
