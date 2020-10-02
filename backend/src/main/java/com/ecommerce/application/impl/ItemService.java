@@ -112,7 +112,7 @@ public class ItemService implements IItemService {
 
 	@Override
 	public List<Item> getByUser(String category, String name, int page) {
-		User user = userRepository.getUserId(name);
+		List<User> user = userRepository.getUserId(name);
 		return this.itemRepository.getByUserName(category, user.getId(), page);
 	}
 

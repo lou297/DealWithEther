@@ -1,13 +1,40 @@
 <template>
     <div>
         <!-- <h-nav></h-nav> -->
-        <div style="height:530px; background-color: rgb(255,212,85);">
-            <img src="../../../public/images/avataaars.svg" alt="" style="width: 15rem; margin: 5rem 0 1rem 0;"><br>
-            <h1 style="margin: 2rem 0 1rem 0; color:red; display: inline-block;">상</h1>
-            <h1 style="margin: 2rem 0.7rem 1rem 0; display: inline-block;">품목록</h1>
+        <!-- <div style="height:530px; background-color: rgb(253,248,244);">
+            <div style="float:left; font-size:40px; ">
+             <div style="margin: 13rem 0 1rem 11rem; float:left;">한번의 터치로 쉽고 간편하게</div><br>
+             <div style="margin: 13rem 0 1rem 15rem; ">로켓배송 가능한 중코마켓</div><br>
+            </div>
+            <img src="../../../public/images/hero-img.svg" alt="" style="width: 30rem; float:right; margin: 6rem 5rem 1rem 0rem;"><br>
 
+        </div> -->
+
+        <section class="hero-banner">
+      <div class="container">
+        <div class="row no-gutters align-items-center pt-60px">
+          <div class="col-5 d-none d-sm-block">
+            <div class="hero-banner__img">
+              <img class="img-fluid" src="../../../public/images/hero-banner.png" alt="">
+            </div>
+          </div>
+          <div class="col-sm-7 col-lg-6 offset-lg-1 pl-4 pl-md-5 pl-lg-0">
+            <div class="hero-banner__content">
+              <h4>Shop is fun</h4>
+              <h1>Browse Our Premium Product</h1>
+              <p>Us which over of signs divide dominion deep fill bring they're meat beho upon own earth without morning over third. Their male dry. They are great appear whose land fly grass.</p>
+              <a class="button button-hero" href="#">Browse Now</a>
+            </div>
+          </div>
         </div>
+      </div>
+    </section>
+
+
         <v-card color="basil">
+            <v-card-title class="text-center justify-center py-6">
+                <h1 class="font-weight-bold text-secondary">카테고리별 상품목록</h1>
+            </v-card-title>
             <v-tabs v-model="tab" background-color="transparent" color="basil" grow>
                 <v-flex xl1 lg1 md1 sm0 xs0><span></span></v-flex>
                 <v-tab class="font-weight-bold" @click="getAllList(); setSearchBy(0);" style="font-family: 'Jua', sans-serif; font-size:18px;">전체 보기</v-tab>
@@ -82,9 +109,9 @@ export default {
             items: [],
             newItem: {
                 id: 999,
-                name: "dummy",
+                name : "dummy",
                 price: "1",
-                registeredAt: "2020-09-29"
+                registeredAt : "2020-09-29"
             },
             categories: ['패션/잡화',
                 '뷰티/미용',
@@ -136,7 +163,8 @@ export default {
             else if (this.searchBy === 1) {
                 alert(this.categoryNow);
                 this.getByCategory(this.categoryNow);
-            } else if (this.searchBy === 2) this.getByName(this.categoryNow, this.searchKeyword);
+            }
+            else if (this.searchBy === 2) this.getByName(this.categoryNow, this.searchKeyword);
             else if (this.searchBy === 3) this.getBySeller(this.categoryNow, this.searchKeyword);
         },
         onClickItem(itemId) {
@@ -145,7 +173,7 @@ export default {
         getAllList() {
             const vm = this;
             findAll(this.page, function (response) {
-                    console.log(response.data)
+                console.log(response.data)
                     if (response.data.length > 0) {
                         vm.items = response.data;
                         vm.items.forEach(i => {
@@ -230,6 +258,7 @@ export default {
                 });
         },
         getByOnlyName(name) {
+            console.log('이름으로만 검색하기')
             const vm = this;
             findByOnlyName(name, this.page, function (response) {
                     if (response.data.length > 0) {
@@ -291,11 +320,11 @@ export default {
         }
     },
     mounted: function () {
-        if (this.route != 1) this.getAllList(); // 상점 눌러서 들어왔을 때
+        if(this.route != 1) this.getAllList(); // 상점 눌러서 들어왔을 때
     },
     created() {
         this.searchKeyword = this.$route.params.searchKeyword;
-        if (this.searchKeyword.length != 0) {
+        if(this.searchKeyword.length != 0) {
             this.searchBy = 2; // 제목으로 검색
             this.search();
             this.route = 1;
@@ -311,8 +340,9 @@ ul {
     display: flex;
     list-style: none;
 }
-
 .itemCard {
-    padding: 12px;
+    padding : 12px;
 }
+
+.hero-banner{background:#F1F6F7;position:relative;margin-bottom:10px}@media (min-width: 991px){.hero-banner{z-index:111}}.hero-banner::before{content:"";display:block;width:5%;height:100%;background:#384aeb;position:absolute;top:0;left:0}@media (min-width: 575px){.hero-banner::before{width:20%}}@media (min-width: 991px){.hero-banner::before{width:35%}}.hero-banner__img{position:relative;top:1px}@media (max-width: 575px){.hero-banner__content{padding-bottom:50px}}@media (min-width: 1000px){.hero-banner__content{max-width:495px}}.hero-banner__content h4{font-size:30px;font-family:"Roboto",sans-serif;color:#555555;margin-bottom:12px}.hero-banner__content h1{font-family:"Roboto",sans-serif;font-size:25px;text-transform:uppercase;font-weight:700;margin-bottom:10px}@media (min-width: 767px){.hero-banner__content h1{font-size:30px;margin-bottom:25px}}@media (min-width: 991px){.hero-banner__content h1{font-size:50px}}.hero-banner__content p{margin-bottom:10px}@media (min-width: 767px){.hero-banner__content p{margin-bottom:40px}}
 </style>
