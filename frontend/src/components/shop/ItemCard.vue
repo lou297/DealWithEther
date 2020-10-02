@@ -2,7 +2,7 @@
     <v-hover v-slot:default="{ hover }">
         <v-card
             class="item-card mx-auto"
-            max-width="250"
+            max-width="200"
             max-height="400"
             :elevation="hover ? 16 : 2"
             @click.prevent="$emit('clicked')" href=""
@@ -10,13 +10,14 @@
             <v-img class="white--text align-end" height="250" :src="imgPath">
                 
             </v-img>
-            <v-card-title style="font-size:18px; float:left;">{{ item.name }}</v-card-title>
-            <v-card-actions style="float:right;">
+            <v-card-title style="font-size:17px; float:left; padding:8px 8px 16px 8px; font-weight: bold;" id="font">{{ item.name }}</v-card-title>
+            <v-card-actions style="float:right; padding: 2px 0 0 0px;">
                 <v-btn
                     color="red accent-4"
                     icon
                     v-if="checkLiked()"
                     @click.stop="changeLiked()"
+                    style="padding: 0px;"
                 >
                     <v-icon middle color="red accent-4" icon>mdi-heart</v-icon>
                 </v-btn>
@@ -24,10 +25,11 @@
                     <v-icon middle color="red accent-4">mdi-heart-outline</v-icon>
                 </v-btn>
             </v-card-actions>
-            <v-card-actions style="clear:both;"></v-card-actions>
-            <v-card-actions style="padding:16px 0 0 16px; color:black; float:left; font-weight:bold; font-size:15px;">{{ item.price }} CASH</v-card-actions>
-            <v-card-actions style="padding:16px 16px 0 0; color:black; float:right; font-size:14px;">{{ item.registeredAt }}</v-card-actions>
-            <v-card-actions style="clear:both;"></v-card-actions>
+            <v-card-actions style="clear:both; padding:0px;"></v-card-actions>
+            <v-card-actions style="color:black; float:left; font-size:16px;" id="font">{{ item.price }} CASH</v-card-actions>
+            <!-- <v-card-actions style="color:black; font-size:13px; float:right;">{{ item.registeredAt }}</v-card-actions> -->
+            <v-card-actions style="color:black; font-size:13px; float:right;" id="font">2시간 전</v-card-actions>
+            <v-card-actions style="clear:both; padding:0px;"></v-card-actions>
         </v-card>
     </v-hover>
 </template>
@@ -113,6 +115,11 @@ export default {
 </script>
 
 <style>
+
+#font {
+  font-family: Helvetica, Arial, sans-serif;
+}
+
 .item-card img {
     height: 180px;
     width: 180px;

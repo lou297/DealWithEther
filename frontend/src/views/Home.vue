@@ -26,14 +26,15 @@
             <v-tabs-items v-model="tab">
                 <v-tab-item v-for="item in items" :key="item">
                     <v-card color="basil" flat>
-                        <v-card-text>
-                            <div class="row">
-                                <v-flex xl1 lg1 md1 sm0 xs0><span></span></v-flex>
-                                <v-flex xs12 sm6 md5 lg2 xl2 class="col-md-3 artwork" v-for="item in itemlist" v-bind:key="item.id">
-                                    <item-card :item="item" @clicked="onClickItem(item.id)"></item-card>
-                                </v-flex>
-                                <v-flex xl1 lg1 md1 sm0 xs0><span></span></v-flex>
-                            </div>
+                        <v-card-text style="padding:16px 110px 16px 110px;">
+                                <v-row>
+                                    <v-flex xs12 sm4 md3 lg2 xl6
+                                            class="col-md-2 artwork"
+                                            v-for="item in itemlist"
+                                            v-bind:key="item.id">
+                                        <item-card :item="item" @clicked="onClickItem(item.id)"></item-card>
+                                    </v-flex>
+                                </v-row>
                         </v-card-text>
                     </v-card>
                 </v-tab-item>
@@ -41,6 +42,7 @@
         </v-card>
     </div>
 </template>
+
 
 <script>
 import HNav from "../components/common/HNav";
@@ -133,7 +135,6 @@ export default {
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
-
 
 .searchform label,
 .searchform input {

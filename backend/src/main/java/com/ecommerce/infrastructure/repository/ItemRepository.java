@@ -112,7 +112,7 @@ public class ItemRepository implements IItemRepository {
 	@Override
 	public List<Item> getByMainCategory(final String category) { // 조회수 순으로 5개 보여주기
 		StringBuilder sbSql = new StringBuilder(
-				"SELECT * FROM items WHERE category like ? order by view_count desc limit 5");
+				"SELECT * FROM items WHERE category like ? order by view_count desc limit 6");
 		String tempCategory = "%" + category + "%";
 		try {
 			return this.jdbcTemplate.query(sbSql.toString(), new Object[] { tempCategory },
