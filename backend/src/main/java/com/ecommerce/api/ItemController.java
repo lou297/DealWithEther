@@ -357,7 +357,6 @@ public class ItemController {
             System.out.println(kind);
         } else if (kind == 1) {
             items = itemService.getByNameContainingAndCategoryContaining(page, "", category);
-
             System.out.println(kind);
         } else if (kind == 2) {
             items = itemService.getBySeller(page, "");
