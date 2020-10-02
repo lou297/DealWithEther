@@ -51,14 +51,16 @@ public class UserRepository implements IUserRepository {
     }
 
     @Override
-    public User getUserId(final String name) {
+    public List<User> getUserId(final String name) {
         StringBuilder sbSql = new StringBuilder("SELECT * FROM users WHERE name=?");
         try {
-            return this.jdbcTemplate.queryForObject(sbSql.toString(), new Object[] { name },
+            return this.jdbcTemplate.query(sbSql.toString(), new Object[] { name },
                     (rs, rowNum) -> UserFactory.create(rs));
         } catch (EmptyResultDataAccessException e) {
             return null;
         } catch (Exception e) {
+            System.out.println(e);
+            System.out.println(e.getMessage());
             throw new RepositoryException(e, e.getMessage());
         }
     }
