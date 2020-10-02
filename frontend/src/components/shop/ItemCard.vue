@@ -43,7 +43,6 @@ export default {
     props: ['item'],
     computed: {
         imgPath() {
-            console.log(process.env.VUE_APP_BACKEND)
             return process.env.VUE_APP_BACKEND + 'api/items/images/' + this.item.id + "_1";
             // return "https://picsum.photos/id/11/100/60";
         }
@@ -63,10 +62,11 @@ export default {
     methods: {
         getLikedList() {
             const vm = this;
+            vm.isLiked = false
             findLikedList(this.$store.state.user.id, function (response) {
                     vm.userLiked = response
                     if (response.data.length > 0) {
-                        if(response.data.includes(vm.item.id)) {
+                        if(response.data.includes(vm.item.id*1)) {
                             vm.isLiked = true;
                         }
                     }
@@ -86,7 +86,8 @@ export default {
         },
         changeLiked() {
             const vm = this;
-            if (this.userLiked.data.includes(this.item.id)) {
+            // if (this.userLiked.data.includes(this.item.id)) {
+            if(this.isLiked) {
                 deleteBookMark(this.$store.state.user.id, this.item.id, function (response) {
                         vm.getLikedList()
                     },
@@ -99,7 +100,6 @@ export default {
                     userId: vm.$store.state.user.id,
                     itemId: vm.item.id
                 };
-                console.log(body);
                 bookMarkSave(body, function (response) {
                         vm.getLikedList()
                     },

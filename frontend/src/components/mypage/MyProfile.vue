@@ -357,8 +357,6 @@ export default {
             )
         },
         imgPath(flag) {
-            console.log(process.env.VUE_APP_BACKEND);
-            console.log(this.user.id);
             return flag ? process.env.VUE_APP_BACKEND + 'api/users/downloadFile/' + this.user.id : "https://picsum.photos/500/300?random";
         },
         reload(){
