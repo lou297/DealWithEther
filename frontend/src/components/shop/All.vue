@@ -24,7 +24,7 @@
                                 color="black"
                                 label="검색어를 입력하세요"
                                 v-model="searchKeyword"
-                                @keyup.enter="setPage(1); search"
+                                @keyup.enter="setPage(1); search();"
                                 style="margin-left:5px"
                                 solo
                                 clearable
@@ -35,7 +35,7 @@
             <div style="clear:both;"></div>
             <v-tabs v-model="tab" background-color="transparent" color="basil" grow>
                 <v-flex xl1 lg1 md1 sm0 xs0><span></span></v-flex>
-                <v-tab v-for="item in categories" :key="item" class="font-weight-bold" @click="categoryNow = item; search;" style="font-family: 'Jua', sans-serif; font-size:18px;">{{ item }}</v-tab>
+                <v-tab v-for="item in categories" :key="item" class="font-weight-bold" @click="categoryNow = item; setPage(1); search();" style="font-family: 'Jua', sans-serif; font-size:18px;">{{ item }}</v-tab>
                 <v-flex xl1 lg1 md1 sm0 xs0><span></span></v-flex>
             </v-tabs>
             <v-container>
@@ -121,13 +121,10 @@ export default {
         changeSearchBy(searchBy) {
             this.searchBy = searchBy;
             console.log(this.searchBy);
-            this.setPage(1);
-            this.search();
         },
         setPage(page) {
             this.page = page;
             console.log(this.page + " : " + this.searchBy);
-            this.search();
         },
         setSearchBy(searchBy) {
             this.searchBy = searchBy;
