@@ -29,7 +29,7 @@
                           :elevation="hover ? 16 : 2"
                         >
                           <v-img
-                            src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2F20150805_174%2Feco33j_14387587048977dTo3_PNG%2F20150805_161129.png&type=sc960_832"
+                            src="https://t1.daumcdn.net/cfile/tistory/260D7C4651FA0F400D?download"
                             aspect-ratio="1"
                             class="grey lighten-2"
                             @click="onImageClick"
@@ -113,8 +113,8 @@
                 label="장소"
                 required
               ></v-text-field>
-              <v-btn color="success" class="mr-4" @click="save">취소</v-btn>
-              <v-btn color="error" class="mr-4" @click="save">등록</v-btn>
+              <v-btn color="error" class="mr-4" @click="save">취소</v-btn>
+              <v-btn color="success" class="mr-4" @click="save">등록</v-btn>
             </v-form>
           </v-flex>
         </v-layout>
