@@ -2,40 +2,40 @@ package com.ecommerce.application.impl;
 
 import com.ecommerce.application.IItemService;
 import com.ecommerce.domain.Item;
+import com.ecommerce.domain.ItemJpa;
 import com.ecommerce.domain.User;
 import com.ecommerce.domain.exception.ApplicationException;
 import com.ecommerce.domain.repository.IItemRepository;
+import com.ecommerce.domain.repository.IItemRepository2;
 import com.ecommerce.domain.repository.IUserRepository;
 import com.ecommerce.domain.wrapper.EscrowFactory;
-import com.ecommerce.infrastructure.repository.UserRepository;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileCopyUtils;
-import org.web3j.crypto.CipherException;
 import org.web3j.crypto.Credentials;
 import org.web3j.crypto.WalletUtils;
 import org.web3j.protocol.Web3j;
 import org.web3j.protocol.core.methods.response.TransactionReceipt;
 import org.web3j.protocol.http.HttpService;
-import org.web3j.tuples.generated.Tuple6;
 import org.web3j.tx.gas.ContractGasProvider;
 import org.web3j.tx.gas.DefaultGasProvider;
 
-import java.io.IOException;
+import javax.transaction.Transactional;
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
+@Transactional
 public class ItemService implements IItemService {
 	public static final Logger logger = LoggerFactory.getLogger(ItemService.class);
 	@Value("${eth.erc20.contract}")
@@ -66,6 +66,9 @@ public class ItemService implements IItemService {
 
 	@Autowired
 	private IUserRepository userRepository;
+
+	@Autowired
+	IItemRepository2 itemRepository2;
 
 	@Autowired
 	private Web3j web3j;
@@ -112,7 +115,7 @@ public class ItemService implements IItemService {
 
 	@Override
 	public List<Item> getByUser(String category, String name, int page) {
-		List<User> user = userRepository.getUserId(name);
+		User user = userRepository.getUserId(name);
 		return this.itemRepository.getByUserName(category, user.getId(), page);
 	}
 
@@ -236,6 +239,8 @@ public class ItemService implements IItemService {
 		return this.itemRepository.getLengthByName(category, name);
 	}
 
+
+
 	@Override
 	public String deploy() throws Exception {
 		ClassPathResource resource = new ClassPathResource(WALLET_RESOURCE);
@@ -261,6 +266,34 @@ public class ItemService implements IItemService {
 	public int changeProgressFalse(long id) {
 		// TODO Auto-generated method stub
 		return this.itemRepository.changeProgressFalse(id);
+	}
+
+	///////////////////////////////////////////// jpa 구간 //////////////////////////////////////////////
+
+
+
+	@Override
+	public Page<ItemJpa> getByNameContaining(int page, String name) {
+		return this.itemRepository2.getByNameContaining(PageRequest.of(page, 12, Sort.Direction.DESC, "id"), name);
+	}
+
+	@Override
+	public Page<ItemJpa> getBySeller(int page, String seller) {
+		User user = userRepository.getUserId(seller);
+		System.out.println(user);
+		return this.itemRepository2.getBySeller(PageRequest.of(page, 12, Sort.Direction.DESC,"id"), user.getId());
+	}
+
+	@Override
+	public Page<ItemJpa> getByNameContainingAndCategoryContaining(int page, String name, String category) {
+		return this.itemRepository2.getByNameContainingAndCategoryContaining(PageRequest.of(page, 12, Sort.Direction.DESC,"id"), name, category);
+	}
+
+	@Override
+	public Page<ItemJpa> getBySellerAndCategoryContaining(int page, String seller, String category) {
+		User user = userRepository.getUserId(seller);
+		System.out.println(user);
+		return this.itemRepository2.getBySellerAndCategoryContaining(PageRequest.of(page, 12, Sort.Direction.DESC,"id"), user.getId(), category);
 	}
 
 }

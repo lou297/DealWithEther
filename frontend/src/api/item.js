@@ -44,6 +44,14 @@ function findLengthByUsername(category, userName, page, success, fail) {
         .catch(fail);
 }
 
+function findLength(success, fail) {
+    instance
+        .get("/api/itemsLength")
+        .then(success)
+        .catch(fail);
+}
+
+
 function findByName(category, name, page, success, fail) {
     instance
         .get("/api/items/name/"+ category + "/" + name + "/" + page)
@@ -59,6 +67,13 @@ function findLengthByName(category, name, page, success, fail) {
 }
 
 function findByOnlyName(name, page, success, fail) {
+    instance
+        .get("/api/items/name/"+ name + "/" + page)
+        .then(success)
+        .catch(fail);
+}
+
+function findLengthByOnlyName(name, page, success, fail) {
     instance
         .get("/api/items/name/"+ name + "/" + page)
         .then(success)
@@ -169,6 +184,21 @@ function addLike(userId, itemId, success, fail) {
         .catch(err => fail(err));
 }
 
+function getList(page, category, keyword, kind, success, fail) {
+    instance
+        .get("api/items/page/" + page + "/category/" + category + "/keyword/" + keyword + /kind/ + kind)
+        .then(res => success(res))
+        .catch(err => fail(err));
+}
+
+function getListNoKeyword(page, category, kind, success, fail) {
+    instance
+        .get("api/items/page/" + page + "/category/" + category + /kind/ + kind)
+        .then(res => success(res))
+        .catch(err => fail(err));
+}
+
+
 export {
     findAll,
     findByCategory,
@@ -190,5 +220,9 @@ export {
     findLikedList,
     findByOnlyName,
     findLengthByUsername,
-    findLengthByName
+    findLengthByName,
+    findLengthByOnlyName,
+    findLength,
+    getList,
+    getListNoKeyword
 };
