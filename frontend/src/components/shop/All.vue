@@ -24,7 +24,7 @@
                                 color="black"
                                 label="검색어를 입력하세요"
                                 v-model="searchKeyword"
-                                @keyup.enter="setPage(1); search"
+                                @keyup.enter="setPage(1); search();"
                                 style="margin-left:5px"
                                 solo
                                 clearable
@@ -35,7 +35,7 @@
             <div style="clear:both;"></div>
             <v-tabs v-model="tab" background-color="transparent" color="basil" grow>
                 <v-flex xl1 lg1 md1 sm0 xs0><span></span></v-flex>
-                <v-tab v-for="item in categories" :key="item" class="font-weight-bold" @click="categoryNow = item;" style="font-family: 'Jua', sans-serif; font-size:18px;">{{ item }}</v-tab>
+                <v-tab v-for="item in categories" :key="item" class="font-weight-bold" @click="categoryNow = item; setPage(1); search();" style="font-family: 'Jua', sans-serif; font-size:18px;">{{ item }}</v-tab>
                 <v-flex xl1 lg1 md1 sm0 xs0><span></span></v-flex>
             </v-tabs>
             <v-container>
@@ -120,11 +120,11 @@ export default {
     methods: {
         changeSearchBy(searchBy) {
             this.searchBy = searchBy;
+            console.log(this.searchBy);
         },
         setPage(page) {
             this.page = page;
             console.log(this.page + " : " + this.searchBy);
-            this.search();
         },
         setSearchBy(searchBy) {
             this.searchBy = searchBy;
@@ -137,17 +137,18 @@ export default {
             console.log(this.searchKeyword);
         },
         search() {
-            console.log("searchby : " + this.searchBy);
-            console.log("keyword : " + this.searchKeyword);
-            console.log("category : " + this.categoryNow);
-
             let temp = 0;
 
             if (this.categoryNow === "전체보기") temp = 0;
             else temp = 1;
 
+            console.log("searchby : " + this.searchBy);
+            console.log("keyword : " + this.searchKeyword);
+            console.log("category : " + this.categoryNow);
+            console.log("temp : " + temp);
+
             console.log(temp)
-            if (!this.searchKeyword) {
+            if (!this.searchKeyword || this.searchKeyword === "") {
                 if (this.searchBy === 1 && temp === 0) this.getListNoKeyword(0);
                 else if (this.searchBy === 1 && temp === 1) this.getListNoKeyword(1);
                 else if (this.searchBy === 2 && temp === 0) this.getListNoKeyword(2);

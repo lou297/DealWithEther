@@ -348,7 +348,7 @@ public class ItemController {
     @ApiOperation(value = "Select page list") // page에 대한거 db에서 쿼리로 넘기기
     @RequestMapping(value = "/items/page/{page}/category/{category}/kind/{kind}", method = RequestMethod.GET)
     public Page<ItemJpa> getPageNoKeyword(@PathVariable int page, @PathVariable String category, @PathVariable int kind) {
-        System.out.println("jpa로 검색하자");
+        System.out.println("jpa로 검색하자 아무것도없는거 검색하자");
         System.out.println(category);
 
         Page<ItemJpa> items = null;
