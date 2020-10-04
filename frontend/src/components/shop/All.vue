@@ -4,7 +4,7 @@
             <div class="container h-100">
                 <div class="blog-banner">
                     <div class="text-center">
-                        <h1 style="font-size:35px;">Shop Category</h1>
+                        <h1 style="font-size:35px;">중코 상점</h1>
                         <nav aria-label="breadcrumb" class="banner-breadcrumb"></nav>
                     </div>
                 </div>

@@ -27,6 +27,7 @@ contract EscrowFactory is Ownable {
     address public ratingRecordContractAddress;
     /////////////////////////////////////////////////////////
 
+<<<<<<< HEAD
     mapping(uint32 => Item) public items;
     Escrow[] public escrows;
     mapping(uint256 => Escrow) public purchaseIdToEscrow;
@@ -36,6 +37,14 @@ contract EscrowFactory is Ownable {
         address _purchaseRecordAddress,
         address _ratingRecordContractAddress
     ) public {
+=======
+
+    mapping (uint32 => Item) public items;
+    Escrow[] public escrows;
+    mapping (uint256 => Escrow) public purchaseIdToEscrow;
+    
+    constructor(address _cashContractAddress, address _purchaseRecordAddress, address _ratingRecordContractAddress) public {
+>>>>>>> dd849a29fecab387825edbe1e2d8fee7aa4c4d32
         admin = msg.sender;
         cashContractAddress = _cashContractAddress;
         purchaseRecordContractAddress = _purchaseRecordAddress;
@@ -54,6 +63,7 @@ contract EscrowFactory is Ownable {
     function setRatingRecordContract(address _address) public onlyOwner {
         ratingRecordContractAddress = _address;
     }
+<<<<<<< HEAD
 
     /////////////////////////////////////////////////////////
 
@@ -66,6 +76,12 @@ contract EscrowFactory is Ownable {
             uint256
         )
     {
+=======
+    /////////////////////////////////////////////////////////
+
+
+    function registerItem(uint32 itemId, uint32 price) public returns(uint32, uint32, address, uint256){
+>>>>>>> dd849a29fecab387825edbe1e2d8fee7aa4c4d32
         Item memory item = Item(itemId, price, msg.sender, now, 0, true);
         items[itemId] = item;
         return (item.itemId, item.price, item.seller, item.registeredAt);
@@ -75,6 +91,7 @@ contract EscrowFactory is Ownable {
         Item memory item = items[itemId];
         require(item.seller != msg.sender, "Check buyer address");
         require(item.available == true, "Item not available");
+<<<<<<< HEAD
 
         Escrow escrow = new Escrow(
             cashContractAddress,
@@ -85,6 +102,10 @@ contract EscrowFactory is Ownable {
             msg.sender,
             item.price
         );
+=======
+        
+        Escrow escrow = new Escrow(cashContractAddress, purchaseRecordContractAddress, ratingRecordContractAddress, itemId, item.seller, msg.sender, item.price);
+>>>>>>> dd849a29fecab387825edbe1e2d8fee7aa4c4d32
         uint256 purchaseId = escrows.push(escrow) - 1;
         purchaseIdToEscrow[purchaseId] = escrow;
 
@@ -157,7 +178,6 @@ contract Escrow {
     ////////////////////추가 기능 - 평가//////////////////////
     RatingRecordInterface public ratingRecordContract;
     /////////////////////////////////////////////////////////
-
     uint32 public itemId;
     address public seller;
     address public buyer;
@@ -250,9 +270,13 @@ contract Escrow {
         purchaseRecordContract.confirmPurchase(address(this));
         return true;
     }
-
-    function evaluate(uint256 score) public onlyBuyer {
+    
+    function evaluate(uint score) public onlyBuyer {
+        require(rating == 0);
+        require(state == State.Complete);
+        require(score >= 0 && score <= 5);
         rating = score;
         ratingRecordContract.addRating(buyer, address(this), score);
     }
+
 }

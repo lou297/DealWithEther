@@ -8,7 +8,6 @@ import com.ecommerce.domain.Purchase;
 import com.ecommerce.domain.PurchaseState;
 import com.ecommerce.domain.exception.ApplicationException;
 import com.ecommerce.domain.wrapper.Escrow;
-import com.ecommerce.domain.wrapper.EscrowContract;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
