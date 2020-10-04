@@ -298,17 +298,9 @@ export default {
     },
 
     Chatting(){
-      var vm = this;
-      findUserById(this.userId, function(res) {
-          const result = res.data;
-          console.log('유저내용');
-          console.log(result);
-          vm.userName = result.name;
-      });
-      alert(vm.userName);
-      var win = window.open("../../chat", "PopupWin", "width=400,height=600");
-
-      //this.$router.push("../../chat");
+      var name = this.userName;
+      var id = this.item.id;
+      var win = window.open("../../chat/"+name +"/"+id, "PopupWin", "width=400,height=600");
     },
 
     purchase() {
@@ -437,6 +429,12 @@ export default {
   },
   created() {
     this.item.id = this.$route.params.id;
+    var vm = this;
+    findUserById(this.userId, function(res) {
+          const result = res.data;
+          console.log(result.name);
+          vm.userName = result.name;
+    });
   },
   mounted: function() {
     const vm = this;
