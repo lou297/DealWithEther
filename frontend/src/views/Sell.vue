@@ -6,7 +6,7 @@
             <div class="container h-100">
                 <div class="blog-banner">
                     <div class="text-center">
-                        <h1 style="font-size:35px;">Sell Item</h1>
+                        <h1 style="font-size:35px;">상품 판매</h1>
                         <nav aria-label="breadcrumb" class="banner-breadcrumb"></nav>
                     </div>
                 </div>
