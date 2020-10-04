@@ -9,7 +9,7 @@
             <v-toolbar-title v-if="windowSize.x > 1000">
                 <router-link id="link-to-shop" style="font-size:18px; color:black; font-weight:bold;" to="/shop">상점</router-link>
                 <router-link id="link-to-sell" style="font-size:18px; color:black; font-weight:bold;" to="/sell">판매하기</router-link>
-                <router-link id="link-to-mypage" style="font-size:18px; color:black;" to="/mypage/wallet_create" v-if="!$store.state.user.walletAddress">마이페이지</router-link>
+                <router-link id="link-to-mypage" style="font-size:18px; color:black; font-weight:bold;" to="/mypage/wallet_create" v-if="!$store.state.user.walletAddress">마이페이지</router-link>
                 <!-- <router-link id="link-to-myshop" to="/mypage/wallet_info" v-if="$store.state.user.walletAddress">내상점</router-link> -->
                 <router-link id="link-to-myshop" style="font-size:18px; color:black; font-weight:bold;" to="/mypage/profile" v-if="$store.state.user.walletAddress">프로필</router-link>
                 <router-link id="link-to-logout" style="font-size:18px; color:black; font-weight:bold;" to="/logout" v-if="$store.state.isSigned">로그아웃</router-link>
@@ -133,12 +133,14 @@ export default {
 }
 
 #title {
-    color: white;
+    color: black;
     margin-left: 60px;
 }
 
 #link-to-shop, #link-to-sell, #link-to-mypage, #link-to-myshop, #link-to-logout, #link-to-signup, #link-to-login {
-    color: white;
+    color: black;
+    font-weight: bold;
+    font-size:18px;
     margin: 0 10px;
 }
 
