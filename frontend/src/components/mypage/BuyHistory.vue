@@ -31,7 +31,7 @@
         </v-stepper-header>
       </v-stepper>
       <div id="btn-container">
-        <v-btn color="error" :disabled="state > 2" @click="cancel"
+        <v-btn color="error" :disabled="state > 2 || state == 0" @click="cancel"
           >구매취소</v-btn
         >
         <v-btn color="primary" :disabled="state != 3" @click="confirm"
@@ -107,7 +107,7 @@ export default {
           this.state = 4;
           break;
         case "X":
-          this.state = 5;
+          this.state = 0;
           break;
       }
     },
