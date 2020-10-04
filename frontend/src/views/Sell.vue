@@ -1,18 +1,18 @@
 <template>
   <div>
     <h-nav></h-nav>
-    <div style="height:530px; background-color: rgb(255,212,85);">
-      <img
-        src="../../public/images/avataaars.svg"
-        alt=""
-        style="width: 15rem; margin: 5rem 0 1rem 0;"
-      /><br />
-      <h1 style="margin: 2rem 0 1rem 0; color:red; display: inline-block;">
-        상
-      </h1>
-      <h1 style="margin: 2rem 0.7rem 1rem 0; display: inline-block;">품등록</h1>
-    </div>
-    <v-card color="basil">
+
+    <section class="blog-banner-area" id="category">
+            <div class="container h-100">
+                <div class="blog-banner">
+                    <div class="text-center">
+                        <h1 style="font-size:35px;">Sell Item</h1>
+                        <nav aria-label="breadcrumb" class="banner-breadcrumb"></nav>
+                    </div>
+                </div>
+            </div>
+      </section>
+    <v-card color="white">
       <v-container>
         <v-layout row>
           <v-flex xl5 lg5 md5 sm12 xs12>
@@ -29,7 +29,7 @@
                           :elevation="hover ? 16 : 2"
                         >
                           <v-img
-                            src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2F20150805_174%2Feco33j_14387587048977dTo3_PNG%2F20150805_161129.png&type=sc960_832"
+                            src="https://t1.daumcdn.net/cfile/tistory/260D7C4651FA0F400D?download"
                             aspect-ratio="1"
                             class="grey lighten-2"
                             @click="onImageClick"
@@ -113,8 +113,8 @@
                 label="장소"
                 required
               ></v-text-field>
-              <v-btn color="success" class="mr-4" @click="save">취소</v-btn>
-              <v-btn color="error" class="mr-4" @click="save">등록</v-btn>
+              <v-btn color="error" class="mr-4" @click="save">취소</v-btn>
+              <v-btn color="success" class="mr-4" @click="save">등록</v-btn><br><br>
             </v-form>
           </v-flex>
         </v-layout>

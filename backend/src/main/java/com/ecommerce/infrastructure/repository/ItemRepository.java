@@ -112,7 +112,7 @@ public class ItemRepository implements IItemRepository {
 	@Override
 	public List<Item> getByMainCategory(final String category) { // 조회수 순으로 5개 보여주기
 		StringBuilder sbSql = new StringBuilder(
-				"SELECT * FROM items WHERE category like ? order by view_count desc limit 6");
+				"SELECT * FROM items WHERE category like ? order by view_count desc limit 9");
 		String tempCategory = "%" + category + "%";
 		try {
 			return this.jdbcTemplate.query(sbSql.toString(), new Object[] { tempCategory },
@@ -255,6 +255,31 @@ public class ItemRepository implements IItemRepository {
 		try {
 			return this.jdbcTemplate.query(sbSql.toString(), new Object[] { tname, (page - 1) * 12 },
 					(rs, rowNum) -> ItemFactory.create(rs));
+		} catch (Exception e) {
+			throw new RepositoryException(e, e.getMessage());
+		}
+	}
+
+	@Override
+	public int getLengthByUser(String category, long id) {
+		StringBuilder sbSql = new StringBuilder(
+				"SELECT count(*) FROM items WHERE seller=? and category like ?");
+		String tcategory = "%" + category + "%";
+		try {
+			return this.jdbcTemplate.queryForObject(sbSql.toString(), new Object[] { id, tcategory },	int.class);
+		} catch (Exception e) {
+			throw new RepositoryException(e, e.getMessage());
+		}
+	}
+
+	@Override
+	public int getLengthByName(String category, String name) {
+		StringBuilder sbSql = new StringBuilder(
+				"SELECT count(*) FROM items WHERE name like ? and category like ?");
+		String tcategory = "%" + category + "%";
+		String tname = "%" + name + "%";
+		try {
+			return this.jdbcTemplate.queryForObject(sbSql.toString(), new Object[] { tname, tcategory },	int.class);
 		} catch (Exception e) {
 			throw new RepositoryException(e, e.getMessage());
 		}

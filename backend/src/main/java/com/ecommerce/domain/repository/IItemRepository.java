@@ -47,4 +47,8 @@ public interface IItemRepository {
 	int changeProgressFalse(long id);
 
 	List<Item> getByOnlyName(String name, int page);
+
+	int getLengthByUser(String category, long name);
+
+	int getLengthByName(String category, String name);
 }
