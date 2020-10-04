@@ -63,6 +63,7 @@ export default {
         evaluator: 0,
         getter: 0,
         score: 0,
+        privateKey: 0,
       },
     };
   },
@@ -136,20 +137,32 @@ export default {
         alert("잘못된 점수입니다!");
         return;
       }
+
       this.rating.purchasesId = this.buyPurchase.id;
       this.rating.evaluator = this.buyPurchase.buyerId;
       this.rating.getter = this.buyPurchase.sellerId;
       this.rating.score = parseInt(score);
 
-      ratingService.create(
-        this.rating,
-        (res) => {
-          alert("평가 성공!");
-        },
-        (err) => {
-          alert("평가 실패!");
+      const privateKey = prompt("평가를 남기려면 개인키를 입력하세요.");
+      walletService.isValidPrivateKey(this.userId, privateKey, (res) => {
+        if (res) {
+          this.rating.privateKey = privateKey
+          ratingService.create(
+            this.rating,
+            (res) => {
+              alert("평가 성공!");
+            },
+            (err) => {
+              alert("평가 실패!");
+            }
+          );
+        } else {
+          alert("개인키 인증에 실패하였습니다.");
         }
-      );
+      });
+      
+
+      
     },
     confirm() {
       const privateKey = prompt("구매를 확정하려면 개인키를 입력하세요.");
