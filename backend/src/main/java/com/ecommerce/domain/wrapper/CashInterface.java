@@ -1,4 +1,4 @@
-package cash;
+package com.ecommerce.domain.wrapper;
 
 import java.math.BigInteger;
 import java.util.Arrays;
