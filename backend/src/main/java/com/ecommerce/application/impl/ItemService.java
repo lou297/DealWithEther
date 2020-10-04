@@ -47,6 +47,9 @@ public class ItemService implements IItemService {
 	@Value("${eth.purchase.record.contract}")
 	private String PURCHASE_CONTRACT_ADDRESS;
 
+	@Value("${eth.rating.record.contract}")
+	private String RATING_CONTRACT_ADDRESS;
+
 	@Value("${eth.admin.address}")
 	private String ADMIN_ADDRESS;
 
@@ -236,7 +239,7 @@ public class ItemService implements IItemService {
 		Web3j web3 = Web3j.build(new HttpService(NETWORK_URL)); // defaults to http://localhost:8545/
 		Credentials credentials = WalletUtils.loadJsonCredentials(PASSWORD, data);
 		escrowFactory = EscrowFactory
-				.deploy(web3, credentials, contractGasProvider, ERC20_TOKEN_CONTRACT, PURCHASE_CONTRACT_ADDRESS).send();
+				.deploy(web3, credentials, contractGasProvider, ERC20_TOKEN_CONTRACT, PURCHASE_CONTRACT_ADDRESS, RATING_CONTRACT_ADDRESS).send();
 
 		return escrowFactory.getContractAddress();
 	}
