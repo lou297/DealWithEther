@@ -18,15 +18,20 @@ contract EscrowFactory is Ownable{
     address public admin;
     address public cashContractAddress; 
     address public purchaseRecordContractAddress;
-   
+    ////////////////////추가 기능 - 평가//////////////////////
+    address public ratingRecordContractAddress;
+    /////////////////////////////////////////////////////////
+
+
     mapping (uint32 => Item) public items;
     Escrow[] public escrows;
     mapping (uint256 => Escrow) public purchaseIdToEscrow;
     
-    constructor(address _cashContractAddress, address _purchaseRecordAddress) public {
+    constructor(address _cashContractAddress, address _purchaseRecordAddress, address _ratingRecordContractAddress) public {
         admin = msg.sender;
         cashContractAddress = _cashContractAddress;
         purchaseRecordContractAddress = _purchaseRecordAddress;
+        ratingRecordContractAddress = _ratingRecordContractAddress;
     }
     
     function setPaymentMethod(address _address) public onlyOwner {
@@ -36,7 +41,14 @@ contract EscrowFactory is Ownable{
     function setPurchaseRecordContract(address _address) public onlyOwner {
         purchaseRecordContractAddress = _address;
     }
-    
+
+    ////////////////////추가 기능 - 평가//////////////////////
+    function setRatingRecordContract(address _address) public onlyOwner {
+        ratingRecordContractAddress = _address;
+    }
+    /////////////////////////////////////////////////////////
+
+
     function registerItem(uint32 itemId, uint32 price) public returns(uint32, uint32, address, uint256){
         Item memory item = Item(itemId, price, msg.sender, now, 0, true);
         items[itemId] = item;
@@ -48,7 +60,7 @@ contract EscrowFactory is Ownable{
         require(item.seller != msg.sender, "Check buyer address");
         require(item.available == true, "Item not available");
         
-        Escrow escrow = new Escrow(cashContractAddress, purchaseRecordContractAddress, itemId, item.seller, msg.sender, item.price);
+        Escrow escrow = new Escrow(cashContractAddress, purchaseRecordContractAddress, ratingRecordContractAddress, itemId, item.seller, msg.sender, item.price);
         uint256 purchaseId = escrows.push(escrow) - 1;
         purchaseIdToEscrow[purchaseId] = escrow;
         
@@ -84,6 +96,10 @@ contract PurchaseRecordInterface {
     function confirmPurchase(address _address) external;
 }
 
+contract RatingRecordInterface {
+    function addRating(address getter, address purchaseContractAddress, uint score) external;
+}
+
 contract Escrow {
     
     enum State {Purchased, Paid, Sent, Complete, Cancelled}
@@ -91,6 +107,9 @@ contract Escrow {
     CashInterface public cashContract;
     address public purchaseRecordContractAddress;
     PurchaseRecordInterface public purchaseRecordContract;
+    ////////////////////추가 기능 - 평가//////////////////////
+    RatingRecordInterface public ratingRecordContract;
+    /////////////////////////////////////////////////////////
     
     uint32 public itemId;
     address public seller;
@@ -100,6 +119,7 @@ contract Escrow {
     uint public purchasedAt;
     uint private initialCash;
     uint public completeAt;
+    uint public rating;
     
     modifier onlySeller {
         require(msg.sender == seller);
@@ -114,6 +134,9 @@ contract Escrow {
     constructor(
         address _contractAddress, 
         address _purchaseRecordAddress,
+        ////////////////////추가 기능 - 평가//////////////////////
+        address _ratingRecordAddress,
+        /////////////////////////////////////////////////////////
         uint32 _itemId, 
         address _seller, 
         address _buyer, 
@@ -122,6 +145,9 @@ contract Escrow {
         cashContract = CashInterface(_contractAddress);
         purchaseRecordContractAddress = _purchaseRecordAddress;
         purchaseRecordContract = PurchaseRecordInterface(_purchaseRecordAddress);
+        ////////////////////추가 기능 - 평가//////////////////////
+        ratingRecordContract = RatingRecordInterface(_ratingRecordAddress);
+        /////////////////////////////////////////////////////////
         
         // require(cashContract.balanceOf(_buyer) >= _price + 20, "Insufficient Cash");
         
@@ -173,4 +199,12 @@ contract Escrow {
         return true;
     }
     
+    function evaluate(uint score) public onlyBuyer {
+        require(rating == 0);
+        require(state == State.Complete);
+        require(score >= 0 && score <= 5);
+        rating = score;
+        ratingRecordContract.addRating(buyer, address(this), score);
+    }
+
 }

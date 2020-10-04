@@ -39,7 +39,7 @@ contract Cash is IERC20{
      * totalSupply(inital supply), minter(owner)
      */
     constructor() public {
-        _totalSupply = 10 ** 7; // initial supply
+        _totalSupply = 10 ** 12; // initial supply
         minter = msg.sender;
         balances[minter] = _totalSupply;
     }
