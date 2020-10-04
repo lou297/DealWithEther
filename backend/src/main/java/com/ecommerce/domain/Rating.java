@@ -10,6 +10,7 @@ public class Rating {
 	private long getter;
 	private boolean seller;
 	private int score;
+	private String privateKey;
 
 	@Override
 	public String toString() {
