@@ -97,7 +97,7 @@
 
               <v-row>
                 <v-col cols="2.1">
-                  <v-btn large color="primary" style="width:100%">문의톡</v-btn>
+                  <v-btn large color="primary" @click="Chatting()" style="width:100%">문의톡</v-btn>
                 </v-col>
                 <v-col cols="2.1">
                   <v-btn large color="warning" style="width:100%"
@@ -245,6 +245,7 @@ export default {
         itemId: "",
       },
       userId: this.$store.state.user.id,
+      userName: "",
       star: require("../../../public/images/star.png"),
       time: "",
       modal: false,
@@ -294,6 +295,20 @@ export default {
         "_" +
         n
       );
+    },
+
+    Chatting(){
+      var vm = this;
+      findUserById(this.userId, function(res) {
+          const result = res.data;
+          console.log('유저내용');
+          console.log(result);
+          vm.userName = result.name;
+      });
+      alert(vm.userName);
+      var win = window.open("../../chat", "PopupWin", "width=400,height=600");
+
+      //this.$router.push("../../chat");
     },
 
     purchase() {
