@@ -20,7 +20,7 @@ Vue.use(VueRouter);
  */
 const routes = [
     {
-        path: '/chat',
+        path: '/chat/:name/:id',
         name: 'Chat',
         component: Chat,
     },
