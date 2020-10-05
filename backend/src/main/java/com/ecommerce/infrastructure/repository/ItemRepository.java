@@ -174,22 +174,10 @@ public class ItemRepository implements IItemRepository {
 	@Override
 	public int update(final Item item) {
 		StringBuilder sbSql = new StringBuilder("UPDATE items ");
-		sbSql.append("SET name=?, category=?, explanation=?, available=?, image=?, price=?, direct_deal=? ");
-		if (item.isDirectDeal()) {
-			sbSql.append(", deal_region=? ");
-		}
+		sbSql.append("SET price=? ");
 		sbSql.append("where id=?");
 		try {
-			if (item.isDirectDeal()) {
-				return this.jdbcTemplate.update(sbSql.toString(),
-						new Object[] { item.getName(), item.getCategory(), item.getExplanation(), item.getAvailable(),
-								item.getImage(), item.getPrice(), item.isDirectDeal(), item.getDealRegion(),
-								item.getId() });
-			} else {
-				return this.jdbcTemplate.update(sbSql.toString(),
-						new Object[] { item.getName(), item.getCategory(), item.getExplanation(), item.getAvailable(),
-								item.getImage(), item.getPrice(), item.isDirectDeal(), item.getId() });
-			}
+			return this.jdbcTemplate.update(sbSql.toString(), new Object[] { item.getPrice(), item.getId() });
 		} catch (Exception e) {
 			throw new RepositoryException(e, e.getMessage());
 		}
@@ -262,11 +250,10 @@ public class ItemRepository implements IItemRepository {
 
 	@Override
 	public int getLengthByUser(String category, long id) {
-		StringBuilder sbSql = new StringBuilder(
-				"SELECT count(*) FROM items WHERE seller=? and category like ?");
+		StringBuilder sbSql = new StringBuilder("SELECT count(*) FROM items WHERE seller=? and category like ?");
 		String tcategory = "%" + category + "%";
 		try {
-			return this.jdbcTemplate.queryForObject(sbSql.toString(), new Object[] { id, tcategory },	int.class);
+			return this.jdbcTemplate.queryForObject(sbSql.toString(), new Object[] { id, tcategory }, int.class);
 		} catch (Exception e) {
 			throw new RepositoryException(e, e.getMessage());
 		}
@@ -274,12 +261,11 @@ public class ItemRepository implements IItemRepository {
 
 	@Override
 	public int getLengthByName(String category, String name) {
-		StringBuilder sbSql = new StringBuilder(
-				"SELECT count(*) FROM items WHERE name like ? and category like ?");
+		StringBuilder sbSql = new StringBuilder("SELECT count(*) FROM items WHERE name like ? and category like ?");
 		String tcategory = "%" + category + "%";
 		String tname = "%" + name + "%";
 		try {
-			return this.jdbcTemplate.queryForObject(sbSql.toString(), new Object[] { tname, tcategory },	int.class);
+			return this.jdbcTemplate.queryForObject(sbSql.toString(), new Object[] { tname, tcategory }, int.class);
 		} catch (Exception e) {
 			throw new RepositoryException(e, e.getMessage());
 		}

@@ -97,10 +97,16 @@
 
               <v-row>
                 <v-col cols="2.1">
-                  <v-btn large color="primary" @click="Chatting()" style="width:100%">문의톡</v-btn>
+                  <v-btn
+                    large
+                    color="primary"
+                    @click="Chatting()"
+                    style="width:100%"
+                    >문의톡</v-btn
+                  >
                 </v-col>
                 <v-col cols="2.1">
-                  <v-btn large color="warning" style="width:100%"
+                  <v-btn large color="warning" style="width:100%" @click="nego"
                     >네고요청</v-btn
                   >
                 </v-col>
@@ -206,6 +212,7 @@ import { findById } from "@/api/item.js";
 import { CATEGORY } from "@/utils/category.js";
 import { bookMarkSave } from "@/api/bookmark.js";
 import * as walletService from "@/api/wallet.js";
+import * as itemService from "@/api/item.js";
 import HNav from "../../components/common/HNav copy";
 import Vue from "vue";
 import VueDaumPostcode from "vue-daum-postcode";
@@ -272,6 +279,42 @@ export default {
       // 이전 페이지로 이동한다.
       this.$router.go(-1);
     },
+    nego() {
+      var price = prompt("원하는 가격을 입력하세요.");
+      var address = "";
+      var vm = this;
+      const privateKey = prompt("상품을 구매하시려면 개인키를 입력하세요.");
+      let check = false;
+      var id = this.item.id;
+      walletService.isValidPrivateKey(this.userId, privateKey, (res) => {
+        if (res) {
+          itemService.update(
+            id,
+            price,
+            (res) => {
+              purchaseService.create(
+                id,
+                privateKey,
+                vm.walletAddress,
+                (response) => {
+                  alert("네고요청을 전달하였습니다");
+                  vm.$router.push("../../mypage/profile");
+                },
+                (error) => {
+                  alert("에러가 발생하였습니다.");
+                }
+              );
+            },
+            (err) => {
+              alert("네고요청 실패!!");
+            }
+          );
+        } else {
+          alert("개인키 인증에 실패하였습니다.");
+          this.isCashCharging = false;
+        }
+      });
+    },
     convertWeiToEth(value) {
       if (value) {
         return weiToEth(value.toString()) + " ETH";
@@ -297,10 +340,14 @@ export default {
       );
     },
 
-    Chatting(){
+    Chatting() {
       var name = this.userName;
       var id = this.item.id;
-      var win = window.open("../../chat/"+name +"/"+id, "PopupWin", "width=400,height=600");
+      var win = window.open(
+        "../../chat/" + name + "/" + id,
+        "PopupWin",
+        "width=400,height=600"
+      );
     },
 
     purchase() {
@@ -431,9 +478,9 @@ export default {
     this.item.id = this.$route.params.id;
     var vm = this;
     findUserById(this.userId, function(res) {
-          const result = res.data;
-          console.log(result.name);
-          vm.userName = result.name;
+      const result = res.data;
+      console.log(result.name);
+      vm.userName = result.name;
     });
   },
   mounted: function() {
