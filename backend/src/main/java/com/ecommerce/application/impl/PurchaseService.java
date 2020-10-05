@@ -170,6 +170,7 @@ public class PurchaseService implements IPurchaseService {
                 purchase.setCreatedAt(LocalDateTime.now());
                 purchase.setItemId(id);
                 purchase.setPurchaseId(neer.purchaseId.longValue());
+                purchase.setAddress(cash.getWalletAddress());
 
                 cashContract = CashContract.load(ERC20_TOKEN_CONTRACT, web3j, credentials, contractGasProvider);
 

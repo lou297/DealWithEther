@@ -91,7 +91,6 @@ contract EscrowFactory is Ownable {
         Item memory item = items[itemId];
         require(item.seller != msg.sender, "Check buyer address");
         require(item.available == true, "Item not available");
-<<<<<<< HEAD
 
         Escrow escrow = new Escrow(
             cashContractAddress,
@@ -102,10 +101,6 @@ contract EscrowFactory is Ownable {
             msg.sender,
             item.price
         );
-=======
-        
-        Escrow escrow = new Escrow(cashContractAddress, purchaseRecordContractAddress, ratingRecordContractAddress, itemId, item.seller, msg.sender, item.price);
->>>>>>> dd849a29fecab387825edbe1e2d8fee7aa4c4d32
         uint256 purchaseId = escrows.push(escrow) - 1;
         purchaseIdToEscrow[purchaseId] = escrow;
 

@@ -142,10 +142,11 @@ function download(id, success, fail, final) {
     .finally(final);
 }
 
-function update(id, price, success, fail) {
+function update(id, price, pk, success, fail) {
   const body = {
     id: id,
     price: price,
+    pk: pk,
   };
   instance
     .put("/api/items", JSON.stringify(body))

@@ -191,14 +191,16 @@ public class ItemService implements IItemService {
 		if (item.getPrice() == 0)
 			item.setPrice(itemStored.getPrice());
 
-		Web3j web3 = Web3j.build(new HttpService(NETWORK_URL));
+		// Web3j web3 = Web3j.build(new HttpService(NETWORK_URL));
 
-		credentials = Credentials.create(item.getPk());
+		// credentials = Credentials.create(item.getPk());
 
-		escrowFactory = EscrowFactory.load(ITEM_CONTRACT, web3, credentials, contractGasProvider);
+		// escrowFactory = EscrowFactory.load(ITEM_CONTRACT, web3, credentials,
+		// contractGasProvider);
 
-		TransactionReceipt tr = escrowFactory
-				.registerItem(BigInteger.valueOf(item.getId()), BigInteger.valueOf(item.getPrice())).send();
+		// TransactionReceipt tr = escrowFactory
+		// .registerItem(BigInteger.valueOf(item.getId()),
+		// BigInteger.valueOf(item.getPrice())).send();
 
 		return this.itemRepository.get(item.getId());
 	}
