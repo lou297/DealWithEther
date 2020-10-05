@@ -31,28 +31,8 @@
 <script src="https://www.gstatic.com/firebasejs/7.22.0/firebase-analytics.js"></script>
 
 <script>
-
-const firebase = require("firebase");
-require("firebase/firestore");
-
-  var firebaseConfig = {
-    apiKey: "AIzaSyBLERzEBv4p5978AxszC7zqy8aQXXfxCY8",
-    authDomain: "ssafy2.firebaseapp.com",
-    databaseURL: "https://ssafy2.firebaseio.com",
-    projectId: "ssafy2",
-    storageBucket: "ssafy2.appspot.com",
-    messagingSenderId: "435147211758",
-    appId: "1:435147211758:web:c225ef95ebbd44f73284ff",
-    measurementId: "G-M80C8DTDRF"
-  };
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-  firebase.analytics();
-
-  var db = firebase.firestore();
-</script>
-
-<script>
+import * as firebase from "firebase/app";
+// var database = firebase.database();
 
 export default {
   components: {
@@ -71,9 +51,19 @@ export default {
         var chat = io.connect("http://localhost:8000/chat");
 
         $("form").submit(function(e) {
-            db.collection("chatting").add({
-              message: "Ada",
-            })
+        //   var fullPath = new Date().getTime();
+        //   var storageRef = firebase.storage().ref("chattings");
+        //   console.log(storageRef);
+        //   var message = $("#msg").val();
+        //   storageRef.put(message).then((snapshot) => {
+        //   var imageUrl = firebase
+        //     .storage()
+        //     .ref(snapshot.metadata.fullPath)
+        //     .getDownloadURL()
+        //     .then((url) => {
+        //         alert("채팅 업로드 완료");
+        //     });
+        // });
 
           e.preventDefault();
 
