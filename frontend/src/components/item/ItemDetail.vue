@@ -7,7 +7,7 @@
             cycle
             hide-delimiter-background
             show-arrows-on-hover
-            style="width:300px; margin-left:90px;"
+            style="width: 300px; margin-left: 90px"
           >
             <v-carousel-item v-for="n in item.image" :key="n">
               <v-row class="fill-height" align="center" justify="center">
@@ -27,20 +27,20 @@
           md5
           sm12
           xs12
-          style="margin:40px 0 0 30px;"
+          style="margin: 40px 0 0 30px"
           id="font"
         >
           <v-col>
             <v-row>
               <v-col style="float: left; text-align: left">
-                <div id="font" style="font-size:19px;">{{ item.name }}</div>
+                <div id="font" style="font-size: 19px">{{ item.name }}</div>
               </v-col>
             </v-row>
             <v-row>
               <v-col style="float: right; text-align: left">
                 <div
                   id="font"
-                  style="display: inline; font-weight: bold; font-size:21px;"
+                  style="display: inline; font-weight: bold; font-size: 21px"
                 >
                   {{ item.price }}
                 </div>
@@ -97,10 +97,16 @@
 
               <v-row>
                 <v-col cols="2.1">
-                  <v-btn large color="primary" @click="Chatting()" style="width:100%">문의톡</v-btn>
+                  <v-btn
+                    large
+                    color="primary"
+                    @click="Chatting()"
+                    style="width: 100%"
+                    >문의톡</v-btn
+                  >
                 </v-col>
                 <v-col cols="2.1">
-                  <v-btn large color="warning" style="width:100%"
+                  <v-btn large color="warning" style="width: 100%" @click="nego"
                     >네고요청</v-btn
                   >
                 </v-col>
@@ -109,33 +115,37 @@
                     <v-btn
                       large
                       color="error"
-                      style="width:100%"
+                      style="width: 100%"
                       @click="openModal"
                       >바로구매</v-btn
                     >
                     <MyModal @close="closeModal" v-if="modal">
                       <div
                         v-if="postState == false"
-                        style="text-align:left;"
+                        style="text-align: left"
                         @click="getAddress"
                       >
                         <p
-                          style="margin-top: 5px; font-weight:bold; float:left;"
+                          style="
+                            margin-top: 5px;
+                            font-weight: bold;
+                            float: left;
+                          "
                         >
                           택배거래
                         </p>
-                        <div style="float:right; margin-left:200px;">
+                        <div style="float: right; margin-left: 200px">
                           <img
                             src="../../../public/images/arrow.png"
-                            style="width:12px;"
+                            style="width: 12px"
                           />
                         </div>
-                        <div style="clear:both;">
-                          <div style="float: left;">
-                            <div style="font-size:14px; ">
+                        <div style="clear: both">
+                          <div style="float: left">
+                            <div style="font-size: 14px">
                               안전하게 상품을 받을때까지,
                             </div>
-                            <div style="font-size:14px;">
+                            <div style="font-size: 14px">
                               중코마켓이 결제금액을 보관해요
                             </div>
                           </div>
@@ -143,18 +153,18 @@
                       </div>
                       <div v-if="postState == true">
                         <div v-if="Addressresult == false">
-                          <p style="margin-top: 5px;">배송지를 입력해주세요.</p>
+                          <p style="margin-top: 5px">배송지를 입력해주세요.</p>
                           <hr />
                           <vue-daum-postcode
                             @complete="handleAddress($event)"
                           />
                         </div>
                         <div v-else>
-                          <p style="margin-top: 5px;">
+                          <p style="margin-top: 5px">
                             상세주소를 입력해주세요.
                           </p>
                           <hr />
-                          <div style="text-align:left;">
+                          <div style="text-align: left">
                             {{ address }}<br />
                             <input
                               type="text"
@@ -166,16 +176,16 @@
                           <v-btn
                             color="error"
                             primary
-                            style="margin-top:8px"
+                            style="margin-top: 8px"
                             @click="movePage"
                             >구매하기</v-btn
                           >
                         </div>
                       </div>
                       <hr v-if="directState == true" />
-                      <div style="text-align:left;" v-if="directState == true">
-                        <p style="margin-top: 5px; font-weight:bold;">직거래</p>
-                        <p style="font-size:14px; margin:5px 0px 5px 0px;">
+                      <div style="text-align: left" v-if="directState == true">
+                        <p style="margin-top: 5px; font-weight: bold">직거래</p>
+                        <p style="font-size: 14px; margin: 5px 0px 5px 0px">
                           직거래도 현금없이 간편하게 결제할 수 있어요
                         </p>
                       </div>
@@ -206,6 +216,7 @@ import { findById } from "@/api/item.js";
 import { CATEGORY } from "@/utils/category.js";
 import { bookMarkSave } from "@/api/bookmark.js";
 import * as walletService from "@/api/wallet.js";
+import * as itemService from "@/api/item.js";
 import HNav from "../../components/common/HNav copy";
 import Vue from "vue";
 import VueDaumPostcode from "vue-daum-postcode";
@@ -268,9 +279,46 @@ export default {
     };
   },
   methods: {
-    goBack: function() {
+    goBack: function () {
       // 이전 페이지로 이동한다.
       this.$router.go(-1);
+    },
+    nego() {
+      var price = prompt("원하는 가격을 입력하세요.");
+      var address = "";
+      var vm = this;
+      const privateKey = prompt("상품을 구매하시려면 개인키를 입력하세요.");
+      let check = false;
+      var id = this.item.id;
+      walletService.isValidPrivateKey(this.userId, privateKey, (res) => {
+        if (res) {
+          itemService.update(
+            id,
+            price,
+            privateKey,
+            (res) => {
+              purchaseService.create(
+                id,
+                privateKey,
+                vm.walletAddress,
+                (response) => {
+                  alert("네고요청을 전달하였습니다");
+                  vm.$router.push("../../mypage/profile");
+                },
+                (error) => {
+                  alert("에러가 발생하였습니다.");
+                }
+              );
+            },
+            (err) => {
+              alert("네고요청 실패!!");
+            }
+          );
+        } else {
+          alert("개인키 인증에 실패하였습니다.");
+          this.isCashCharging = false;
+        }
+      });
     },
     convertWeiToEth(value) {
       if (value) {
@@ -297,10 +345,14 @@ export default {
       );
     },
 
-    Chatting(){
+    Chatting() {
       var name = this.userName;
       var id = this.item.id;
-      var win = window.open("../../chat/"+name +"/"+id, "PopupWin", "width=400,height=600");
+      var win = window.open(
+        "../../chat/" + name + "/" + id,
+        "PopupWin",
+        "width=400,height=600"
+      );
     },
 
     purchase() {
@@ -314,7 +366,7 @@ export default {
           purchaseService.create(
             id,
             privateKey,
-            vm.walletAddress,
+            vm.allAddress,
             (response) => {
               alert("구매 의사를 전달하였습니다");
               vm.$router.push("../../mypage/profile");
@@ -335,10 +387,10 @@ export default {
 
       bookMarkSave(
         this.bookMarkList,
-        function(success) {
+        function (success) {
           console.log("찜 성공");
         },
-        function(fail) {
+        function (fail) {
           console.dir(fail);
         }
       );
@@ -413,10 +465,10 @@ export default {
 
       bookMarkSave(
         this.bookMarkList,
-        function(success) {
+        function (success) {
           console.log("찜 성공");
         },
-        function(fail) {
+        function (fail) {
           console.dir(fail);
         }
       );
@@ -430,19 +482,19 @@ export default {
   created() {
     this.item.id = this.$route.params.id;
     var vm = this;
-    findUserById(this.userId, function(res) {
-          const result = res.data;
-          console.log(result.name);
-          vm.userName = result.name;
+    findUserById(this.userId, function (res) {
+      const result = res.data;
+      console.log(result.name);
+      vm.userName = result.name;
     });
   },
-  mounted: function() {
+  mounted: function () {
     const vm = this;
 
     // [DB] 상품 상세 정보 조회
     findById(
       this.item.id,
-      function(res) {
+      function (res) {
         const result = res.data;
         vm.item.name = result.name;
         vm.item.category = result.category;
@@ -463,7 +515,7 @@ export default {
         vm.time += date[1];
 
         // 판매자 정보
-        findUserById(result.seller, function(res) {
+        findUserById(result.seller, function (res) {
           const result = res.data;
           vm.item.seller.name = result.name;
           vm.item.seller.email = result.email;
@@ -482,7 +534,7 @@ export default {
         );
       },
 
-      function(error) {
+      function (error) {
         console.error(error);
         alert("DB에서 상품 상세 정보 조회를 가져올 수 없습니다.");
       }
@@ -490,11 +542,11 @@ export default {
     // [Smart Contract] 가격 조회
     getPrice(
       this.item.id,
-      function(price) {
+      function (price) {
         vm.item.price = price;
         console.log(price);
       },
-      function(err) {
+      function (err) {
         console.error("가격 조회 실패:", err);
       }
     );

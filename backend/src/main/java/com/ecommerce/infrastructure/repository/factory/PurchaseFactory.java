@@ -7,9 +7,9 @@ import java.sql.SQLException;
 
 public class PurchaseFactory {
 
-    public static Purchase create(ResultSet rs) throws SQLException
-    {
-        if (rs == null) return null;
+    public static Purchase create(ResultSet rs) throws SQLException {
+        if (rs == null)
+            return null;
         Purchase purchase = new Purchase();
         purchase.setId(rs.getLong("id"));
         purchase.setPurchaseId(rs.getLong("purchase_id"));
@@ -19,6 +19,7 @@ public class PurchaseFactory {
         purchase.setItemId(rs.getLong("item_id"));
         purchase.setState(rs.getString("state"));
         purchase.setContractAddress(rs.getString("contract_address"));
+        purchase.setAddress(rs.getString("address"));
 
         return purchase;
     }

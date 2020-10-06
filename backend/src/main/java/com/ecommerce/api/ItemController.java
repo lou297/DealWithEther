@@ -112,7 +112,7 @@ public class ItemController {
 
     @RequestMapping(value = "/items/seller/{category}/{name}/{page}", method = RequestMethod.GET)
     public List<Item> getBySellerItem(@PathVariable String category, @PathVariable String name,
-                                      @PathVariable int page) {
+            @PathVariable int page) {
         List<Item> item = itemService.getByUser(category, name, page);
         if (item == null) {
             logger.error("NOT FOUND NAME: ", name);
@@ -122,8 +122,8 @@ public class ItemController {
     }
 
     @RequestMapping(value = "/items/sellerLength/{category}/{name}/{page}", method = RequestMethod.GET)
-    public int getLengthBySellerItem(HttpServletResponse res, @PathVariable String category,
-                                     @PathVariable String name, @PathVariable int page) {
+    public int getLengthBySellerItem(HttpServletResponse res, @PathVariable String category, @PathVariable String name,
+            @PathVariable int page) {
         int length = itemService.getLengthByUser(category, name) / 12 + 1;
         return length;
     }
@@ -142,7 +142,7 @@ public class ItemController {
 
     @RequestMapping(value = "/items/nameLength/{category}/{name}/{page}", method = RequestMethod.GET)
     public int getLengthByName(HttpServletResponse res, @PathVariable String category, @PathVariable String name,
-                               @PathVariable int page) {
+            @PathVariable int page) {
         int length = itemService.getLengthByname(category, name) / 12 + 1;
         return length;
     }
@@ -233,7 +233,7 @@ public class ItemController {
 
     @ApiOperation(value = "Update an item")
     @RequestMapping(value = "/items", method = RequestMethod.PUT)
-    public Item update(@RequestBody Item item) {
+    public Item update(@RequestBody Item item) throws Exception {
         return itemService.update(item);
     }
 
@@ -318,15 +318,18 @@ public class ItemController {
                 .body(resource);
     }
 
-    ///////////////////////////////////////////// jpa 구간 //////////////////////////////////////////////
+    ///////////////////////////////////////////// jpa 구간
+    ///////////////////////////////////////////// //////////////////////////////////////////////
 
     @ApiOperation(value = "Select page list") // page에 대한거 db에서 쿼리로 넘기기
     @RequestMapping(value = "/items/page/{page}/category/{category}/keyword/{keyword}/kind/{kind}", method = RequestMethod.GET)
-    public Page<ItemJpa> getPage(@PathVariable int page, @PathVariable String category, @PathVariable String keyword, @PathVariable int kind) {
+    public Page<ItemJpa> getPage(@PathVariable int page, @PathVariable String category, @PathVariable String keyword,
+            @PathVariable int kind) {
         System.out.println("jpa로 검색하자");
         System.out.println(category);
         System.out.println(keyword);
-        if(category.equals("전체보기")) category = "";
+        if (category.equals("전체보기"))
+            category = "";
         Page<ItemJpa> items = null;
         if (kind == 0) {
             items = itemService.getByNameContaining(page, keyword);
@@ -347,7 +350,8 @@ public class ItemController {
 
     @ApiOperation(value = "Select page list") // page에 대한거 db에서 쿼리로 넘기기
     @RequestMapping(value = "/items/page/{page}/category/{category}/kind/{kind}", method = RequestMethod.GET)
-    public Page<ItemJpa> getPageNoKeyword(@PathVariable int page, @PathVariable String category, @PathVariable int kind) {
+    public Page<ItemJpa> getPageNoKeyword(@PathVariable int page, @PathVariable String category,
+            @PathVariable int kind) {
         System.out.println("jpa로 검색하자 아무것도없는거 검색하자");
         System.out.println(category);
 
