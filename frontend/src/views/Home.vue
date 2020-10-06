@@ -6,49 +6,49 @@
                 <div class="row no-gutters align-items-center">
                 <div class="col-5 d-none d-sm-block">
                     <div class="hero-banner__img">
-                    <img class="img-fluid" style="height:388px;width:400px; margin-right:350px;" src="../../public/images/hero-banner.png" alt="">
+                    <img class="img-fluid" style="height:388px;width:400px; margin-right:350px;" src="../../public/images/이미지.png" alt="">
                     </div>
                 </div>
                 <div class="col-sm-7 col-lg-6 offset-lg-1 pl-4 pl-md-5 pl-lg-0">
                     <div class="hero-banner__content" style="margin-top:38px; margin-left:50px;">
-                    <h4>중코마켓</h4>
-                    <h1 style="margin:0px;">중고마켓에서</h1>
-                    <h1>코인으로 거래하자</h1>
-                    <p style="margin-bottom:8px;">1이더 = 400,000원 상당</p>
-                    <p style="margin-bottom:8px;">1이더 = 100,000 CASH</p>
-                    <p style="margin-bottom:8px;">이더로 코인을 충전하여 거래하세요</p>
+                        <h4>중코마켓</h4>
+                        <h1 style="margin:0px;">중고마켓에서</h1>
+                        <h1>코인으로 거래하자</h1>
+                        <p style="margin-bottom:8px;">1이더 = 400,000원 상당</p>
+                        <p style="margin-bottom:8px;">1이더 = 100,000 CASH</p>
+                        <p style="margin-bottom:8px;">이더로 코인을 충전하여 거래하세요</p>
                     </div>
-                </div>
                 </div>
             </div>
         </div>
-        <v-card color="white">
-            <v-card-title class="text-center justify-center py-6">
-                <h1 class="font-weight-bold text-secondary">카테고리별 인기상품</h1>
-            </v-card-title>
+    </div>
+    <v-card color="white">
+        <v-card-title class="text-center justify-center py-6">
+            <h1 class="font-weight-bold text-secondary">카테고리별 인기상품</h1>
+        </v-card-title>
+        <v-flex xl1 lg1 md1 sm0 xs0><span></span></v-flex>
+        <v-tabs v-model="tab" background-color="transparent" color="basil" grow>
             <v-flex xl1 lg1 md1 sm0 xs0><span></span></v-flex>
-            <v-tabs v-model="tab" background-color="transparent" color="basil" grow>
-                <v-flex xl1 lg1 md1 sm0 xs0><span></span></v-flex>
-                <v-tab v-for="item in items" :key="item" class="font-weight-bold" @click="getCategory(item)" style="font-family: 'Jua', sans-serif; font-size:18px;">{{ item }}</v-tab>
-                <v-flex xl1 lg1 md1 sm0 xs0><span></span></v-flex>
-            </v-tabs>
-            <v-tabs-items v-model="tab">
-                <v-tab-item v-for="item in items" :key="item">
-                    <v-card color="white" flat>
-                        <v-card-text style="padding:16px 110px 16px 110px;">
-                                <v-row>
-                                    <v-flex xs12 sm6 md4 lg4 xl6
-                                            class="col-md-2 artwork"
-                                            v-for="item in itemlist"
-                                            v-bind:key="item.id">
-                                        <item-card :item="item" @clicked="onClickItem(item.id)"></item-card>
-                                    </v-flex>
-                                </v-row>
-                        </v-card-text>
-                    </v-card>
-                </v-tab-item>
-            </v-tabs-items>
-        </v-card>
+            <v-tab v-for="item in items" :key="item" class="font-weight-bold" @click="getCategory(item)" style="font-family: 'Jua', sans-serif; font-size:18px;">{{ item }}</v-tab>
+            <v-flex xl1 lg1 md1 sm0 xs0><span></span></v-flex>
+        </v-tabs>
+        <v-tabs-items v-model="tab">
+            <v-tab-item v-for="item in items" :key="item">
+                <v-card color="white" flat>
+                    <v-card-text style="padding:16px 110px 16px 110px;">
+                            <v-row>
+                                <v-flex xs12 sm6 md4 lg4 xl6
+                                        class="col-md-2 artwork"
+                                        v-for="item in itemlist"
+                                        v-bind:key="item.id">
+                                    <item-card :item="item" @clicked="onClickItem(item.id)"></item-card>
+                                </v-flex>
+                            </v-row>
+                    </v-card-text>
+                </v-card>
+            </v-tab-item>
+        </v-tabs-items>
+    </v-card>
 
         <!--================ Start footer Area  =================-->	
 	<footer class="footer" style="background:#002347; padding-top:25px; height:350px;">
@@ -173,7 +173,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
 
 #image{
