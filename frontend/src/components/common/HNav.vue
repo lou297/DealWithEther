@@ -1,6 +1,6 @@
 <template>
-    <v-card tile v-resize="onResize">
-        <v-app-bar color="white" dark>
+    <v-card tile v-resize="onResize" style="z-index:99999">
+        <v-app-bar color="transparent" app hide-on-scroll flat>
             <v-toolbar-title>
                 <router-link class="navbar-brand font" style="font-size:18px; color:black; font-weight:bold;" to="/" id="title" >중코마켓</router-link>
             </v-toolbar-title>
