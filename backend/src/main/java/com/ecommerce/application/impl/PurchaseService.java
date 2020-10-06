@@ -170,6 +170,7 @@ public class PurchaseService implements IPurchaseService {
                 purchase.setCreatedAt(LocalDateTime.now());
                 purchase.setItemId(id);
                 purchase.setPurchaseId(neer.purchaseId.longValue());
+                purchase.setAddress(cash.getWalletAddress());
 
                 cashContract = CashContract.load(ERC20_TOKEN_CONTRACT, web3j, credentials, contractGasProvider);
 
@@ -241,6 +242,12 @@ public class PurchaseService implements IPurchaseService {
         credentials = Credentials.create(cash.getPrivateKey());
         Purchase purchase = purchaseRepository.getByPurchaseId(purchaseId);
         escrow = Escrow.load(purchase.getContractAddress(), web3j, credentials, contractGasProvider);
+
+        Item item = this.itemRepository.get(purchase.getItemId());
+
+        TransactionReceipt tr2 = escrowFactory
+                .registerItem(BigInteger.valueOf(item.getId()), BigInteger.valueOf(item.getPrice())).send();
+
         // 여기서도 지갑 갱신
         Wallet wallet = walletService.get(purchase.getBuyerId());
         walletService.syncBalance(wallet.getAddress(), wallet.getBalance(),
@@ -248,8 +255,8 @@ public class PurchaseService implements IPurchaseService {
 
         TransactionReceipt tr = escrow.cancel().send();
 
-        Item item = itemRepository.get(purchase.getItemId());
-        itemRepository.changeProgressFalse(item.getId());
+        Item item2 = itemRepository.get(purchase.getItemId());
+        itemRepository.changeProgressFalse(item2.getId());
 
         purchase.setState("X");
         return purchaseRepository.update(purchase);

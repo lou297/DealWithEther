@@ -1,7 +1,7 @@
 <template>
     <div>
         <h-nav></h-nav>
-        <section class="hero-banner" style="margin-bottom:0px; height:500px; padding-top:40px;"> 
+        <div class="hero-banner" style="margin-bottom:0px; height:500px; padding-top:40px;"> 
             <div class="container">
                 <div class="row no-gutters align-items-center">
                 <div class="col-5 d-none d-sm-block">
@@ -9,7 +9,7 @@
                     <img class="img-fluid" style="height:388px;width:400px; margin-right:350px;" src="../../public/images/hero-banner.png" alt="">
                     </div>
                 </div>
-                <div class="col-sm-7 col-lg-6 offset-lg-1 pl-4 pl-md-5 pl-lg-0">
+                <div class="col-sm-7 col-lg-5 offset-lg-1 pl-4 pl-md-5 pl-lg-0">
                     <div class="hero-banner__content" style="margin-top:38px; margin-left:50px;">
                     <h4>중코마켓</h4>
                     <h1 style="margin:0px;">중고마켓에서</h1>
@@ -21,7 +21,7 @@
                 </div>
                 </div>
             </div>
-        </section>
+        </div>
         <v-card color="white">
             <v-card-title class="text-center justify-center py-6">
                 <h1 class="font-weight-bold text-secondary">카테고리별 인기상품</h1>
