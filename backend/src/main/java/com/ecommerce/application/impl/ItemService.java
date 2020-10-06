@@ -271,28 +271,30 @@ public class ItemService implements IItemService {
 
 	@Override
 	public Page<ItemJpa> getByNameContaining(int page, String name) {
-		return this.itemRepository2.getByNameContaining(PageRequest.of(page, 12, Sort.Direction.DESC, "id"), name);
+		return this.itemRepository2.getByNameContainingAndProgressAndAvailable(
+				PageRequest.of(page, 12, Sort.Direction.DESC, "id"), name, false, true);
 	}
 
 	@Override
 	public Page<ItemJpa> getBySeller(int page, String seller) {
 		User user = userRepository.getUserId(seller);
 		System.out.println(user);
-		return this.itemRepository2.getBySeller(PageRequest.of(page, 12, Sort.Direction.DESC, "id"), user.getId());
+		return this.itemRepository2.getBySellerAndProgressAndAvailable(
+				PageRequest.of(page, 12, Sort.Direction.DESC, "id"), user.getId(), false, true);
 	}
 
 	@Override
 	public Page<ItemJpa> getByNameContainingAndCategoryContaining(int page, String name, String category) {
-		return this.itemRepository2.getByNameContainingAndCategoryContaining(
-				PageRequest.of(page, 12, Sort.Direction.DESC, "id"), name, category);
+		return this.itemRepository2.getByNameContainingAndCategoryContainingAndProgressAndAvailable(
+				PageRequest.of(page, 12, Sort.Direction.DESC, "id"), name, category, false, true);
 	}
 
 	@Override
 	public Page<ItemJpa> getBySellerAndCategoryContaining(int page, String seller, String category) {
 		User user = userRepository.getUserId(seller);
 		System.out.println(user);
-		return this.itemRepository2.getBySellerAndCategoryContaining(
-				PageRequest.of(page, 12, Sort.Direction.DESC, "id"), user.getId(), category);
+		return this.itemRepository2.getBySellerAndCategoryContainingAndProgressAndAvailable(
+				PageRequest.of(page, 12, Sort.Direction.DESC, "id"), user.getId(), category, false, true);
 	}
 
 }

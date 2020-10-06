@@ -8,7 +8,17 @@
         @click="onClickItem()"
       >
       </v-img>
-      <p style="margin: 0">{{ item.name }}</p>
+      <p style="float:left">{{ item.name }}(</p>
+      <v-img
+        style="
+                    text-align: left;
+                    width: 15px;
+                    float: left;
+                    margin: 3px 4px 0 4px;
+                  "
+        :src="star"
+      ></v-img
+      >: {{ eval }})
     </v-col>
     <v-col cols="10" id="progress-container">
       <p id="cancel-message" v-if="state == 5">취소된 거래입니다.</p>
@@ -38,9 +48,31 @@
         <v-btn color="primary" :disabled="state != 3" @click="confirm"
           >구매 확정</v-btn
         >
-        <v-btn color="success" :disabled="state != 4" @click="evaluate"
+        <v-btn color="success" :disabled="state != 4" @click="openModal"
           >평가하기</v-btn
         >
+        <v-dialog @close="closeModal" v-model="modal" width="300px">
+          <div style="background-color:white; padding-top:10px">
+            <h3 style="margin:30px;">판매자 : {{ userName }}</h3>
+            <v-divider></v-divider>
+            <v-rating
+              hover
+              v-model="eval"
+              background-color="orange lighten-3"
+              color="orange"
+              style="margin:20px"
+            ></v-rating>
+            <v-btn
+              color="success"
+              @click="evaluate"
+              style="margin-top:20px; margin-bottom:20px"
+              >평가하기</v-btn
+            >
+            <v-btn color="error" @click="closeModal" style="margin-left:10px"
+              >창 닫기</v-btn
+            >
+          </div>
+        </v-dialog>
       </div>
     </v-col>
   </v-row>
@@ -50,6 +82,8 @@ import * as purchaseService from "@/api/purchase.js";
 import * as walletService from "@/api/wallet.js";
 import * as ratingService from "@/api/rating.js";
 import * as itemService from "@/api/item.js";
+import * as userService from "@/api/user.js";
+import MyModal from "@/components/item/Modal.vue";
 export default {
   props: ["buyPurchase"],
   data() {
@@ -65,13 +99,17 @@ export default {
         score: 0,
         privateKey: 0,
       },
+      modal: false,
+      eval: "평가 전",
+      userName: "",
+      star: require("../../../public/images/star.png"),
     };
   },
   created() {
     this.updateState();
     this.fetchPurchaseInfo();
   },
-  mounted: function () {
+  mounted: function() {
     const vm = this;
     ratingService.getList(
       (res) => {
@@ -84,6 +122,7 @@ export default {
               vm.ratings[key].evaluator == vm.buyPurchase.buyerId
             ) {
               vm.state = 6;
+              vm.eval = vm.ratings[key].score;
             }
           }
         }
@@ -113,14 +152,26 @@ export default {
           break;
       }
     },
+    openModal() {
+      this.modal = true;
+    },
+    closeModal() {
+      this.modal = false;
+    },
     imgPath(id) {
       return process.env.VUE_APP_BACKEND + "api/items/images/" + id + "_1";
     },
     fetchPurchaseInfo() {
+      const vm = this;
       itemService.findById(
         this.buyPurchase.itemId,
         (res) => {
           this.item = res.data;
+
+          userService.findById(this.item.seller, function(res) {
+            const result = res.data;
+            vm.userName = result.name;
+          });
         },
         (err) => {
           alert(err);
@@ -132,21 +183,14 @@ export default {
       this.$router.push("../item/detail/" + this.buyPurchase.itemId);
     },
     evaluate() {
-      var score = prompt("점수를 입력해주세요 (1~5)");
-      if (score != 5 && score != 1 && score != 2 && score != 3 && score != 4) {
-        alert("잘못된 점수입니다!");
-        return;
-      }
-
       this.rating.purchasesId = this.buyPurchase.id;
       this.rating.evaluator = this.buyPurchase.buyerId;
       this.rating.getter = this.buyPurchase.sellerId;
-      this.rating.score = parseInt(score);
-
+      this.rating.score = this.eval;
       const privateKey = prompt("평가를 남기려면 개인키를 입력하세요.");
       walletService.isValidPrivateKey(this.userId, privateKey, (res) => {
         if (res) {
-          this.rating.privateKey = privateKey
+          this.rating.privateKey = privateKey;
           ratingService.create(
             this.rating,
             (res) => {
@@ -160,9 +204,6 @@ export default {
           alert("개인키 인증에 실패하였습니다.");
         }
       });
-      
-
-      
     },
     confirm() {
       const privateKey = prompt("구매를 확정하려면 개인키를 입력하세요.");
