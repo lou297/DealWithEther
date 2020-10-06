@@ -120,19 +120,13 @@ import { save as savaImage } from "@/api/item.js";
 import { registerItem } from "@/utils/itemInventory.js";
 import * as walletService from "@/api/wallet.js";
 import HNav from "../components/common/HNav";
-<<<<<<< HEAD
 import HBreadcrumb from "@/components/common/HBreadcrumb";
-=======
 
->>>>>>> 21ced97953bb7b48d6a78a99421d101ab547a58d
 export default {
   name: "ItemCreate",
   components: {
     HNav,
-<<<<<<< HEAD
     HBreadcrumb
-=======
->>>>>>> 21ced97953bb7b48d6a78a99421d101ab547a58d
   },
   data() {
     return {
