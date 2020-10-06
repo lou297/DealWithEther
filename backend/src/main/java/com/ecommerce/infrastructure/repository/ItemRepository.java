@@ -125,7 +125,7 @@ public class ItemRepository implements IItemRepository {
 
 	@Override
 	public Item get(final long id) {
-		StringBuilder sbSql = new StringBuilder("SELECT * FROM items WHERE id=? and progress=0 and available=1");
+		StringBuilder sbSql = new StringBuilder("SELECT * FROM items WHERE id=?");
 		try {
 			return this.jdbcTemplate.queryForObject(sbSql.toString(), new Object[] { id },
 					(rs, rowNum) -> ItemFactory.create(rs));

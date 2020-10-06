@@ -2,13 +2,13 @@
   <v-row id="container">
     <v-col cols="2" id="item-info-container">
       <v-img
-        :src="imgPath(item.itemId)"
+        :src="imgPath(item.id)"
         :lazy-src="`https://picsum.photos/10/6?random`"
         aspect-ratio="1"
         @click="onClickItem()"
       >
       </v-img>
-      <p style="float:left">{{ item.name }}(</p>
+      <p style="float:left">{{ item.name }} (</p>
       <v-img
         style="
                     text-align: left;
@@ -17,8 +17,8 @@
                     margin: 3px 4px 0 4px;
                   "
         :src="star"
-      ></v-img
-      >: {{ eval }})
+      ></v-img>
+      <div style="float: left;">: {{ eval }})</div>
     </v-col>
     <v-col cols="10" id="progress-container">
       <p id="cancel-message" v-if="state == 5">취소된 거래입니다.</p>
@@ -100,7 +100,7 @@ export default {
         privateKey: 0,
       },
       modal: false,
-      eval: "평가 전",
+      eval: "- ",
       userName: "",
       star: require("../../../public/images/star.png"),
     };

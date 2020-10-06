@@ -129,7 +129,16 @@
                         <item-card :item="item" @clicked="onClickItem(item.id)"></item-card>
                     </v-col>
                 </v-row>
-                <sell-hitsory v-if="tabStatus == 1"></sell-hitsory>
+                <v-row v-if="tabStatus == 1">
+                  <v-container
+                    v-for="item in items"
+                    :key="item.itemId"
+                  >
+                    <sell-item
+                      :item="item"
+                    ></sell-item>
+                  </v-container>
+                </v-row>
                 <v-row v-if="tabStatus == 2">
                     <v-container
                         v-for="buyPurchase in buyPurchases"
@@ -165,6 +174,7 @@ import * as purchaseService from "@/api/purchase.js";
 
 import ItemCard from "../shop/ItemCard.vue";
 import BuyHistory from "./BuyHistory.vue";
+import SellItem from "./SellItem.vue";
 import SellHitsory from "./SellList.vue";
 import ImgModal from "./ImgModal";
 import walletModal from "./WalletCreate"
@@ -179,54 +189,55 @@ import BN from "bn.js";
 import {save as savaImage} from "../../api/item.js";
 
 export default {
-    components: {
-        MyPageNav,
-        ItemCard,
-        BuyHistory,
-        SellHitsory,
-        ImgModal,
-        walletModal,
-    },
-    data() {
-        return {
-            //   userId: this.$store.state.user.id,
-            user: {
-                id: this.$store.state.user.id,
-                name: "",
-                email: "",
-            },
-            size: 0,
-            wallet: {
-                id: 0,
-                ownerId: null,
-                address: "",
-                balance: 0,
-                cash: 0,
-                receivingCount: 0,
-            },
-            //선택된 탭
-            tabStatus: 1,
-            items: [],
-            buyPurchases: [],
-            isCharging: false, // 현재 코인을 충전하고 있는 중인지 확인
-            isCashCharging: false, // 현재 캐시을 충전하고 있는 중인지 확인
-            cashChargeAmount: 0.1,
-            walletAddress: this.$store.state.user.walletAddress,
-            ratings: [],
+  components: {
+    MyPageNav,
+    ItemCard,
+    BuyHistory,
+    SellItem,
+    SellHitsory,
+    ImgModal,
+  },
+  data() {
+    return {
+      //   userId: this.$store.state.user.id,
+      user: {
+        id: this.$store.state.user.id,
+        name: "",
+        email: "",
+      },
+      size: 0,
+      wallet: {
+        id: 0,
+        ownerId: null,
+        address: "",
+        balance: 0,
+        cash: 0,
+        receivingCount: 0,
+      },
+      //선택된 탭
+      tabStatus: 1,
+      items: [],
+      buyPurchases: [],
+      isCharging: false, // 현재 코인을 충전하고 있는 중인지 확인
+      isCashCharging: false, // 현재 캐시을 충전하고 있는 중인지 확인
+      cashChargeAmount: 0.1,
+      walletAddress: this.$store.state.user.walletAddress,
+      ratings: [],
 
-            imageModal: false,
-            walletModal: false,
-        };
-    },
-    created() {
-        this.fetchUserInfo();
-        this.fetchWalletInfo();
-        this.fetchBuyHistory();
-    },
-    computed: {
-        canCashCharge() {
-            return this.cashChargeAmount >= 0.1 && !this.isCashCharging;
-        },
+      imageModal: false,
+      walletModal: false,
+    };
+  },
+  created() {
+    this.fetchUserInfo();
+    this.showRegistedItemList();
+    this.fetchWalletInfo();
+    this.fetchBuyHistory();
+  },
+  computed: {
+    canCashCharge() {
+      return this.cashChargeAmount >= 0.1 && !this.isCashCharging;
+      },
     },
     methods: {
         changePassword() {
