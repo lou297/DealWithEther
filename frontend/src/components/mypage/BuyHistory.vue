@@ -44,7 +44,7 @@
       </v-stepper>
       <div id="btn-container">
         <v-btn color="error" :disabled="state > 2 || state == 0" @click="cancel"
-          >구매취소</v-btn
+          >{{ isCharging ? "취소중입니다" : "구매취소" }}</v-btn
         >
         <v-btn color="primary" :disabled="state != 3" @click="confirm"
           >구매 확정</v-btn
@@ -90,6 +90,7 @@ export default {
   props: ["buyPurchase"],
   data() {
     return {
+        isCharging: false,
       userId: this.$store.state.user.id,
       state: -1,
       item: {},
@@ -228,9 +229,14 @@ export default {
         }
       });
     },
+      reload() {
+          this.imageModal = false;
+          this.$router.go(this.$router.currentRoute);
+      },
     cancel() {
       const privateKey = prompt("구매를 취소하려면 개인키를 입력하세요.");
       const vm = this;
+      vm.isCharging = true;
       walletService.isValidPrivateKey(this.userId, privateKey, (res) => {
         if (res) {
           purchaseService.cancel(
@@ -238,9 +244,12 @@ export default {
             privateKey,
             (res) => {
               alert("구매가 취소되었습니다.");
+                vm.isCharging = false;
+                vm.reload();
             },
             (error) => {
               alert("구매가 취소되지 않았습니다. 다시 시도해주세요");
+                vm.isCharging = false;
             }
           );
         } else {

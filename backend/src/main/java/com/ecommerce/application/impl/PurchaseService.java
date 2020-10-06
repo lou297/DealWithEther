@@ -244,9 +244,8 @@ public class PurchaseService implements IPurchaseService {
         escrow = Escrow.load(purchase.getContractAddress(), web3j, credentials, contractGasProvider);
 
         Item item = this.itemRepository.get(purchase.getItemId());
+        System.out.println(1);
 
-        TransactionReceipt tr2 = escrowFactory
-                .registerItem(BigInteger.valueOf(item.getId()), BigInteger.valueOf(item.getPrice())).send();
 
         // 여기서도 지갑 갱신
         Wallet wallet = walletService.get(purchase.getBuyerId());
@@ -254,7 +253,7 @@ public class PurchaseService implements IPurchaseService {
                 wallet.getCash() + itemRepository.get(purchase.getItemId()).getPrice() + 20);
 
         TransactionReceipt tr = escrow.cancel().send();
-
+        System.out.println(2);
         Item item2 = itemRepository.get(purchase.getItemId());
         itemRepository.changeProgressFalse(item2.getId());
 
