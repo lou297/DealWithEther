@@ -54,8 +54,7 @@
 <script>
 import * as purchaseService from "@/api/purchase.js";
 import * as ratingService from "@/api/rating.js";
-import * as walletService from "@/api/wallet";
-
+import * as walletService from "@/api/wallet.js";
 export default {
     props: ["item"],
     data() {
@@ -157,12 +156,35 @@ export default {
             });
         },
     },
+    send() {
+      const privateKey = prompt("배송하시려면 개인키를 입력하세요.");
+      console.log(this.userId);
+      const vm = this;
+      walletService.isValidPrivateKey(this.userId, privateKey, (res) => {
+        if (res) {
+          purchaseService.send(
+            vm.purchaseInfo.purchaseId,
+            privateKey,
+            (res) => {
+              alert("성공!");
+            },
+            (error) => {
+              alert(error);
+            }
+          );
+        } else {
+          alert("개인키 인증에 실패하였습니다.");
+          this.isCashCharging = false;
+        }
+      });
+     },
+  },
 };
 </script>
 
 <style>
-#container2 {
-    padding: 0 10px;
+#container {
+  padding : 0 10px;
 }
 
 #item-info-container {

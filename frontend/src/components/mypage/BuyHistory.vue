@@ -1,4 +1,5 @@
 <template>
+<v-card>
   <v-row id="container">
     <v-col cols="2" id="item-info-container">
       <v-img
@@ -76,6 +77,7 @@
       </div>
     </v-col>
   </v-row>
+</v-card>
 </template>
 <script>
 import * as purchaseService from "@/api/purchase.js";
@@ -262,7 +264,7 @@ export default {
 
 <style>
 #container {
-  border: 1px solid black;
+  padding : 0 10px;
 }
 
 #item-info-container {
