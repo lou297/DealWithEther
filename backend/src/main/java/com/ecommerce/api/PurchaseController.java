@@ -78,6 +78,7 @@ public class PurchaseController {
 
     @RequestMapping(value = "/purchases/cancel/{purchaseId}", method = RequestMethod.POST)
     public long cancel(@PathVariable long purchaseId, @RequestBody Cash cash) throws Exception {
+        System.out.println("일단 접속이 되냐");
         return this.purchaseService.cancel(purchaseId, cash);
     }
 
