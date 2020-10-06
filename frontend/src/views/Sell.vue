@@ -125,11 +125,12 @@
 </template>
 
 <script>
-import {create as createItem} from "@/api/item.js";
-import {save as savaImage} from "@/api/item.js";
-import {registerItem} from "@/utils/itemInventory.js";
+import { create as createItem } from "@/api/item.js";
+import { save as savaImage } from "@/api/item.js";
+import { registerItem } from "@/utils/itemInventory.js";
 import * as walletService from "@/api/wallet.js";
 import HNav from "../components/common/HNav";
+import Loading from "@/views/Loading";
 
 export default {
     name: "ItemCreate",
@@ -256,42 +257,46 @@ export default {
                 }
             });
 
-            /**
-             * TODO: PJTⅢ 과제3 Req.1-1 [상품 등록]
-             * DB에 상품 등록 후 반환 받은 id를 이용해서 이더리움에 상품을 등록
-             */
-        },
-
-        onImageClick() {
-            this.$refs.uploader.click();
-        },
-
-        onFileChange(input) {
-            let length = input.target.files.length;
-            if (length === 0) {
-                return;
-            }
-
-            if (length > 9) length = 9;
-            for (let i = 1; i <= length; i++) {
-                if (this.image.length + i >= 9) {
-                    alert("더이상 이미지를 추가할수 없습니다");
-                    break;
-                }
-                const file = input.target.files[i - 1];
-                this.image.push(URL.createObjectURL(file));
-                this.files.push(file);
-            }
-            console.log(this.files);
-            this.$refs.uploader.value = null;
-        },
-
-        removeImage(n) {
-            alert(n);
-            // this.item.image[n].removeImage();
-            this.image.splice(n, 1);
-            this.files.splice(n, 1);
-        },
+      /**
+       * TODO: PJTⅢ 과제3 Req.1-1 [상품 등록]
+       * DB에 상품 등록 후 반환 받은 id를 이용해서 이더리움에 상품을 등록
+       */
     },
+
+    onImageClick() {
+      this.$refs.uploader.click();
+    },
+
+    cancel() {
+      this.$router.push("/");
+    },
+
+    onFileChange(input) {
+      let length = input.target.files.length;
+      if (length === 0) {
+        return;
+      }
+
+      if (length > 9) length = 9;
+      for (let i = 1; i <= length; i++) {
+        if (this.image.length + i >= 9) {
+          alert("더이상 이미지를 추가할수 없습니다");
+          break;
+        }
+        const file = input.target.files[i - 1];
+        this.image.push(URL.createObjectURL(file));
+        this.files.push(file);
+      }
+      console.log(this.files);
+      this.$refs.uploader.value = null;
+    },
+
+    removeImage(n) {
+      alert(n);
+      // this.item.image[n].removeImage();
+      this.image.splice(n, 1);
+      this.files.splice(n, 1);
+    },
+  },
 };
 </script>

@@ -53,7 +53,7 @@
                     <v-btn
                       color="primary"
                       :disabled="item.state !== 'C'"
-                      @click="canclePurchase(index)"
+                      @click="cancelPurchase(index)"
                       >거래 취소</v-btn
                     >
                   </v-row>
@@ -119,13 +119,13 @@ export default {
       alert("estimate");
       // 평가하기 버튼
     },
-    canclePurchase(index) {
+    cancelPurchase(index) {
       const privateKey = prompt("취소하시려면 개인키를 입력하세요.");
       console.log(this.userId);
       const vm = this;
       walletService.isValidPrivateKey(this.userId, privateKey, (res) => {
         if (res) {
-          purchaseService.cancle(
+          purchaseService.cancel(
             vm.items[index].purchaseId,
             privateKey,
             (res) => {
@@ -170,7 +170,6 @@ export default {
     for (let i = 0; i < this.items.length; i++) {
       const temp = this.getItemName(this.items[i].itemId);
       this.name.push(temp);
-      console.log(temp);
     }
   },
 };
