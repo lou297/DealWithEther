@@ -12,6 +12,8 @@ public interface IPurchaseRepository {
     List<Purchase> getBySeller(long id);
     List<Purchase> getByBuyer(long id);
 
+    List<Purchase> getPurchaseByItemId(long itemId);
+
     @Transactional
     long create(Purchase purchase);
 

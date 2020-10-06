@@ -114,7 +114,17 @@
             <item-card :item="item" @clicked="onClickItem(item.id)"></item-card>
           </v-col>
         </v-row>
-        <sell-hitsory v-if="tabStatus == 1"></sell-hitsory>
+        <!-- <sell-hitsory v-if="tabStatus == 1"></sell-hitsory> -->
+        <v-row v-if="tabStatus == 1">
+          <v-container
+            v-for="item in items"
+            :key="item.itemId"
+          >
+            <sell-item
+              :item="item"
+            ></sell-item>
+          </v-container>
+        </v-row>
         <v-row v-if="tabStatus == 2">
           <v-container
             v-for="buyPurchase in buyPurchases"
@@ -143,6 +153,7 @@ import * as purchaseService from "@/api/purchase.js";
 
 import ItemCard from "../shop/ItemCard.vue";
 import BuyHistory from "./BuyHistory.vue";
+import SellItem from "./SellItem.vue";
 import SellHitsory from "./SellList.vue";
 import ImgModal from "./ImgModal";
 
@@ -160,6 +171,7 @@ export default {
     MyPageNav,
     ItemCard,
     BuyHistory,
+    SellItem,
     SellHitsory,
     ImgModal,
   },
@@ -195,6 +207,7 @@ export default {
   },
   created() {
     this.fetchUserInfo();
+    this.showRegistedItemList();
     this.fetchWalletInfo();
     this.fetchBuyHistory();
   },
@@ -215,6 +228,7 @@ export default {
         this.user.id,
         (res) => {
           this.items = res.data;
+          console.log(this.items)
         },
         (err) => {
           alert(err);

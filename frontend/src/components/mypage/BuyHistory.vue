@@ -2,7 +2,7 @@
   <v-row id="container">
     <v-col cols="2" id="item-info-container">
       <v-img
-        :src="imgPath(item.itemId)"
+        :src="imgPath(item.id)"
         :lazy-src="`https://picsum.photos/10/6?random`"
         aspect-ratio="1"
         @click="onClickItem()"

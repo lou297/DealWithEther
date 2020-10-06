@@ -255,4 +255,9 @@ public class PurchaseService implements IPurchaseService {
         return purchaseRepository.update(purchase);
     }
 
+    @Override
+    public List<Purchase> getPurchaseByItemId(int itemId) {
+        return purchaseRepository.getPurchaseByItemId(itemId);
+    }
+
 }
