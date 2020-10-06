@@ -14,9 +14,11 @@
                 <router-link id="link-to-myshop" style="font-size:16px; color:black; font-weight:bold;" to="/mypage/profile">프로필</router-link>
                 <router-link id="link-to-logout" style="font-size:16px; color:black; font-weight:bold;" to="/logout" v-if="$store.state.isSigned">로그아웃</router-link>
                 <a id="link-to-signup"
+                    style="font-size:16px; color:black; font-weight:bold;"
                    v-if="!$store.state.isSigned"
                    @click.stop="signup = true">회원가입</a>
                 <a id="link-to-login"
+                    style="font-size:16px; color:black; font-weight:bold;"
                    v-if="!$store.state.isSigned"
                    @click.stop="signin = true">로그인</a>
             </v-toolbar-title>
