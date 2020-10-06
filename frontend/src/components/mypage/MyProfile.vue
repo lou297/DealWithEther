@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div style="margin-top:60px">
         <!-- <my-page-nav></my-page-nav> -->
         <v-row>
             <v-flex md2></v-flex>
@@ -110,7 +110,7 @@
                 </v-row>
 
                 <v-row>
-                    <v-tabs color="#356859" grow background-color="#FFFBE6">
+                    <v-tabs color="#1A237E" grow>
                         <v-tab class="tab-menu" @click="showRegistedItemList">
                             등록 상품 목록
                         </v-tab>
@@ -423,7 +423,7 @@ export default {
 }
 
 #profile-image-container {
-    border: 1px solid  #ffd455;
+    border: 1px solid  #1A237E;
     padding: 30px 0 18px 0;
 }
 
