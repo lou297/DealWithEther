@@ -1,7 +1,7 @@
 <template>
     <div>
         <h-nav></h-nav>
-        <section class="hero-banner" style="margin-bottom:0px; height:500px; padding-top:40px;"> 
+        <div class="hero-banner" style="margin-bottom:0px; height:500px; padding-top:40px;"> 
             <div class="container">
                 <div class="row no-gutters align-items-center">
                 <div class="col-5 d-none d-sm-block">
@@ -21,7 +21,7 @@
                 </div>
                 </div>
             </div>
-        </section>
+        </div>
         <v-card color="white">
             <v-card-title class="text-center justify-center py-6">
                 <h1 class="font-weight-bold text-secondary">카테고리별 인기상품</h1>

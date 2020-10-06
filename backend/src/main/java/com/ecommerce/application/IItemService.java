@@ -35,7 +35,7 @@ public interface IItemService {
 	int viewCountUpdate(long id);
 
 	@Transactional
-	Item update(Item item);
+	Item update(Item item) throws Exception;
 
 	@Transactional
 	int imageUpdate(long id, int image);
@@ -54,14 +54,17 @@ public interface IItemService {
 
 	List<Item> getByOnlyName(String name, int page);
 
-    int getLengthByUser(String category, String name);
+	int getLengthByUser(String category, String name);
 
 	int getLengthByname(String category, String name);
 
-
-	///////////////////////////////////////////// jpa 구간 //////////////////////////////////////////////
+	///////////////////////////////////////////// jpa 구간
+	///////////////////////////////////////////// //////////////////////////////////////////////
 	Page<ItemJpa> getByNameContaining(int page, String name);
+
 	Page<ItemJpa> getBySeller(int page, String seller);
+
 	Page<ItemJpa> getByNameContainingAndCategoryContaining(int page, String name, String category);
+
 	Page<ItemJpa> getBySellerAndCategoryContaining(int page, String seller, String category);
 }
