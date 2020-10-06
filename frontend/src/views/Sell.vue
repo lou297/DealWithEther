@@ -114,20 +114,13 @@
                                 required
                             ></v-text-field>
                             <v-btn color="error" class="mr-4" @click="save">취소</v-btn>
-                            <v-btn color="success" class="mr-4" @click="save">등록</v-btn>
-                            <br><br>
-                            <v-btn color="success" class="mr-4" @click.stop="loading = true">등록</v-btn>
+                            <v-btn color="success" class="mr-4" @click="save" v-bind:disabled="isCharging">{{ isCharging ? "등록중입니다" : "등록" }}</v-btn>
                             <br><br>
                         </v-form>
                     </v-flex>
                 </v-layout>
             </v-container>
         </v-card>
-        <v-dialog v-model="loading" max-width="500" min-width="300">
-            <div style="background-color: white">
-                <Loading :loading="loading" v-on:closeThis=""></Loading>
-            </div>
-        </v-dialog>
     </div>
 </template>
 
@@ -137,16 +130,15 @@ import {save as savaImage} from "@/api/item.js";
 import {registerItem} from "@/utils/itemInventory.js";
 import * as walletService from "@/api/wallet.js";
 import HNav from "../components/common/HNav";
-import Loading from "@/views/Loading";
 
 export default {
     name: "ItemCreate",
     components: {
         HNav,
-        Loading,
     },
     data() {
         return {
+            isCharging: false,
             files: [],
             item: {
                 id: "",
@@ -202,6 +194,7 @@ export default {
             const privateKey = prompt("캐시를 충전하시려면 개인키를 입력하세요.");
             this.item.pk = privateKey;
             this.isCreating = true; // 아이템 등록 중임을 화면에 표시, 등록이 끝나면 false로 변경
+            this.isCharging = true;
             walletService.isValidPrivateKey(this.userId, privateKey, (res) => {
                 if (res) {
                     if (
@@ -239,6 +232,7 @@ export default {
                                 vm.item.id,
                                 function(success) {
                                     alert("이미지 등록 성공!");
+                                    vm.isCharging = false;
                                 },
                                 function(error) {
                                     console.log(error);
@@ -255,6 +249,7 @@ export default {
                             console.log("안녕");
                         }
                     );
+
                 } else {
                     alert("개인키 인증에 실패하였습니다.");
                     this.isCreating = false;

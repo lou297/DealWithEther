@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import CubeSpin from 'vue-loading-spinner'
+import CubeSpin from 'vue-loading-spinner/components/Cube'
 
 export default {
     components: {
