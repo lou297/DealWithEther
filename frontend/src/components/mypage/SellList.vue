@@ -170,7 +170,6 @@ export default {
     for (let i = 0; i < this.items.length; i++) {
       const temp = this.getItemName(this.items[i].itemId);
       this.name.push(temp);
-      console.log(temp);
     }
   },
 };
