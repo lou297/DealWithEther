@@ -20,8 +20,8 @@
                 <p style="margin:0; font-weight: bold;">{{ item.price }} cash</p>
             </v-col>
             <v-col cols="10" id="progress-container">
-                <p id="cancel-message" v-if="state == 5">취소된 거래입니다.</p>
-                <p id="waiting-message" v-if="state == -1">거래 대기 중</p>
+                <p id="cancel-message" v-if="state == 5" style="font-weight:bold; font-size:14px">취소된 거래입니다.</p>
+                <p id="waiting-message" v-if="state == -1" style="font-weight:bold; font-size:14px">거래 대기 중</p>
                 <v-stepper alt-labels v-model="state">
                     <v-stepper-header>
                         <v-stepper-step step="1" :complete="state >= 1">
@@ -177,7 +177,6 @@ export default {
           this.isCashCharging = false;
         }
       });
-     },
   },
 };
 </script>
