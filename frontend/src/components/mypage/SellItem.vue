@@ -1,6 +1,7 @@
 <template>
     <v-card>
-        <v-row id="container2">
+        <v-row id="container">
+            <v-flex size1></v-flex>
             <v-col cols="2" id="item-info-container">
                 <!-- <v-img
                   :src="imgPath(item.id)"
@@ -10,16 +11,18 @@
                 >
                 </v-img>
                 <p style="margin: 0">{{ item.name }}</p> -->
-                <v-list-item>
-                    <v-list-item-avatar size="100px">
+                <v-list-item style="padding:0">
+                    <v-list-item-avatar style="margin:0;" width="100%" height="100%">
                         <v-img :src="imgPath(item.itemId)"
-                               :lazy-src="`https://picsum.photos/10/6?random`"></v-img>
+                               :lazy-src="`https://picsum.photos/10/6?random`"
+                                aspect-ratio="1"
+                                @click="onClickItem()"></v-img>
                     </v-list-item-avatar>
                 </v-list-item>
                 <p style="margin:0; font-weight: bold;">{{ item.name }}</p>
                 <p style="margin:0; font-weight: bold;">{{ item.price }} cash</p>
             </v-col>
-            <v-col cols="10" id="progress-container">
+            <v-col cols="8" id="progress-container">
                 <p id="cancel-message" v-if="state == 5" style="font-weight:bold; font-size:14px">취소된 거래입니다.</p>
                 <p id="waiting-message" v-if="state == -1" style="font-weight:bold; font-size:14px">거래 대기 중</p>
                 <v-stepper alt-labels v-model="state">
@@ -42,12 +45,13 @@
                     </v-stepper-header>
                 </v-stepper>
                 <div id="btn-container">
-                    <p>{{ purchaseInfo.address }}</p>
+                    <span class="font-weight-bold">{{ purchaseInfo.address }}</span>
                     <v-btn color="success" :disabled="state != 2 && !isCharging" @click="send(index)"
                     >{{ isCharging ? "처리중입니다" : "배송시작" }}
                     </v-btn>
                 </div>
             </v-col>
+            <v-flex size1></v-flex>
         </v-row>
     </v-card>
 </template>

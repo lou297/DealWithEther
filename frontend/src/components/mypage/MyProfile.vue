@@ -5,7 +5,7 @@
             <v-flex md2></v-flex>
             <v-col cols="12" md="8">
                 <v-row id="profile-container">
-                    <v-col cols="4" id="profile-image-container">
+                    <v-col cols="4" id="profile-image-container" class="rounded-lg">
                         <div>
                             <v-avatar size="130px">
                                 <!--                                <v-img-->
@@ -30,20 +30,21 @@
                             <p class="font-weight-bold">{{ user.email }}</p>
                             <router-link
                                 :to="{ name: 'mypage.password' }"
-                                style="color: green"
+                                class="font-weight-bold"
                             >비밀번호 변경
                             </router-link>
-                            <a id="link-to-login" @click.stop="imageModal = true">이미지등록</a>
+                            <span class="profile-text-field"> / </span>
+                            <a @click.stop="imageModal = true" class="font-weight-bold">이미지 등록</a>
                         </div>
                     </v-col>
                     <!-- 지갑정보가 있을때 -->
                     <v-col cols="8" id="wallet-info-container" v-if="$store.state.user.walletAddress">
                         <v-row>
                             <v-col cols="6" md="3">
-                                <p>보유 ETH :</p>
+                                <p class="profile-text-field">보유 ETH :</p>
                             </v-col>
                             <v-col cols="6" md="3">
-                                <p>{{ wallet.balance }} ETH</p>
+                                <p class="profile-text-field">{{ wallet.balance }} ETH</p>
                             </v-col>
                             <v-col cols="12" md="6">
                                 <v-btn
@@ -58,16 +59,16 @@
                         </v-row>
                         <v-row>
                             <v-col cols="6" md="3">
-                                <p>보유 캐시 :</p>
+                                <p class="profile-text-field">보유 캐시 :</p>
                             </v-col>
                             <v-col cols="6" md="3">
-                                <p>{{ wallet.cash }} CASH</p>
+                                <p class="profile-text-field">{{ wallet.cash }} CASH</p>
                             </v-col>
                             <v-col cols="6" md="3">
                                 <input
                                     v-model="cashChargeAmount"
                                     type="number"
-                                    class="form-control"
+                                    class="form-control profile-text-field"
                                 />
                             </v-col>
                             <v-col cols="6" md="3">
@@ -83,10 +84,10 @@
                         </v-row>
                         <v-row>
                             <v-col cols="12" md="3">
-                                <p>내 지갑주소 :</p>
+                                <p class="profile-text-field">내 지갑주소 :</p>
                             </v-col>
                             <v-col cols="12" md="9">
-                                <p>{{ wallet.address }}</p>
+                                <p class="profile-text-field">{{ wallet.address }}</p>
                             </v-col>
                         </v-row>
                     </v-col>
@@ -422,7 +423,7 @@ export default {
 }
 
 #profile-image-container {
-    background-color: #ffd455;
+    border: 1px solid  #ffd455;
     padding: 30px 0 18px 0;
 }
 
@@ -436,7 +437,7 @@ export default {
 }
 
 #wallet-info-container p {
-    font-size: 17px;
+  font-size: 14px;
 }
 
 #item-container {
@@ -446,5 +447,9 @@ export default {
 .tab-menu {
     font-size: 16px;
     font-weight: bold;
+}
+
+.profile-text-field {
+  font-weight: bold;
 }
 </style>
