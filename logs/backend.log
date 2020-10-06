@@ -1870,3 +1870,431 @@
 2020-10-06 15:58:06 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
 2020-10-06 15:58:06 [main] INFO  com.ecommerce.Application - Started Application in 6.029 seconds (JVM running for 6.797)
 2020-10-06 15:58:10 [http-nio-8080-exec-3] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-10-06 16:14:31 [main] INFO  com.ecommerce.Application - Starting Application on DESKTOP-KVCQHCD with PID 3004 (C:\SSAFY\BlockChain_SubPJT3\s03p23a103\backend\target\classes started by multicampus in C:\SSAFY\BlockChain_SubPJT3\s03p23a103)
+2020-10-06 16:14:31 [main] DEBUG com.ecommerce.Application - Running with Spring Boot v2.1.4.RELEASE, Spring v5.1.6.RELEASE
+2020-10-06 16:14:31 [main] INFO  com.ecommerce.Application - No active profile set, falling back to default profiles: default
+2020-10-06 16:14:32 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data repositories in DEFAULT mode.
+2020-10-06 16:14:32 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 162ms. Found 1 repository interfaces.
+2020-10-06 16:14:32 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$f4e3fb3d] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-10-06 16:14:33 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2020-10-06 16:14:33 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2020-10-06 16:14:33 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.17]
+2020-10-06 16:14:33 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2020-10-06 16:14:33 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2020-10-06 16:14:33 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2020-10-06 16:14:34 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2020-10-06 16:14:34 [main] INFO  org.hibernate.Version - HHH000412: Hibernate Core {5.3.9.Final}
+2020-10-06 16:14:34 [main] INFO  org.hibernate.cfg.Environment - HHH000206: hibernate.properties not found
+2020-10-06 16:14:34 [main] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.0.4.Final}
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration boolean -> org.hibernate.type.BooleanType@3ea84e01
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration boolean -> org.hibernate.type.BooleanType@3ea84e01
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.lang.Boolean -> org.hibernate.type.BooleanType@3ea84e01
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration numeric_boolean -> org.hibernate.type.NumericBooleanType@986b619
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration true_false -> org.hibernate.type.TrueFalseType@24eecabf
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration yes_no -> org.hibernate.type.YesNoType@16e907b6
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration byte -> org.hibernate.type.ByteType@3cf8a235
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration byte -> org.hibernate.type.ByteType@3cf8a235
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.lang.Byte -> org.hibernate.type.ByteType@3cf8a235
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration character -> org.hibernate.type.CharacterType@334b392d
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration char -> org.hibernate.type.CharacterType@334b392d
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.lang.Character -> org.hibernate.type.CharacterType@334b392d
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration short -> org.hibernate.type.ShortType@1bdafb01
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration short -> org.hibernate.type.ShortType@1bdafb01
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.lang.Short -> org.hibernate.type.ShortType@1bdafb01
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration integer -> org.hibernate.type.IntegerType@fd87c22
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration int -> org.hibernate.type.IntegerType@fd87c22
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.lang.Integer -> org.hibernate.type.IntegerType@fd87c22
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration long -> org.hibernate.type.LongType@636e4bf8
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration long -> org.hibernate.type.LongType@636e4bf8
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.lang.Long -> org.hibernate.type.LongType@636e4bf8
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration float -> org.hibernate.type.FloatType@7878bbdb
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration float -> org.hibernate.type.FloatType@7878bbdb
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.lang.Float -> org.hibernate.type.FloatType@7878bbdb
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration double -> org.hibernate.type.DoubleType@2e1ba142
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration double -> org.hibernate.type.DoubleType@2e1ba142
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.lang.Double -> org.hibernate.type.DoubleType@2e1ba142
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration big_decimal -> org.hibernate.type.BigDecimalType@77cd235b
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.math.BigDecimal -> org.hibernate.type.BigDecimalType@77cd235b
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration big_integer -> org.hibernate.type.BigIntegerType@204b0f07
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.math.BigInteger -> org.hibernate.type.BigIntegerType@204b0f07
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration string -> org.hibernate.type.StringType@7f53fc38
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.lang.String -> org.hibernate.type.StringType@7f53fc38
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration nstring -> org.hibernate.type.StringNVarcharType@571d0925
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration ncharacter -> org.hibernate.type.CharacterNCharType@4b09d1c3
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration url -> org.hibernate.type.UrlType@7d977a20
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.net.URL -> org.hibernate.type.UrlType@7d977a20
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration Duration -> org.hibernate.type.DurationType@76ffc17c
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.time.Duration -> org.hibernate.type.DurationType@76ffc17c
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration Instant -> org.hibernate.type.InstantType@2a9e754e
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.time.Instant -> org.hibernate.type.InstantType@2a9e754e
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration LocalDateTime -> org.hibernate.type.LocalDateTimeType@1acc873b
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.time.LocalDateTime -> org.hibernate.type.LocalDateTimeType@1acc873b
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration LocalDate -> org.hibernate.type.LocalDateType@6cee903a
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.time.LocalDate -> org.hibernate.type.LocalDateType@6cee903a
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration LocalTime -> org.hibernate.type.LocalTimeType@51e94b7d
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.time.LocalTime -> org.hibernate.type.LocalTimeType@51e94b7d
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration OffsetDateTime -> org.hibernate.type.OffsetDateTimeType@6c519e47
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.time.OffsetDateTime -> org.hibernate.type.OffsetDateTimeType@6c519e47
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration OffsetTime -> org.hibernate.type.OffsetTimeType@62de73eb
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.time.OffsetTime -> org.hibernate.type.OffsetTimeType@62de73eb
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration ZonedDateTime -> org.hibernate.type.ZonedDateTimeType@b841713
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.time.ZonedDateTime -> org.hibernate.type.ZonedDateTimeType@b841713
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration date -> org.hibernate.type.DateType@7c8f047a
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.sql.Date -> org.hibernate.type.DateType@7c8f047a
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration time -> org.hibernate.type.TimeType@553fbe94
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.sql.Time -> org.hibernate.type.TimeType@553fbe94
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration timestamp -> org.hibernate.type.TimestampType@1de12397
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.sql.Timestamp -> org.hibernate.type.TimestampType@1de12397
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.util.Date -> org.hibernate.type.TimestampType@1de12397
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration dbtimestamp -> org.hibernate.type.DbTimestampType@545604a9
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration calendar -> org.hibernate.type.CalendarType@655909e2
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.util.Calendar -> org.hibernate.type.CalendarType@655909e2
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.util.GregorianCalendar -> org.hibernate.type.CalendarType@655909e2
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration calendar_date -> org.hibernate.type.CalendarDateType@5d3b6585
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration locale -> org.hibernate.type.LocaleType@4fea5ee0
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.util.Locale -> org.hibernate.type.LocaleType@4fea5ee0
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration currency -> org.hibernate.type.CurrencyType@7b3085a3
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.util.Currency -> org.hibernate.type.CurrencyType@7b3085a3
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration timezone -> org.hibernate.type.TimeZoneType@5a7a6d34
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.util.TimeZone -> org.hibernate.type.TimeZoneType@5a7a6d34
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration class -> org.hibernate.type.ClassType@5ae66c98
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.lang.Class -> org.hibernate.type.ClassType@5ae66c98
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration uuid-binary -> org.hibernate.type.UUIDBinaryType@223cbf0d
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.util.UUID -> org.hibernate.type.UUIDBinaryType@223cbf0d
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration uuid-char -> org.hibernate.type.UUIDCharType@cf9bd1e
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration binary -> org.hibernate.type.BinaryType@4a105556
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration byte[] -> org.hibernate.type.BinaryType@4a105556
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration [B -> org.hibernate.type.BinaryType@4a105556
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration wrapper-binary -> org.hibernate.type.WrapperBinaryType@4f20b022
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration Byte[] -> org.hibernate.type.WrapperBinaryType@4f20b022
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration [Ljava.lang.Byte; -> org.hibernate.type.WrapperBinaryType@4f20b022
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration row_version -> org.hibernate.type.RowVersionType@1c8f71a7
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration image -> org.hibernate.type.ImageType@2e85e3f1
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration characters -> org.hibernate.type.CharArrayType@592cb470
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration char[] -> org.hibernate.type.CharArrayType@592cb470
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration [C -> org.hibernate.type.CharArrayType@592cb470
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration wrapper-characters -> org.hibernate.type.CharacterArrayType@45424c0
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration [Ljava.lang.Character; -> org.hibernate.type.CharacterArrayType@45424c0
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration Character[] -> org.hibernate.type.CharacterArrayType@45424c0
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration text -> org.hibernate.type.TextType@ccd000e
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration ntext -> org.hibernate.type.NTextType@12a6e8ed
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration blob -> org.hibernate.type.BlobType@d4ecdb0
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.sql.Blob -> org.hibernate.type.BlobType@d4ecdb0
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration materialized_blob -> org.hibernate.type.MaterializedBlobType@669c2b07
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration clob -> org.hibernate.type.ClobType@7d18338b
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.sql.Clob -> org.hibernate.type.ClobType@7d18338b
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration nclob -> org.hibernate.type.NClobType@7b8b07ae
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.sql.NClob -> org.hibernate.type.NClobType@7b8b07ae
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration materialized_clob -> org.hibernate.type.MaterializedClobType@42503099
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration materialized_nclob -> org.hibernate.type.MaterializedNClobType@6df37f7a
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration serializable -> org.hibernate.type.SerializableType@23c05889
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration object -> org.hibernate.type.ObjectType@60a4e619
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.lang.Object -> org.hibernate.type.ObjectType@60a4e619
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration imm_date -> org.hibernate.type.AdaptedImmutableType@2558f65c
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration imm_time -> org.hibernate.type.AdaptedImmutableType@11c3ce6a
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration imm_timestamp -> org.hibernate.type.AdaptedImmutableType@1a3b1f7e
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration imm_dbtimestamp -> org.hibernate.type.AdaptedImmutableType@22899683
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration imm_calendar -> org.hibernate.type.AdaptedImmutableType@40017e98
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration imm_calendar_date -> org.hibernate.type.AdaptedImmutableType@4fbe486c
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration imm_binary -> org.hibernate.type.AdaptedImmutableType@dbc7e0a
+2020-10-06 16:14:34 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration imm_serializable -> org.hibernate.type.AdaptedImmutableType@636fccb0
+2020-10-06 16:14:34 [main] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2020-10-06 16:14:34 [main] DEBUG o.h.type.spi.TypeConfiguration$Scope - Scoping TypeConfiguration [org.hibernate.type.spi.TypeConfiguration@34a33343] to MetadataBuildingContext [org.hibernate.boot.internal.MetadataBuildingContextRootImpl@98722ef]
+2020-10-06 16:14:34 [main] DEBUG o.h.type.spi.TypeConfiguration$Scope - Scoping TypeConfiguration [org.hibernate.type.spi.TypeConfiguration@34a33343] to SessionFactoryImpl [org.hibernate.internal.SessionFactoryImpl@3d2b13b1]
+2020-10-06 16:14:35 [main] TRACE o.h.type.spi.TypeConfiguration$Scope - Handling #sessionFactoryCreated from [org.hibernate.internal.SessionFactoryImpl@3d2b13b1] for TypeConfiguration
+2020-10-06 16:14:35 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2020-10-06 16:14:36 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration$JpaWebMvcConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2020-10-06 16:14:36 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [public org.springframework.http.ResponseEntity<springfox.documentation.spring.web.json.Json> springfox.documentation.swagger2.web.Swagger2Controller.getDocumentation(java.lang.String,javax.servlet.http.HttpServletRequest)]
+2020-10-06 16:14:36 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2020-10-06 16:14:36 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Context refreshed
+2020-10-06 16:14:36 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2020-10-06 16:14:36 [main] INFO  s.d.s.w.s.ApiListingReferenceScanner - Scanning for api listing references
+2020-10-06 16:14:36 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: listUsingGET_1
+2020-10-06 16:14:36 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: deleteUsingDELETE_1
+2020-10-06 16:14:36 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getPageUsingGET_1
+2020-10-06 16:14:36 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: listUsingGET_2
+2020-10-06 16:14:36 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: registerUsingPOST_1
+2020-10-06 16:14:37 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: deleteUsingDELETE_2
+2020-10-06 16:14:37 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getUsingGET_1
+2020-10-06 16:14:37 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: listUsingGET_3
+2020-10-06 16:14:37 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: registerUsingPOST_2
+2020-10-06 16:14:37 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: deleteUsingDELETE_3
+2020-10-06 16:14:37 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: downloadFileUsingGET_1
+2020-10-06 16:14:37 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getUsingGET_2
+2020-10-06 16:14:37 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: listUsingGET_4
+2020-10-06 16:14:37 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: updateUsingPUT_1
+2020-10-06 16:14:37 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getUsingGET_3
+2020-10-06 16:14:37 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getByUserUsingGET_1
+2020-10-06 16:14:37 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: registerUsingPOST_3
+2020-10-06 16:14:37 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2020-10-06 16:14:37 [main] INFO  com.ecommerce.Application - Started Application in 6.499 seconds (JVM running for 6.916)
+2020-10-06 16:14:40 [http-nio-8080-exec-4] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-10-06 16:20:11 [http-nio-8080-exec-7] INFO  o.h.h.i.QueryTranslatorFactoryInitiator - HHH000397: Using ASTQueryTranslatorFactory
+2020-10-06 16:20:11 [http-nio-8080-exec-7] DEBUG org.hibernate.SQL - 
+    select
+        itemjpa0_.id as id1_0_,
+        itemjpa0_.available as availabl2_0_,
+        itemjpa0_.category as category3_0_,
+        itemjpa0_.deal_region as deal_reg4_0_,
+        itemjpa0_.direct_deal as direct_d5_0_,
+        itemjpa0_.explanation as explanat6_0_,
+        itemjpa0_.image as image7_0_,
+        itemjpa0_.name as name8_0_,
+        itemjpa0_.price as price9_0_,
+        itemjpa0_.progress as progres10_0_,
+        itemjpa0_.registered_at as registe11_0_,
+        itemjpa0_.seller as seller12_0_,
+        itemjpa0_.view_count as view_co13_0_ 
+    from
+        items itemjpa0_ 
+    where
+        (
+            itemjpa0_.name like ? escape ?
+        ) 
+        and itemjpa0_.progress=? 
+        and itemjpa0_.available=? 
+    order by
+        itemjpa0_.id desc limit ?
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.type.descriptor.sql.BasicBinder - binding parameter [1] as [VARCHAR] - [%%]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.type.descriptor.sql.BasicBinder - binding parameter [2] as [CHAR] - [\]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.type.descriptor.sql.BasicBinder - binding parameter [3] as [BOOLEAN] - [false]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.type.descriptor.sql.BasicBinder - binding parameter [4] as [BOOLEAN] - [true]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([id1_0_] : [BIGINT]) - [116]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([availabl2_0_] : [BOOLEAN]) - [true]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([category3_0_] : [VARCHAR]) - [뷰티/미용]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([deal_reg4_0_] : [VARCHAR]) - [null]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([direct_d5_0_] : [BOOLEAN]) - [false]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([explanat6_0_] : [VARCHAR]) - [daffa]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([image7_0_] : [INTEGER]) - [1]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([name8_0_] : [VARCHAR]) - [오ㅗㅗㅇㄹ롱ㄹ놈ㄴㅀ]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([price9_0_] : [INTEGER]) - [123123]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([progres10_0_] : [BOOLEAN]) - [false]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([registe11_0_] : [TIMESTAMP]) - [2020-10-06T16:11:29]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([seller12_0_] : [BIGINT]) - [2]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([view_co13_0_] : [INTEGER]) - [0]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([id1_0_] : [BIGINT]) - [115]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([availabl2_0_] : [BOOLEAN]) - [true]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([category3_0_] : [VARCHAR]) - [뷰티/미용]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([deal_reg4_0_] : [VARCHAR]) - [null]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([direct_d5_0_] : [BOOLEAN]) - [false]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([explanat6_0_] : [VARCHAR]) - [asd]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([image7_0_] : [INTEGER]) - [1]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([name8_0_] : [VARCHAR]) - [ㅁㄴㅇㅁㄴㅇ]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([price9_0_] : [INTEGER]) - [1111]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([progres10_0_] : [BOOLEAN]) - [false]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([registe11_0_] : [TIMESTAMP]) - [2020-10-06T16:09:48]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([seller12_0_] : [BIGINT]) - [2]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([view_co13_0_] : [INTEGER]) - [0]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([id1_0_] : [BIGINT]) - [114]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([availabl2_0_] : [BOOLEAN]) - [true]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([category3_0_] : [VARCHAR]) - [생활/문구/가구]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([deal_reg4_0_] : [VARCHAR]) - [null]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([direct_d5_0_] : [BOOLEAN]) - [false]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([explanat6_0_] : [VARCHAR]) - [싸요]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([image7_0_] : [INTEGER]) - [1]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([name8_0_] : [VARCHAR]) - [치마 팜]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([price9_0_] : [INTEGER]) - [5000]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([progres10_0_] : [BOOLEAN]) - [false]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([registe11_0_] : [TIMESTAMP]) - [2020-10-06T16:08:44]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([seller12_0_] : [BIGINT]) - [14]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([view_co13_0_] : [INTEGER]) - [0]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([id1_0_] : [BIGINT]) - [113]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([availabl2_0_] : [BOOLEAN]) - [true]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([category3_0_] : [VARCHAR]) - [뷰티/미용]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([deal_reg4_0_] : [VARCHAR]) - [null]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([direct_d5_0_] : [BOOLEAN]) - [false]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([explanat6_0_] : [VARCHAR]) - [sf]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([image7_0_] : [INTEGER]) - [1]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([name8_0_] : [VARCHAR]) - [asdfawef]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([price9_0_] : [INTEGER]) - [1111]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([progres10_0_] : [BOOLEAN]) - [false]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([registe11_0_] : [TIMESTAMP]) - [2020-10-06T16:08:06]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([seller12_0_] : [BIGINT]) - [2]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([view_co13_0_] : [INTEGER]) - [0]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([id1_0_] : [BIGINT]) - [111]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([availabl2_0_] : [BOOLEAN]) - [true]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([category3_0_] : [VARCHAR]) - [생활/문구/가구]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([deal_reg4_0_] : [VARCHAR]) - [null]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([direct_d5_0_] : [BOOLEAN]) - [false]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([explanat6_0_] : [VARCHAR]) - []
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([image7_0_] : [INTEGER]) - [1]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([name8_0_] : [VARCHAR]) - [보드]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([price9_0_] : [INTEGER]) - [25000]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([progres10_0_] : [BOOLEAN]) - [false]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([registe11_0_] : [TIMESTAMP]) - [2020-10-06T11:59:55]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([seller12_0_] : [BIGINT]) - [11]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([view_co13_0_] : [INTEGER]) - [9]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([id1_0_] : [BIGINT]) - [110]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([availabl2_0_] : [BOOLEAN]) - [true]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([category3_0_] : [VARCHAR]) - [디지털/가전]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([deal_reg4_0_] : [VARCHAR]) - [null]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([direct_d5_0_] : [BOOLEAN]) - [false]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([explanat6_0_] : [VARCHAR]) - [노트북]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([image7_0_] : [INTEGER]) - [1]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([name8_0_] : [VARCHAR]) - [노트북]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([price9_0_] : [INTEGER]) - [2500000]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([progres10_0_] : [BOOLEAN]) - [false]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([registe11_0_] : [TIMESTAMP]) - [2020-10-06T11:58:29]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([seller12_0_] : [BIGINT]) - [13]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([view_co13_0_] : [INTEGER]) - [18]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([id1_0_] : [BIGINT]) - [100]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([availabl2_0_] : [BOOLEAN]) - [true]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([category3_0_] : [VARCHAR]) - [뷰티/미용]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([deal_reg4_0_] : [VARCHAR]) - [null]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([direct_d5_0_] : [BOOLEAN]) - [false]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([explanat6_0_] : [VARCHAR]) - [dazvcdaad]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([image7_0_] : [INTEGER]) - [2]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([name8_0_] : [VARCHAR]) - [fssdvsdv]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([price9_0_] : [INTEGER]) - [11111]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([progres10_0_] : [BOOLEAN]) - [false]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([registe11_0_] : [TIMESTAMP]) - [2020-10-06T11:05:36]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([seller12_0_] : [BIGINT]) - [2]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([view_co13_0_] : [INTEGER]) - [3]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([id1_0_] : [BIGINT]) - [97]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([availabl2_0_] : [BOOLEAN]) - [true]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([category3_0_] : [VARCHAR]) - [패션/잡화]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([deal_reg4_0_] : [VARCHAR]) - [null]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([direct_d5_0_] : [BOOLEAN]) - [false]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([explanat6_0_] : [VARCHAR]) - [좋다]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([image7_0_] : [INTEGER]) - [1]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([name8_0_] : [VARCHAR]) - [핑크색 가방]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([price9_0_] : [INTEGER]) - [15000]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([progres10_0_] : [BOOLEAN]) - [false]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([registe11_0_] : [TIMESTAMP]) - [2020-10-04T18:15:28]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([seller12_0_] : [BIGINT]) - [3]
+2020-10-06 16:20:11 [http-nio-8080-exec-7] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([view_co13_0_] : [INTEGER]) - [31]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        itemjpa0_.id as id1_0_,
+        itemjpa0_.available as availabl2_0_,
+        itemjpa0_.category as category3_0_,
+        itemjpa0_.deal_region as deal_reg4_0_,
+        itemjpa0_.direct_deal as direct_d5_0_,
+        itemjpa0_.explanation as explanat6_0_,
+        itemjpa0_.image as image7_0_,
+        itemjpa0_.name as name8_0_,
+        itemjpa0_.price as price9_0_,
+        itemjpa0_.progress as progres10_0_,
+        itemjpa0_.registered_at as registe11_0_,
+        itemjpa0_.seller as seller12_0_,
+        itemjpa0_.view_count as view_co13_0_ 
+    from
+        items itemjpa0_ 
+    where
+        (
+            itemjpa0_.name like ? escape ?
+        ) 
+        and itemjpa0_.progress=? 
+        and itemjpa0_.available=? 
+    order by
+        itemjpa0_.id desc limit ?
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.type.descriptor.sql.BasicBinder - binding parameter [1] as [VARCHAR] - [%%]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.type.descriptor.sql.BasicBinder - binding parameter [2] as [CHAR] - [\]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.type.descriptor.sql.BasicBinder - binding parameter [3] as [BOOLEAN] - [false]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.type.descriptor.sql.BasicBinder - binding parameter [4] as [BOOLEAN] - [true]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([id1_0_] : [BIGINT]) - [116]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([availabl2_0_] : [BOOLEAN]) - [true]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([category3_0_] : [VARCHAR]) - [뷰티/미용]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([deal_reg4_0_] : [VARCHAR]) - [null]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([direct_d5_0_] : [BOOLEAN]) - [false]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([explanat6_0_] : [VARCHAR]) - [daffa]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([image7_0_] : [INTEGER]) - [1]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([name8_0_] : [VARCHAR]) - [오ㅗㅗㅇㄹ롱ㄹ놈ㄴㅀ]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([price9_0_] : [INTEGER]) - [123123]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([progres10_0_] : [BOOLEAN]) - [false]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([registe11_0_] : [TIMESTAMP]) - [2020-10-06T16:11:29]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([seller12_0_] : [BIGINT]) - [2]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([view_co13_0_] : [INTEGER]) - [0]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([id1_0_] : [BIGINT]) - [115]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([availabl2_0_] : [BOOLEAN]) - [true]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([category3_0_] : [VARCHAR]) - [뷰티/미용]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([deal_reg4_0_] : [VARCHAR]) - [null]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([direct_d5_0_] : [BOOLEAN]) - [false]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([explanat6_0_] : [VARCHAR]) - [asd]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([image7_0_] : [INTEGER]) - [1]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([name8_0_] : [VARCHAR]) - [ㅁㄴㅇㅁㄴㅇ]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([price9_0_] : [INTEGER]) - [1111]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([progres10_0_] : [BOOLEAN]) - [false]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([registe11_0_] : [TIMESTAMP]) - [2020-10-06T16:09:48]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([seller12_0_] : [BIGINT]) - [2]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([view_co13_0_] : [INTEGER]) - [1]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([id1_0_] : [BIGINT]) - [114]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([availabl2_0_] : [BOOLEAN]) - [true]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([category3_0_] : [VARCHAR]) - [생활/문구/가구]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([deal_reg4_0_] : [VARCHAR]) - [null]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([direct_d5_0_] : [BOOLEAN]) - [false]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([explanat6_0_] : [VARCHAR]) - [싸요]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([image7_0_] : [INTEGER]) - [1]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([name8_0_] : [VARCHAR]) - [치마 팜]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([price9_0_] : [INTEGER]) - [5000]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([progres10_0_] : [BOOLEAN]) - [false]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([registe11_0_] : [TIMESTAMP]) - [2020-10-06T16:08:44]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([seller12_0_] : [BIGINT]) - [14]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([view_co13_0_] : [INTEGER]) - [1]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([id1_0_] : [BIGINT]) - [113]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([availabl2_0_] : [BOOLEAN]) - [true]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([category3_0_] : [VARCHAR]) - [뷰티/미용]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([deal_reg4_0_] : [VARCHAR]) - [null]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([direct_d5_0_] : [BOOLEAN]) - [false]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([explanat6_0_] : [VARCHAR]) - [sf]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([image7_0_] : [INTEGER]) - [1]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([name8_0_] : [VARCHAR]) - [asdfawef]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([price9_0_] : [INTEGER]) - [1111]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([progres10_0_] : [BOOLEAN]) - [false]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([registe11_0_] : [TIMESTAMP]) - [2020-10-06T16:08:06]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([seller12_0_] : [BIGINT]) - [2]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([view_co13_0_] : [INTEGER]) - [0]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([id1_0_] : [BIGINT]) - [111]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([availabl2_0_] : [BOOLEAN]) - [true]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([category3_0_] : [VARCHAR]) - [생활/문구/가구]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([deal_reg4_0_] : [VARCHAR]) - [null]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([direct_d5_0_] : [BOOLEAN]) - [false]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([explanat6_0_] : [VARCHAR]) - []
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([image7_0_] : [INTEGER]) - [1]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([name8_0_] : [VARCHAR]) - [보드]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([price9_0_] : [INTEGER]) - [25000]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([progres10_0_] : [BOOLEAN]) - [false]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([registe11_0_] : [TIMESTAMP]) - [2020-10-06T11:59:55]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([seller12_0_] : [BIGINT]) - [11]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([view_co13_0_] : [INTEGER]) - [10]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([id1_0_] : [BIGINT]) - [110]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([availabl2_0_] : [BOOLEAN]) - [true]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([category3_0_] : [VARCHAR]) - [디지털/가전]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([deal_reg4_0_] : [VARCHAR]) - [null]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([direct_d5_0_] : [BOOLEAN]) - [false]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([explanat6_0_] : [VARCHAR]) - [노트북]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([image7_0_] : [INTEGER]) - [1]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([name8_0_] : [VARCHAR]) - [노트북]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([price9_0_] : [INTEGER]) - [2500000]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([progres10_0_] : [BOOLEAN]) - [false]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([registe11_0_] : [TIMESTAMP]) - [2020-10-06T11:58:29]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([seller12_0_] : [BIGINT]) - [13]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([view_co13_0_] : [INTEGER]) - [19]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([id1_0_] : [BIGINT]) - [100]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([availabl2_0_] : [BOOLEAN]) - [true]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([category3_0_] : [VARCHAR]) - [뷰티/미용]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([deal_reg4_0_] : [VARCHAR]) - [null]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([direct_d5_0_] : [BOOLEAN]) - [false]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([explanat6_0_] : [VARCHAR]) - [dazvcdaad]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([image7_0_] : [INTEGER]) - [2]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([name8_0_] : [VARCHAR]) - [fssdvsdv]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([price9_0_] : [INTEGER]) - [11111]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([progres10_0_] : [BOOLEAN]) - [false]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([registe11_0_] : [TIMESTAMP]) - [2020-10-06T11:05:36]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([seller12_0_] : [BIGINT]) - [2]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([view_co13_0_] : [INTEGER]) - [10]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([id1_0_] : [BIGINT]) - [97]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([availabl2_0_] : [BOOLEAN]) - [true]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([category3_0_] : [VARCHAR]) - [패션/잡화]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([deal_reg4_0_] : [VARCHAR]) - [null]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([direct_d5_0_] : [BOOLEAN]) - [false]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([explanat6_0_] : [VARCHAR]) - [좋다]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([image7_0_] : [INTEGER]) - [1]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([name8_0_] : [VARCHAR]) - [핑크색 가방]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([price9_0_] : [INTEGER]) - [15000]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([progres10_0_] : [BOOLEAN]) - [false]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([registe11_0_] : [TIMESTAMP]) - [2020-10-04T18:15:28]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([seller12_0_] : [BIGINT]) - [3]
+2020-10-06 16:34:44 [http-nio-8080-exec-4] TRACE o.h.t.descriptor.sql.BasicExtractor - extracted value ([view_co13_0_] : [INTEGER]) - [33]
