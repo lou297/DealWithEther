@@ -145,47 +145,21 @@ export default {
         HNav,
         Loading,
     },
-  },
-  methods: {
-    // 상품을 등록한다.
-    save() {
-      const vm = this;
-      const privateKey = prompt("캐시를 충전하시려면 개인키를 입력하세요.");
-      this.item.pk = privateKey;
-      this.isCreating = true; // 아이템 등록 중임을 화면에 표시, 등록이 끝나면 false로 변경
-      walletService.isValidPrivateKey(this.userId, privateKey, (res) => {
-        if (res) {
-          const data = new FormData();
-          const file = this.files;
-          for (let i = 0; i < this.files.length; i++) {
-            data.append("file", this.files[i]);
-          }
-          for (var pair of data.entries()) {
-            console.log(pair[0] + "," + pair[1]);
-          }
-
-          createItem(
-            // 상품 등록 - 백앤드
-            this.item,
-            function(success) {
-              alert("상품 등록 성공!");
-              console.log(success);
-              vm.item.id = success.data.id;
-              console.log("아이디:" + success.data.id);
-              savaImage(
-                // 사진 등록
-                data,
-                vm.item.id,
-                function(success) {
-                  alert("이미지 등록 성공!");
-                },
-                function(error) {
-                  console.log(error);
-                },
-                function(final) {
-                  console.log("안녕");
-                }
-              );
+    data() {
+        return {
+            files: [],
+            item: {
+                id: "",
+                name: "",
+                category: "",
+                explanation: "",
+                available: true,
+                seller: this.$store.state.user.id,
+                directDeal: false,
+                dealRegion: "",
+                price: null,
+                address: this.$store.state.user.walletAddress,
+                pk: "",
             },
             image: [],
             id: null,
@@ -254,7 +228,7 @@ export default {
                     createItem(
                         // 상품 등록 - 백앤드
                         this.item,
-                        function (success) {
+                        function(success) {
                             alert("상품 등록 성공!");
                             console.log(success);
                             vm.item.id = success.data.id;
@@ -263,21 +237,21 @@ export default {
                                 // 사진 등록
                                 data,
                                 vm.item.id,
-                                function (success) {
+                                function(success) {
                                     alert("이미지 등록 성공!");
                                 },
-                                function (error) {
+                                function(error) {
                                     console.log(error);
                                 },
-                                function (final) {
+                                function(final) {
                                     console.log("안녕");
                                 }
                             );
                         },
-                        function (error) {
+                        function(error) {
                             console.log(error);
                         },
-                        function (final) {
+                        function(final) {
                             console.log("안녕");
                         }
                     );
