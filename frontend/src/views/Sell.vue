@@ -121,11 +121,6 @@
         </v-layout>
       </v-container>
     </v-card>
-    <v-dialog v-model="loading" max-width="500" min-width="300">
-      <div style="background-color: white">
-        <Loading :loading="loading" v-on:closeThis=""></Loading>
-      </div>
-    </v-dialog>
   </div>
 </template>
 
@@ -135,13 +130,11 @@ import { save as savaImage } from "@/api/item.js";
 import { registerItem } from "@/utils/itemInventory.js";
 import * as walletService from "@/api/wallet.js";
 import HNav from "../components/common/HNav";
-import Loading from "@/views/Loading";
 
 export default {
   name: "ItemCreate",
   components: {
     HNav,
-    Loading,
   },
   data() {
     return {
