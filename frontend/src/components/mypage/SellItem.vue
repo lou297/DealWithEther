@@ -43,7 +43,7 @@
       </v-stepper>
       <div id="btn-container">
         <p>{{purchaseInfo.address}}</p>
-        <v-btn color="success" :disabled="state != 2" @click="send(index)"
+        <v-btn color="success" :disabled="state != 2" @click="send()"
           >배송 시작</v-btn>
       </div>
     </v-col>
@@ -53,6 +53,7 @@
 <script>
 import * as purchaseService from "@/api/purchase.js";
 import * as ratingService from "@/api/rating.js";
+import * as walletService from "@/api/wallet.js";
 export default {
   props: ["item"],
   data() {
@@ -122,20 +123,20 @@ export default {
     onClickItem() {
       this.$router.push("../item/detail/" + this.item.id);
     },
-    send(index) {
+    send() {
       const privateKey = prompt("배송하시려면 개인키를 입력하세요.");
       console.log(this.userId);
       const vm = this;
       walletService.isValidPrivateKey(this.userId, privateKey, (res) => {
         if (res) {
           purchaseService.send(
-            vm.items[index].purchaseId,
+            vm.purchaseInfo.purchaseId,
             privateKey,
             (res) => {
               alert("성공!");
             },
             (error) => {
-              alert("실패!");
+              alert(error);
             }
           );
         } else {
@@ -149,7 +150,7 @@ export default {
 </script>
 
 <style>
-#container2 {
+#container {
   padding : 0 10px;
 }
 
