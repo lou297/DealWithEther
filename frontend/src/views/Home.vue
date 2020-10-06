@@ -12,11 +12,12 @@
                 <div class="col-sm-7 col-lg-6 pl-4 pl-md-5 pl-lg-0">
                     <div class="hero-banner__content" style="margin-top:38px; margin-left:50px;">
                         <h4>중코마켓</h4>
-                        <h1 style="margin:0px;">중고마켓에서</h1>
-                        <h1>코인으로 거래하자</h1>
-                        <p style="margin-bottom:8px;">1이더 = 400,000원 상당</p>
-                        <p style="margin-bottom:8px;">1이더 = 100,000 CASH</p>
-                        <p style="margin-bottom:8px;">이더로 코인을 충전하여 거래하세요</p>
+                        <p style="margin:0px; font-size:36px; font-weight:bold;">중고마켓에서</p>
+                        <p style="font-size:36px; font-weight:bold;">코인으로 거래하자</p>
+                        <!-- <h1>코인으로 거래하자</h1> -->
+                        <p style="margin-bottom:8px; font-weight:bold;">1이더 = 400,000원 상당</p>
+                        <p style="margin-bottom:8px; font-weight:bold;">1이더 = 100,000 CASH</p>
+                        <p style="margin-bottom:8px; font-weight:bold;">이더로 코인을 충전하여 거래하세요</p>
                     </div>
                 </div>
             </div>
@@ -24,7 +25,7 @@
     </div>
     <v-card color="white">
         <v-card-title class="text-center justify-center py-6">
-            <h1 class="font-weight-bold text-secondary">카테고리별 인기상품</h1>
+            <p class="font-weight-bold text-secondary" style="font-size:22px">카테고리별 인기상품</p>
         </v-card-title>
         <v-flex xl1 lg1 md1 sm0 xs0><span></span></v-flex>
         <v-tabs v-model="tab" background-color="transparent" color="basil" grow>
