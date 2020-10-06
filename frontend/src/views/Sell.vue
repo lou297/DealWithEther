@@ -120,12 +120,19 @@ import { save as savaImage } from "@/api/item.js";
 import { registerItem } from "@/utils/itemInventory.js";
 import * as walletService from "@/api/wallet.js";
 import HNav from "../components/common/HNav";
+<<<<<<< HEAD
 import HBreadcrumb from "@/components/common/HBreadcrumb";
+=======
+
+>>>>>>> 21ced97953bb7b48d6a78a99421d101ab547a58d
 export default {
   name: "ItemCreate",
   components: {
     HNav,
+<<<<<<< HEAD
     HBreadcrumb
+=======
+>>>>>>> 21ced97953bb7b48d6a78a99421d101ab547a58d
   },
   data() {
     return {
@@ -210,7 +217,7 @@ export default {
           createItem(
             // 상품 등록 - 백앤드
             this.item,
-            function (success) {
+            function(success) {
               alert("상품 등록 성공!");
               console.log(success);
               vm.item.id = success.data.id;
@@ -219,21 +226,21 @@ export default {
                 // 사진 등록
                 data,
                 vm.item.id,
-                function (success) {
+                function(success) {
                   alert("이미지 등록 성공!");
                 },
-                function (error) {
+                function(error) {
                   console.log(error);
                 },
-                function (final) {
+                function(final) {
                   console.log("안녕");
                 }
               );
             },
-            function (error) {
+            function(error) {
               console.log(error);
             },
-            function (final) {
+            function(final) {
               console.log("안녕");
             }
           );
