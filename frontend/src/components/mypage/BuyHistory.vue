@@ -1,28 +1,34 @@
 <template>
 <v-card>
   <v-row id="container">
+    <v-flex size1></v-flex>
     <v-col cols="2" id="item-info-container">
-      <v-img
-        :src="imgPath(item.id)"
-        :lazy-src="`https://picsum.photos/10/6?random`"
-        aspect-ratio="1"
-        @click="onClickItem()"
-      >
-      </v-img>
-      <p style="float:left">{{ item.name }} (</p>
+      <v-list-item style="padding:0">
+        <v-list-item-avatar style="margin:0;" width="100%" height="100%">
+          <v-img :src="imgPath(item.itemId)"
+            :lazy-src="`https://picsum.photos/10/6?random`"
+            aspect-ratio="1"
+            @click="onClickItem()"></v-img>
+        </v-list-item-avatar>
+      </v-list-item>
+      <p style="margin:0; font-weight: bold;">{{ item.name }}</p>
+      
+      <p style="margin:0; font-weight: bold;">{{ item.price }} cash</p>
+      <div>
       <v-img
         style="
-                    text-align: left;
-                    width: 15px;
-                    float: left;
-                    margin: 3px 4px 0 4px;
-                  "
-        :src="star"
+              text-align: left;
+              width: 15px;
+              float: left;
+              margin: 3px 4px 0 4px;
+              "
+              :src="star"
       ></v-img>
-      <div style="float: left;">: {{ eval }})</div>
+      <div style="float: left;">: {{ eval }} </div>
+      </div>
     </v-col>
-    <v-col cols="10" id="progress-container">
-      <p id="cancel-message" v-if="state == 5">취소된 거래입니다.</p>
+    <v-col cols="8" id="progress-container">
+      <p id="cancel-message" v-if="state == 5" style="font-weight:bold; font-size:14px">취소된 거래입니다.</p>
       <v-stepper alt-labels v-model="state">
         <v-stepper-header>
           <v-stepper-step step="1" :complete="state >= 1">
@@ -76,6 +82,7 @@
         </v-dialog>
       </div>
     </v-col>
+    <v-flex size1></v-flex>
   </v-row>
 </v-card>
 </template>
@@ -151,7 +158,7 @@ export default {
           this.state = 4;
           break;
         case "X":
-          this.state = 0;
+          this.state = 5;
           break;
       }
     },
@@ -182,7 +189,6 @@ export default {
       );
     },
     onClickItem() {
-      alert("클릭");
       this.$router.push("../item/detail/" + this.buyPurchase.itemId);
     },
     evaluate() {
