@@ -144,10 +144,14 @@
             </v-col>
         </v-row>
         <v-dialog v-model="imageModal" max-width="500" min-width="300">
-            <ImgModal :imageModal="imageModal" v-on:closeThis="reload"></ImgModal>
+            <div style="background-color: white">
+                <ImgModal :imageModal="imageModal" v-on:closeThis="reload"></ImgModal>
+            </div>
         </v-dialog>
         <v-dialog v-model="walletModal" max-width="500" min-width="300">
-            <walletModal :walletModal="walletModal" v-on:closeThis="reload"></walletModal>
+            <div style="background-color: white">
+                <walletModal :walletModal="walletModal" v-on:closeThis="reload"></walletModal>
+            </div>
         </v-dialog>
     </div>
 </template>
