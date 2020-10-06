@@ -35,8 +35,8 @@ public class ItemRepository implements IItemRepository {
 
 	@Override
 	public List<Item> list() {
-		StringBuilder sbSql = new StringBuilder("SELECT * FROM items WHERE available=? and progress=0"); // where
-																											// available
+		StringBuilder sbSql = new StringBuilder("SELECT * FROM items WHERE available=? "); // where
+																							// available
 		try {
 			return this.jdbcTemplate.query(sbSql.toString(), new Object[] { true },
 					(rs, rowNum) -> ItemFactory.create(rs));
@@ -60,7 +60,7 @@ public class ItemRepository implements IItemRepository {
 
 	@Override
 	public List<Item> getByUser(final long userId) {
-		StringBuilder sbSql = new StringBuilder("SELECT * FROM items WHERE seller=? and progress=0 and available=1");
+		StringBuilder sbSql = new StringBuilder("SELECT * FROM items WHERE seller=? ");
 		try {
 			return this.jdbcTemplate.query(sbSql.toString(), new Object[] { userId },
 					(rs, rowNum) -> ItemFactory.create(rs));
@@ -239,7 +239,7 @@ public class ItemRepository implements IItemRepository {
 	@Override
 	public List<Item> getByOnlyName(String name, int page) {
 		StringBuilder sbSql = new StringBuilder(
-				"SELECT * FROM items WHERE name like ? and progress=0 and available=1 ORDER BY registered_at DESC limit 12 offset ?");
+				"SELECT * FROM items WHERE name like ? ORDER BY registered_at DESC limit 12 offset ?");
 		String tname = "%" + name + "%";
 		try {
 			return this.jdbcTemplate.query(sbSql.toString(), new Object[] { tname, (page - 1) * 12 },
@@ -251,8 +251,7 @@ public class ItemRepository implements IItemRepository {
 
 	@Override
 	public int getLengthByUser(String category, long id) {
-		StringBuilder sbSql = new StringBuilder(
-				"SELECT count(*) FROM items WHERE seller=? and category like ? and progress=0 and available=1");
+		StringBuilder sbSql = new StringBuilder("SELECT count(*) FROM items WHERE seller=? and category like ?");
 		String tcategory = "%" + category + "%";
 		try {
 			return this.jdbcTemplate.queryForObject(sbSql.toString(), new Object[] { id, tcategory }, int.class);
@@ -263,8 +262,7 @@ public class ItemRepository implements IItemRepository {
 
 	@Override
 	public int getLengthByName(String category, String name) {
-		StringBuilder sbSql = new StringBuilder(
-				"SELECT count(*) FROM items WHERE name like ? and category like ? and progress=0 and available=1");
+		StringBuilder sbSql = new StringBuilder("SELECT count(*) FROM items WHERE name like ? and category like ?");
 		String tcategory = "%" + category + "%";
 		String tname = "%" + name + "%";
 		try {
