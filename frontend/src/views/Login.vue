@@ -1,9 +1,9 @@
 <template>
-    <div class="container">
-        <v-card>
+    <v-card>
+        <v-container>
             <v-card-title class="headline">Sign In</v-card-title>
 
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <label for="email">email</label>
                 <input
                     type="text"
@@ -12,8 +12,18 @@
                     v-model="user.email"
                     placeholder="이메일"
                 />
-            </div>
-            <div class="form-group">
+            </div> -->
+            <v-text-field
+                label="이메일"
+                v-model="user.email"
+            ></v-text-field>
+            <v-text-field
+                label="비밀번호"
+                v-model="user.password"
+                type="password"
+            ></v-text-field>
+
+            <!-- <div class="form-group">
                 <label for="password">비밀번호</label>
                 <input
                     type="password"
@@ -22,14 +32,14 @@
                     v-model="user.password"
                     placeholder="비밀번호"
                 />
-            </div>
+            </div> -->
             <v-card-actions>
-                <v-btn text>
+                <!-- <v-btn text>
                     <v-img src="../../public/images/kakaolink_btn_medium.png" max-width="45px"></v-img>
                 </v-btn>
                 <v-btn text>
                     <v-img src="../../public/images/naver_btn2.png" max-width="45px"></v-img>
-                </v-btn>
+                </v-btn> -->
                 <v-spacer></v-spacer>
                 <v-btn color="green darken-1" text @click="login" min-width="100px">
                     <v-icon>power_settings_new</v-icon>
@@ -43,8 +53,8 @@
                     <Signup></Signup>
                 </v-dialog>
             </v-card-actions>
-        </v-card>
-    </div>
+        </v-container>
+    </v-card>
 
 </template>
 
