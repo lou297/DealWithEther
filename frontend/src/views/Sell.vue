@@ -114,13 +114,22 @@
                 required
               ></v-text-field>
               <v-btn color="error" class="mr-4" @click="cancel">취소</v-btn>
-              <v-btn color="success" class="mr-4" @click="save">등록</v-btn
-              ><br /><br />
+              <v-btn color="success" class="mr-4" @click="save">등록</v-btn>
+              <br /><br />
+              <v-btn color="success" class="mr-4" @click.stop="loading = true"
+                >등록</v-btn
+              >
+              <br /><br />
             </v-form>
           </v-flex>
         </v-layout>
       </v-container>
     </v-card>
+    <v-dialog v-model="loading" max-width="500" min-width="300">
+      <div style="background-color: white">
+        <Loading :loading="loading" v-on:closeThis=""></Loading>
+      </div>
+    </v-dialog>
   </div>
 </template>
 
@@ -130,11 +139,13 @@ import { save as savaImage } from "@/api/item.js";
 import { registerItem } from "@/utils/itemInventory.js";
 import * as walletService from "@/api/wallet.js";
 import HNav from "../components/common/HNav";
+import Loading from "@/views/Loading";
 
 export default {
   name: "ItemCreate",
   components: {
     HNav,
+    Loading,
   },
   data() {
     return {
@@ -195,6 +206,18 @@ export default {
       this.isCreating = true; // 아이템 등록 중임을 화면에 표시, 등록이 끝나면 false로 변경
       walletService.isValidPrivateKey(this.userId, privateKey, (res) => {
         if (res) {
+          if (
+            this.item.name.length <= 0 ||
+            this.item.category.length <= 0 ||
+            this.item.price === null ||
+            this.item.price <= 0 ||
+            this.image === null ||
+            this.image.length <= 0
+          ) {
+            alert("입력폼을 모두 입력해주세요.");
+            this.isCreating = false;
+            return;
+          }
           const data = new FormData();
           const file = this.files;
           for (let i = 0; i < this.files.length; i++) {
@@ -245,12 +268,13 @@ export default {
        * DB에 상품 등록 후 반환 받은 id를 이용해서 이더리움에 상품을 등록
        */
     },
-    cancel() {
-      this.$router.push("/");
-    },
 
     onImageClick() {
       this.$refs.uploader.click();
+    },
+
+    cancel() {
+      this.$router.push("/");
     },
 
     onFileChange(input) {

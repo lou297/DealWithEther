@@ -128,4 +128,15 @@ public class PurchaseRepository implements IPurchaseRepository {
             throw new RepositoryException(e, e.getMessage());
         }
     }
+
+    @Override
+    public List<Purchase> getPurchaseByItemId(long itemId) {
+        StringBuilder sbSql =  new StringBuilder("SELECT * FROM purchases WHERE item_id=? ");
+        try {
+            return this.jdbcTemplate.query(sbSql.toString(),
+                    new Object[]{itemId}, (rs, rowNum) -> PurchaseFactory.create(rs));
+        } catch (Exception e) {
+            throw new RepositoryException(e, e.getMessage());
+        }
+    }
 }

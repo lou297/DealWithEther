@@ -18,6 +18,8 @@ public interface IPurchaseService {
 
     List<PurchaseInfo> getByBuyer(int id);
 
+    List<Purchase> getPurchaseByItemId(int itemId);
+
     @Transactional
     Purchase create(Purchase purchase);
 
