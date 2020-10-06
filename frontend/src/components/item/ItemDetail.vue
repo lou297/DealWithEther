@@ -279,7 +279,7 @@ export default {
     };
   },
   methods: {
-    goBack: function () {
+    goBack: function() {
       // 이전 페이지로 이동한다.
       this.$router.go(-1);
     },
@@ -387,10 +387,10 @@ export default {
 
       bookMarkSave(
         this.bookMarkList,
-        function (success) {
+        function(success) {
           console.log("찜 성공");
         },
-        function (fail) {
+        function(fail) {
           console.dir(fail);
         }
       );
@@ -465,10 +465,10 @@ export default {
 
       bookMarkSave(
         this.bookMarkList,
-        function (success) {
+        function(success) {
           console.log("찜 성공");
         },
-        function (fail) {
+        function(fail) {
           console.dir(fail);
         }
       );
@@ -482,19 +482,19 @@ export default {
   created() {
     this.item.id = this.$route.params.id;
     var vm = this;
-    findUserById(this.userId, function (res) {
+    findUserById(this.userId, function(res) {
       const result = res.data;
       console.log(result.name);
       vm.userName = result.name;
     });
   },
-  mounted: function () {
+  mounted: function() {
     const vm = this;
 
     // [DB] 상품 상세 정보 조회
     findById(
       this.item.id,
-      function (res) {
+      function(res) {
         const result = res.data;
         vm.item.name = result.name;
         vm.item.category = result.category;
@@ -515,7 +515,7 @@ export default {
         vm.time += date[1];
 
         // 판매자 정보
-        findUserById(result.seller, function (res) {
+        findUserById(result.seller, function(res) {
           const result = res.data;
           vm.item.seller.name = result.name;
           vm.item.seller.email = result.email;
@@ -530,11 +530,14 @@ export default {
               vm.rating = vm.rating.toFixed(1);
             }
           },
-          (err) => {}
+
+          (err) => {
+            vm.rating = "0.0";
+          }
         );
       },
 
-      function (error) {
+      function(error) {
         console.error(error);
         alert("DB에서 상품 상세 정보 조회를 가져올 수 없습니다.");
       }
@@ -542,11 +545,11 @@ export default {
     // [Smart Contract] 가격 조회
     getPrice(
       this.item.id,
-      function (price) {
+      function(price) {
         vm.item.price = price;
         console.log(price);
       },
-      function (err) {
+      function(err) {
         console.error("가격 조회 실패:", err);
       }
     );
