@@ -113,7 +113,7 @@
                 label="장소"
                 required
               ></v-text-field>
-              <v-btn color="error" class="mr-4" @click="save">취소</v-btn>
+              <v-btn color="error" class="mr-4" @click="cancel">취소</v-btn>
               <v-btn color="success" class="mr-4" @click="save">등록</v-btn
               ><br /><br />
             </v-form>
@@ -244,6 +244,9 @@ export default {
        * TODO: PJTⅢ 과제3 Req.1-1 [상품 등록]
        * DB에 상품 등록 후 반환 받은 id를 이용해서 이더리움에 상품을 등록
        */
+    },
+    cancel() {
+      this.$router.push("/");
     },
 
     onImageClick() {
