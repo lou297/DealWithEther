@@ -22,7 +22,7 @@
                    v-if="!$store.state.isSigned"
                    @click.stop="signin = true">로그인</a>
             </v-toolbar-title>
-            <v-flex v-if="windowSize.x <= 1000">
+            <v-flex v-if="windowSize.x <= 660">
                 <v-menu transition="scroll-x-transition">
                     <template v-slot:activator="{ on, attrs }">
                         <v-btn
