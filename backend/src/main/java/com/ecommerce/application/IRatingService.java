@@ -1,11 +1,11 @@
 package com.ecommerce.application;
 
-import com.ecommerce.domain.Item;
+import java.util.List;
+
+import com.ecommerce.domain.Cash;
 import com.ecommerce.domain.Rating;
 
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 public interface IRatingService {
 	List<Rating> list();
@@ -13,7 +13,7 @@ public interface IRatingService {
 	double get(long userId);
 
 	@Transactional
-	long register(Rating rating);
+	long register(Rating rating) throws Exception;
 
 	@Transactional
 	int delete(long id);

@@ -78,6 +78,7 @@ public class PurchaseController {
 
     @RequestMapping(value = "/purchases/cancel/{purchaseId}", method = RequestMethod.POST)
     public long cancel(@PathVariable long purchaseId, @RequestBody Cash cash) throws Exception {
+        System.out.println("일단 접속이 되냐");
         return this.purchaseService.cancel(purchaseId, cash);
     }
 
@@ -156,6 +157,19 @@ public class PurchaseController {
         if (records == null || records.isEmpty())
             throw new EmptyListException("조회된 구매 이력이 없습니다.");
         return records;
+    }
+
+    /**
+     * 아이템에 해당하는 거래 내역
+     * 
+     * @param pid purchase id
+     * @return Purchase
+     */
+    @ApiOperation(value = "Fetch purchase history of item_id")
+    @RequestMapping(value = "/purchases/item/{item_id}", method = RequestMethod.GET)
+    public List<Purchase> getPurchaseByItemId(@PathVariable int item_id) {
+        List<Purchase> purchases = this.purchaseService.getPurchaseByItemId(item_id);
+        return purchases;
     }
 
 }

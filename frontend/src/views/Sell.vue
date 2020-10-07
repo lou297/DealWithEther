@@ -1,17 +1,7 @@
 <template>
   <div>
     <h-nav></h-nav>
-
-    <section class="blog-banner-area" id="category">
-            <div class="container h-100">
-                <div class="blog-banner">
-                    <div class="text-center">
-                        <h1 style="font-size:35px;">상품 판매</h1>
-                        <nav aria-label="breadcrumb" class="banner-breadcrumb"></nav>
-                    </div>
-                </div>
-            </div>
-      </section>
+    <h-breadcrumb title="판매 등록"></h-breadcrumb>
     <v-card color="white">
       <v-container>
         <v-layout row>
@@ -113,8 +103,9 @@
                 label="장소"
                 required
               ></v-text-field>
-              <v-btn color="error" class="mr-4" @click="save">취소</v-btn>
-              <v-btn color="success" class="mr-4" @click="save">등록</v-btn><br><br>
+              <v-btn color="error" class="mr-4" @click="cancel">취소</v-btn>
+              <v-btn color="success" class="mr-4" @click="save">등록</v-btn>
+              <br /><br />
             </v-form>
           </v-flex>
         </v-layout>
@@ -129,11 +120,13 @@ import { save as savaImage } from "@/api/item.js";
 import { registerItem } from "@/utils/itemInventory.js";
 import * as walletService from "@/api/wallet.js";
 import HNav from "../components/common/HNav";
+import HBreadcrumb from "@/components/common/HBreadcrumb";
 
 export default {
   name: "ItemCreate",
   components: {
     HNav,
+    HBreadcrumb
   },
   data() {
     return {
@@ -259,6 +252,10 @@ export default {
 
     onImageClick() {
       this.$refs.uploader.click();
+    },
+
+    cancel() {
+      this.$router.push("/");
     },
 
     onFileChange(input) {

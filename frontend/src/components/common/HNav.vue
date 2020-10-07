@@ -1,22 +1,24 @@
 <template>
-    <v-card tile v-resize="onResize">
-        <v-app-bar color="white" dark>
+    <v-card tile v-resize="onResize" style="z-index:99999">
+        <v-app-bar color="transparent" app hide-on-scroll flat>
             <v-toolbar-title>
-                <router-link class="navbar-brand font" style="font-size:18px; color:black; font-weight:bold;" to="/" id="title" >중코마켓</router-link>
+                <router-link class="navbar-brand font rounded-lg" style="font-size:22px; color:black; background-color:white; font-weight:bold;" to="/" id="title" >중코마켓</router-link>
             </v-toolbar-title>
 
             <v-spacer></v-spacer>
             <v-toolbar-title v-if="windowSize.x > 1000">
-                <router-link id="link-to-shop" style="font-size:18px; color:black; font-weight:bold;" to="/shop">상점</router-link>
-                <router-link id="link-to-sell" style="font-size:18px; color:black; font-weight:bold;" to="/sell">판매하기</router-link>
-                <router-link id="link-to-mypage" style="font-size:18px; color:black; font-weight:bold;" to="/mypage/wallet_create" v-if="!$store.state.user.walletAddress">마이페이지</router-link>
+                <router-link id="link-to-shop" style="font-size:16px; color:black; font-weight:bold;" to="/shop">상점</router-link>
+                <router-link id="link-to-sell" style="font-size:16px; color:black; font-weight:bold;" to="/sell">판매하기</router-link>
+<!--                <router-link id="link-to-mypage" style="font-size:18px; color:black; font-weight:bold;" to="/mypage/wallet_create" v-if="!$store.state.user.walletAddress">마이페이지</router-link>-->
                 <!-- <router-link id="link-to-myshop" to="/mypage/wallet_info" v-if="$store.state.user.walletAddress">내상점</router-link> -->
-                <router-link id="link-to-myshop" style="font-size:18px; color:black; font-weight:bold;" to="/mypage/profile" v-if="$store.state.user.walletAddress">프로필</router-link>
-                <router-link id="link-to-logout" style="font-size:18px; color:black; font-weight:bold;" to="/logout" v-if="$store.state.isSigned">로그아웃</router-link>
+                <router-link id="link-to-myshop" style="font-size:16px; color:black; font-weight:bold;" to="/mypage/profile">프로필</router-link>
+                <router-link id="link-to-logout" style="font-size:16px; color:black; font-weight:bold;" to="/logout" v-if="$store.state.isSigned">로그아웃</router-link>
                 <a id="link-to-signup"
+                    style="font-size:16px; color:black; font-weight:bold;"
                    v-if="!$store.state.isSigned"
                    @click.stop="signup = true">회원가입</a>
                 <a id="link-to-login"
+                    style="font-size:16px; color:black; font-weight:bold;"
                    v-if="!$store.state.isSigned"
                    @click.stop="signin = true">로그인</a>
             </v-toolbar-title>
@@ -44,17 +46,17 @@
                                 <router-link id="link-to-sell-2" to="/sell">판매하기</router-link>
                             </v-list-item-title>
                         </v-list-item>
-                        <v-list-item v-if="!$store.state.user.walletAddress">
-                            <v-list-item-title>
-                                <router-link id="link-to-mypage-2" to="/mypage/wallet_create">마이페이지</router-link>
-                            </v-list-item-title>
-                        </v-list-item>
+<!--                        <v-list-item v-if="!$store.state.user.walletAddress">-->
+<!--                            <v-list-item-title>-->
+<!--                                <router-link id="link-to-mypage-2" to="/mypage/wallet_create">마이페이지</router-link>-->
+<!--                            </v-list-item-title>-->
+<!--                        </v-list-item>-->
                         <!-- <v-list-item v-if="$store.state.user.walletAddress">
                             <v-list-item-title>
                                 <router-link id="link-to-myshop-2" to="/mypage/wallet_info">내상점</router-link>
                             </v-list-item-title>
                         </v-list-item> -->
-                        <v-list-item v-if="$store.state.user.walletAddress">
+                        <v-list-item>
                             <v-list-item-title>
                                 <router-link id="link-to-myshop-2" to="/mypage/profile">프로필</router-link>
                             </v-list-item-title>

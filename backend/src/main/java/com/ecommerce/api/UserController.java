@@ -55,7 +55,7 @@ public class UserController {
     public List<User> list() {
         List<User> userList = userService.list();
 
-        if (userList == null || userList.isEmpty() )
+        if (userList == null || userList.isEmpty())
             throw new EmptyListException("NO DATA");
 
         return userList;
@@ -84,22 +84,23 @@ public class UserController {
 
     @PostMapping("/users/upload/{id}")
     @ApiOperation(value = "파일 업로드")
-    public ResponseEntity<Map<String, Object>> getArticle(HttpServletResponse res, HttpServletRequest req, @RequestParam("file") MultipartFile[] file, @PathVariable long id)
+    public ResponseEntity<Map<String, Object>> getArticle(HttpServletResponse res, HttpServletRequest req,
+            @RequestParam("file") MultipartFile[] file, @PathVariable long id)
             throws JsonProcessingException, IOException {
         ResponseEntity<Map<String, Object>> entity = null;
         try {
             String filename = id + "";
             String realPath = System.getProperty("user.dir") + profileUrl + filename;
-            System.out.println(realPath);
+            System.out.println("업로드 경로 " + realPath);
             file[0].transferTo(new File(realPath + ".jpg"));
         } catch (RuntimeException e) {
         }
         return entity;
     }
 
-
     @GetMapping("/users/downloadFile/{fileName:.+}")
-    public ResponseEntity<Resource> downloadFile(HttpServletResponse res, HttpServletRequest req, @PathVariable String fileName) throws MalformedURLException{
+    public ResponseEntity<Resource> downloadFile(HttpServletResponse res, HttpServletRequest req,
+            @PathVariable String fileName) throws MalformedURLException {
         // Load file as Resource
         Resource resource = fileUploadDownloadHandler.loadFileAsResource(fileName + ".jpg");
 
@@ -112,12 +113,11 @@ public class UserController {
         }
 
         // Fallback to the default content type if type could not be determined
-        if(contentType == null) {
+        if (contentType == null) {
             contentType = "application/octet-stream";
         }
 
-        return ResponseEntity.ok()
-                .contentType(MediaType.parseMediaType(contentType))
+        return ResponseEntity.ok().contentType(MediaType.parseMediaType(contentType))
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
                 .body(resource);
     }

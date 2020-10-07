@@ -28,7 +28,7 @@ public class RatingController {
 
 	@ApiOperation(value = "Register Rating")
 	@RequestMapping(value = "/ratings", method = RequestMethod.POST)
-	public long register(@RequestBody Rating rating) {
+	public long register(@RequestBody Rating rating) throws Exception {
 		return ratingService.register(rating);
 	}
 

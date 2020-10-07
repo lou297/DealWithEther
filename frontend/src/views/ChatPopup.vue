@@ -54,7 +54,7 @@ export default {
     $(function() {
 
         const io = require('socket.io-client');
-        var chat = io.connect("http://localhost:8000/chat");
+        var chat = io.connect("http://192.168.0.131:8000/chat");
 
         $("form").submit(function(e) {
           e.preventDefault();

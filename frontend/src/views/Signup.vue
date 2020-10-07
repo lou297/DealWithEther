@@ -1,8 +1,8 @@
 <template>
-    <div class="container">
-        <v-card>
+    <v-card>
+        <v-container>
             <v-card-title class="headline">Sign Up</v-card-title>
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <label for="email">이메일</label>
                 <input
                     type="text"
@@ -41,7 +41,25 @@
                     v-model="user.passwordConfirm"
                     placeholder="비밀번호 확인"
                 />
-            </div>
+            </div> -->
+            <v-text-field
+                label="이메일"
+                v-model="user.email"
+            ></v-text-field>
+            <v-text-field
+                label="이름"
+                v-model="user.name"
+            ></v-text-field>
+            <v-text-field
+                label="비밀번호"
+                v-model="user.password"
+                type="password"
+            ></v-text-field>
+            <v-text-field
+                label="비밀번호 확인"
+                v-model="user.passwordConfirm"
+                type="password"
+            ></v-text-field>
 
             <v-card-actions>
                 <v-spacer></v-spacer>
@@ -50,8 +68,8 @@
                     SignUp
                 </v-btn>
             </v-card-actions>
-        </v-card>
-    </div>
+        </v-container>
+    </v-card>
 </template>
 
 <script>

@@ -47,6 +47,9 @@ public class ItemService implements IItemService {
 	@Value("${eth.purchase.record.contract}")
 	private String PURCHASE_CONTRACT_ADDRESS;
 
+	@Value("${eth.rating.record.contract}")
+	private String RATING_CONTRACT_ADDRESS;
+
 	@Value("${eth.admin.address}")
 	private String ADMIN_ADDRESS;
 
@@ -178,29 +181,26 @@ public class ItemService implements IItemService {
 	 * 
 	 * @param item
 	 * @return
+	 * @throws Exception
 	 */
-	public Item update(final Item item) {
+	public Item update(final Item item) throws Exception {
 		Item itemStored = this.itemRepository.get(item.getId());
 		if (itemStored == null)
 			throw new ApplicationException("해당 상품을 찾을 수 없습니다.");
 
-		if (item.getSeller() == 0 || item.getSeller() != itemStored.getSeller())
-			throw new ApplicationException("잘못된 접근입니다.");
-
-		if (item.getName() == null || "".equals(item.getName()))
-			item.setName(itemStored.getName());
-		if (item.getExplanation() == null || "".equals(item.getExplanation()))
-			item.setExplanation(itemStored.getExplanation());
-		if (item.getAvailable() == null || "".equals(item.getAvailable()))
-			item.setAvailable(itemStored.getAvailable());
-		if (item.getImage() == 0 || "".equals(item.getImage()))
-			item.setImage(itemStored.getImage());
 		if (item.getPrice() == 0)
 			item.setPrice(itemStored.getPrice());
 
-		int affected = this.itemRepository.update(item);
-		if (affected == 0)
-			throw new ApplicationException("상품정보수정 처리가 반영되지 않았습니다.");
+		// Web3j web3 = Web3j.build(new HttpService(NETWORK_URL));
+
+		// credentials = Credentials.create(item.getPk());
+
+		// escrowFactory = EscrowFactory.load(ITEM_CONTRACT, web3, credentials,
+		// contractGasProvider);
+
+		// TransactionReceipt tr = escrowFactory
+		// .registerItem(BigInteger.valueOf(item.getId()),
+		// BigInteger.valueOf(item.getPrice())).send();
 
 		return this.itemRepository.get(item.getId());
 	}
@@ -239,8 +239,6 @@ public class ItemService implements IItemService {
 		return this.itemRepository.getLengthByName(category, name);
 	}
 
-
-
 	@Override
 	public String deploy() throws Exception {
 		ClassPathResource resource = new ClassPathResource(WALLET_RESOURCE);
@@ -251,8 +249,8 @@ public class ItemService implements IItemService {
 
 		Web3j web3 = Web3j.build(new HttpService(NETWORK_URL)); // defaults to http://localhost:8545/
 		Credentials credentials = WalletUtils.loadJsonCredentials(PASSWORD, data);
-		escrowFactory = EscrowFactory
-				.deploy(web3, credentials, contractGasProvider, ERC20_TOKEN_CONTRACT, PURCHASE_CONTRACT_ADDRESS).send();
+		escrowFactory = EscrowFactory.deploy(web3, credentials, contractGasProvider, ERC20_TOKEN_CONTRACT,
+				PURCHASE_CONTRACT_ADDRESS, RATING_CONTRACT_ADDRESS).send();
 
 		return escrowFactory.getContractAddress();
 	}
@@ -268,32 +266,35 @@ public class ItemService implements IItemService {
 		return this.itemRepository.changeProgressFalse(id);
 	}
 
-	///////////////////////////////////////////// jpa 구간 //////////////////////////////////////////////
-
-
+	///////////////////////////////////////////// jpa 구간
+	///////////////////////////////////////////// //////////////////////////////////////////////
 
 	@Override
 	public Page<ItemJpa> getByNameContaining(int page, String name) {
-		return this.itemRepository2.getByNameContaining(PageRequest.of(page, 12, Sort.Direction.DESC, "id"), name);
+		return this.itemRepository2.getByNameContainingAndProgressAndAvailable(
+				PageRequest.of(page, 12, Sort.Direction.DESC, "id"), name, false, true);
 	}
 
 	@Override
 	public Page<ItemJpa> getBySeller(int page, String seller) {
 		User user = userRepository.getUserId(seller);
 		System.out.println(user);
-		return this.itemRepository2.getBySeller(PageRequest.of(page, 12, Sort.Direction.DESC,"id"), user.getId());
+		return this.itemRepository2.getBySellerAndProgressAndAvailable(
+				PageRequest.of(page, 12, Sort.Direction.DESC, "id"), user.getId(), false, true);
 	}
 
 	@Override
 	public Page<ItemJpa> getByNameContainingAndCategoryContaining(int page, String name, String category) {
-		return this.itemRepository2.getByNameContainingAndCategoryContaining(PageRequest.of(page, 12, Sort.Direction.DESC,"id"), name, category);
+		return this.itemRepository2.getByNameContainingAndCategoryContainingAndProgressAndAvailable(
+				PageRequest.of(page, 12, Sort.Direction.DESC, "id"), name, category, false, true);
 	}
 
 	@Override
 	public Page<ItemJpa> getBySellerAndCategoryContaining(int page, String seller, String category) {
 		User user = userRepository.getUserId(seller);
 		System.out.println(user);
-		return this.itemRepository2.getBySellerAndCategoryContaining(PageRequest.of(page, 12, Sort.Direction.DESC,"id"), user.getId(), category);
+		return this.itemRepository2.getBySellerAndCategoryContainingAndProgressAndAvailable(
+				PageRequest.of(page, 12, Sort.Direction.DESC, "id"), user.getId(), category, false, true);
 	}
 
 }
