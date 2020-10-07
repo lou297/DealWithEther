@@ -197,6 +197,7 @@ export default {
     SellItem,
     SellHitsory,
     ImgModal,
+    walletModal
   },
   data() {
     return {
@@ -247,15 +248,12 @@ export default {
             this.$router.push("../item/detail/" + itemId);
         },
         showRegistedItemList() {
-          console.log("시작")
-          console.dir(this.user)
             this.tabStatus = 1;
             this.items = [];
             itemService.findMySaleItems(
                 this.user.id,
                 (res) => {
                     this.items = res.data;
-                    console.log(res)
                 },
                 (err) => {
                     alert(err);
@@ -401,8 +399,6 @@ export default {
             );
         },
         imgPath(flag) {
-            // console.log(process.env.VUE_APP_BACKEND);
-            // console.log(this.user.id);
             return flag
                 ? process.env.VUE_APP_BACKEND + "api/users/downloadFile/" + this.user.id
                 : "https://picsum.photos/500/300?random";

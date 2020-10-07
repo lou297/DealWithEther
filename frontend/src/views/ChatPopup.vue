@@ -15,7 +15,7 @@
       </div>
       <div class="form-group" style="float:right; padding-right:30px;">
         <div class="col-sm-offset-2 col-sm-10">
-          <button type="submit" class="footerchat" style="width: 10%;">전송</button>
+          <button type="submit" class="footerchat" @click="deleteString" style="width: 10%;">전송</button>
         </div>
       </div>
       </form>
@@ -43,27 +43,15 @@ export default {
       id : this.$route.params.id
     };
   },
+
   created() {
     var vm = this;
     $(function() {
 
         const io = require('socket.io-client');
-        var chat = io.connect("http://192.168.0.131:8000/chat");
+        var chat = io.connect("http://j3a103.p.ssafy.io:8000/chat");
 
         $("form").submit(function(e) {
-        //   var fullPath = new Date().getTime();
-        //   var storageRef = firebase.storage().ref("chattings");
-        //   console.log(storageRef);
-        //   var message = $("#msg").val();
-        //   storageRef.put(message).then((snapshot) => {
-        //   var imageUrl = firebase
-        //     .storage()
-        //     .ref(snapshot.metadata.fullPath)
-        //     .getDownloadURL()
-        //     .then((url) => {
-        //         alert("채팅 업로드 완료");
-        //     });
-        // });
 
           e.preventDefault();
 
@@ -74,11 +62,12 @@ export default {
             msg: $("#msg").val()
           });
         });
+        document.getElementById("msg").value = null;
 
         // 서버로부터의 메시지가 수신되면
         chat.on("chat message", function(data) {
           
-          $("#chat").append(vm.name).append(' : '+data.msg).append($('<br>'));
+          $("#chat").append(data.name).append(' : '+data.msg).append($('<br><br>'));
         });
       });
   },
