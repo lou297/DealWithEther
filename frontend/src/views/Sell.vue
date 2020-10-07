@@ -204,38 +204,26 @@ export default {
           for (let i = 0; i < this.files.length; i++) {
             data.append("file", this.files[i]);
           }
-          for (var pair of data.entries()) {
-            console.log(pair[0] + "," + pair[1]);
-          }
-
           createItem(
             // 상품 등록 - 백앤드
             this.item,
             function(success) {
               alert("상품 등록 성공!");
-              console.log(success);
               vm.item.id = success.data.id;
-              console.log("아이디:" + success.data.id);
               savaImage(
                 // 사진 등록
                 data,
                 vm.item.id,
                 function(success) {
-                  alert("이미지 등록 성공!");
+                  this.$router.push("detail/" + vm.item.id)
                 },
                 function(error) {
                   console.log(error);
-                },
-                function(final) {
-                  console.log("안녕");
                 }
               );
             },
             function(error) {
               console.log(error);
-            },
-            function(final) {
-              console.log("안녕");
             }
           );
         } else {
