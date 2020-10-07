@@ -52,7 +52,7 @@
     </v-card>
 
         <!--================ Start footer Area  =================-->	
-	<footer class="footer" style="background:#002347; padding-top:25px; height:350px;">
+	<!-- <footer class="footer" style="background:#002347; padding-top:25px; height:350px;">
         <v-col style="color: white;"><h1>Our Team</h1></v-col><br>
         <v-row>
             <v-col cols="1">
@@ -80,7 +80,7 @@
             <v-col cols="1">
             </v-col>
         </v-row>
-	</footer>
+	</footer> -->
     </div>
 </template>
 

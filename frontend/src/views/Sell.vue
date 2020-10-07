@@ -182,7 +182,7 @@ export default {
     // 상품을 등록한다.
     save() {
       const vm = this;
-      const privateKey = prompt("캐시를 충전하시려면 개인키를 입력하세요.");
+      const privateKey = prompt("상품을 등록하시려면 개인키를 입력하세요.");
       this.item.pk = privateKey;
       this.isCreating = true; // 아이템 등록 중임을 화면에 표시, 등록이 끝나면 false로 변경
       walletService.isValidPrivateKey(this.userId, privateKey, (res) => {
