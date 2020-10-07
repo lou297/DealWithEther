@@ -215,7 +215,7 @@ export default {
                 data,
                 vm.item.id,
                 function(success) {
-                  vm.$router.push("detail/" + vm.item.id)
+                  vm.$router.push("item/detail/" + vm.item.id)
                 },
                 function(error) {
                   console.log(error);
