@@ -6,7 +6,7 @@
             </v-toolbar-title>
 
             <v-spacer></v-spacer>
-            <v-toolbar-title v-if="windowSize.x > 1000">
+            <v-toolbar-title v-if="windowSize.x > 660">
                 <router-link id="link-to-shop" style="font-size:16px; color:black; font-weight:bold;" to="/shop">상점</router-link>
                 <router-link id="link-to-sell" style="font-size:16px; color:black; font-weight:bold;" to="/sell">판매하기</router-link>
 <!--                <router-link id="link-to-mypage" style="font-size:18px; color:black; font-weight:bold;" to="/mypage/wallet_create" v-if="!$store.state.user.walletAddress">마이페이지</router-link>-->
