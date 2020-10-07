@@ -12,17 +12,17 @@ import * as firebase from "firebase/app";
 import "firebase/storage";
 
 var firebaseConfig = {
-    apiKey: "AIzaSyBLERzEBv4p5978AxszC7zqy8aQXXfxCY8",
-    authDomain: "ssafy2.firebaseapp.com",
-    databaseURL: "gs://ssafy2.appspot.com",
-    projectId: "ssafy2",
-    storageBucket: "gs://ssafy2.appspot.com",
-    messagingSenderId: "435147211758",
-    appId: "1:435147211758:web:c225ef95ebbd44f73284ff",
-    measurementId: "G-M80C8DTDRF"
-};
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+    apiKey: "AIzaSyA25rnJNs_q5KELyjwtbkfidT6X28M9rSY",
+    authDomain: "fir-chat-7c99b.firebaseapp.com",
+    databaseURL: "https://fir-chat-7c99b.firebaseio.com",
+    projectId: "fir-chat-7c99b",
+    storageBucket: "fir-chat-7c99b.appspot.com",
+    messagingSenderId: "158051831435",
+    appId: "1:158051831435:web:f9a46181db2bfe1ce80e8e",
+    measurementId: "G-SQRQ354GKV"
+  };
+
+export default !firebase.apps.length ? firebase.initializeApp(firebaseConfig) : firebase.app();
 
 Vue.filter("truncate", function(text, length, clamp) {
     if (text) {

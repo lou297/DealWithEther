@@ -24,11 +24,18 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script src="/socket.io/socket.io.js"></script>
-<script src="/__/firebase/7.22.1/firebase.js"></script>
-
 <script>
-import * as firebase from 'firebase/app';
+var firebaseConfig = {
+    apiKey: "AIzaSyA25rnJNs_q5KELyjwtbkfidT6X28M9rSY",
+    authDomain: "fir-chat-7c99b.firebaseapp.com",
+    databaseURL: "https://fir-chat-7c99b.firebaseio.com",
+    projectId: "fir-chat-7c99b",
+};
+firebase.initializeApp(firebaseConfig);
+</script>
+<script>
 
+var db = firebase.database();
 export default {
   components: {
   },
@@ -42,10 +49,8 @@ export default {
   methods: {
 
     saveData() {
-      console.log('저장');
-      var storageRef = firebase.storage().ref("message/");
-     
-      console.log(storageRef)
+      alert('메세지 저장');
+      console.log(database);
     }
 
   },

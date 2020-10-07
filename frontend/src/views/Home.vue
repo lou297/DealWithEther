@@ -49,37 +49,6 @@
                 </v-tab-item>
             </v-tabs-items>
         </v-card>
-
-        <!--================ Start footer Area  =================-->	
-	<footer class="footer" style="background:#002347; padding-top:25px; height:350px;">
-        <v-col style="color: white;"><h1>Our Team</h1></v-col><br>
-        <v-row>
-            <v-col cols="1">
-            </v-col>
-            <v-col cols="2">
-                <img id="image" src="../../public/images/이정훈.jpg" alt=""><br><br>
-                <p style="color:white;">이정훈</p>
-            </v-col>
-            <v-col cols="2">
-                <img id="image" src="../../public/images/윤경준.jpg" alt=""><br><br>
-                <p style="color:white;">윤경준</p>
-            </v-col>
-            <v-col cols="2">
-                <img id="image" src="../../public/images/강민형.jpeg" alt=""><br><br>
-                <p style="color:white;">강민형</p>
-            </v-col>
-            <v-col cols="2">
-                <img id="image" src="../../public/images/김동현.jpg" alt=""><br><br>
-                <p style="color:white;">김동현</p>
-            </v-col>
-            <v-col cols="2">
-                <img id="image" src="../../public/images/최연희.jpg" alt=""><br><br>
-                <p style="color:white;">최연희</p>
-            </v-col>
-            <v-col cols="1">
-            </v-col>
-        </v-row>
-	</footer>
     </div>
 </template>
 
