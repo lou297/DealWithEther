@@ -1,13 +1,12 @@
 <template>
-    <div>
+    <div style="margin-top:30px">
         <v-container>
             <v-row>
-                <v-flex col xl5 lg5 md5 sm12 xs12>
+                <v-flex col xl4 lg4 md4 sm12 xs12>
                     <v-carousel
                         cycle
                         hide-delimiter-background
                         show-arrows-on-hover
-                        style="width: 300px; margin-left: 90px"
                     >
                         <v-carousel-item v-for="n in item.image" :key="n">
                             <v-row class="fill-height" align="center" justify="center">
@@ -22,9 +21,9 @@
                 </v-flex>
                 <v-flex
                     col
-                    xl5
-                    lg5
-                    md5
+                    xl6
+                    lg6
+                    md6
                     sm12
                     xs12
                     style="margin: 40px 0 0 30px"
@@ -99,7 +98,17 @@
                             </v-col
                             >
                             <br/><br/><br/>
-
+                            
+                        </v-row>
+                        <v-row>
+                                <v-textarea
+                                readonly
+                                no-resize
+                                rows="5"
+                                :value="item.explanation"
+                                style="padding:12px"
+                                ></v-textarea>
+                            </v-row>
                             <v-row>
                                 <v-col cols="2.1">
                                     <v-btn
@@ -111,12 +120,12 @@
                                     </v-btn
                                     >
                                 </v-col>
-                                <v-col cols="2.1">
+                                <!-- <v-col cols="2.1">
                                     <v-btn large color="warning" style="width: 100%" @click="nego"
                                     >네고요청
                                     </v-btn
                                     >
-                                </v-col>
+                                </v-col> -->
                                 <v-col cols="2.1">
                                     <div class="example-modal-window">
                                         <v-btn
@@ -203,10 +212,8 @@
                                     </div>
                                 </v-col>
                             </v-row>
-                        </v-row>
                     </v-col>
                 </v-flex>
-                <v-divider/>
             </v-row>
         </v-container>
     </div>
