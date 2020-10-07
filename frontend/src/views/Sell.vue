@@ -267,7 +267,6 @@ export default {
     },
 
     removeImage(n) {
-      alert(n);
       // this.item.image[n].removeImage();
       this.image.splice(n, 1);
       this.files.splice(n, 1);
