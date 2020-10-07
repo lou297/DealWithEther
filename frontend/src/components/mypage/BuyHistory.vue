@@ -5,7 +5,7 @@
     <v-col cols="2" id="item-info-container">
       <v-list-item style="padding:0">
         <v-list-item-avatar style="margin:0;" width="100%" height="100%">
-          <v-img :src="imgPath(item.itemId)"
+          <v-img :src="imgPath(item.id)"
             :lazy-src="`https://picsum.photos/10/6?random`"
             aspect-ratio="1"
             @click="onClickItem()"></v-img>
